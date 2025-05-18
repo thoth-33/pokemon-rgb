@@ -154,7 +154,7 @@ make
 
 ### Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.x.y/`. Then specify it when you run `make`:
+If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds globally. Instead, you can put its files in a directory within pokemon-rgb, such as `pokemon-rgb/rgbds-0.x.y/`. Then specify it when you run `make`:
 
 ```bash
 make RGBDS=rgbds-0.x.y/
