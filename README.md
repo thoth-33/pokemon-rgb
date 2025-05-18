@@ -15,6 +15,6 @@ To check all of the features, check [**FEATURES.md**](FEATURES.md).
 
 ## Download
 
-To download the latest version, go to the [Releases](https://github.com/jamescastells/pokemon-rgb/releases) page and grab the latest IPS file. Use an IPS patcher and apply the IPS file to a Pokémon Red ROM.
+To download the latest version, go to the [**Releases**](https://github.com/jamescastells/pokemon-rgb/releases) page and grab the latest IPS file. Use an IPS patcher and apply the IPS file to a Pokémon Red ROM.
 
 If you'd like to build from source, see [**INSTALL.md**](INSTALL.md).
