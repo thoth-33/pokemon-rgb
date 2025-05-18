@@ -1,8 +1,12 @@
 # Pokémon RGB Version
 
+![Title screen](images/titlescreen.png)
+
 Pokémon RGB Version is a hack ROM of Pokémon Red which adds full color, the ability to select a female character as the protagonist, and makes all 151 Pokémon obtainable.
 
 To check all of the features, check [**FEATURES.md**](FEATURES.md).
+
+This hack was originally posted [here](https://www.romhacking.net/hacks/8100/).
 
 ## Credits
 
