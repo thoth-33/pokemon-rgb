@@ -1,48 +1,20 @@
-# Pokémon Red and Blue [![Build Status][ci-badge]][ci]
+# Pokémon RGB Version [![Build Status][ci-badge]][ci]
 
-This is a disassembly of Pokémon Red and Blue.
+Pokémon RGB Version is a hack ROM of Pokémon Red which adds full color, the ability to select a female character as the protagonist, and makes all 151 Pokémon obtainable.
 
-It builds the following ROMs:
+To check all of the features, check [**Features.md**](Features.md).
 
-- Pokemon Red (UE) [S][!].gb `sha1: ea9bcae617fdf159b045185467ae58b2e4a48b9a`
-- Pokemon Blue (UE) [S][!].gb `sha1: d7037c83e1ae5b39bde3c30787637ba1d4c48ce2`
-- BLUEMONS.GB (debug build) `sha1: 5b1456177671b79b263c614ea0e7cc9ac542e9c4`
-- dmgapae0.e69.patch `sha1: 0fb5f743696adfe1dbb2e062111f08f9bc5a293a`
-- dmgapee0.e68.patch `sha1: ed4be94dc29c64271942c87f2157bca9ca1019c7`
+## Credits
 
-To set up the repository, see [**INSTALL.md**](INSTALL.md).
+- [DannyE](https://github.com/dannye), for the color and audio engine.
+- The whole Pokémon RGB team, which host their project [here](https://github.com/dannye/pokered-gbc).
+- BurstXShadowzX on DeviantArt for Green's graphics
+- [Vortyne](https://github.com/Vortyne) and the [pureRGB team](https://github.com/Vortyne/pureRGB) for the Mew-under-the-truck code.
+- [Thoth-33](https://github.com/thoth-33) for originally creating this hack, creating the party icons, coloring gender, porting Yellow's starter distributors, and coloring Pokéballs.
+- [Me](https://github.com/jamescastells) :) for reviving this project and noticing some bugs.
 
+## Download
 
-## See also
+To download the latest version, go to the [Releases](releases) page and grab the latest IPS file. Use an IPS patcher and apply the IPS file to a Pokémon Red ROM.
 
-- [**Wiki**][wiki] (includes [tutorials][tutorials])
-- [**Symbols**][symbols]
-- **Discord:** [pret][discord]
-- **IRC:** [libera#pret][irc]
-
-Other disassembly projects:
-
-- [**Pokémon Yellow**][pokeyellow]
-- [**Pokémon Gold/Silver**][pokegold]
-- [**Pokémon Crystal**][pokecrystal]
-- [**Pokémon Pinball**][pokepinball]
-- [**Pokémon TCG**][poketcg]
-- [**Pokémon Ruby**][pokeruby]
-- [**Pokémon FireRed**][pokefirered]
-- [**Pokémon Emerald**][pokeemerald]
-
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokegold]: https://github.com/pret/pokegold
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokeruby]: https://github.com/pret/pokeruby
-[pokefirered]: https://github.com/pret/pokefirered
-[pokeemerald]: https://github.com/pret/pokeemerald
-[wiki]: https://github.com/pret/pokered/wiki
-[tutorials]: https://github.com/pret/pokered/wiki/Tutorials
-[symbols]: https://github.com/pret/pokered/tree/symbols
-[discord]: https://discord.gg/d5dubZ3
-[irc]: https://web.libera.chat/?#pret
-[ci]: https://github.com/pret/pokered/actions
-[ci-badge]: https://github.com/pret/pokered/actions/workflows/main.yml/badge.svg
+If you'd like to build from source, see [**INSTALL.md**](INSTALL.md).
