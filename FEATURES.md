@@ -12,7 +12,7 @@ Special thanks to Danny-E33. He provided much insight into the function of his c
 
 Note: While this hack shares inspiration from hacks like Satin and Gender Selection, it does not contain any of their code. The ASM hacking to add additional character options was written from the ground up by the author.
 
-## Version 1-2 changes
+## Version 1-2:
 
 General changes:
 
@@ -32,7 +32,7 @@ Pokémon trades have been adjusted:
 - Cinnabar Island Raichu for Electrode trade has been replaced by Machoke for Magmar (Named Apollo, Machoke evolves upon receipt.)
 - Cinnabar Island Venemoth for Tangela trade has been replaced by Kadabra for Kangaskhan (Named Houdini, Kadabra evolves upon receipt.)
 
-# Version 3 changes
+## Version 3:
 
 - Ability to play as rival removed to create space for other sprites
 - The Super Nerd in Mt. Moon will allow you to take both fossils after defeating him.
