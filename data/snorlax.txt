@@ -1,0 +1,49 @@
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |Dg |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |Dg |gr |gr |Dg |gr |gr |Dg |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |Lg |gr |gr |gr |gr |gr |gr |Dg |gr |gr |gr |Dg |BLK|BLK|gr |gr |gr |gr |gr |gr |Lg |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |Lg |gr |gr |Lg |gr |gr |Lg |gr |gr |gr |gr |gr |gr |gr |BLK|Blu|BLK|gr |gr |gr |Lg |gr |gr |Lg |gr |gr |Lg |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |Lg |gr |gr |gr |Lg |gr |gr |gr |gr |gr |gr |gr |BLK|Blu|Blu|Blu|BLK|BLK|gr |gr |Lg |BLK|BLK|gr |Lg |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |BLK|LYw|LYw|Blu|Blu|Blu|BLK|BLK|BLK|Blu|Blu|BLK|gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |gr |BLK|BLK|gr |gr |BLK|LYw|BLK|BLK|LYw|LYw|LYw|Blu|Blu|Blu|Blu|DBl|BLK|gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |BLK|Blu|WHT|BLK|BLK|BLK|LYw|LYw|LYw|LYw|LYw|BLK|BLK|Ylw|DBl|DBl|DBl|BLK|gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |Dg |gr |gr |gr |BLK|Blu|WHT|BLK|LYw|LYw|LYw|BLK|BLK|LYw|LYw|LYw|LYw|Ylw|Ylw|DBl|DBl|BLK|gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|Dg |gr |gr |Dg |gr |gr |Dg |BLK|BLK|BLK|LYw|LYw|LYw|LYw|LYw|LYw|BLK|LYw|BLK|BLK|Ylw|DBl|DBl|DBl|BLK|gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |Dg |gr |gr |gr |Dg |BLK|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|Ylw|BLK|WHT|DBl|BLK|DBl|DBl|DBl|BLK|gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |BLK|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|BLK|WHT|DBl|DBl|DBl|BLK|DBl|BLK|gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |BLK|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|BLK|DBl|DBl|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |BLK|gr |BLK|Ylw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|LYw|Ylw|BLK|DBl|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |BLK|WHT|BLK|WHT|BLK|Ylw|Ylw|LYw|LYw|LYw|LYw|LYw|Ylw|Ylw|Ylw|Ylw|BLK|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |BLK|DYw|Ylw|Ylw|BLK|Ylw|Ylw|Ylw|Ylw|Ylw|BLK|Ylw|BLK|Ylw|Ylw|Ylw|BLK|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |BLK|DYw|DYw|Ylw|Ylw|DBl|Ylw|Ylw|Ylw|BLK|WHT|BLK|WHT|BLK|Ylw|DBl|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |BLK|DYw|DYw|Ylw|Ylw|DBl|DBl|DBl|BLK|LYw|Ylw|Ylw|Ylw|WHT|BLK|DBl|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |BLK|Ylw|Ylw|Ylw|DBl|DBl|DBl|BLK|Ylw|DYw|DYw|Ylw|Ylw|BLK|DBl|DBl|DBl|DBl|BLK|gr |gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |BLK|BLK|BLK|BLK|DBl|DBl|BLK|Ylw|DYw|DYw|Ylw|Ylw|BLK|DBl|DBl|DBl|BLK|gr |gr |Dg |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |gr |gr |BLK|BLK|BLK|Ylw|DYw|DYw|Ylw|Ylw|BLK|DBl|BLK|BLK|Dg |gr |gr |Dg |gr |gr |Dg |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |gr |gr |Lg |gr |gr |gr |gr |BLK|Ylw|Ylw|Ylw|BLK|BLK|BLK|gr |gr |gr |Dg |gr |gr |gr |Dg |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |Lg |gr |gr |Lg |gr |gr |Lg |gr |gr |BLK|BLK|BLK|gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|gr |gr |gr |gr |Lg |gr |gr |gr |Lg |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |gr |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
