@@ -42,9 +42,9 @@ Run setup and leave the default settings. At the "**Select Packages**" step, cho
 
 Double click on the text that says "**Skip**" next to each package to select the most recent version to install.
 
-Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 0.6.1**.
+Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds**.
 
-**Note:** If you already have an installed rgbds older than 0.6.0, you will need to update to 0.6.0 or 0.6.1. Ignore this if you have never installed rgbds before. If a version newer than 0.6.1 does not work, try downloading 0.6.1.
+**Note:** If you already have an installed rgbds older than 0.9.0, you will need to update.
 
 Now open the **Cygwin terminal** and enter the following commands.
 
@@ -58,7 +58,7 @@ cd /cygdrive/c/Users/<user>/Desktop
 
 (The Windows `C:\` drive is called `/cygdrive/c/` in Cygwin. Replace *\<user>* in the example path with your username.)
 
-Now you're ready to [build **pokered**](#build-pokered).
+Now you're ready to [build **pokemon-rgb**](#pokemon-rgb).
 
 
 ## macOS
@@ -67,9 +67,9 @@ Install [**Homebrew**](https://brew.sh/). Follow the official instructions.
 
 Open **Terminal** and prepare to enter commands.
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 0.6.1**.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds**.
 
-Now you're ready to [build **pokered**](#build-pokered).
+Now you're ready to [build **pokemon-rgb**](#build pokemon-rgb).
 
 
 ## Linux
@@ -84,7 +84,7 @@ To install the software required for **pokered**:
 sudo apt-get install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.6.1** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
 ### OpenSUSE
 
@@ -94,7 +94,7 @@ To install the software required for **pokered**:
 sudo zypper install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.6.1** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
 ### Arch Linux
 
@@ -106,7 +106,7 @@ sudo pacman -S make gcc git
 
 Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for Arch Linux to install **rgbds 0.6.1**.
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.6.1** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
 ### Termux
 
@@ -122,7 +122,7 @@ To install **rgbds**:
 sudo apt install rgbds
 ```
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.6.1** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
 ### Other distros
 
@@ -133,18 +133,18 @@ If your distro is not listed here, try to find the required software in its repo
 - `git`
 - `rgbds`
 
-If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.6.1** from source.
+If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
-Now you're ready to [build **pokered**](#build-pokered).
+Now you're ready to [build **pokemon-rgb**](#Build pokemon-rgb).
 
 
-## Build pokered
+## Build pokemon-rgb
 
-To download the **pokered** source files:
+To download the **pokemon-rgb** source files:
 
 ```bash
-git clone https://github.com/pret/pokered
-cd pokered
+git clone https://github.com/jamescastells/pokemon-rgb
+cd pokemon-rgb
 ```
 
 To build **pokered.gbc** and **pokeblue.gbc**:
@@ -155,8 +155,8 @@ make
 
 ### Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.6.1 globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.6.1/`. Then specify it when you run `make`:
+If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds globally. Instead, you can put its files in a directory within pokered, such as `pokered/rgbds-0.x.y/`. Then specify it when you run `make`:
 
 ```bash
-make RGBDS=rgbds-0.6.1/
+make RGBDS=rgbds-0.x.y/
 ```
