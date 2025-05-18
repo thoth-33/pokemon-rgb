@@ -58,7 +58,7 @@ cd /cygdrive/c/Users/<user>/Desktop
 
 (The Windows `C:\` drive is called `/cygdrive/c/` in Cygwin. Replace *\<user>* in the example path with your username.)
 
-Now you're ready to [build **pokemon-rgb**](#pokemon-rgb).
+Now you're ready to [build **pokemon-rgb**](#build-pokemon-rgb).
 
 
 ## macOS
@@ -69,8 +69,7 @@ Open **Terminal** and prepare to enter commands.
 
 Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds**.
 
-Now you're ready to [build **pokemon-rgb**](#build pokemon-rgb).
-
+Now you're ready to [build **pokemon-rgb**](#build-pokemon-rgb).
 
 ## Linux
 
@@ -104,7 +103,7 @@ To install the software required for **pokered**:
 sudo pacman -S make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for Arch Linux to install **rgbds 0.6.1**.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for Arch Linux to install **rgbds**.
 
 If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
@@ -135,7 +134,7 @@ If your distro is not listed here, try to find the required software in its repo
 
 If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds** from source.
 
-Now you're ready to [build **pokemon-rgb**](#Build pokemon-rgb).
+Now you're ready to [build **pokemon-rgb**](#build-pokemon-rgb).
 
 
 ## Build pokemon-rgb
