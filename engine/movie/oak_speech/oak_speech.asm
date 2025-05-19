@@ -3,6 +3,11 @@ PrepareOakSpeech:
 	push af
 	ld a, [wOptions]
 	push af
+	; Retrieve BIT_DEBUG_MODE set in DebugMenu for StartNewGameDebug.
+	; BUG: StartNewGame carries over bit 5 from previous save files,
+	; which causes CheckForceBikeOrSurf to not return.
+	; To fix this in debug builds, reset bit 5 here or in StartNewGame.
+	; In non-debug builds, the instructions can be removed.
 	ld a, [wd732]
 	push af
 	ld hl, wPlayerName
@@ -24,6 +29,7 @@ PrepareOakSpeech:
 	call z, InitOptions
 	; These debug names are used for StartNewGameDebug.
 	; TestBattle uses the debug names from DebugMenu.
+	; A variant of this process is performed in PrepareTitleScreen.
 	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -52,7 +58,7 @@ OakSpeech:
 	call AddItemToInventory  ; give one potion
 	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
-	call SpecialWarpIn
+	call PrepareForSpecialWarp
 	xor a
 	ldh [hTileAnimations], a
 IF GEN_2_GRAPHICS
@@ -65,8 +71,8 @@ ENDC
 	nop
 	nop
 	;ld a, [wd732]
-	;bit 1, a ; possibly a debug mode bit
-	;jp nz, .skipChoosingNames
+	;bit BIT_DEBUG_MODE, a
+	;jp nz, .skipSpeech
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -140,7 +146,7 @@ ENDC
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-.skipChoosingNames
+.skipSpeech
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de, RedPicFront
@@ -172,7 +178,7 @@ ENDC
 	ld hl, vSprites
 	lb bc, BANK(RedSprite), $0C
 	ld a, [wPlayerGender] ; check gender
-	and a      ; check gender
+	and a
 	jr z, .NotGreen3
 	ld de,GreenSprite
 	lb bc, BANK(GreenSprite), $0C
@@ -220,7 +226,7 @@ OakSpeechText1:
 	text_end
 OakSpeechText2:
 	text_far _OakSpeechText2A
-	sound_cry_gloom
+	sound_cry_gloom ; BUG: The cry played does not match the sprite displayed.
 	text_far _OakSpeechText2B
 	text_end
 IntroducePlayerText:

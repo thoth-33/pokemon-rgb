@@ -447,6 +447,7 @@ wAddedToParty::
 ; The purpose of these flags is to track which mons levelled up during the
 ; current battle at the end of the battle when evolution occurs.
 ; Other methods of evolution simply set it by calling TryEvolvingMon.
+wMiscBattleData::
 wCanEvolveFlags:: db
 
 wForceEvolution:: db
@@ -460,8 +461,7 @@ wAILayer2Encouragement:: db
 wPlayerSubstituteHP:: db
 wEnemySubstituteHP:: db
 
-; The player's selected move during a test battle.
-; InitBattleVariables sets it to the move Pound.
+; used for TestBattle (unused in non-debug builds)
 wTestBattlePlayerSelectedMove:: db
 
 	ds 1
@@ -529,6 +529,7 @@ wEnemyNumHits:: ; db
 wEnemyBideAccumulatedDamage:: dw
 
 	ds 8
+wMiscBattleDataEnd::
 ENDU
 
 ; This union spans 39 bytes.
@@ -2216,7 +2217,7 @@ wd730:: db
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 wd732:: db
 
-; bit 0: running a test battle
+; bit 0: running a test battle (unused in non-debug builds)
 ; bit 1: prevent music from changing when entering new map
 ; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
 ; bit 3: trainer wants to battle
