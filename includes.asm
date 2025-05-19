@@ -1,8 +1,6 @@
 DEF GEN_2_GRAPHICS EQU 1
 DEF GEN_2_MUSIC    EQU 1
 
-INCLUDE "charmap.asm"
-
 INCLUDE "macros/asserts.asm"
 INCLUDE "macros/const.asm"
 INCLUDE "macros/predef.asm"
@@ -20,6 +18,7 @@ INCLUDE "macros/scripts/text.asm"
 
 INCLUDE "macros/color.asm"
 
+INCLUDE "constants/charmap.asm"
 INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/oam_constants.asm"
 INCLUDE "constants/misc_constants.asm"
