@@ -546,9 +546,9 @@ TextCommandSounds::
 	db TX_SOUND_GET_ITEM_2,           SFX_GET_ITEM_2
 	db TX_SOUND_GET_KEY_ITEM,         SFX_GET_KEY_ITEM
 	db TX_SOUND_DEX_PAGE_ADDED,       SFX_DEX_PAGE_ADDED
-	db TX_SOUND_CRY_NIDORINA,         NIDORINA ; used in OakSpeech
-	db TX_SOUND_CRY_PIDGEOT,          PIDGEOT  ; used in SaffronCityText12
-	db TX_SOUND_CRY_GLOOM,            GLOOM  ; unused
+	db TX_SOUND_CRY_NIDORINA,         NIDORINA ; unused
+	db TX_SOUND_CRY_PIDGEOT,          PIDGEOT  ; used in SaffronCityPidgeotText
+	db TX_SOUND_CRY_GLOOM,            GLOOM  ; used in Oakspeech
 
 TextCommand_DOTS::
 ; wait for button press or 30 frames while printing "…"s

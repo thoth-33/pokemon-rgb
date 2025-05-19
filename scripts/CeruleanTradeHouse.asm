@@ -2,25 +2,26 @@ CeruleanTradeHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeruleanTradeHouse_TextPointers:
-	dw CeruleanHouse1Text1
-	dw CeruleanHouse1Text2
-	dw CeruleanHouse1Text3
-	dw CeruleanHouse1Text4
-	dw CeruleanHouse1Text5
-	dw CeruleanHouse1Text6
+	def_text_pointers
+	dw_const CeruleanTradeHouseGrannyText,    TEXT_CERULEANTRADEHOUSE_GRANNY
+	dw_const CeruleanTradeHouseGamblerText,   TEXT_CERULEANTRADEHOUSE_GAMBLER
+	dw_const CeruleanTradeHouseGirlText,      TEXT_CERULEANTRADEHOUSE_GIRL
+	dw_const CeruleanTradeHouseBulbasaurText, TEXT_CERULEANTRADEHOUSE_BULBASAUR
+	dw_const CeruleanTradeHouseOddishText,    TEXT_CERULEANTRADEHOUSE_ODDISH
+	dw_const CeruleanTradeHouseSandshrewText, TEXT_CERULEANTRADEHOUSE_SANDSHREW
 
-CeruleanHouse1Text1:
-	text_far _CeruleanHouse1Text1
+CeruleanTradeHouseGrannyText:
+	text_far _CeruleanTradeHouseGrannyText
 	text_end
 
-CeruleanHouse1Text2:
+CeruleanTradeHouseGamblerText:
 	text_asm
 	ld a, TRADE_FOR_LOLA
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 	
-CeruleanHouse1Text3:
+CeruleanTradeHouseGirlText:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -130,21 +131,21 @@ MelanieText5::
 	line "That's too bad...@"
 	text_end
 	
-CeruleanHouse1Text4:
+CeruleanTradeHouseBulbasaurText:
 	text_far MelanieBulbasaurText
 	text_asm
 	ld a, BULBASAUR
 	call PlayCry
 	jp TextScriptEnd
 
-CeruleanHouse1Text5:
+CeruleanTradeHouseOddishText:
 	text_far MelanieOddishText
 	text_asm
 	ld a, ODDISH
 	call PlayCry
 	jp TextScriptEnd
 
-CeruleanHouse1Text6:
+CeruleanTradeHouseSandshrewText:
 	text_far MelanieSandshrewText
 	text_asm
 	ld a, SANDSHREW

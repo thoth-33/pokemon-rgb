@@ -1,3 +1,6 @@
+	object_const_def
+	const VERMILIONDOCK_MEW
+
 VermilionDock_Object:
 	db $f ; border block
 
