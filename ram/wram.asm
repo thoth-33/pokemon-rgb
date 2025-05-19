@@ -1045,14 +1045,14 @@ wOnSGB:: db
 wDefaultPaletteCommand:: db
 
 UNION
-wPlayerHPBarColor:: dw
+wPlayerHPBarColor:: db
 
 NEXTU
 ; species of the mon whose palette is used for the whole screen
 wWholeScreenPaletteMonSpecies:: db
+ENDU
 
 wEnemyHPBarColor:: db
-ENDU
 
 ; 0: green
 ; 1: yellow
