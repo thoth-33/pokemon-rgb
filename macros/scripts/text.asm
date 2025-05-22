@@ -1,13 +1,38 @@
-DEF text   EQUS "db TX_START,"    ; Start writing text.
-DEF next   EQUS "db \"<NEXT>\","  ; Move a line down.
-DEF line   EQUS "db \"<LINE>\","  ; Start writing at the bottom line.
-DEF para   EQUS "db \"<PARA>\","  ; Start a new paragraph.
-DEF cont   EQUS "db \"<CONT>\","  ; Scroll to the next line.
-DEF done   EQUS "db \"<DONE>\""   ; End a text box.
-DEF prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
+MACRO text
+	db TX_START, \# ; Start writing text
+ENDM
 
-DEF page   EQUS "db \"<PAGE>\","         ; Start a new Pokédex page.
-DEF dex    EQUS "db \"<DEXEND>\", \"@\"" ; End a Pokédex entry.
+MACRO next
+	db "<NEXT>", \# ; Move a line down
+ENDM
+
+MACRO line
+	db "<LINE>", \# ; Start writing at the bottom line
+ENDM
+
+MACRO para
+	db "<PARA>", \# ; Start a new paragraph
+ENDM
+
+MACRO cont
+	db "<CONT>", \# ; Scroll to the next line
+ENDM
+
+MACRO done
+	db "<DONE>" ; End a text box
+ENDM
+
+MACRO prompt
+	db "<PROMPT>" ; Prompt the player to end a text box (initiating some other event)
+ENDM
+
+MACRO page
+	db "<PAGE>", \# ; Start a new Pokédex page
+ENDM
+
+MACRO dex
+	db "<DEXEND>@" ; End a Pokédex entry
+ENDM
 
 
 ; TextCommandJumpTable indexes (see home/text.asm)
@@ -137,9 +162,9 @@ MACRO sound_cry_pidgeot
 	db TX_SOUND_CRY_PIDGEOT
 ENDM
 
-	const TX_SOUND_CRY_GLOOM ; $16
-MACRO sound_cry_gloom
-	db TX_SOUND_CRY_GLOOM
+	const TX_SOUND_CRY_DEWGONG ; $16
+MACRO sound_cry_dewgong
+	db TX_SOUND_CRY_DEWGONG
 ENDM
 
 	const TX_FAR ; $17

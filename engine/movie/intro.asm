@@ -275,9 +275,8 @@ CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB:
-; unused
-	predef GetMoveSoundB
+PlayIntroMoveSound: ; unreferenced
+	predef GetIntroMoveSound
 	ld a, b
 	jp PlaySound
 
@@ -319,12 +318,13 @@ PlayShootingStar:
 	call LoadIntroGraphics
 	call EnableLCD
 	ld hl, rLCDC
-	res 5, [hl]
-	set 3, [hl]
+	res rLCDC_WINDOW_ENABLE, [hl]
+	set rLCDC_BG_TILEMAP, [hl]
 	ld c, 64
 	call DelayFrames
 	farcall AnimateShootingStar
 	push af
+	; A `call LoadPresentsGraphic` here was removed in localization
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40
@@ -356,7 +356,11 @@ IntroDrawBlackBars:
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
 
-EmptyFunc2:
+LoadPresentsGraphic: ; unreferenced
+	; This routine loaded the "PRESENTS" text graphic (tiles
+	; $67, $68, $69, $6A, $6B, and $6C from gamefreak_presents.2bpp)
+	; at coordinates (11, 7) in the Japanese versions.
+	; It was dummied out in the English localization.
 	ret
 
 IntroNidorinoAnimation0:

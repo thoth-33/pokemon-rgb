@@ -62,14 +62,14 @@ SetPalFunctions:
 ; HAXed to give trainers palettes independantly
 ; Also skips the "transform" check, caller does that instead
 DeterminePaletteID:
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	and a
 
 	push bc
 	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
 	pop bc
 
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld hl, MonsterPalettes
 	and a
 	jr nz, .skipDexNumConversion ; Check if trainer?
@@ -79,7 +79,7 @@ IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	; OPP_GARY, so ignore it)
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	ld d, PAL_HERO
+	ld a, PAL_HERO
 	ret z
 
 	ld a, [wTrainerClass] ; Get trainer ID
@@ -105,27 +105,20 @@ ENDC
 	
 
 DetermineBackSpritePaletteID:
-	ld [wd11e], a
+	ld [wPokedexNum], a
 	and a
 
 	push bc
 	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
 	pop bc
 
-	ld a, [wd11e]
+	ld a, [wPokedexNum]
 	ld hl, MonsterPalettes
 	and a
 	jr nz, .getPaletteID ; Check if trainer?
 
-IF GEN_2_GRAPHICS	
-	ld a, [wPlayerGender]
-	and a
-	jr z, .BoyBackPalette
-	ld a, PAL_ERIKA
-	jr .KeepLoadingPaletteStuff1
-.BoyBackPalette
+IF GEN_2_GRAPHICS
 	ld a, PAL_HERO
-.KeepLoadingPaletteStuff1
 ELSE
 	ld a, PAL_REDMON
 ENDC
@@ -250,7 +243,7 @@ LoadSGB:
 	nop
 	ld a, $1
 	ld [wOnSGB], a
-	ld a, [wGBC]
+	ld a, [wOnCGB]
 	and a
 	;jr z, .asm_7203f
 	nop
@@ -400,21 +393,21 @@ Wait7000:
 	ret
 
 SendSGBPackets:
-	ld a, [wGBC]
+	ld a, [wOnCGB]
 	and a
-	jr z, .notGBC
+	jr z, .notCGB
 	push de
-	call InitGBCPalettes
+	call InitCGBPalettes
 	pop hl
 	call EmptyFunc3
 	ret
-.notGBC
+.notCGB
 	push de
 	call SendSGBPacket
 	pop hl
 	jp SendSGBPacket
 
-InitGBCPalettes:
+InitCGBPalettes:
 	ld a, $80 ; index 0 with auto-increment
 	ldh [rBGPI], a
 	inc hl

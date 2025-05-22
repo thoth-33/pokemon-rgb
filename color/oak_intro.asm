@@ -3,23 +3,16 @@
 GetNidorinoPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, PAL_GLOOM
+	ld a, PAL_NIDORINO
 ELSE
-	ld a, PAL_GREENMON
+	ld a, PAL_PURPLEMON
 ENDC
 	jr GotPalID
 
 GetRedPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, [wPlayerGender]
-	and a
-	jr z, .BoyOakPalette
-	ld a, PAL_ERIKA
-	jr .KeepLoadingPaletteStuff2
-.BoyOakPalette
 	ld a, PAL_HERO
-.KeepLoadingPaletteStuff2
 ELSE
 	ld a, PAL_REDMON
 ENDC

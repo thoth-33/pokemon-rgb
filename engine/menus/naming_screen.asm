@@ -8,8 +8,8 @@ AskName:
 	ld b, 4
 	ld c, 11
 	call z, ClearScreenArea ; only if in wild battle
-	ld a, [wcf91]
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
@@ -45,7 +45,7 @@ AskName:
 .declinedNickname
 	ld d, h
 	ld e, l
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -83,8 +83,8 @@ DisplayNameRaterScreen::
 
 DisplayNamingScreen:
 	push hl
-	ld hl, wd730
-	set 6, [hl]
+	ld hl, wStatusFlags5
+	set BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -95,10 +95,7 @@ DisplayNamingScreen:
 
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	;farcall LoadMonPartySpriteGfx			;Changes from PartyIcons
-	;ld a, [wcf91]					;
-	;ld [hColorHackTmp], a				;
-	farcall LoadMonPartySpriteForSpecies		; 
+	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
 	ld b, 9
 	ld c, 18
@@ -173,8 +170,8 @@ DisplayNamingScreen:
 	call GBPalNormal
 	xor a
 	ld [wAnimCounter], a
-	ld hl, wd730
-	res 6, [hl]
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wIsInBattle]
 	and a
 	jp z, LoadTextBoxTilePatterns
@@ -332,9 +329,8 @@ DisplayNamingScreen:
 LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
-	ld bc, (ED_TileEnd - ED_Tile) / $8
-	; to fix the graphical bug on poor emulators
-	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
+	; BUG: BANK("Home") should be BANK(ED_Tile), although it coincidentally works as-is
+	lb bc, BANK("Home"), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile:
@@ -464,16 +460,12 @@ PrintNamingText:
 	ld de, RivalsTextString
 	dec a
 	jr z, .notNickname
-	ld a, 0				;Sets party slot to load, naming pokemon stored in 0
-	ld [hPartyMonIndex], a		;
-	;ld a, [wcf91];moved down
-	;ld [wMonPartySpriteSpecies], a	;Removed by ParyIcons
-	;push af ;pointless
-	;farcall WriteMonPartySpriteOAMBySpecies     ;Changed by PartyIcons
-	farcall WriteMonPartySpriteOAMByPartyIndex   ;
-	;pop af	 ;pointless
-	ld a, [wcf91] ;moved from above
-	ld [wd11e], a
+	ld a, [wCurPartySpecies]
+	ld [wMonPartySpriteSpecies], a
+	push af
+	farcall WriteMonPartySpriteOAMBySpecies
+	pop af
+	ld [wNamedObjectIndex], a
 	call GetMonName
 	hlcoord 4, 1
 	call PlaceString

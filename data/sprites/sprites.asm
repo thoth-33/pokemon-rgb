@@ -5,7 +5,7 @@ MACRO overworld_sprite
 ENDM
 
 SpriteSheetPointerTable:
-	table_width 4, SpriteSheetPointerTable
+	table_width 4
 	; graphics, tile count
 	overworld_sprite RedSprite, 12              ; SPRITE_RED
 	overworld_sprite BlueSprite, 12             ; SPRITE_BLUE
@@ -33,7 +33,7 @@ SpriteSheetPointerTable:
 	overworld_sprite RocketSprite, 12           ; SPRITE_ROCKET
 	overworld_sprite ChannelerSprite, 12        ; SPRITE_CHANNELER
 	overworld_sprite WaiterSprite, 12           ; SPRITE_WAITER
-	overworld_sprite ErikaSprite, 12            ; SPRITE_ERIKA
+	overworld_sprite SilphWorkerFSprite, 12     ; SPRITE_SILPH_WORKER_F
 	overworld_sprite MiddleAgedWomanSprite, 12  ; SPRITE_MIDDLE_AGED_WOMAN
 	overworld_sprite BrunetteGirlSprite, 12     ; SPRITE_BRUNETTE_GIRL
 	overworld_sprite LanceSprite, 12            ; SPRITE_LANCE
@@ -50,7 +50,7 @@ SpriteSheetPointerTable:
 	overworld_sprite NurseSprite, 12            ; SPRITE_NURSE
 	overworld_sprite LinkReceptionistSprite, 12 ; SPRITE_LINK_RECEPTIONIST
 	overworld_sprite SilphPresidentSprite, 12   ; SPRITE_SILPH_PRESIDENT
-	overworld_sprite SilphWorkerSprite, 12      ; SPRITE_SILPH_WORKER
+	overworld_sprite SilphWorkerMSprite, 12     ; SPRITE_SILPH_WORKER_M
 	overworld_sprite WardenSprite, 12           ; SPRITE_WARDEN
 	overworld_sprite CaptainSprite, 12          ; SPRITE_CAPTAIN
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER
@@ -67,10 +67,6 @@ SpriteSheetPointerTable:
 	overworld_sprite BrunoSprite, 12            ; SPRITE_BRUNO
 	overworld_sprite LoreleiSprite, 12          ; SPRITE_LORELEI
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
-	overworld_sprite SandshrewSprite, 12        ; SPRITE_SANDSHREW
-	overworld_sprite OddishSprite, 12           ; SPRITE_ODDISH
-	overworld_sprite BulbasaurSprite, 12        ; SPRITE_BULBASAUR
-	overworld_sprite OfficerJennySprite, 12     ; SPRITE_OFFICER_JENNY
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

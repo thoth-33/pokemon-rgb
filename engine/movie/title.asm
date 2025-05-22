@@ -1,21 +1,25 @@
-; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
-CopyFixedLengthText:
+CopyDebugName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen::
-	ld hl, NintenText
+PrepareTitleScreen::
+	; These debug names are already copied later in PrepareOakSpeech.
+	; Removing the unused copies below has no apparent impact.
+	; CopyDebugName can also be safely deleted afterwards.
+	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
-	call CopyFixedLengthText
-	ld hl, SonyText
+	call CopyDebugName
+	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
-	call CopyFixedLengthText
+	call CopyDebugName
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
-	ld hl, wd732
+	ld hl, wStatusFlags6
 	ld [hli], a
+	ASSERT wStatusFlags6 + 1 == wStatusFlags7
 	ld [hli], a
+	ASSERT wStatusFlags7 + 1 == wElite4Flags
 	ld [hl], a
 ;	ld a, 0 ; BANK(Music_TitleScreen)
 ;	ld [wAudioROMBank], a
@@ -40,10 +44,10 @@ DisplayTitleScreen:
 	ld bc, 5 tiles
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
-	ld hl, GamefreakLogoGraphics
+	ld hl, GameFreakLogoGraphics
 	ld de, vTitleLogo2 tile (16 + 5)
 	ld bc, 9 tiles
-	ld a, BANK(GamefreakLogoGraphics)
+	ld a, BANK(GameFreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics
 	ld de, vTitleLogo
@@ -216,7 +220,7 @@ ENDC
 ;	ld [wNewSoundID], a
 	call PlayMusic
 	xor a
-	ld [wUnusedCC5B], a
+	ld [wUnusedFlag], a
 
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop
@@ -358,8 +362,8 @@ ClearBothBGMaps:
 	jp FillMemory
 
 LoadTitleMonSprite:
-	ld [wcf91], a
-	ld [wd0b5], a
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	hlcoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
@@ -377,7 +381,7 @@ LoadCopyrightAndTextBoxTiles:
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 tile $60
-	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (GameFreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
 	hlcoord 2, 7
 	ld de, CopyrightTextString
@@ -399,12 +403,15 @@ PrintGameVersionOnTitleScreen:
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText:
-IF DEF(_BLUE)
+IF DEF(_RED)
 	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
 ENDC
-IF DEF(_RED)
+IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 ENDC
 
-NintenText: db "NINTEN@"
-SonyText:   db "SONY@"
+DebugNewGamePlayerName:
+	db "NINTEN@"
+
+DebugNewGameRivalName:
+	db "SONY@"

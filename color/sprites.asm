@@ -11,6 +11,7 @@ DEF ATK_PAL_PURPLE  EQU 7
 ; 8: color based on attack type
 ; 9: don't change color palette (assume it's already set properly from elsewhere)
 
+
 DEF SPR_PAL_ORANGE  EQU 0
 DEF SPR_PAL_BLUE    EQU 1
 DEF SPR_PAL_GREEN   EQU 2
@@ -37,16 +38,15 @@ LoadOverworldSpritePalettes:
 	ld hl, SpritePalettesPokecenter
 	cp POKECENTER
 	jr z, .gotPaletteList
+	ld a, [wCurMap]
+	cp INDIGO_PLATEAU_LOBBY
+	jr z, .gotPaletteList
 	; If not, load the normal Object Pals
 	ld hl, SpritePalettes
 .gotPaletteList
 	pop bc
 	ld a, b
 	ldh [rSVBK], a
-	jr LoadSpritePaletteData
-
-LoadPartySpritePalettes:
-	ld hl, PartySpritePalettes
 	jr LoadSpritePaletteData
 
 LoadAttackSpritePalettes:
@@ -88,16 +88,14 @@ ColorOverworldSprite::
 	ld e, a
 	ld d, wSpriteStateData1 >> 8
 	ld a, [de] ; Load A with picture ID
-
 	dec a
+
 	ld de, SpritePaletteAssignments
-	jr z, .getGender ; pulls operation out of loop for hero sprite
 	add e
 	ld e, a
 	jr nc, .noCarry
 	inc d
 .noCarry
-
 	ld a, [de] ; Get the picture ID's palette
 
 	; If it's 8, that means no particular palette is assigned
@@ -125,20 +123,6 @@ ColorOverworldSprite::
 	pop bc
 	pop af
 	ret
-	
-.getGender
-	ld a, [wWalkBikeSurfState]
-	cp a, 2
-	jr z, .surfing
-	ld a, [wPlayerGender]
-	and a
-	ld a, SPR_PAL_ORANGE
-	jr z, .norandomColor
-	ld a, SPR_PAL_GREEN
-	jr .norandomColor
-.surfing
-	ld a, SPR_PAL_EMOJI
-    	jr .norandomColor
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
 ;
@@ -275,34 +259,6 @@ LoadAnimationTilesetPalettes:
 	dec b
 	jr nz, .copyLoop
 
-	;Per-ball colors for pokeballs
-	ld a, c
-	and a		;check if c == 0
-	jr nz, .notBall
-	ld a, [wcf91]
-	cp SAFARI_BALL
-	ld b, ATK_PAL_GREEN
-	jr z, .gotColor
- 	cp POKE_BALL
-	ld b, ATK_PAL_RED
-	jr z, .gotColor
-	cp GREAT_BALL
-	ld b, ATK_PAL_BLUE
-	jr z, .gotColor
-	cp ULTRA_BALL
-	ld b, ATK_PAL_GREY
-	jr z, .gotColor
-	ld b, ATK_PAL_PURPLE ;masterball color
-.gotColor
-	ld a, b
-	ld [W2_SpritePaletteMap + $33], a
-	ld [W2_SpritePaletteMap + $43], a
-	ld [W2_SpritePaletteMap + $37], a
-	ld [W2_SpritePaletteMap + $47], a
-	ld [W2_SpritePaletteMap + $38], a
-	ld [W2_SpritePaletteMap + $48], a
-.notBall
-
 	; If in a trade, some of the tiles near the end are different. Override some tiles
 	; for the link cable, and replace the "purple" palette to match the exact color of
 	; the link cable.
@@ -354,6 +310,7 @@ ClearSpritePaletteMap:
 
 
 SpritePaletteAssignments: ; Characters on the overworld
+	table_width 1, SpritePaletteAssignments
 	; 0x01: SPRITE_RED
 	db SPR_PAL_ORANGE
 
@@ -533,18 +490,6 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 	; 0x3c: SPRITE_SEEL
 	db SPR_PAL_BLUE
-	
-	; 0x-1: SPRITE_SANDSHREW
-	db SPR_PAL_BROWN
-	
-	; 0x-2: SPRITE_ODDISH
-	db SPR_PAL_GREEN
-	
-	; 0x-3: SPRITE_BULBASAUR
-	db SPR_PAL_GREEN
-	
-	; 0x-3: SPRITE_OFFICER_JENNY
-	db SPR_PAL_BLUE
 
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE
@@ -582,6 +527,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; 0x48: SPRITE_LYING_OLD_MAN
 	db SPR_PAL_BROWN
 
+	assert_table_length NUM_SPRITES
+
+
 AnimationTileset1Palettes:
 	INCBIN "color/data/animtileset1palettes.bin"
 
@@ -589,6 +537,7 @@ AnimationTileset2Palettes:
 	INCBIN "color/data/animtileset2palettes.bin"
 
 TypeColorTable: ; Used for a select few sprites to be colorized based on attack type
+	table_width 1, TypeColorTable
 	db 0 ; NORMAL EQU $00
 	db 0 ; FIGHTING EQU $01
 	db 0 ; FLYING EQU $02
@@ -616,5 +565,6 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 7 ; PSYCHIC EQU $18
 	db 6 ; ICE EQU $19
 	db 1 ; DRAGON EQU $1A
+	assert_table_length NUM_TYPES
 
 INCLUDE "color/data/spritepalettes.asm"

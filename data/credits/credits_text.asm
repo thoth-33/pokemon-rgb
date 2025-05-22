@@ -1,6 +1,6 @@
 CreditsTextPointers:
 ; entries correspond to CRED_* constants
-	table_width 2, CreditsTextPointers
+	table_width 2
 	dw CredVersion
 	dw CredTajiri
 	dw CredTaOota
@@ -69,7 +69,7 @@ CreditsTextPointers:
 
 CredVersion:
 IF DEF(_RED)
-	db -8, "RGB VERSION STAFF@"
+	db -8, "RED VERSION STAFF@"
 ENDC
 IF DEF(_BLUE)
 	db -8, "BLUE VERSION STAFF@"

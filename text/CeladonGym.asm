@@ -1,4 +1,4 @@
-_ErikaPreBattleText::
+_CeladonGymErikaPreBattleText::
 	text "Hello. Lovely"
 	line "weather isn't it?"
 	cont "It's so pleasant."
@@ -25,7 +25,7 @@ _ErikaPreBattleText::
 	line "shall not lose."
 	done
 
-_ReceivedRainbowBadgeText::
+_CeladonGymErikaReceivedRainbowBadgeText::
 	text "Oh!"
 	line "I concede defeat."
 
@@ -36,7 +36,7 @@ _ReceivedRainbowBadgeText::
 	line "the RAINBOWBADGE."
 	prompt
 
-_ErikaPostBattleAdviceText::
+_CeladonGymErikaPostBattleAdviceText::
 	text "You are cataloging"
 	line "#MON? I must"
 	cont "say I'm impressed."
@@ -47,7 +47,7 @@ _ErikaPostBattleAdviceText::
 	cont "unattractive."
 	done
 
-_ErikaRainbowBadgeInfoText::
+_CeladonGymRainbowBadgeInfoText::
 	text "The RAINBOWBADGE"
 	line "will make #MON"
 	cont "up to L50 obey."
@@ -61,7 +61,7 @@ _ErikaRainbowBadgeInfoText::
 	line "this with you."
 	done
 
-_ReceivedTM21Text::
+_CeladonGymReceivedTM21Text::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
@@ -80,7 +80,7 @@ _TM21ExplanationText::
 	cont "your #MON!"
 	done
 
-_TM21NoRoomText::
+_CeladonGymTM21NoRoomText::
 	text "You should make"
 	line "room for this."
 	done
@@ -124,7 +124,7 @@ _CeladonGymAfterBattleText3::
 	done
 
 _CeladonGymBattleText4::
-	text "Did you see the"
+	text "Aren't you the"
 	line "peeping Tom?"
 	done
 
@@ -134,8 +134,8 @@ _CeladonGymEndBattleText4::
 	prompt
 
 _CeladonGymAfterBattleText4::
-	text "I hope he stops"
-	line "peeping. We get a"
+	text "Oh, you weren't"
+	line "peeping? We get a"
 	cont "lot of gawkers!"
 	done
 

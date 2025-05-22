@@ -9,7 +9,7 @@ IF DEF(_RED)
 	db 40, WEEZING
 	db 34, PONYTA
 	db 35, GRIMER
-	db 38, MAGMAR
+	db 42, WEEZING
 	db 42, MUK
 ENDC
 IF DEF(_BLUE)
@@ -28,4 +28,3 @@ ENDC
 
 	def_water_wildmons 0 ; encounter rate
 	end_water_wildmons
-

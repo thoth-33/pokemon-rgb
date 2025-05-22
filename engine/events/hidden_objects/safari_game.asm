@@ -44,7 +44,7 @@ SafariZoneGameOver:
 ;	jr nz, .waitForMusicToPlay
 
 	ld a, TEXT_SAFARI_GAME_OVER
-	ldh [hSpriteIndexOrTextID], a
+	ldh [hTextID], a
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
@@ -52,7 +52,7 @@ SafariZoneGameOver:
 	ldh [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
-	ld a, $5
+	ld a, SCRIPT_SAFARIZONEGATE_LEAVING_SAFARI
 	ld [wSafariZoneGateCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1

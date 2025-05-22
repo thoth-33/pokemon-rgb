@@ -69,7 +69,6 @@ ROMX $7
 	"Maps 4"
 	"Hidden Objects 1"
 ROMX $8
-	"NPC Sprites 3"
 	"Sound Effect Headers 2"
 ;	"Music Headers 2"
 	"Sound Effects 2"
@@ -151,7 +150,7 @@ ROMX $1B
 	"Tilesets 3"
 ROMX $1C
 	"bank1C"
-	org $4a92
+	org $4a69
 	"BattleTransition_BlackScreen"
 	org $5fb6
 	"InitPartyMenuBlkPacket"
@@ -202,24 +201,20 @@ ROMX $2B
 ROMX $2C
 	"bank2C"
 	"Move Names"
-ROMX $2F
-	"bank2F"
-ROMX $30
-	"bank30"
 ROMX $31
 	"bank31"
 ROMX $32
-	"bank32"
+	"Pics 7"
 ROMX $33
-	"bank33"
+	"Pics 8"
 ROMX $34
-	"bank34"
+	"Pics 9"
 ROMX $35
-	"bank35"
+	"Pics 10"
 ROMX $36
-	"bank36"
+	"Pics 11"
 ROMX $37
-	"bank37"
+	"Pics 12"
 WRAM0
 	"Audio RAM"
 	org $c100

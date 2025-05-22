@@ -1,10 +1,7 @@
 ChoosePlayerName:
 	call OakSpeechSlidePicRight
-        ld a, [wPlayerGender] ; load gender
-	and a
-	jr nz, .AreGirl ; Skip to girl names if you are a girl instead
 	ld de, DefaultNamesPlayer
-        call DisplayIntroNameTextBox
+	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .customName
@@ -13,17 +10,6 @@ ChoosePlayerName:
 	ld de, wPlayerName
 	call OakSpeechSlidePicLeft
 	jr .done
-.AreGirl ; Copy of the boy naming routine, just with girl's names
-	ld de, DefaultNamesGirl
-	call DisplayIntroNameTextBox
-	ld a, [wCurrentMenuItem]
-	and a
-        jr z, .customName
-	ld hl, DefaultNamesGirlList
-	call GetDefaultName
-	ld de, wPlayerName
-	call OakSpeechSlidePicLeft
-	jr .done ; End of new Girl Names routine
 .customName
 	ld hl, wPlayerName
 	xor a ; NAME_PLAYER_SCREEN
@@ -36,12 +22,6 @@ ChoosePlayerName:
 	call Delay3
 	ld de, RedPicFront
 	ld b, BANK(RedPicFront)
-	ld a, [wPlayerGender] ; Added gender check
-	and a      ; Added gender check
-        jr z, .AreBoy3
-	ld de, GreenPicFront
-	ld b, BANK(GreenPicFront)
-.AreBoy3
 	call IntroDisplayPicCenteredOrUpperRight
 .done
 	ld hl, YourNameIsText
@@ -74,7 +54,7 @@ ChooseRivalName:
 	call ClearScreen
 	call Delay3
 	ld de, Rival1Pic
-	ld b, $13
+	ld b, BANK(Rival1Pic)
 	call IntroDisplayPicCenteredOrUpperRight
 .done
 	ld hl, HisNameIsText
@@ -92,7 +72,7 @@ OakSpeechSlidePicLeft:
 	ld c, 10
 	call DelayFrames
 	pop de
-	ld hl, wcd6d
+	ld hl, wNameBuffer
 	ld bc, NAME_LENGTH
 	call CopyData
 	call Delay3
@@ -229,7 +209,7 @@ GetDefaultName:
 .foundName
 	ld h, d
 	ld l, e
-	ld de, wcd6d
+	ld de, wNameBuffer
 	ld bc, NAME_BUFFER_LENGTH
 	jp CopyData
 

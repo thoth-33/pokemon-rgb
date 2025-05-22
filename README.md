@@ -1,24 +1,31 @@
-# Pokémon RGB Version
+# Pokémon Red and Blue [![Build Status][ci-badge]][ci]
 
-![Title screen](images/titlescreen.png)
+This is a disassembly of Pokémon Red and Blue overhauled with full GBC support and Crystal's audio engine. Made by FroggestSpirit, Drenn, and dannye.
 
-Pokémon RGB Version is a hack ROM of Pokémon Red which adds full color, the ability to select a female character as the protagonist, and makes all 151 Pokémon obtainable.
+It builds the following ROMs:
 
-To check all of the features, check [**FEATURES.md**](FEATURES.md).
+- Pokemon Red (UE) [S][!].gbc `sha1: 66931bf79e389518c696d05a30b621a668054457`
+- Pokemon Blue (UE) [S][!].gbc `sha1: d8f3610feda2daef904178be8f1ff2dbe1ec4107`
+- BLUEMONS.GB (debug build) `sha1: 19c43f814fcd510785b8015e33ba8084ab426e96`
+- dmgapae0.e69.patch
+- dmgapee0.e68.patch
 
-This hack was originally posted [here](https://www.romhacking.net/hacks/8100/).
+To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
-## Credits
 
-- [DannyE](https://github.com/dannye), for the color and audio engine.
-- The whole Pokémon RGB team, which host their project [here](https://github.com/dannye/pokered-gbc).
-- BurstXShadowzX on DeviantArt for Green's graphics
-- [Vortyne](https://github.com/Vortyne) and the [pureRGB team](https://github.com/Vortyne/pureRGB) for the Mew-under-the-truck code.
-- [Thoth-33](https://github.com/thoth-33) for originally creating this hack, creating the party icons, coloring gender, porting Yellow's starter distributors, and coloring Pokéballs.
-- [Me](https://github.com/jamescastells) :) for reviving this project and noticing some bugs.
+## See also
 
-## Download
+- [**Wiki**][wiki] (includes [tutorials][tutorials])
+- [**Symbols**][symbols]
+- [**Tools**][tools]
 
-To download the latest version, go to the [**Releases**](https://github.com/jamescastells/pokemon-rgb/releases) page and grab the latest IPS file. Use an IPS patcher and apply the IPS file to a Pokémon Red ROM.
+You can find us on [Discord (pret, #pokered)](https://discord.gg/d5dubZ3).
 
-If you'd like to build from source, see [**INSTALL.md**](INSTALL.md).
+For other pret projects, see [pret.github.io](https://pret.github.io/).
+
+[wiki]: https://github.com/pret/pokered/wiki
+[tutorials]: https://github.com/pret/pokered/wiki/Tutorials
+[symbols]: https://github.com/pret/pokered/tree/symbols
+[tools]: https://github.com/pret/gb-asm-tools
+[ci]: https://github.com/pret/pokered/actions
+[ci-badge]: https://github.com/pret/pokered/actions/workflows/main.yml/badge.svg

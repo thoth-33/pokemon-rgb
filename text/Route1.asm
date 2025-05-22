@@ -1,4 +1,4 @@
-_Route1ViridianMartSampleText::
+_Route1Youngster1MartSampleText::
 	text "Hi! I work at a"
 	line "#MON MART."
 
@@ -12,25 +12,25 @@ _Route1ViridianMartSampleText::
 	cont "Here you go!"
 	prompt
 
-_Route1Text_1cae8::
+_Route1Youngster1GotPotionText::
 	text "<PLAYER> got"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_Route1Text_1caee::
+_Route1Youngster1AlsoGotPokeballsText::
 	text "We also carry"
 	line "# BALLs for"
 	cont "catching #MON!"
 	done
 
-_Route1Text_1caf3::
+_Route1Youngster1NoRoomText::
 	text "You have too much"
 	line "stuff with you!"
 	done
 
-_Route1Text2::
+_Route1Youngster2Text::
 	text "See those ledges"
 	line "along the road?"
 
@@ -43,47 +43,8 @@ _Route1Text2::
 	cont "quicker that way."
 	done
 
-_Route1Text3::
+_Route1SignText::
 	text "ROUTE 1"
 	line "PALLET TOWN -"
 	cont "VIRIDIAN CITY"
 	done
-
-_OakBeforeBattleText::
-	text "OAK: Oh, my!"
-	
-	para "It seems you"
-	line "caught me during"
-	cont "during my lunch"
-	cont "hour!"
-	
-	para "<PLAYER>, you"
-	line "have truly come"
-	cont "into your own!"
-	
-	para "Your #MON"
-	line "LEAGUE challenge"
-	cont "has reignited"
-	cont "a spirit that"
-	cont "left me a long"
-	cont "time ago..."
-	
-	para "How about we"
-	line "spar a bit?"
-	cont "What say you?"
-	
-	done
-
-_OakDefeatedText::
-	text "Oops,"
-	line "I've lost track"
-	cont "of  the time."
-	para "I have to run"
-	line "back to the lab."
-	prompt
-
-_OakWonText::
-	text "Back in my day,"
-	line "I was a serious"
-	cont "TRAINER!"
-	prompt

@@ -55,8 +55,7 @@
 	const EVENT_BEAT_CERULEAN_RIVAL
 	const_skip 14
 	const EVENT_BEAT_CERULEAN_ROCKET_THIEF
-	const EVENT_GOT_BULBASAUR_IN_CERULEAN
-	const_skip 17
+	const_skip 18
 	const EVENT_BEAT_CERULEAN_GYM_TRAINER_0
 	const EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 	const_skip 2
@@ -97,8 +96,6 @@
 	const EVENT_RESCUED_MR_FUJI_2
 	const_skip 16
 	const EVENT_GOT_POKE_FLUTE
-	const_skip 30
-	const EVENT_GOT_SQUIRTLE_FROM_OFFICER_JENNY
 
 ; Vermilion City events
 	const_next $150
@@ -508,8 +505,7 @@
 	const EVENT_NUGGET_REWARD_AVAILABLE
 
 ; Route 25 events
-	const_next $550 - 1
-	const EVENT_CHARMANDER
+	const_next $550
 	const EVENT_MET_BILL
 	const EVENT_BEAT_ROUTE_25_TRAINER_0
 	const EVENT_BEAT_ROUTE_25_TRAINER_1
@@ -555,10 +551,7 @@
 
 ; S.S. Anne events
 	const_next $5C0
-	const_skip
-	const EVENT_ENCOUNTERED_MEW
-	const EVENT_FOUND_MEW
-	const_skip
+	const_skip 4
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_0
 	const EVENT_BEAT_SS_ANNE_5_TRAINER_1
 	const_skip 26
