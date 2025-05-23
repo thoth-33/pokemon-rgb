@@ -8,16 +8,20 @@ InGameTrade_CheckForTradeEvo:
 	ld a, [wInGameTradeReceiveMonName]
 	cp "G" ; GRAVELER
 	jr z, .nameMatched
-	; "SPECTRE" (HAUNTER)
-	cp "S"
+	cp "M" ; MACHOKE
+	jr z, .nameMatched	
+	cp "K" ; KADABRA
+	jr z, .nameMatched
+	cp "H" ; HAUNTER
+	jr z, .nameMatched	
 	ret nz
 	ld a, [wInGameTradeReceiveMonName + 1]
 	cp "P"
 	ret nz
 .nameMatched
-	ld a, [wPartyCount]
-	dec a
-	ld [wWhichPokemon], a
+;	ld a, [wPartyCount]
+;	dec a
+;	ld [wWhichPokemon], a
 	ld a, TRUE
 	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING
