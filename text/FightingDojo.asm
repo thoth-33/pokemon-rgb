@@ -27,11 +27,11 @@ _FightingDojoKarateMasterIWillGiveYouAPokemonText::
 	cont "your trophy!"
 
 	para "In return, I will"
-	line "give you a prized"
+	line "give you prized"
 	cont "fighting #MON!"
-
-	para "Choose whichever"
-	line "one you like!"
+	
+	para "No need to choose,"
+	line "take them both!"
 	done
 
 _FightingDojoKarateMasterStayAndTrainWithUsText::
