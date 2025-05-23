@@ -183,8 +183,16 @@ HoFMonInfoText:
 	next "TYPE2/@"
 
 HoFLoadPlayerPics:
+	ld a, [wPlayerGender] ; New gender check
+	and a
+	jr nz, .girlPic
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
+	jr .routine1 ; skip the girl stuff and go to main routine
+.girlPic
+	ld de, GreenPicFront
+	ld a, BANK(GreenPicFront)
+.routine1 ; resume original routine
 	call UncompressSpriteFromDE
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
@@ -192,8 +200,16 @@ HoFLoadPlayerPics:
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
+	ld a, [wPlayerGender] ; new gender check
+	and a      ; new gender check
+	jr nz, .girlBack
 	ld de, RedPicBack
 	ld a, BANK(RedPicBack)
+	jr .routine2 ; skip the girl stuff and continue original routine if guy
+.girlBack
+	ld de, GreenPicBack
+	ld a, BANK(GreenPicBack)
+.routine2 ; original routine
 	call UncompressSpriteFromDE
 
 IF GEN_2_GRAPHICS ; Use uncompressed red sprite

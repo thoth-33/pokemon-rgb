@@ -99,6 +99,7 @@ PidgeotPicBack::     INCBIN "gfx/pokemon/gsback/pidgeotb.pic"
 StarmiePicFront::    INCBIN "gfx/pokemon/gsfront/starmie.pic"
 StarmiePicBack::     INCBIN "gfx/pokemon/gsback/starmieb.pic"
 RedPicBack::         INCBIN "gfx/gstrainers/redb.pic"
+GreenPicBack::       INCBIN "gfx/gstrainers/greenb.pic"
 OldManPicBack::      INCBIN "gfx/gstrainers/oldmanb.pic"
 
 GastlyPicFront::     INCBIN "gfx/pokemon/gsfront/gastly.pic"

@@ -91,6 +91,7 @@ ColorOverworldSprite::
 	dec a
 
 	ld de, SpritePaletteAssignments
+	jr z, .colorHero ; pulls operation out of loop for hero sprite
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -123,6 +124,20 @@ ColorOverworldSprite::
 	pop bc
 	pop af
 	ret
+	
+.colorHero
+	ld a, [wWalkBikeSurfState]
+	cp a, 2
+	jr z, .surfing
+	ld a, [wPlayerGender]
+	and a
+	ld a, SPR_PAL_ORANGE
+	jr z, .norandomColor
+	ld a, SPR_PAL_GREEN
+	jr .norandomColor
+.surfing
+	ld a, SPR_PAL_EMOJI
+    jr .norandomColor
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
 ;

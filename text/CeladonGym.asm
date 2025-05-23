@@ -124,7 +124,7 @@ _CeladonGymAfterBattleText3::
 	done
 
 _CeladonGymBattleText4::
-	text "Aren't you the"
+	text "Did you see the"
 	line "peeping Tom?"
 	done
 
@@ -134,8 +134,8 @@ _CeladonGymEndBattleText4::
 	prompt
 
 _CeladonGymAfterBattleText4::
-	text "Oh, you weren't"
-	line "peeping? We get a"
+	text "I hope he stops"
+	line "peeping. We get a"
 	cont "lot of gawkers!"
 	done
 

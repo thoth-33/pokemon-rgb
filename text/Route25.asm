@@ -61,8 +61,8 @@ _Route25CooltrainerF1EndBattleText::
 	prompt
 
 _Route25CooltrainerF1AfterBattleText::
-	text "I wish my guy was"
-	line "as good as you!"
+	text "I wish I was as"
+	line "good as you!"
 	done
 
 _Route25Youngster3BattleText::

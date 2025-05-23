@@ -2066,6 +2066,11 @@ wRoute18Gate1FCurScript:: db
 	ds 6
 wGameProgressFlagsEnd::
 
+wPlayerGender::
+	; $00 = male
+	; $01 = female
+		ds 1
+		
 UNION
 	ds 128
 NEXTU

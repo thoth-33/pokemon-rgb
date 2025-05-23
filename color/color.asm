@@ -239,8 +239,25 @@ FillBox:
 
 ; Load town map
 SetPal_TownMap:
+	ld a, [wPlayerGender]
+	and a
+	jr z, .boyMap
 	ld a, 2
 	ldh [rSVBK], a
+	ld hl, W2_SpritePaletteMap
+	ld bc, $100
+	ld a, SPR_PAL_GREEN
+	call FillMemory
+	jr .girlMap
+.boyMap
+
+	ld a, 2
+	ldh [rSVBK], a
+	ld hl, W2_SpritePaletteMap
+	ld bc, $100
+	ld a, SPR_PAL_ORANGE
+	call FillMemory
+.girlMap
 
 	ld d, PAL_TOWNMAP
 	ld e, 0
@@ -248,6 +265,10 @@ SetPal_TownMap:
 
 	ld d, PAL_TOWNMAP2
 	ld e, 1
+	farcall LoadSGBPalette
+
+	ld d, PAL_GREENMON
+	ld e, 2
 	farcall LoadSGBPalette
 
 	ld a, 1
@@ -356,6 +377,16 @@ SetPal_Pokedex:
 	ld d, a
 	ld e, 0
 
+	ld a, [wPlayerGender]
+	and a
+	jr z, .boyDex
+	ld a, 2
+	ldh [rSVBK], a
+	farcall LoadSGBPalette
+	ld d, PAL_GREENMON
+	jr .girlDex
+		
+.boyDex
 	ld a, 2
 	ldh [rSVBK], a
 
@@ -366,6 +397,8 @@ IF DEF(_BLUE)
 ELSE
 	ld d, PAL_REDMON
 ENDC
+
+.girlDex
 	ld e, 1
 	farcall LoadSGBPalette
 
@@ -834,23 +867,25 @@ SetPal_GameFreakIntro:
 
 ; Trainer card
 SetPal_TrainerCard:
+	ld a, [wPlayerGender] ; Gender check
+	and a
+	jr z, .BoyTrainerCard
+
+	; Greens's palette
 	ld a, 2
 	ldh [rSVBK], a
-
-	ld d, PAL_MEWMON
-	ld e, 0
+	ld d, PAL_ERIKA ; Green palette
+	ld e, 4
 	farcall LoadSGBPalette
-	ld d, PAL_BADGE
-	ld e, 1
+	ld d, PAL_GREENMON ; Border
+	ld e, 5
 	farcall LoadSGBPalette
-	ld d, PAL_REDMON
-	ld e, 2
-	farcall LoadSGBPalette
-	ld d, PAL_YELLOWMON
-	ld e, 3
-	farcall LoadSGBPalette
+	jr .EndTrainerCard
 
 	; Red's palette
+.BoyTrainerCard
+	ld a, 2
+	ldh [rSVBK], a
 IF GEN_2_GRAPHICS
 	ld d, PAL_HERO
 ELSE
@@ -866,6 +901,20 @@ ELSE ; _RED
 	ld d, PAL_REDMON
 ENDC
 	ld e, 5
+	farcall LoadSGBPalette
+
+.EndTrainerCard	
+	ld d, PAL_MEWMON
+	ld e, 0
+	farcall LoadSGBPalette
+	ld d, PAL_BADGE
+	ld e, 1
+	farcall LoadSGBPalette
+	ld d, PAL_REDMON
+	ld e, 2
+	farcall LoadSGBPalette
+	ld d, PAL_YELLOWMON
+	ld e, 3
 	farcall LoadSGBPalette
 
 	; Load palette map

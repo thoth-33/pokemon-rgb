@@ -12,7 +12,14 @@ ENDC
 GetRedPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
+	ld a, [wPlayerGender]
+	and a
+	jr z, .boyOak
+	ld a, PAL_ERIKA
+	jr .girlOak
+.boyOak
 	ld a, PAL_HERO
+.girlOak
 ELSE
 	ld a, PAL_REDMON
 ENDC

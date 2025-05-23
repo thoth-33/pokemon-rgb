@@ -120,7 +120,7 @@ _Route9Youngster1AfterBattleText::
 
 _Route9Hiker3BattleText::
 	text "Hahahaha!"
-	line "Come on, dude!"
+	line "Come on, kid!"
 	done
 
 _Route9Hiker3EndBattleText::
