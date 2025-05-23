@@ -238,14 +238,14 @@ MtMoonB2FRocket4Text:
 
 MtMoonB2FDomeFossilText:
 	text_asm
-	ld a, $1
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .YouWantText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .done
+	;ld a, $1
+	;ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	;ld hl, .YouWantText
+	;call PrintText
+	;call YesNoChoice
+	;ld a, [wCurrentMenuItem]
+	;and a
+	;jr nz, .done
 	lb bc, DOME_FOSSIL, 1
 	call GiveItem
 	jp nc, MtMoonB2FYouHaveNoRoomText
@@ -254,9 +254,9 @@ MtMoonB2FDomeFossilText:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_DOME_FOSSIL
-	ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
-	ld [wMtMoonB2FCurScript], a
-	ld [wCurMapScript], a
+	;ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
+	;ld [wMtMoonB2FCurScript], a
+	;ld [wCurMapScript], a
 .done
 	jp TextScriptEnd
 
@@ -266,14 +266,14 @@ MtMoonB2FDomeFossilText:
 
 MtMoonB2FHelixFossilText:
 	text_asm
-	ld a, $1
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .YouWantText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .done
+	;ld a, $1
+	;ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	;ld hl, .YouWantText
+	;call PrintText
+	;call YesNoChoice
+	;ld a, [wCurrentMenuItem]
+	;and a
+	;jr nz, .done
 	lb bc, HELIX_FOSSIL, 1
 	call GiveItem
 	jp nc, MtMoonB2FYouHaveNoRoomText
@@ -282,9 +282,9 @@ MtMoonB2FHelixFossilText:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_HELIX_FOSSIL
-	ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
-	ld [wMtMoonB2FCurScript], a
-	ld [wCurMapScript], a
+	;ld a, SCRIPT_MTMOONB2F_MOVE_SUPER_NERD
+	;ld [wMtMoonB2FCurScript], a
+	;ld [wCurMapScript], a
 .done
 	jp TextScriptEnd
 

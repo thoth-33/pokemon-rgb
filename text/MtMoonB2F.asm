@@ -30,13 +30,13 @@ _MtMoonB2FSuperNerdTheyreBothMineText::
 
 _MtMoonB2FSuperNerdOkIllShareText::
 	text "OK!"
-	line "I'll share!"
+	line "You take them!"
 	prompt
 
-_MtMoonB2fSuperNerdEachTakeOneText::
-	text "We'll each take"
-	line "one!"
-	cont "No being greedy!"
+_MtMoon3Text_49f8f::
+	text "You take both."
+	line "I'm sorry for"
+	cont "being greedy!"
 	done
 
 _MtMoonB2FSuperNerdTheresAPokemonLabText::
