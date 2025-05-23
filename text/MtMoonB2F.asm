@@ -33,7 +33,7 @@ _MtMoonB2FSuperNerdOkIllShareText::
 	line "You take them!"
 	prompt
 
-_MtMoon3Text_49f8f::
+_MtMoonB2fSuperNerdEachTakeOneText::
 	text "You take both."
 	line "I'm sorry for"
 	cont "being greedy!"
