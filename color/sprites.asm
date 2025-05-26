@@ -282,7 +282,7 @@ LoadAnimationTilesetPalettes:
 	ld a, c
 	and a		;check if c == 0
 	jr nz, .notBall
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp SAFARI_BALL
 	ld b, ATK_PAL_GREEN
 	jr z, .gotColor
