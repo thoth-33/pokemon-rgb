@@ -10,6 +10,7 @@ MtMoonPokecenter_TextPointers:
 	dw_const MtMoonPokecenterMagikarpSalesmanText, TEXT_MTMOONPOKECENTER_MAGIKARP_SALESMAN
 	dw_const MtMoonPokecenterClipboardText,        TEXT_MTMOONPOKECENTER_CLIPBOARD
 	dw_const MtMoonPokecenterLinkReceptionistText, TEXT_MTMOONPOKECENTER_LINK_RECEPTIONIST
+	dw_const MtMoonPokecenterChanseyText,          TEXT_MTMOONPOKECENTER_CHANSEY
 
 MtMoonPokecenterNurseText:
 	script_pokecenter_nurse
@@ -93,3 +94,8 @@ MtMoonPokecenterClipboardText:
 
 MtMoonPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
+
+MtMoonPokecenterChanseyText:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

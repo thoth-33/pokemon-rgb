@@ -547,8 +547,17 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; 0x-3: SPRITE_BULBASAUR
 	db SPR_PAL_GREEN
 	
-	; 0x-3: SPRITE_OFFICER_JENNY
+	; 0x-4: SPRITE_OFFICER_JENNY
 	db SPR_PAL_BLUE
+	
+	; 0x-5: SPRITE_CHANSEY
+	db SPR_PAL_PURPLE
+	
+	; 0x-6: SPRITE_JIGGLYPUFF
+	db SPR_PAL_PURPLE
+	
+	; 0x-7: SPRITE_PIKACHU
+	db SPR_PAL_ORANGE
 	
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE

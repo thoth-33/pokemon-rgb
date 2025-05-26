@@ -366,6 +366,7 @@ INCLUDE "color/color.asm"
 
 SECTION "Itemfinder 1", ROMX
 
+INCLUDE "engine/events/pokecenter_chansey.asm"
 INCLUDE "engine/movie/credits.asm"
 INCLUDE "engine/pokemon/status_ailments.asm"
 INCLUDE "engine/items/itemfinder.asm"
