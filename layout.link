@@ -69,6 +69,7 @@ ROMX $7
 	"Maps 4"
 	"Hidden Objects 1"
 ROMX $8
+	"NPC Sprites 3"
 	"Sound Effect Headers 2"
 ;	"Music Headers 2"
 	"Sound Effects 2"

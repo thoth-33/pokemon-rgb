@@ -87,6 +87,7 @@ Route24_TextPointers:
 	dw_const Route24CooltrainerF2Text, TEXT_ROUTE24_COOLTRAINER_F2
 	dw_const Route24Youngster2Text,    TEXT_ROUTE24_YOUNGSTER2
 	dw_const PickUpItemText,           TEXT_ROUTE24_TM_THUNDER_WAVE
+	dw_const Route24DamianText,        TEXT_ROUTE24_DAMIAN
 
 Route24TrainerHeaders:
 	def_trainers 2
@@ -279,4 +280,70 @@ Route24Youngster2EndBattleText:
 
 Route24Youngster2AfterBattleText:
 	text_far _Route24Youngster2AfterBattleText
+	text_end
+
+Route24DamianText:
+	text_asm
+	CheckEvent EVENT_GOT_CHARMANDER
+	jr nz, .hasCharmander
+	ld hl, Route24Text_Damian1
+	call PrintText
+	ld a, [wRivalStarter]
+	cp SQUIRTLE ; Rival got Squirtle
+	jr z, .noOffer
+	ld hl, Route24Text_Damian5
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .declined
+	ld a, CHARMANDER
+	ld [wNamedObjectIndex], a
+	ld [wCurPartySpecies], a
+	call GetMonName
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	lb bc, CHARMANDER, 10
+	call GivePokemon
+	jp nc, TextScriptEnd
+	ld a, [wAddedToParty]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	ld hl, Route24Text_Damian2
+	call PrintText
+	SetEvent EVENT_GOT_CHARMANDER
+.noOffer
+	jp TextScriptEnd
+
+.declined
+	ld hl, Route24Text_Damian3
+	jr .scriptEnd
+
+.hasCharmander
+	ld hl, Route24Text_Damian4
+.scriptEnd
+	call PrintText
+	jp TextScriptEnd
+
+Route24Text_Damian1:
+	text_far _Route24DamianText1
+	text_end
+
+Route24Text_Damian2:
+	text_far _Route24DamianText2
+	text_waitbutton
+	text_end
+
+Route24Text_Damian3:
+	text_far _Route24DamianText3
+	text_end
+
+Route24Text_Damian4:
+	text_far _Route24DamianText4
+	text_end
+
+Route24Text_Damian5:
+	text_far _Route24DamianText5
 	text_end

@@ -122,6 +122,7 @@ VermilionCity_TextPointers:
 	dw_const VermilionCityGambler2Text,           TEXT_VERMILIONCITY_GAMBLER2
 	dw_const VermilionCityMachopText,             TEXT_VERMILIONCITY_MACHOP
 	dw_const VermilionCitySailor2Text,            TEXT_VERMILIONCITY_SAILOR2
+	dw_const VermilionCityOfficerJennyText,       TEXT_VERMILIONCITY_OFFICER_JENNY	
 	dw_const VermilionCitySignText,               TEXT_VERMILIONCITY_SIGN
 	dw_const VermilionCityNoticeSignText,         TEXT_VERMILIONCITY_NOTICE_SIGN
 	dw_const MartSignText,                        TEXT_VERMILIONCITY_MART_SIGN
@@ -236,6 +237,79 @@ VermilionCityMachopText:
 
 VermilionCitySailor2Text:
 	text_far _VermilionCitySailor2Text
+	text_end
+	
+VermilionCityOfficerJennyText:
+	text_asm
+	CheckEvent EVENT_GOT_SQUIRTLE_FROM_OFFICER_JENNY
+	jr nz, .hasSquirtle
+	ld a, [wRivalStarter]
+	cp BULBASAUR ; Rival got Bulbasaur
+	jr z, .noOffer
+	ld a, [wBeatGymFlags]
+	bit 2, a ; THUNDERBADGE
+	jr nz, .offerSquirtle
+.noOffer
+	ld hl, OfficerJennyText1
+	call PrintText
+.scriptEnd
+	jp TextScriptEnd
+	
+.offerSquirtle
+	ld hl, OfficerJennyText2
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .declined
+	ld a, SQUIRTLE
+	ld [wNamedObjectIndex], a
+	ld [wCurPartySpecies], a
+	call GetMonName
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	lb bc, SQUIRTLE, 10
+	call GivePokemon
+	ret nc
+	ld a, [wAddedToParty]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	ld hl, OfficerJennyText3
+	call PrintText
+	SetEvent EVENT_GOT_SQUIRTLE_FROM_OFFICER_JENNY
+	jr .scriptEnd
+	
+.declined
+	ld hl, OfficerJennyText4
+	call PrintText
+	jr .scriptEnd
+	
+.hasSquirtle
+	ld hl, OfficerJennyText5
+	call PrintText
+	jr .scriptEnd
+	
+OfficerJennyText1:
+	text_far _OfficerJennyText1
+	text_end
+
+OfficerJennyText2:
+	text_far _OfficerJennyText2
+	text_end
+
+OfficerJennyText3:
+	text_far _OfficerJennyText3
+	text_waitbutton
+	text_end
+
+OfficerJennyText4:
+	text_far _OfficerJennyText4
+	text_end
+
+OfficerJennyText5:
+	text_far _OfficerJennyText5
 	text_end
 
 VermilionCitySignText:

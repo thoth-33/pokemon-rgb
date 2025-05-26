@@ -67,6 +67,10 @@ SpriteSheetPointerTable:
 	overworld_sprite BrunoSprite, 12            ; SPRITE_BRUNO
 	overworld_sprite LoreleiSprite, 12          ; SPRITE_LORELEI
 	overworld_sprite SeelSprite, 12             ; SPRITE_SEEL
+	overworld_sprite SandshrewSprite, 12        ; SPRITE_SANDSHREW
+	overworld_sprite OddishSprite, 12           ; SPRITE_ODDISH
+	overworld_sprite BulbasaurSprite, 12        ; SPRITE_BULBASAUR
+	overworld_sprite OfficerJennySprite, 12     ; SPRITE_OFFICER_JENNY
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

@@ -72,3 +72,10 @@ GameboyKidSprite::       INCBIN "gfx/sprites/gameboy_kid.2bpp"
 FairySprite::            INCBIN "gfx/sprites/fairy.2bpp"
 AgathaSprite::           INCBIN "gfx/sprites/agatha.2bpp"
 SeelSprite::             INCBIN "gfx/sprites/seel.2bpp"
+
+SECTION "NPC Sprites 3", ROMX
+
+SandshrewSprite::        INCBIN "gfx/sprites/sandshrew.2bpp"
+OddishSprite::           INCBIN "gfx/sprites/oddish.2bpp"
+BulbasaurSprite::        INCBIN "gfx/sprites/bulbasaur.2bpp"
+OfficerJennySprite::     INCBIN "gfx/sprites/officer_jenny.2bpp"
