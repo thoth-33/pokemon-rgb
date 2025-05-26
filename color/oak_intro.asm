@@ -3,9 +3,9 @@
 GetNidorinoPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, PAL_NIDORINO
+	ld a, PAL_GLOOM
 ELSE
-	ld a, PAL_PURPLEMON
+	ld a, PAL_GREENMON
 ENDC
 	jr GotPalID
 

@@ -82,7 +82,7 @@ ENDC
 	call GBFadeOutToWhite
 	;call ClearScreen
 	call GetNidorinoPalID ; HAX
-	ld a, NIDORINO
+	ld a, GLOOM
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetMonHeader
@@ -227,7 +227,7 @@ OakSpeechText1:
 OakSpeechText2:
 	text_far _OakSpeechText2A
 	; BUG: The cry played does not match the sprite displayed.
-	sound_cry_nidorina
+	sound_cry_gloom
 	text_far _OakSpeechText2B
 	text_end
 IntroducePlayerText:
