@@ -49,6 +49,10 @@ LoadOverworldSpritePalettes:
 	ldh [rSVBK], a
 	jr LoadSpritePaletteData
 
+LoadPartySpritePalettes:
+	ld hl, PartySpritePalettes
+	jr LoadSpritePaletteData
+
 LoadAttackSpritePalettes:
 	ld hl, AttackSpritePalettes
 

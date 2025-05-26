@@ -191,6 +191,48 @@ AttackSpritePalettes:
 	RGB 12,0,13
 	RGB 0,0,0
 
+PartySpritePalettes:
+	; RED
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 31,7,1
+	RGB 0,0,0
+	; BLUE
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 10,9,31
+	RGB 0,0,0
+	; GREEN
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 7,23,3
+	RGB 0,0,0
+	; BROWN
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 15,10,3
+	RGB 0,0,0
+	; PINK
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 30,16,17
+	RGB 0,0,0
+	; GRAY
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 13,13,13
+	RGB 0,0,0
+	; YELLOW
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 29,29,5
+	RGB 0,0,0
+	; PURPLE
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 18,4,18
+	RGB 0,0,0
+
 ; Not related to sprites, move this somewhere else?
 SlotPaletteMap:
 IF DEF(_RED)

@@ -693,6 +693,8 @@ SetPal_Overworld:
 	ld [wDefaultPaletteCommand], a
 	ret
 
+INCLUDE "color/menu_icon_pals.asm"
+
 ; Open pokemon menu
 SetPal_PartyMenu:
 	ld a, 2
@@ -737,9 +739,57 @@ SetPal_PartyMenu:
 	ld [W2_StaticPaletteMapChanged], a
 	xor a
 	ld [W2_TileBasedPalettes], a
+	
+	CALL_INDIRECT LoadPartySpritePalettes
+	
+	xor a
+	ld [W2_UseOBP1], a
+	ld hl, W2_SpritePaletteMap
+	ldh [hColorHackTmp], a	;sets party position to 0
+	ld bc, $08		;Sets palette painter pointer
+.loop3
+	push hl
+	xor a		;Temp switch to
+	ldh [rSVBK], a	;Ram bank 1
+	ld a, [hColorHackTmp] ; Position within party
+	ld hl, wPartySpecies ; load pointer to beginning of part array into hl
+	ld d, 0
+	ld e, a
+	inc a			;increment party position
+	ldh [hColorHackTmp], a	;after it has been loaded from
+	add hl, de  ; Move pointer de locations down.
+	ld a, [hl] ; Load data at pointer into a
+	ld [wPokedexNum], a
+	ld a, [hli]	; Checks if the next pointer location, 
+	cp $ff		; sets flag to jump if end of array
+	jr z, .done
+	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
+	ld a, [wPokedexNum] 	; Because table starts at 0,
+	dec a		; it will need to be -1 to be accurate
+	ld d, 0
+	ld e, a
+	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
+	add hl, de ; move pointer by dex number
+	ld e, [hl] ; Load data at pointer into a
+	ld a, 2		;Switch back to
+	ldh [rSVBK], a	;Ram bank 2
+	pop hl
+	ld a, e
+	call FillMemory ;paint palettes
+	ld bc, $08 ;increments palette painter pointer
+	jr .loop3
+.done
+	pop hl
+
+	xor a
 	ldh [rSVBK], a
 	ret
 
+TradeScreenPaletteCall:
+	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
+	add hl, de ; move pointer by dex number
+	ld e, [hl] ; Load data at pointer into a
+	ret
 
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
@@ -972,10 +1022,28 @@ SetPal_NameEntry:
 	ld a, 2
 	ldh [rSVBK], a
 
-	CALL_INDIRECT LoadOverworldSpritePalettes
+;	CALL_INDIRECT LoadOverworldSpritePalettes
+;	CALL_INDIRECT ClearSpritePaletteMap
 
-	CALL_INDIRECT ClearSpritePaletteMap
-
+	CALL_INDIRECT LoadPartySpritePalettes
+	xor a
+	ld [W2_UseOBP1], a
+	ld hl, W2_SpritePaletteMap
+	ld bc, $100		;Sets palette painter pointer
+	push hl
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
+	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
+	ld a, [wPokedexNum] 	; Because table starts at 0,
+	dec a		; it will need to be -1 to be accurate
+	ld d, 0
+	ld e, a
+	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
+	add hl, de ; move pointer by dex number
+	ld a, [hl] ; Load data at pointer into a
+	pop hl
+	call FillMemory ;paint palettes
+	
 	xor a
 	ldh [rSVBK], a
 	ret

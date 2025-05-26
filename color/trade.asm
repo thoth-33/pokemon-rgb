@@ -30,12 +30,27 @@ Trade_InitGameboyTransferGfx_ColorHook:
 	ld a, 2
 	ldh [rSVBK], a
 
-	callfar LoadAttackSpritePalettes
+;	callfar LoadAttackSpritePalettes
+	callfar LoadPartySpritePalettes
+	xor a
+	ld [W2_UseOBP1], a
 
 	; Set the palettes to use for the pokemon sprites
-	ld b, $30
+;	ld b, $30
 	ld hl, W2_SpritePaletteMap
-	ld a, 2 ; ATK_PAL_RED
+	push hl
+	ld a, [wCurPartySpecies]
+	ld [wPokedexNum], a
+	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
+	ld a, [wPokedexNum]     ; Because table starts at 0,
+	dec a        ; it will need to be -1 to be accurate
+	ld d, 0
+	ld e, a
+	callfar TradeScreenPaletteCall
+	ld a, e
+	ld b, $32
+	pop hl
+;	ld a, 2 ; ATK_PAL_RED
 .loop
 	ld [hl], a
 	set 6, l
