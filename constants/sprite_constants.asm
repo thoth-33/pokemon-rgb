@@ -69,6 +69,30 @@
 	const SPRITE_CHANSEY                 ; $-5
 	const SPRITE_JIGGLYPUFF              ; $-6
 	const SPRITE_PIKACHU                 ; $-7	
+	const SPRITE_ARTICUNO                ; $-8
+	const SPRITE_ZAPDOS                  ; $-9
+	const SPRITE_MOLTRES                 ; $-A	
+	const SPRITE_CUBONE                  ; $-B	
+	const SPRITE_DODUO                   ; $-C
+	const SPRITE_FEAROW                  ; $-D
+	const SPRITE_KANGASKHAN              ; $-E	
+	const SPRITE_LAPRAS                  ; $-F
+	const SPRITE_MACHOKE                 ; $-G
+	const SPRITE_MACHOP                  ; $-H	
+	const SPRITE_MEOWTH                  ; $-I
+	const SPRITE_NIDORANF                ; $-J	
+	const SPRITE_NIDORANM                ; $-K	
+	const SPRITE_NIDORINO                ; $-L	
+	const SPRITE_PIDGEOT                 ; $-M	
+	const SPRITE_PIDGEY                  ; $-N	
+	const SPRITE_POLIWRATH               ; $-O	
+	const SPRITE_PSYDUCK                 ; $-P
+	const SPRITE_SLOWBRO                 ; $-Q
+	const SPRITE_SLOWPOKE                ; $-R
+	const SPRITE_SPEAROW                 ; $-S
+	const SPRITE_WIGGLYTUFF              ; $-T
+	const SPRITE_MEWTWO                  ; $-U
+	const SPRITE_MEW                     ; $-V
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e
