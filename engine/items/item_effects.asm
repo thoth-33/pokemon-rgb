@@ -474,8 +474,8 @@ ItemUseBall:
 	ld hl, wEnemyBattleStatus3
 	bit TRANSFORMED, [hl]
 	jr z, .notTransformed
-	ld a, DITTO
-	ld [wEnemyMonSpecies2], a
+;	ld a, DITTO
+;	ld [wEnemyMonSpecies2], a ; commented out to make catching Mew easier.
 	jr .skip6
 
 .notTransformed
