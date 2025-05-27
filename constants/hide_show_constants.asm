@@ -34,6 +34,7 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_D                ; 16
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
+	const HS_ROUTE_1_OAK		      	   ; Rest will be off by 1
 	const HS_ROUTE_2_ITEM_1                ; 19 X
 	const HS_ROUTE_2_ITEM_2                ; 1A X
 	const HS_ROUTE_4_ITEM                  ; 1B X
@@ -122,7 +123,7 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_B2F_FOSSIL_2          ; 6E
 	const HS_MT_MOON_B2F_ITEM_1            ; 6F X
 	const HS_MT_MOON_B2F_ITEM_2            ; 70 X
-	const HS_CERULEAN_BULBASAUR            ; Rest will be off by 1
+	const HS_CERULEAN_BULBASAUR            ; Rest will be off by 2
 	const HS_SS_ANNE_2F_RIVAL              ; 71
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 72 X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 73 X
