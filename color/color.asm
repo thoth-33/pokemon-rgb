@@ -267,10 +267,6 @@ SetPal_TownMap:
 	ld e, 1
 	farcall LoadSGBPalette
 
-	ld d, PAL_GREENMON
-	ld e, 2
-	farcall LoadSGBPalette
-
 	ld a, 1
 	ld [W2_TileBasedPalettes], a
 
