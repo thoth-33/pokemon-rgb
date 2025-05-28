@@ -349,7 +349,10 @@ LoadPartyMonSprite:
 	ld [hMultiplicand], a
 	ld [hMultiplicand + 1], a
 	ld a, [wPokedexNum]
-	dec a
+	cp 152 ; check for and ID higher than Mew's
+	jr c, .notAboveMew ; Jump if not higher than Mew's
+	xor a ; if higher than Mew's then give ID 0 so that MissingNo icon is assigned
+.notAboveMew
 	ld [hMultiplicand + 2], a
 
 	; hMultiplier = icon size, in bytes
