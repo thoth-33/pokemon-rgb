@@ -1938,6 +1938,8 @@ wMissableObjectFlagsEnd::
 
 	ds 7
 
+wPartySpritePaletteSlot::
+
 ; saved copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
 wSavedSpriteImageIndex:: db
 

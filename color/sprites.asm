@@ -49,10 +49,6 @@ LoadOverworldSpritePalettes:
 	ldh [rSVBK], a
 	jr LoadSpritePaletteData
 
-LoadPartySpritePalettes:
-	ld hl, PartySpritePalettes
-	jr LoadSpritePaletteData
-
 LoadAttackSpritePalettes:
 	ld hl, AttackSpritePalettes
 
@@ -148,6 +144,58 @@ ColorOverworldSprite::
 .flying
 	ld a, SPR_PAL_BROWN
     jr .norandomColor
+	
+; Color the Party menu pokemon sprites
+LoadSinglePartySpritePalette::
+; Load a single sprite palette
+	ld a, [wMonPartySpriteSpecies]
+	ld b, 0
+	call GetPartySpritePalette
+	ld d, a
+	xor a
+	ld e, a
+	ld [wPartySpritePaletteSlot], a
+	call LoadMenuPalette_Sprite
+	ld a, 2
+	ldh [rSVBK], a
+	ld [W2_ForceOBPUpdate], a
+	xor a
+	ldh [rSVBK], a
+	ret
+
+LoadPartyMenuSpritePalettes::
+; Load the party sprites palettes	
+	ld hl,PartySpritePalettes
+	call LoadSpritePaletteData
+	ld a, %11100100
+	ldh [rOBP1], a
+	ret
+
+FindPartySpritePalette::
+	ld a, [hPartyMonIndex]
+	ld hl, wPartySpecies
+	ld b, 0
+	ld c, a
+ 	add hl, bc
+	ld a, [hl]
+	call GetPartySpritePalette
+	ld [wPartySpritePaletteSlot], a
+	ret
+
+GetPartySpritePalette:
+	ld [wPokedexNum], a ; Store a in wram to be used in the function
+	predef IndexToPokedex ; Convert ID to Pokedex ID
+	ld a, [wPokedexNum] ; Get the result of the function
+	cp 152 ; check for and ID higher than Mew's
+	jr c, .notAboveMew ; Jump if not higher than Mew's
+	xor a ; if higher than Mew's then give ID 0 so that purple palette is assigned
+.notAboveMew
+	ld hl, MonMenuIconPals
+	ld b, 0
+	ld c, a ; Add the pokemon pokedex ID which is used as a pointer in the palette assignment list
+	add hl, bc
+	ld a, [hl] ; Load pokemon assigned palette
+	ret
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
 ;
@@ -713,4 +761,5 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 1 ; DRAGON EQU $1A
 	assert_table_length NUM_TYPES
 
+INCLUDE "color/menu_icon_pals.asm"
 INCLUDE "color/data/spritepalettes.asm"
