@@ -2086,8 +2086,8 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $01 = biking
 ; $02 = surfing
 wWalkBikeSurfState:: db
-
-	ds 10
+wPlayerFlying:: db ; 0 = not a bird, 1 = bird
+	ds 9
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 

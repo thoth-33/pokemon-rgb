@@ -248,6 +248,9 @@ DoFlyAnimation:
 	ret
 
 LoadBirdSpriteGraphics:
+; Set flight state
+	ld a, $1
+	ld [wPlayerFlying], a
 	ld de, BirdSprite
 	ld hl, vNPCSprites
 	lb bc, BANK(BirdSprite), 12

@@ -133,6 +133,9 @@ ColorOverworldSprite::
 	ld a, [wWalkBikeSurfState]
 	cp a, 2
 	jr z, .surfing
+	ld a, [wPlayerFlying]
+	cp a, $1
+	jr z, .flying
 	ld a, [wPlayerGender]
 	and a
 	ld a, SPR_PAL_ORANGE
@@ -141,6 +144,9 @@ ColorOverworldSprite::
 	jr .norandomColor
 .surfing
 	ld a, SPR_PAL_EMOJI
+    jr .norandomColor
+.flying
+	ld a, SPR_PAL_BROWN
     jr .norandomColor
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).

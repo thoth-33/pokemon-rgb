@@ -245,19 +245,21 @@ SetPal_TownMap:
 	ld a, 2
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
-	ld bc, $100
+	ld bc, $4
 	ld a, SPR_PAL_GREEN
-	call FillMemory
 	jr .girlMap
 .boyMap
 
 	ld a, 2
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
-	ld bc, $100
+	ld bc, $4
 	ld a, SPR_PAL_ORANGE
-	call FillMemory
 .girlMap
+	call FillMemory
+	ld bc, $4
+	ld a, SPR_PAL_BROWN
+	call FillMemory
 
 	ld d, PAL_TOWNMAP
 	ld e, 0
