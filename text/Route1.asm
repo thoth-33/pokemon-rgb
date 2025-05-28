@@ -49,7 +49,7 @@ _Route1SignText::
 	cont "VIRIDIAN CITY"
 	done
 
-_Route1OakBeforeBattleText::
+_Route1OakText::
 	text "OAK: Oh, my!"
 	
 	para "It seems you"
@@ -75,11 +75,10 @@ _Route1OakBeforeBattleText::
 	done
 
 _Route1OakDefeatedText::
-	text "Oops,"
-	line "I've lost track"
-	cont "of  the time."
-	para "I have to run"
-	line "back to the lab."
+	text "Guess"
+	line "I'm better at"
+	cont "research than"
+	cont "at battling!"
 	prompt
 
 _Route1OakVictoryText::
@@ -87,3 +86,11 @@ _Route1OakVictoryText::
 	line "I was a serious"
 	cont "TRAINER!"
 	prompt
+	
+_Route1OakAfterText::
+	text "Oops, Looks like"
+	line "I've lost track"
+	cont "of the time."
+	para "I have to run"
+	line "back to the lab."
+	done

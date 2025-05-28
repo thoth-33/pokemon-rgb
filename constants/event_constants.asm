@@ -224,6 +224,7 @@
 ; Route 1 events
 	const_next $3C0
 	const EVENT_GOT_POTION_SAMPLE
+	const EVENT_ROUTE1_OAK_WANTS_BATTLE
 
 ; Route 2 events
 	const_next $3D8
