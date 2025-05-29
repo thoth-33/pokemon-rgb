@@ -605,10 +605,10 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_BLUE
 	
 	; 0x-5: SPRITE_CHANSEY
-	db SPR_PAL_PURPLE
+	db SPR_PAL_ORANGE
 	
 	; 0x-6: SPRITE_JIGGLYPUFF
-	db SPR_PAL_PURPLE
+	db SPR_PAL_ORANGE
 	
 	; 0x-7: SPRITE_PIKACHU
 	db SPR_PAL_ORANGE
