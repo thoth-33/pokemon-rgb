@@ -730,6 +730,14 @@ ExtraWarpCheck::
 	jr z, .useFunction2
 	cp VIRIDIAN_FOREST
 	jr z, .useFunction2
+	cp SAFARI_ZONE_CENTER
+	jr z, .useFunction2
+	cp SAFARI_ZONE_EAST
+	jr z, .useFunction2
+	cp SAFARI_ZONE_WEST
+	jr z, .useFunction2
+	cp SAFARI_ZONE_NORTH
+	jr z, .useFunction2
 	ld a, [wCurMapTileset]
 	and a ; outside tileset (OVERWORLD)
 	jr z, .useFunction2

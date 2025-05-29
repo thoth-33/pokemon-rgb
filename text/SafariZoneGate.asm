@@ -55,7 +55,7 @@ _SafariZoneGateSafariZoneWorker1ReturnSafariBallsText::
 	done
 
 _SafariZoneGateSafariZoneWorker1GoodLuckText::
-	text "Good Luck!"
+	text "Good luck!"
 	done
 
 _SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText::

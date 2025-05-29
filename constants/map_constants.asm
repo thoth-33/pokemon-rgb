@@ -236,10 +236,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const POKEMON_MANSION_2F,            15, 14 ; $D6
 	map_const POKEMON_MANSION_3F,            15,  9 ; $D7
 	map_const POKEMON_MANSION_B1F,           15, 14 ; $D8
-	map_const SAFARI_ZONE_EAST,              15, 13 ; $D9
-	map_const SAFARI_ZONE_NORTH,             20, 18 ; $DA
-	map_const SAFARI_ZONE_WEST,              15, 13 ; $DB
-	map_const SAFARI_ZONE_CENTER,            15, 13 ; $DC
+	map_const SAFARI_ZONE_EAST,              17, 13 ; $D9
+	map_const SAFARI_ZONE_NORTH,             23, 20 ; $DA
+	map_const SAFARI_ZONE_WEST,              18, 15 ; $DB
+	map_const SAFARI_ZONE_CENTER,            20, 17 ; $DC
 	map_const SAFARI_ZONE_CENTER_REST_HOUSE,  4,  4 ; $DD
 	map_const SAFARI_ZONE_SECRET_HOUSE,       4,  4 ; $DE
 	map_const SAFARI_ZONE_WEST_REST_HOUSE,    4,  4 ; $DF

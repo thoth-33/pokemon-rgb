@@ -3,7 +3,7 @@
 	const_export SAFARIZONENORTH_TM_SKULL_BASH
 
 SafariZoneNorth_Object:
-	db $0 ; border block
+	db $2 ; border block
 
 	def_warp_events
 	warp_event  2, 35, SAFARI_ZONE_WEST, 1
