@@ -232,14 +232,14 @@ FightingDojoHitmonleePokeBallText:
 ;	jr .done
 ;.GetMon
 	ld a, HITMONLEE
-	call DisplayPokedex
-	ld hl, .Text
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .done
-	ld a, [wCurPartySpecies]
+;	call DisplayPokedex
+;	ld hl, .Text
+;	call PrintText
+;	call YesNoChoice
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	jr nz, .done
+;	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon
@@ -249,7 +249,10 @@ FightingDojoHitmonleePokeBallText:
 	ld a, HS_FIGHTING_DOJO_GIFT_1
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
+	SetEvent EVENT_GOT_HITMONLEE
+	CheckEvent EVENT_GOT_HITMONCHAN
+	jr z, .done
+	SetEvent EVENT_DEFEATED_FIGHTING_DOJO
 .done
 	jp TextScriptEnd
 
@@ -266,24 +269,27 @@ FightingDojoHitmonchanPokeBallText:
 ;	jr .done
 ;.GetMon
 	ld a, HITMONCHAN
-	call DisplayPokedex
-	ld hl, .Text
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .done
-	ld a, [wCurPartySpecies]
+;	call DisplayPokedex
+;	ld hl, .Text
+;	call PrintText
+;	call YesNoChoice
+;	ld a, [wCurrentMenuItem]
+;	and a
+;	jr nz, .done
+;	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon
 	jr nc, .done
-	SetEvents EVENT_GOT_HITMONCHAN, EVENT_DEFEATED_FIGHTING_DOJO
 
 	; once Poké Ball is taken, hide sprite
 	ld a, HS_FIGHTING_DOJO_GIFT_2
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	SetEvent EVENT_GOT_HITMONCHAN
+	CheckEvent EVENT_GOT_HITMONLEE
+	jr z, .done
+	SetEvent EVENT_DEFEATED_FIGHTING_DOJO
 .done
 	jp TextScriptEnd
 
