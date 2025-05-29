@@ -50,7 +50,7 @@ ENDM
 	warp_tiles $5E
 
 .ForestWarpTileIDs:
-	warp_tiles $5A, $5C, $3A
+	warp_tiles $3A
 
 .DojoWarpTileIDs:
 .GymWarpTileIDs:

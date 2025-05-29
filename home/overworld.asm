@@ -728,6 +728,8 @@ ExtraWarpCheck::
 	jr z, .useFunction2
 	cp ROCK_TUNNEL_1F
 	jr z, .useFunction2
+	cp VIRIDIAN_FOREST
+	jr z, .useFunction2
 	ld a, [wCurMapTileset]
 	and a ; outside tileset (OVERWORLD)
 	jr z, .useFunction2
