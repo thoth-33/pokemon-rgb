@@ -1777,10 +1777,10 @@ WakeUpEntireParty:
 	ret
 
 Route12SnorlaxFluteCoords:
-	dbmapcoord  9, 62 ; one space West of Snorlax
-	dbmapcoord 10, 61 ; one space North of Snorlax
-	dbmapcoord 10, 63 ; one space South of Snorlax
-	dbmapcoord 11, 62 ; one space East of Snorlax
+	dbmapcoord  9, 60 ; one space West of Snorlax
+	dbmapcoord 10, 59 ; one space North of Snorlax
+	dbmapcoord 10, 61 ; one space South of Snorlax
+	dbmapcoord 11, 60 ; one space East of Snorlax
 	db -1 ; end
 
 Route16SnorlaxFluteCoords:
