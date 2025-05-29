@@ -81,14 +81,14 @@ ENDC
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
-	cp 20 ; is the player standing on the right side of the bridge?
+	cp 22 ; is the player standing on the right side of the bridge?
 	jr z, .playerOnRightSideOfBridge
 	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
 	ld a, SPRITESTATEDATA2_MAPX
 	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData2
-	ld [hl], 25
+	ld [hl], 27
 .playerOnRightSideOfBridge
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a
@@ -102,13 +102,13 @@ ENDC
 	ret
 
 CeruleanCityCoords1:
-	dbmapcoord 30,  7
-	dbmapcoord 30,  9
+	dbmapcoord 32,  7
+	dbmapcoord 32,  9
 	db -1 ; end
 
 CeruleanCityCoords2:
-	dbmapcoord 20,  6
-	dbmapcoord 21,  6
+	dbmapcoord 22,  6
+	dbmapcoord 23,  6
 	db -1 ; end
 
 CeruleanCityMovement1:
@@ -184,7 +184,7 @@ CeruleanCityRivalDefeatedScript:
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
-	cp 20 ; is the player standing on the right side of the bridge?
+	cp 22 ; is the player standing on the right side of the bridge?
 	jr nz, .playerOnRightSideOfBridge
 	ld de, CeruleanCityMovement4
 	jr .skip
