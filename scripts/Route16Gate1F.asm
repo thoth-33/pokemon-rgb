@@ -40,6 +40,10 @@ Route16Gate1FDefaultScript:
 	ld [wRoute16Gate1FCurScript], a
 	ret
 .next_to_counter
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROUTE16GATE1F_GUARD
 	ld [wRoute16Gate1FCurScript], a
 	ret
@@ -81,6 +85,8 @@ Route16Gate1FPlayerMovingRightScript:
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, SCRIPT_ROUTE16GATE1F_DEFAULT
 	ld [wRoute16Gate1FCurScript], a
+	xor a
+	ld [wJoyIgnore], a
 	ret
 
 Route16Gate1FIsBicycleInBagScript:

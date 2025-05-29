@@ -40,6 +40,10 @@ Route18Gate1FDefaultScript:
 	ld [wRoute18Gate1FCurScript], a
 	ret
 .next_to_counter
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROUTE18GATE1F_GUARD
 	ld [wRoute18Gate1FCurScript], a
 	ret
@@ -81,6 +85,8 @@ Route18Gate1FPlayerMovingRightScript:
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld a, SCRIPT_ROUTE18GATE1F_DEFAULT
 	ld [wRoute18Gate1FCurScript], a
+	xor a
+	ld [wJoyIgnore], a
 	ret
 
 Route18Gate1F_TextPointers:
