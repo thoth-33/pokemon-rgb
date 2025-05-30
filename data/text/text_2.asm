@@ -1796,11 +1796,13 @@ _BoyGirlText::
     prompt
 
 _boyConfirm::
-    text "Right! So you"
-    line "are a boy."	
+    text "That's right!"
+    line "You're a boy."
+    cont "I knew that."
     prompt
 
 _girlConfirm::
-    text "Right! So you"
-    line "are a girl."
+    text "That's right!"
+    line "You're a girl."
+    cont "I knew that."
     prompt
