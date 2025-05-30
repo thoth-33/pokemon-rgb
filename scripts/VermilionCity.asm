@@ -86,8 +86,18 @@ VermilionCityPlayerExitShipScript:
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesEnd + 1], a
+	ld a, [wXCoord]
+	cp $13
+	jr nz, .justMoveUp ;fallthrough
+	ld a, D_LEFT
+	ld [wSimulatedJoypadStatesEnd + 2], a
+	ld a, 3
+	ld [wSimulatedJoypadStatesIndex], a
+	jr .startMove
+.justMoveUp
 	ld a, 2
 	ld [wSimulatedJoypadStatesIndex], a
+.startMove
 	call StartSimulatingJoypadStates
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_MOVING_UP2
 	ld [wVermilionCityCurScript], a

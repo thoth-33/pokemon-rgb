@@ -11,8 +11,12 @@ VermilionDock_Script:
 	CheckEventReuseHL EVENT_GOT_HM01
 	ret z
 	ld a, [wDestinationWarpID]
-	cp $1
+	cp $2
+	jr z, .exitingSSAnne
+	ld a, [wDestinationWarpID]
+	cp $3
 	ret nz
+.exitingSSAnne	
 	CheckEventReuseHL EVENT_SS_ANNE_LEFT
 	jp z, VermilionDockSSAnneLeavesScript
 	SetEventReuseHL EVENT_STARTED_WALKING_OUT_OF_DOCK
@@ -23,7 +27,15 @@ VermilionDock_Script:
 	ld a, D_UP
 	ld [hli], a
 	ld [hli], a
+	ld a, [wXCoord]
+	cp $12
+	ld a, D_UP
+	jr nz, .moveUp ; fall through
+	ld [hli], a
+	jr .moveLeft
+.moveUp
 	ld [hl], a
+.moveLeft
 	ld a, $3
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
@@ -88,7 +100,7 @@ VermilionDockSSAnneLeavesScript:
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld d, $0
-	ld e, $8
+	ld e, $9 ; increasing this one extends the animation and the tail end of the boat doesnt disappear.
 .shift_columns_up
 	ld hl, $2
 	add hl, bc
@@ -282,13 +294,13 @@ TruckCheck:
 	ld a, [wStatusFlags1]
 	bit BIT_STRENGTH_ACTIVE, a ; using Strength?
 	jr z, NoTruckAction
-	; the position for moving the truck is 22,0
+	; the position for moving the truck is 28, 4
 	ld hl, wYCoord
 	ld a, [hli]
-	and a
+	cp 4
 	jr nz, NoTruckAction
 	ld a, [hl]
-	cp 22
+	cp 28
 	jr nz, NoTruckAction
 	; if the player is trying to walk left
 	ld a, [wPlayerMovingDirection]
@@ -318,7 +330,8 @@ TruckCheck:
 	call CopyData
 	ld a, $c
 	ld [wNewTileBlockID], a ; used to be wd09f
-	ld bc, $a
+	ld b, 2
+	ld c, 13
 	predef ReplaceTileBlock
 	; moving the truck
 	ld a, SFX_PUSH_BOULDER
@@ -339,7 +352,8 @@ TruckCheck:
 	jr nz, .movingtruck
 	ld a, $3
 	ld [wNewTileBlockID], a ; used to be wd09f
-	ld bc, $9
+	ld b, 2
+	ld c, 12
 	predef ReplaceTileBlock
 	callfar AnimateBoulderDust
 	call ShowMew
@@ -363,7 +377,8 @@ ChangeTruckTile:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
 	ret z
-	ld bc, $9
+	ld b, 2
+	ld c, 12
 	call GetOWCoord
 	ld a, [hl]
 	cp $3
