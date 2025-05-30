@@ -24,8 +24,9 @@ TryDoWildEncounter:
 	ld [wRepelRemainingSteps], a
 .next
 ; determine if wild pokemon can appear in the half-block we're standing in
-; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
-	hlcoord 9, 9
+; is the bottom right tile (8,9) of the half-block we're standing in a grass/water tile?
+; By changing the original (9,9) to (8,9) to check the bottom left instead of bottom right, we've fixed MissingNo. and Viridan's forest glitched tiles
+	hlcoord 8, 9
 	ld c, [hl]
 	ld a, [wGrassTile]
 	cp c
