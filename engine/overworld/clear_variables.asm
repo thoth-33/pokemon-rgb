@@ -17,4 +17,9 @@ ClearVariablesOnEnterMap::
 	ld hl, wWhichTrade
 	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
+	; Clear a possible bad game state after a Trainer Fly
+	ld hl, wStatusFlags5
+	set BIT_FLY_TRAINER, [hl] ; Tells the trainer encounter script to cancel any pending encounters
+	ld hl, wMiscFlags
+	res BIT_SCRIPTED_NPC_MOVEMENT, [hl] ; Clear encountered trainer flag (avoid blocked buttons after a Trainer Fly)
 	ret
