@@ -589,6 +589,15 @@ _Route15UpstairsBinocularsText::
 	line "bird is flying"
 	cont "toward the sea."
 	done
+	
+_Route15UpstairsBinocularsText2::
+	text "Looked into the"
+	line "binoculars..."
+
+	para "A large, #MON"
+	line "is washed up"
+	cont "upon the shore."
+	done
 
 _AerodactylFossilText::
 	text "AERODACTYL Fossil"

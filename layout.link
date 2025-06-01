@@ -37,7 +37,7 @@ ROM0
 	"Home"
 	org $1665
 	"LoadMonFrontSprite"
-	org $1db8
+	org $1db6
 	"JpPoint"
 ROMX $1
 	"bank1"
