@@ -97,10 +97,10 @@
 	const EVENT_RESCUED_MR_FUJI_2
 	const_skip 16
 	const EVENT_GOT_POKE_FLUTE
-	const_skip 30
-	const EVENT_GOT_SQUIRTLE_FROM_OFFICER_JENNY
 
 ; Vermilion City events
+	const_skip 30
+	const EVENT_GOT_SQUIRTLE_FROM_OFFICER_JENNY
 	const_next $150
 	const_skip
 	const EVENT_GOT_BIKE_VOUCHER
@@ -224,6 +224,7 @@
 ; Route 1 events
 	const_next $3C0
 	const EVENT_GOT_POTION_SAMPLE
+	const EVENT_ROUTE1_OAK_WANTS_BATTLE
 
 ; Route 2 events
 	const_next $3D8
@@ -509,7 +510,7 @@
 
 ; Route 25 events
 	const_next $550 - 1
-	const EVENT_CHARMANDER
+	const EVENT_GOT_CHARMANDER
 	const EVENT_MET_BILL
 	const EVENT_BEAT_ROUTE_25_TRAINER_0
 	const EVENT_BEAT_ROUTE_25_TRAINER_1

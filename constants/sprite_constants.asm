@@ -1,6 +1,5 @@
 ; overworld sprites
-; SpriteSheetPointerTable indexes 
-;(see data/sprites/sprites.asm)
+; SpriteSheetPointerTable indexes (see data/sprites/sprites.asm)
 	const_def
 	const SPRITE_NONE                    ; $00
 	const SPRITE_RED                     ; $01
@@ -29,7 +28,7 @@
 	const SPRITE_ROCKET                  ; $18
 	const SPRITE_CHANNELER               ; $19
 	const SPRITE_WAITER                  ; $1a
-	const SPRITE_ERIKA                   ; $1b
+	const SPRITE_SILPH_WORKER_F          ; $1b
 	const SPRITE_MIDDLE_AGED_WOMAN       ; $1c
 	const SPRITE_BRUNETTE_GIRL           ; $1d
 	const SPRITE_LANCE                   ; $1e
@@ -46,7 +45,7 @@
 	const SPRITE_NURSE                   ; $29
 	const SPRITE_LINK_RECEPTIONIST       ; $2a
 	const SPRITE_SILPH_PRESIDENT         ; $2b
-	const SPRITE_SILPH_WORKER            ; $2c
+	const SPRITE_SILPH_WORKER_M          ; $2c
 	const SPRITE_WARDEN                  ; $2d
 	const SPRITE_CAPTAIN                 ; $2e
 	const SPRITE_FISHER                  ; $2f
@@ -63,10 +62,37 @@
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_SEEL                    ; $3c
-	const SPRITE_SANDSHREW               ; $-1 ;three sprites inserted everything after this off by three.
+	const SPRITE_SANDSHREW               ; $-1 ;seven sprites inserted everything after this off by seven.
 	const SPRITE_ODDISH                  ; $-2
 	const SPRITE_BULBASAUR               ; $-3
-	const SPRITE_OFFICER_JENNY           ; $-4
+	const SPRITE_OFFICER_JENNY           ; $-4	
+	const SPRITE_CHANSEY                 ; $-5
+	const SPRITE_JIGGLYPUFF              ; $-6
+	const SPRITE_PIKACHU                 ; $-7	
+	const SPRITE_ARTICUNO                ; $-8
+	const SPRITE_ZAPDOS                  ; $-9
+	const SPRITE_MOLTRES                 ; $-A	
+	const SPRITE_CUBONE                  ; $-B	
+	const SPRITE_DODUO                   ; $-C
+	const SPRITE_FEAROW                  ; $-D
+	const SPRITE_KANGASKHAN              ; $-E	
+	const SPRITE_LAPRAS                  ; $-F
+	const SPRITE_MACHOKE                 ; $-G
+	const SPRITE_MACHOP                  ; $-H	
+	const SPRITE_MEOWTH                  ; $-I
+	const SPRITE_NIDORANF                ; $-J	
+	const SPRITE_NIDORANM                ; $-K	
+	const SPRITE_NIDORINO                ; $-L	
+	const SPRITE_PIDGEOT                 ; $-M	
+	const SPRITE_PIDGEY                  ; $-N	
+	const SPRITE_POLIWRATH               ; $-O	
+	const SPRITE_PSYDUCK                 ; $-P
+	const SPRITE_SLOWBRO                 ; $-Q
+	const SPRITE_SLOWPOKE                ; $-R
+	const SPRITE_SPEAROW                 ; $-S
+	const SPRITE_WIGGLYTUFF              ; $-T
+	const SPRITE_MEWTWO                  ; $-U
+	const SPRITE_MEW                     ; $-V
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e

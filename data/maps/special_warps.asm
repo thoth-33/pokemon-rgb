@@ -44,15 +44,15 @@ MACRO special_warp_spec
 	db \4
 ENDM
 
-FirstMapSpec:
+NewGameWarp:
 	special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
-TradeCenterSpec1:
+TradeCenterPlayerWarp:
 	special_warp_spec TRADE_CENTER,  3, 4, CLUB
-TradeCenterSpec2:
+TradeCenterFriendWarp:
 	special_warp_spec TRADE_CENTER,  6, 4, CLUB
-ColosseumSpec1:
+ColosseumPlayerWarp:
 	special_warp_spec COLOSSEUM,     3, 4, CLUB
-ColosseumSpec2:
+ColosseumFriendWarp:
 	special_warp_spec COLOSSEUM,     6, 4, CLUB
 
 
@@ -79,8 +79,8 @@ FlyWarpDataPtr:
 .PalletTown:     fly_warp PALLET_TOWN,      5,  6
 .ViridianCity:   fly_warp VIRIDIAN_CITY,   23, 26
 .PewterCity:     fly_warp PEWTER_CITY,     13, 26
-.CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
-.LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6
+.CeruleanCity:   fly_warp CERULEAN_CITY,   21, 18
+.LavenderTown:   fly_warp LAVENDER_TOWN,    7,  8
 .VermilionCity:  fly_warp VERMILION_CITY,  11,  4
 .CeladonCity:    fly_warp CELADON_CITY,    41, 10
 .FuchsiaCity:    fly_warp FUCHSIA_CITY,    19, 28

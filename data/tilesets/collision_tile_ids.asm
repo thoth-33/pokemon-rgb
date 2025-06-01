@@ -24,7 +24,7 @@ Gym_Coll::
 	coll_tiles $11, $16, $19, $2b, $3c, $3d, $3f, $4a, $4c, $4d, $03
 
 Forest_Coll::
-	coll_tiles $1e, $20, $2e, $30, $34, $37, $39, $3a, $40, $51, $52, $5a, $5c, $5e, $5f
+	coll_tiles $00, $44, $1e, $20, $2e, $30, $34, $37, $3a, $40, $51, $52, $5a, $5c, $5e, $5f
 
 House_Coll::
 	coll_tiles $01, $12, $14, $28, $32, $37, $44, $54, $5c
@@ -38,7 +38,7 @@ Ship_Coll::
 	coll_tiles $04, $0d, $17, $1d, $1e, $23, $34, $37, $39, $4a
 
 ShipPort_Coll::
-	coll_tiles $0a, $1a, $32, $3b
+	coll_tiles $0a, $32, $3b, $54
 
 Cemetery_Coll::
 	coll_tiles $01, $10, $13, $1b, $22, $42, $52

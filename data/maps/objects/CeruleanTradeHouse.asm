@@ -1,3 +1,11 @@
+	object_const_def
+	const_export CERULEANTRADEHOUSE_GRANNY
+	const_export CERULEANTRADEHOUSE_GAMBLER
+	const_export CERULEANTRADEHOUSE_MELANIE
+	const_export CERULEANTRADEHOUSE_BULBASAUR
+	const_export CERULEANTRADEHOUSE_ODDISH
+	const_export CERULEANTRADEHOUSE_SANDSHREW
+
 CeruleanTradeHouse_Object:
 	db $a ; border block
 
@@ -8,11 +16,11 @@ CeruleanTradeHouse_Object:
 	def_bg_events
 
 	def_object_events
-	object_event  5,  4, SPRITE_GRANNY, STAY, LEFT, 1 ; person
-	object_event  1,  2, SPRITE_GAMBLER, STAY, NONE, 2 ; person
-	object_event  3,  1, SPRITE_GIRL, STAY, DOWN, 3 ; person
-	object_event  4,  1, SPRITE_BULBASAUR, STAY, DOWN, 4 ; person
-	object_event  1,  4, SPRITE_ODDISH, STAY, NONE, 5 ; person
-	object_event  5,  3, SPRITE_SANDSHREW, STAY, LEFT, 6 ; person
+	object_event  5,  4, SPRITE_GRANNY, STAY, LEFT, TEXT_CERULEANTRADEHOUSE_GRANNY
+	object_event  1,  2, SPRITE_GAMBLER, STAY, NONE, TEXT_CERULEANTRADEHOUSE_GAMBLER
+	object_event  3,  1, SPRITE_GIRL, STAY, DOWN, TEXT_CERULEANTRADEHOUSE_MELANIE
+	object_event  4,  1, SPRITE_BULBASAUR, STAY, DOWN, TEXT_CERULEANTRADEHOUSE_BULBASAUR
+	object_event  1,  4, SPRITE_ODDISH, STAY, NONE, TEXT_CERULEANTRADEHOUSE_ODDISH
+	object_event  5,  3, SPRITE_SANDSHREW, STAY, LEFT, TEXT_CERULEANTRADEHOUSE_SANDSHREW
 
 	def_warps_to CERULEAN_TRADE_HOUSE

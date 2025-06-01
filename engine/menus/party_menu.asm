@@ -3,10 +3,12 @@ DrawPartyMenu_::
 	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
-	;farcall LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
+;	farcall LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
+
+RedrawPartyMenu_ReloadSprites:
+	farcall LoadPartyMonSprites ; unique party icons
 
 RedrawPartyMenu_::
-	farcall LoadMonPartySpriteGfxWithLCDDisabled 
 	ld a, [wPartyMenuTypeOrMessageID]
 	cp SWAP_MONS_PARTY_MENU
 	jp z, .printMessage
@@ -31,7 +33,8 @@ RedrawPartyMenu_::
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+;	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+	farcall PlacePartyMonSprite ; unique party icons
 	ldh a, [hPartyMonIndex]
 	ld [wWhichPokemon], a
 	inc a
@@ -71,12 +74,12 @@ RedrawPartyMenu_::
 	push hl
 	ld bc, SCREEN_WIDTH + 1 ; down 1 row and right 1 column
 	ldh a, [hUILayoutFlags]
-	set 0, a
+	set BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	add hl, bc
 	predef DrawHP2 ; draw HP bar and prints current / max HP
 	ldh a, [hUILayoutFlags]
-	res 0, a
+	res BIT_PARTY_MENU_HP_BAR, a
 	ldh [hUILayoutFlags], a
 	call SetPartyMenuHPBarColor ; color the HP bar (on SGB)
 	pop hl
@@ -122,19 +125,19 @@ RedrawPartyMenu_::
 	rl b
 	ld c, a
 	add hl, bc
-	ld de, wEvosMoves
+	ld de, wEvoDataBuffer
 	ld a, BANK(EvosMovesPointerTable)
 	ld bc, 2
 	call FarCopyData
-	ld hl, wEvosMoves
+	ld hl, wEvoDataBuffer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wEvosMoves
+	ld de, wEvoDataBuffer
 	ld a, BANK(EvosMovesPointerTable)
-	ld bc, wEvosMovesEnd - wEvosMoves
+	ld bc, 4 * 3 + 1 ; enough for Eevee's three 4-byte evolutions and 0 terminator
 	call FarCopyData
-	ld hl, wEvosMoves
+	ld hl, wEvoDataBuffer
 	ld de, .notAbleToEvolveText
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop
@@ -143,7 +146,7 @@ RedrawPartyMenu_::
 	jr z, .placeEvolutionStoneString ; if so, place the "NOT ABLE" string
 	inc hl
 	inc hl
-	cp EV_ITEM
+	cp EVOLVE_ITEM
 	jr nz, .checkEvolutionsLoop
 ; if it's a stone evolution entry
 	dec hl
@@ -173,11 +176,11 @@ RedrawPartyMenu_::
 	ld b, SET_PAL_PARTY_MENU
 	call RunPaletteCommand
 .printMessage
-	ld hl, wd730
+	ld hl, wStatusFlags5
 	ld a, [hl]
 	push af
 	push hl
-	set 6, [hl] ; turn off letter printing delay
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wPartyMenuTypeOrMessageID] ; message ID
 	cp FIRST_PARTY_MENU_TEXT_ID
 	jr nc, .printItemUseMessage
@@ -197,7 +200,11 @@ RedrawPartyMenu_::
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	jp GBPalNormal
+;	jp GBPalNormal
+	ld a, %11100100 ; 3210
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ret
 .printItemUseMessage
 	and $0F
 	ld hl, PartyMenuItemUseMessagePointers

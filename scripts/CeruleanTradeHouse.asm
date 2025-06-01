@@ -2,52 +2,56 @@ CeruleanTradeHouse_Script:
 	jp EnableAutoTextBoxDrawing
 
 CeruleanTradeHouse_TextPointers:
-	dw CeruleanHouse1Text1
-	dw CeruleanHouse1Text2
-	dw CeruleanHouse1Text3
-	dw CeruleanHouse1Text4
-	dw CeruleanHouse1Text5
-	dw CeruleanHouse1Text6
+	def_text_pointers
+	dw_const CeruleanTradeHouseGrannyText,    TEXT_CERULEANTRADEHOUSE_GRANNY
+	dw_const CeruleanTradeHouseGamblerText,   TEXT_CERULEANTRADEHOUSE_GAMBLER
+	dw_const CeruleanTradeHouseMelanieText,   TEXT_CERULEANTRADEHOUSE_MELANIE
+	dw_const CeruleanTradeHouseBulbasaurText, TEXT_CERULEANTRADEHOUSE_BULBASAUR
+	dw_const CeruleanTradeHouseOddishText,    TEXT_CERULEANTRADEHOUSE_ODDISH
+	dw_const CeruleanTradeHouseSandshrewText, TEXT_CERULEANTRADEHOUSE_SANDSHREW
 
-CeruleanHouse1Text1:
-	text_far _CeruleanHouse1Text1
+CeruleanTradeHouseGrannyText:
+	text_far _CeruleanTradeHouseGrannyText
 	text_end
 
-CeruleanHouse1Text2:
+CeruleanTradeHouseGamblerText:
 	text_asm
 	ld a, TRADE_FOR_LOLA
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
-	
-CeruleanHouse1Text3:
+
+CeruleanTradeHouseMelanieText:
 	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	CheckEvent EVENT_GOT_BULBASAUR_IN_CERULEAN
-	jr nz, .AlreadyHasBulbasuar
+	jr nz, .hasBulbasuar
 	ld hl, CeruleanHouse1Text_Melanie1
 	call PrintText
+;	ld a, [wPikachuHappiness]
+;	cp 147
+;	jr c, .endScript
 	ld a, [wRivalStarter]
-	cp $B0 ; Rival got Charmander
-	jr z, .EndScript
+	cp CHARMANDER ; Rival got Charmander
+	jr z, .endScript
 	ld hl, CeruleanHouse1Text_Melanie2
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .RefuseBulbasuar
+	jr nz, .declined
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, BULBASAUR
-	ld [wd11e], a
-	ld [wcf91], a
+	ld [wNamedObjectIndex], a
+	ld [wCurPartySpecies], a
 	call GetMonName
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	lb bc, BULBASAUR, 10
 	call GivePokemon
-	jr nc, .EndScript
+	jr nc, .endScript
 	ld a, [wAddedToParty]
 	and a
 	call z, WaitForTextScrollButtonPress
@@ -59,15 +63,15 @@ CeruleanHouse1Text3:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_BULBASAUR_IN_CERULEAN
-.EndScript
+.endScript
 	jp TextScriptEnd
 
-.RefuseBulbasuar
+.declined
 	ld hl, CeruleanHouse1Text_Melanie5
 	call PrintText
 	jp TextScriptEnd
 	
-.AlreadyHasBulbasuar
+.hasBulbasuar
 	ld hl, CeruleanHouse1Text_Melanie4
 	call PrintText
 	jp TextScriptEnd
@@ -95,71 +99,24 @@ CeruleanHouse1Text_Melanie5:
 	text_far MelanieText5
 	text_waitbutton
 	text_end
-	
-MelanieText1::
-	text "I take care of"
-	line "injured #MON."
 
-	para "I nursed this"
-	line "BULBASAUR back to"
-	cont "health."
-
-	para "It needs a good"
-	line "trainer to take"
-	cont "care of it now.@"
-	text_end
-
-MelanieText2::
-	text "I know! Would you"
-	line "take care of this"
-	cont "BULBASAUR?"
-	done
-
-MelanieText3::
-	text "Please take care"
-	line "of BULBASAUR!@"
-	text_end
-
-MelanieText4::
-	text "Is BULBASAUR"
-	line "doing well?@"
-	text_end
-
-MelanieText5::
-	text "Oh..."
-	line "That's too bad...@"
-	text_end
-	
-CeruleanHouse1Text4:
+CeruleanTradeHouseBulbasaurText:
 	text_far MelanieBulbasaurText
 	text_asm
 	ld a, BULBASAUR
 	call PlayCry
 	jp TextScriptEnd
 
-CeruleanHouse1Text5:
+CeruleanTradeHouseOddishText:
 	text_far MelanieOddishText
 	text_asm
 	ld a, ODDISH
 	call PlayCry
 	jp TextScriptEnd
 
-CeruleanHouse1Text6:
+CeruleanTradeHouseSandshrewText:
 	text_far MelanieSandshrewText
 	text_asm
 	ld a, SANDSHREW
 	call PlayCry
 	jp TextScriptEnd
-	
-MelanieBulbasaurText::
-	text "BULBASAUR: Bubba!"
-	line "Zoar!@"
-	text_end
-
-MelanieOddishText::
-	text "ODDISH: Orddissh!@"
-	text_end
-
-MelanieSandshrewText::
-	text "SANDSHREW: Pikii!@"
-	text_end

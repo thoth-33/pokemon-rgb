@@ -1,7 +1,5 @@
 DEF GEN_2_GRAPHICS EQU 1
-DEF GEN_2_MUSIC    EQU 1
-
-INCLUDE "charmap.asm"
+;DEF GEN_2_MUSIC    EQU 1
 
 INCLUDE "macros/asserts.asm"
 INCLUDE "macros/const.asm"
@@ -20,8 +18,10 @@ INCLUDE "macros/scripts/text.asm"
 
 INCLUDE "macros/color.asm"
 
+INCLUDE "constants/charmap.asm"
 INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/oam_constants.asm"
+INCLUDE "constants/ram_constants.asm"
 INCLUDE "constants/misc_constants.asm"
 INCLUDE "constants/gfx_constants.asm"
 INCLUDE "constants/input_constants.asm"
@@ -29,6 +29,7 @@ INCLUDE "constants/serial_constants.asm"
 INCLUDE "constants/script_constants.asm"
 INCLUDE "constants/type_constants.asm"
 INCLUDE "constants/battle_constants.asm"
+INCLUDE "constants/battle_anim_constants.asm"
 INCLUDE "constants/move_constants.asm"
 INCLUDE "constants/move_animation_constants.asm"
 INCLUDE "constants/move_effect_constants.asm"
@@ -57,3 +58,10 @@ INCLUDE "constants/menu_constants.asm"
 
 INCLUDE "color/wram.asm"
 INCLUDE "color/data/map_palette_constants.asm"
+
+IF DEF(_RED_VC)
+INCLUDE "vc/pokered.constants.asm"
+ENDC
+IF DEF(_BLUE_VC)
+INCLUDE "vc/pokeblue.constants.asm"
+ENDC

@@ -1,4 +1,4 @@
-_PewterPokecenterText2::
+_PewterPokecenterGentlemanText::
 	text "What!?"
 
 	para "TEAM ROCKET is"
@@ -8,7 +8,20 @@ _PewterPokecenterText2::
 	para "Scram!"
 	done
 
-_PewterJigglypuffText::
+_PewterPokecenterPrintCooltrainerFText::
+	text "#MON CENTERS"
+	line "are wonderful!"
+
+	para "They heal #MON"
+	line "completely."
+
+	para "Even conditions"
+	line "like sleep, burn,"
+	cont "poison and others"
+	cont "are cured."
+	done
+
+_PewterPokecenterJigglypuffText::
 	text "JIGGLYPUFF: Puu"
 	line "pupuu!"
 	done

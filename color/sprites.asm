@@ -11,6 +11,7 @@ DEF ATK_PAL_PURPLE  EQU 7
 ; 8: color based on attack type
 ; 9: don't change color palette (assume it's already set properly from elsewhere)
 
+
 DEF SPR_PAL_ORANGE  EQU 0
 DEF SPR_PAL_BLUE    EQU 1
 DEF SPR_PAL_GREEN   EQU 2
@@ -37,16 +38,15 @@ LoadOverworldSpritePalettes:
 	ld hl, SpritePalettesPokecenter
 	cp POKECENTER
 	jr z, .gotPaletteList
+	ld a, [wCurMap]
+	cp INDIGO_PLATEAU_LOBBY
+	jr z, .gotPaletteList
 	; If not, load the normal Object Pals
 	ld hl, SpritePalettes
 .gotPaletteList
 	pop bc
 	ld a, b
 	ldh [rSVBK], a
-	jr LoadSpritePaletteData
-
-LoadPartySpritePalettes:
-	ld hl, PartySpritePalettes
 	jr LoadSpritePaletteData
 
 LoadAttackSpritePalettes:
@@ -88,16 +88,15 @@ ColorOverworldSprite::
 	ld e, a
 	ld d, wSpriteStateData1 >> 8
 	ld a, [de] ; Load A with picture ID
-
 	dec a
+
 	ld de, SpritePaletteAssignments
-	jr z, .getGender ; pulls operation out of loop for hero sprite
+	jr z, .colorHero ; pulls operation out of loop for hero sprite
 	add e
 	ld e, a
 	jr nc, .noCarry
 	inc d
 .noCarry
-
 	ld a, [de] ; Get the picture ID's palette
 
 	; If it's 8, that means no particular palette is assigned
@@ -126,10 +125,13 @@ ColorOverworldSprite::
 	pop af
 	ret
 	
-.getGender
+.colorHero
 	ld a, [wWalkBikeSurfState]
 	cp a, 2
 	jr z, .surfing
+	ld a, [wPlayerFlying]
+	cp a, $1
+	jr z, .flying
 	ld a, [wPlayerGender]
 	and a
 	ld a, SPR_PAL_ORANGE
@@ -138,7 +140,62 @@ ColorOverworldSprite::
 	jr .norandomColor
 .surfing
 	ld a, SPR_PAL_EMOJI
-    	jr .norandomColor
+    jr .norandomColor
+.flying
+	ld a, SPR_PAL_BROWN
+    jr .norandomColor
+	
+; Color the Party menu pokemon sprites
+LoadSinglePartySpritePalette::
+; Load a single sprite palette
+	ld a, [wMonPartySpriteSpecies]
+	ld b, 0
+	call GetPartySpritePalette
+	ld d, a
+	xor a
+	ld e, a
+	ld [wPartySpritePaletteSlot], a
+	call LoadMenuPalette_Sprite
+	ld a, 2
+	ldh [rSVBK], a
+	ld [W2_ForceOBPUpdate], a
+	xor a
+	ldh [rSVBK], a
+	ret
+
+LoadPartyMenuSpritePalettes::
+; Load the party sprites palettes	
+	ld hl,PartySpritePalettes
+	call LoadSpritePaletteData
+	ld a, %11100100
+	ldh [rOBP1], a
+	ret
+
+FindPartySpritePalette::
+	ld a, [hPartyMonIndex]
+	ld hl, wPartySpecies
+	ld b, 0
+	ld c, a
+ 	add hl, bc
+	ld a, [hl]
+	call GetPartySpritePalette
+	ld [wPartySpritePaletteSlot], a
+	ret
+
+GetPartySpritePalette:
+	ld [wPokedexNum], a ; Store a in wram to be used in the function
+	predef IndexToPokedex ; Convert ID to Pokedex ID
+	ld a, [wPokedexNum] ; Get the result of the function
+	cp 152 ; check for and ID higher than Mew's
+	jr c, .notAboveMew ; Jump if not higher than Mew's
+	xor a ; if higher than Mew's then give ID 0 so that purple palette is assigned
+.notAboveMew
+	ld hl, MonMenuIconPals
+	ld b, 0
+	ld c, a ; Add the pokemon pokedex ID which is used as a pointer in the palette assignment list
+	add hl, bc
+	ld a, [hl] ; Load pokemon assigned palette
+	ret
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
 ;
@@ -279,7 +336,7 @@ LoadAnimationTilesetPalettes:
 	ld a, c
 	and a		;check if c == 0
 	jr nz, .notBall
-	ld a, [wcf91]
+	ld a, [wCurItem]
 	cp SAFARI_BALL
 	ld b, ATK_PAL_GREEN
 	jr z, .gotColor
@@ -354,6 +411,7 @@ ClearSpritePaletteMap:
 
 
 SpritePaletteAssignments: ; Characters on the overworld
+	table_width 1, SpritePaletteAssignments
 	; 0x01: SPRITE_RED
 	db SPR_PAL_ORANGE
 
@@ -533,7 +591,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 	; 0x3c: SPRITE_SEEL
 	db SPR_PAL_BLUE
-	
+
 	; 0x-1: SPRITE_SANDSHREW
 	db SPR_PAL_BROWN
 	
@@ -543,9 +601,90 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; 0x-3: SPRITE_BULBASAUR
 	db SPR_PAL_GREEN
 	
-	; 0x-3: SPRITE_OFFICER_JENNY
+	; 0x-4: SPRITE_OFFICER_JENNY
 	db SPR_PAL_BLUE
-
+	
+	; 0x-5: SPRITE_CHANSEY
+	db SPR_PAL_ORANGE
+	
+	; 0x-6: SPRITE_JIGGLYPUFF
+	db SPR_PAL_ORANGE
+	
+	; 0x-7: SPRITE_PIKACHU
+	db SPR_PAL_ORANGE
+	
+	; 0x-8: SPRITE_ARTICUNO
+	db SPR_PAL_BLUE
+	
+	; 0x-9: SPRITE_ZAPDOS
+	db SPR_PAL_ORANGE
+	
+	; 0x-A: SPRITE_MOLTRES
+	db SPR_PAL_ORANGE
+	
+	; 0x-B: SPRITE_CUBONE
+	db SPR_PAL_BROWN
+		
+	; 0x-C: SPRITE_DODUO
+	db SPR_PAL_BROWN
+	
+	; 0x-D: SPRITE_FEAROW
+	db SPR_PAL_BROWN
+	
+	; 0x-E: SPRITE_KANGASKHAN
+	db SPR_PAL_BROWN
+	
+	; 0x-F: SPRITE_KANGASKHAN
+	db SPR_PAL_BLUE
+	
+	; 0x-G: SPRITE_MACHOKE
+	db SPR_PAL_BLUE
+	
+	; 0x-H: SPRITE_MACHOP
+	db SPR_PAL_BLUE
+	
+	; 0x-I: SPRITE_MEOWTH
+	db SPR_PAL_BROWN
+	
+	; 0x-J: SPRITE_NIDORANF
+	db SPR_PAL_BLUE
+	
+	; 0x-K: SPRITE_NIDORANM
+	db SPR_PAL_ORANGE
+	
+	; 0x-L: SPRITE_NIDORINO
+	db SPR_PAL_ORANGE
+	
+	; 0x-M: SPRITE_PIDGEOT
+	db SPR_PAL_BROWN
+	
+	; 0x-N: SPRITE_PIDGEY
+	db SPR_PAL_BROWN
+	
+	; 0x-O: SPRITE_POLIWRATH
+	db SPR_PAL_BLUE
+	
+	; 0x-P: SPRITE_PSYDUCK
+	db SPR_PAL_ORANGE
+	
+	; 0x-Q: SPRITE_SLOWBRO
+	db SPR_PAL_ORANGE
+	
+	; 0x-R: SPRITE_SLOWPOKE
+	db SPR_PAL_ORANGE
+	
+	; 0x-S: SPRITE_SPEAROW
+	db SPR_PAL_BROWN
+	
+	; 0x-T: SPRITE_WIGGLYTUFF
+	db SPR_PAL_ORANGE
+	
+	; 0x-U: SPRITE_MEWTWO
+	db SPR_PAL_PURPLE
+	
+	; 0x-V: SPRITE_MEW
+	db SPR_PAL_PURPLE
+	
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE
 
@@ -565,7 +704,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_BROWN
 
 	; 0x43: SPRITE_SNORLAX
-	db SPR_PAL_ORANGE
+	db SPR_PAL_GREEN
 
 	; 0x44: SPRITE_OLD_AMBER_COPY
 	db SPR_PAL_ROCK
@@ -582,6 +721,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 	; 0x48: SPRITE_LYING_OLD_MAN
 	db SPR_PAL_BROWN
 
+	assert_table_length NUM_SPRITES
+
+
 AnimationTileset1Palettes:
 	INCBIN "color/data/animtileset1palettes.bin"
 
@@ -589,6 +731,7 @@ AnimationTileset2Palettes:
 	INCBIN "color/data/animtileset2palettes.bin"
 
 TypeColorTable: ; Used for a select few sprites to be colorized based on attack type
+	table_width 1, TypeColorTable
 	db 0 ; NORMAL EQU $00
 	db 0 ; FIGHTING EQU $01
 	db 0 ; FLYING EQU $02
@@ -616,5 +759,7 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 7 ; PSYCHIC EQU $18
 	db 6 ; ICE EQU $19
 	db 1 ; DRAGON EQU $1A
+	assert_table_length NUM_TYPES
 
+INCLUDE "color/menu_icon_pals.asm"
 INCLUDE "color/data/spritepalettes.asm"

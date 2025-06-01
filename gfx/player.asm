@@ -6,6 +6,7 @@ endr
 ELSE
 RedPicFront:: INCBIN "gfx/player/red.pic"
 ENDC
-GreenPicFront:: INCBIN "gfx/player/green.pic"
+
+GreenPicFront:: INCBIN "gfx/gstrainers/green.pic"
 ShrinkPic1::  INCBIN "gfx/player/shrink1.pic"
 ShrinkPic2::  INCBIN "gfx/player/shrink2.pic"

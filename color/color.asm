@@ -38,7 +38,7 @@ SetPal_BattleAfterBlack:
 	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
 	; from appearing on player/enemy silhouettes.
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr z, .doneDelay
 	ld c, 3
 	call DelayFrames
@@ -70,7 +70,7 @@ SetPal_Battle:
 	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
 	; from appearing after closing pokemon menu.
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr z, .doneDelay
 	ld c, 3
 	call DelayFrames
@@ -245,19 +245,21 @@ SetPal_TownMap:
 	ld a, 2
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
-	ld bc, $100
+	ld bc, $4
 	ld a, SPR_PAL_GREEN
-	call FillMemory
 	jr .girlMap
 .boyMap
 
 	ld a, 2
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
-	ld bc, $100
+	ld bc, $4
 	ld a, SPR_PAL_ORANGE
-	call FillMemory
 .girlMap
+	call FillMemory
+	ld bc, $4
+	ld a, SPR_PAL_BROWN
+	call FillMemory
 
 	ld d, PAL_TOWNMAP
 	ld e, 0
@@ -265,10 +267,6 @@ SetPal_TownMap:
 
 	ld d, PAL_TOWNMAP2
 	ld e, 1
-	farcall LoadSGBPalette
-
-	ld d, PAL_GREENMON
-	ld e, 2
 	farcall LoadSGBPalette
 
 	ld a, 1
@@ -289,7 +287,7 @@ SetPal_TownMap:
 
 ; Status screen
 SetPal_StatusScreen:
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	cp NUM_POKEMON_INDEXES + 1
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
@@ -372,14 +370,13 @@ ENDC
 
 ; Show pokedex data
 SetPal_Pokedex:
-	ld a, [wcf91]
+	ld a, [wCurPartySpecies]
 	call DeterminePaletteID
 	ld d, a
 	ld e, 0
 
 	ld a, [wPlayerGender]
 	and a
-
 	jr z, .boyDex
 	ld a, 2
 	ldh [rSVBK], a
@@ -390,6 +387,7 @@ SetPal_Pokedex:
 .boyDex
 	ld a, 2
 	ldh [rSVBK], a
+
 	farcall LoadSGBPalette
 
 IF DEF(_BLUE)
@@ -399,7 +397,6 @@ ELSE
 ENDC
 
 .girlDex
-
 	ld e, 1
 	farcall LoadSGBPalette
 
@@ -487,7 +484,10 @@ SetPal_Slots:
 
 	xor a
 	ldh [rSVBK], a
-	ret
+	
+	; Wait 3 frames to allow tilemap updates to apply.
+	; Prevents garbage from appearing when the slots machine open.
+	jp Delay3
 
 ; Titlescreen with cycling pokemon
 SetPal_TitleScreen:
@@ -670,7 +670,7 @@ SetPal_Overworld:
 
 	; Wait 2 frames before updating palettes (if LCD is on)
 	ldh a, [rLCDC]
-	and rLCDC_ENABLE_MASK
+	and 1 << rLCDC_ENABLE
 	jr z, .doneDelay
 	ld c, 2
 	call DelayFrames
@@ -691,14 +691,13 @@ SetPal_Overworld:
 	ld [wDefaultPaletteCommand], a
 	ret
 
-INCLUDE "color/menu_icon_pals.asm"
-
 ; Open pokemon menu
 SetPal_PartyMenu:
+
 	ld a, 2
 	ldh [rSVBK], a
 
-	CALL_INDIRECT LoadOverworldSpritePalettes
+;	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	ld d, PAL_GREENBAR ; Filler for palette 0 (technically, green)
 	ld e, 0
@@ -737,56 +736,7 @@ SetPal_PartyMenu:
 	ld [W2_StaticPaletteMapChanged], a
 	xor a
 	ld [W2_TileBasedPalettes], a
-
-	CALL_INDIRECT LoadPartySpritePalettes
-	xor a
-	ld [W2_UseOBP1], a
-	ld hl, W2_SpritePaletteMap
-	ldh [hColorHackTmp], a	;sets party position to 0
-	ld bc, $1C		;Sets palette painter pointer
-.loop3
-	push hl
-	xor a		;Temp switch to
-	ldh [rSVBK], a	;Ram bank 1
-	ld a, [hColorHackTmp] ; Position within party
-	ld hl, wPartySpecies ; load pointer to beginning of part array into hl
-	ld d, 0
-	ld e, a
-	inc a			;increment party position
-	ldh [hColorHackTmp], a	;after it has been loaded from
-	add hl, de  ; Move pointer de locations down.
-	ld a, [hl] ; Load data at pointer into a
-	ld [wd11e], a
-	ld a, [hli]	; Checks if the next pointer location, 
-	cp $ff		; sets flag to jump if end of array
-	jr z, .done
-	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
-	ld a, [wd11e] 	; Because table starts at 0,
-	dec a		; it will need to be -1 to be accurate
-	ld d, 0
-	ld e, a
-	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
-	add hl, de ; move pointer by dex number
-	ld e, [hl] ; Load data at pointer into a
-	ld a, 2		;Switch back to
-	ldh [rSVBK], a	;Ram bank 2
-	pop hl
-	ld a, e
-	call FillMemory ;paint palettes
-	ld bc, $04 ;increments palette painter pointer
-	jr .loop3
-.done
-	pop hl
-
-	xor a
 	ldh [rSVBK], a
-
-	ret
-
-TradeScreenPaletteCall:
-	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
-	add hl, de ; move pointer by dex number
-	ld e, [hl] ; Load data at pointer into a
 	ret
 
 ; used when a Pokemon is the only thing on the screen
@@ -915,22 +865,23 @@ SetPal_GameFreakIntro:
 
 ; Trainer card
 SetPal_TrainerCard:
-	ld a, [wPlayerGender]
+	ld a, [wPlayerGender] ; Gender check
 	and a
 	jr z, .BoyTrainerCard
 
+	; Greens's palette
 	ld a, 2
 	ldh [rSVBK], a
-	ld d, PAL_ERIKA; Green palette
+	ld d, PAL_ERIKA ; Green palette
 	ld e, 4
 	farcall LoadSGBPalette
-	ld d, PAL_GREENMON
+	ld d, PAL_GREENMON ; Border
 	ld e, 5
 	farcall LoadSGBPalette
 	jr .EndTrainerCard
 
+	; Red's palette
 .BoyTrainerCard
-
 	ld a, 2
 	ldh [rSVBK], a
 IF GEN_2_GRAPHICS
@@ -950,8 +901,7 @@ ENDC
 	ld e, 5
 	farcall LoadSGBPalette
 
-.EndTrainerCard
-
+.EndTrainerCard	
 	ld d, PAL_MEWMON
 	ld e, 0
 	farcall LoadSGBPalette
@@ -978,6 +928,7 @@ ENDC
 	ld a, 5
 	call FillMemory
 
+
 	; Wait 2 frames before updating palettes
 	ld c, 2
 	call DelayFrames
@@ -986,6 +937,7 @@ ENDC
 	ld [W2_ForceBGPUpdate], a ; Signal to update palettes
 	ldh [rSVBK], a
 	ret
+
 
 ; Clear colors after titlescreen
 SetPal_OakIntro:
@@ -1018,25 +970,8 @@ SetPal_NameEntry:
 	ld a, 2
 	ldh [rSVBK], a
 
-	CALL_INDIRECT LoadPartySpritePalettes
-	xor a
-	ld [W2_UseOBP1], a
-	ld hl, W2_SpritePaletteMap
-	ld bc, $100		;Sets palette painter pointer
-	push hl
-
-	ld a, [wcf91]
-	ld [wd11e], a
-	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
-	ld a, [wd11e] 	; Because table starts at 0,
-	dec a		; it will need to be -1 to be accurate
-	ld d, 0
-	ld e, a
-	ld hl, MonMenuIconPals ; load pointer to beginning of menu icons pallete database into hl
-	add hl, de ; move pointer by dex number
-	ld a, [hl] ; Load data at pointer into a
-	pop hl
-	call FillMemory ;paint palettes
+;	CALL_INDIRECT LoadOverworldSpritePalettes
+	CALL_INDIRECT ClearSpritePaletteMap
 
 	xor a
 	ldh [rSVBK], a

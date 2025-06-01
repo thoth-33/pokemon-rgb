@@ -5,7 +5,7 @@ MACRO overworld_sprite
 ENDM
 
 SpriteSheetPointerTable:
-	table_width 4, SpriteSheetPointerTable
+	table_width 4
 	; graphics, tile count
 	overworld_sprite RedSprite, 12              ; SPRITE_RED
 	overworld_sprite BlueSprite, 12             ; SPRITE_BLUE
@@ -33,7 +33,7 @@ SpriteSheetPointerTable:
 	overworld_sprite RocketSprite, 12           ; SPRITE_ROCKET
 	overworld_sprite ChannelerSprite, 12        ; SPRITE_CHANNELER
 	overworld_sprite WaiterSprite, 12           ; SPRITE_WAITER
-	overworld_sprite ErikaSprite, 12            ; SPRITE_ERIKA
+	overworld_sprite SilphWorkerFSprite, 12     ; SPRITE_SILPH_WORKER_F
 	overworld_sprite MiddleAgedWomanSprite, 12  ; SPRITE_MIDDLE_AGED_WOMAN
 	overworld_sprite BrunetteGirlSprite, 12     ; SPRITE_BRUNETTE_GIRL
 	overworld_sprite LanceSprite, 12            ; SPRITE_LANCE
@@ -50,7 +50,7 @@ SpriteSheetPointerTable:
 	overworld_sprite NurseSprite, 12            ; SPRITE_NURSE
 	overworld_sprite LinkReceptionistSprite, 12 ; SPRITE_LINK_RECEPTIONIST
 	overworld_sprite SilphPresidentSprite, 12   ; SPRITE_SILPH_PRESIDENT
-	overworld_sprite SilphWorkerSprite, 12      ; SPRITE_SILPH_WORKER
+	overworld_sprite SilphWorkerMSprite, 12     ; SPRITE_SILPH_WORKER_M
 	overworld_sprite WardenSprite, 12           ; SPRITE_WARDEN
 	overworld_sprite CaptainSprite, 12          ; SPRITE_CAPTAIN
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER
@@ -71,6 +71,33 @@ SpriteSheetPointerTable:
 	overworld_sprite OddishSprite, 12           ; SPRITE_ODDISH
 	overworld_sprite BulbasaurSprite, 12        ; SPRITE_BULBASAUR
 	overworld_sprite OfficerJennySprite, 12     ; SPRITE_OFFICER_JENNY
+	overworld_sprite ChanseySprite, 12          ; SPRITE_CHANSEY
+	overworld_sprite JigglypuffSprite, 12       ; SPRITE_JIGGLYPUFF
+	overworld_sprite PikachuSprite, 12          ; SPRITE_PIKACHU
+	overworld_sprite ArticunoSprite, 12         ; SPRITE_ARTICUNO
+	overworld_sprite ZapdosSprite, 12           ; SPRITE_ZAPDOS
+	overworld_sprite MoltresSprite, 12          ; SPRITE_MOLTRES
+	overworld_sprite CuboneSprite, 12           ; SPRITE_CUBONE
+	overworld_sprite DoduoSprite, 12            ; SPRITE_DODUO
+	overworld_sprite FearowSprite, 12           ; SPRITE_FEAROW
+	overworld_sprite KangaskhanSprite, 12       ; SPRITE_KANGASKHAN
+	overworld_sprite LaprasSprite, 12           ; SPRITE_LAPRAS
+	overworld_sprite MachokeSprite, 12          ; SPRITE_MACHOKE
+	overworld_sprite MachopSprite, 12           ; SPRITE_MACHOP
+	overworld_sprite MeowthSprite, 12           ; SPRITE_MEOWTH
+	overworld_sprite NidoranFSprite, 12         ; SPRITE_NIDORANF
+	overworld_sprite NidoranMSprite, 12         ; SPRITE_NIDORANM
+	overworld_sprite NidorinoSprite, 12         ; SPRITE_NIDORINO
+	overworld_sprite PidgeotSprite, 12          ; SPRITE_PIDGEOT
+	overworld_sprite PidgeySprite, 12           ; SPRITE_PIDGEY
+	overworld_sprite PoliwrathSprite, 12        ; SPRITE_POLIWRATH
+	overworld_sprite PsyduckSprite, 12          ; SPRITE_PSYDUCK
+	overworld_sprite SlowbroSprite, 12          ; SPRITE_SLOWBRO
+	overworld_sprite SlowpokeSprite, 12         ; SPRITE_SLOWPOKE
+	overworld_sprite SpearowSprite, 12          ; SPRITE_SPEAROW
+	overworld_sprite WigglytuffSprite, 12       ; SPRITE_WIGGLYTUFF
+	overworld_sprite MewtwoSprite, 12           ; SPRITE_MEWTWO
+	overworld_sprite MewSprite, 12              ; SPRITE_MEW
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

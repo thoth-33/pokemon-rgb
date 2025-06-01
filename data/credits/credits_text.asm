@@ -1,6 +1,6 @@
 CreditsTextPointers:
 ; entries correspond to CRED_* constants
-	table_width 2, CreditsTextPointers
+	table_width 2
 	dw CredVersion
 	dw CredTajiri
 	dw CredTaOota
@@ -68,12 +68,7 @@ CreditsTextPointers:
 	assert_table_length NUM_CRED_STRINGS
 
 CredVersion:
-IF DEF(_RED)
 	db -8, "RGB VERSION STAFF@"
-ENDC
-IF DEF(_BLUE)
-	db -8, "BLUE VERSION STAFF@"
-ENDC
 CredTajiri:
 	db -6, "SATOSHI TAJIRI@"
 CredTaOota:

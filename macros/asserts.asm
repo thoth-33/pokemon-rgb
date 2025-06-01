@@ -1,19 +1,41 @@
 ; Macros to verify assumptions about the data or code
 
+MACRO _redef_current_label
+	IF DEF(\1)
+		PURGE \1
+	ENDC
+	IF _NARG == 3 + (\3)
+		DEF \1 EQUS "\<_NARG>"
+	ELIF DEF(..)
+		IF .. - @ == 0
+			DEF \1 EQUS "{..}"
+		ENDC
+	ELIF DEF(.)
+		if . - @ == 0
+			DEF \1 EQUS "{.}"
+		ENDC
+	ENDC
+	if !DEF(\1)
+		DEF \1 EQUS \2
+		{\1}:
+	ENDC
+ENDM
+
 MACRO table_width
 	DEF CURRENT_TABLE_WIDTH = \1
-	IF _NARG == 2
-		REDEF CURRENT_TABLE_START EQUS "\2"
-	ELSE
-		REDEF CURRENT_TABLE_START EQUS "._table_width\@"
-	{CURRENT_TABLE_START}:
-	ENDC
+	_redef_current_label CURRENT_TABLE_START, "._table_width\@", 2, \#
 ENDM
 
 MACRO assert_table_length
 	DEF x = \1
 	ASSERT x * CURRENT_TABLE_WIDTH == @ - {CURRENT_TABLE_START}, \
 		"{CURRENT_TABLE_START}: expected {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
+ENDM
+
+MACRO assert_max_table_length
+	DEF x = \1
+	ASSERT x * CURRENT_TABLE_WIDTH >= @ - {CURRENT_TABLE_START}, \
+		"{CURRENT_TABLE_START}: expected a maximum of {d:x} entries, each {d:CURRENT_TABLE_WIDTH} bytes"
 ENDM
 
 MACRO list_start
@@ -27,7 +49,7 @@ MACRO list_start
 ENDM
 
 MACRO li
-	ASSERT !STRIN(\1, "@"), STRCAT("String terminator \"@\" in list entry: ", \1)
+	ASSERT STRFIND(\1, "@") == -1, STRCAT("String terminator \"@\" in list entry: ", \1)
 	db \1, "@"
 	DEF list_index += 1
 ENDM

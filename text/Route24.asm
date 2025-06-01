@@ -1,29 +1,29 @@
-_Route24Text_51510::
+_Route24CooltrainerM1YouBeatOurContestText::
 	text "Congratulations!"
 	line "You beat our 5"
 	cont "contest trainers!@"
 	text_end
 
-_Route24Text_51515::
+_Route24CooltrainerM1YouJustEarnedAPrizeText::
 	text_start
 
 	para "You just earned a"
 	line "fabulous prize!"
 	prompt
 
-_Route24Text_5151a::
+_Route24CooltrainerM1ReceivedNuggetText::
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_Route24Text_51521::
+_Route24CooltrainerM1NoRoomText::
 	text "You don't have"
 	line "any room!"
 	done
 
-_Route24Text_51526::
+_Route24CooltrainerM1JoinTeamRocketText::
 	text "By the way, would"
 	line "you like to join"
 	cont "TEAM ROCKET?"
@@ -49,19 +49,50 @@ _Route24Text_51526::
 	cont "refuse!"
 	done
 
-_Route24Text_5152b::
+_Route24CooltrainerM1DefeatedText::
 	text "Arrgh!"
 	line "You are good!"
 	prompt
 
-_Route24Text_51530::
+_Route24CooltrainerM1YouCouldBecomeATopLeaderText::
 	text "With your ability,"
 	line "you could become"
 	cont "a top leader in"
 	cont "TEAM ROCKET!"
 	done
 
-_Route24BattleText1::
+_Route24CooltrainerM2BattleText::
 	text "I saw your feat"
 	line "from the grass!"
+	done
+
+_Route24DamianText1::
+	text "I'm not good at"
+	line "raising #MON."
+
+	para "I should release"
+	line "my CHARMANDER"
+	cont "because I haven't"
+	cont "raised it well...@"
+	text_end
+
+_Route24DamianText2::
+	text "Take good care of"
+	line "my CHARMANDER!@"
+	text_end
+
+_Route24DamianText3::
+	text "Oh... I'd better"
+	line "release it then."
+	done
+
+_Route24DamianText4::
+	text "How's CHARMANDER"
+	line "doing?"
+	done
+	
+_Route24DamianText5::
+	text "If you promise me"
+	line "you'll care for"
+	cont "it, it's yours."
 	done

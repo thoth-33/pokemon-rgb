@@ -14,7 +14,7 @@ _CardKeyFailText::
 	done
 
 _TrainerNameText::
-	text_ram wcd6d
+	text_ram wNameBuffer
 	text ": @"
 	text_end
 
@@ -146,4 +146,9 @@ _OaksAideNoRoomText::
 	cont "@"
 	text_ram wOaksAideRewardItemName
 	text "."
+	done
+
+_NurseChanseyText::
+	text "CHANSEY: Chaaan"
+	line "sey!"
 	done

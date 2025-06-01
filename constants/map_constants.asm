@@ -19,8 +19,8 @@ ENDM
 	map_const PALLET_TOWN,                   10,  9 ; $00
 	map_const VIRIDIAN_CITY,                 20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02
-	map_const CERULEAN_CITY,                 20, 18 ; $03
-	map_const LAVENDER_TOWN,                 10,  9 ; $04
+	map_const CERULEAN_CITY,                 21, 18 ; $03
+	map_const LAVENDER_TOWN,                 12, 11 ; $04
 	map_const VERMILION_CITY,                20, 18 ; $05
 	map_const CELADON_CITY,                  25, 18 ; $06
 	map_const FUCHSIA_CITY,                  20, 18 ; $07
@@ -33,28 +33,28 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_1,                       10, 18 ; $0C
 	map_const ROUTE_2,                       10, 36 ; $0D
 	map_const ROUTE_3,                       35,  9 ; $0E
-	map_const ROUTE_4,                       45,  9 ; $0F
+	map_const ROUTE_4,                       44,  9 ; $0F
 	map_const ROUTE_5,                       10, 18 ; $10
 	map_const ROUTE_6,                       10, 18 ; $11
 	map_const ROUTE_7,                       10,  9 ; $12
-	map_const ROUTE_8,                       30,  9 ; $13
+	map_const ROUTE_8,                       28, 11 ; $13
 	map_const ROUTE_9,                       30,  9 ; $14
-	map_const ROUTE_10,                      10, 36 ; $15
+	map_const ROUTE_10,                      10, 35 ; $15
 	map_const ROUTE_11,                      30,  9 ; $16
-	map_const ROUTE_12,                      10, 54 ; $17
+	map_const ROUTE_12,                      10, 53 ; $17
 	map_const ROUTE_13,                      30,  9 ; $18
-	map_const ROUTE_14,                      10, 27 ; $19
+	map_const ROUTE_14,                      11, 27 ; $19
 	map_const ROUTE_15,                      30,  9 ; $1A
-	map_const ROUTE_16,                      20,  9 ; $1B
+	map_const ROUTE_16,                      20, 10 ; $1B
 	map_const ROUTE_17,                      10, 72 ; $1C
-	map_const ROUTE_18,                      25,  9 ; $1D
+	map_const ROUTE_18,                      25, 11 ; $1D
 	map_const ROUTE_19,                      10, 27 ; $1E
 	map_const ROUTE_20,                      50,  9 ; $1F
 	map_const ROUTE_21,                      10, 45 ; $20
 	map_const ROUTE_22,                      20,  9 ; $21
 	map_const ROUTE_23,                      10, 72 ; $22
-	map_const ROUTE_24,                      10, 18 ; $23
-	map_const ROUTE_25,                      30,  9 ; $24
+	map_const ROUTE_24,                      11, 18 ; $23
+	map_const ROUTE_25,                      30, 10 ; $24
 DEF FIRST_INDOOR_MAP EQU const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $25
 	map_const REDS_HOUSE_2F,                  4,  4 ; $26
@@ -70,7 +70,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const ROUTE_2_TRADE_HOUSE,            4,  4 ; $30
 	map_const ROUTE_2_GATE,                   5,  4 ; $31
 	map_const VIRIDIAN_FOREST_SOUTH_GATE,     5,  4 ; $32
-	map_const VIRIDIAN_FOREST,               17, 24 ; $33
+	map_const VIRIDIAN_FOREST,               17, 29 ; $33
 	map_const MUSEUM_1F,                     10,  4 ; $34
 	map_const MUSEUM_2F,                      7,  4 ; $35
 	map_const PEWTER_GYM,                     5,  7 ; $36
@@ -113,7 +113,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const VERMILION_MART,                 4,  4 ; $5B
 	map_const VERMILION_GYM,                  5,  9 ; $5C
 	map_const VERMILION_PIDGEY_HOUSE,         4,  4 ; $5D
-	map_const VERMILION_DOCK,                14,  6 ; $5E
+	map_const VERMILION_DOCK,                19, 10 ; $5E
 	map_const SS_ANNE_1F,                    20,  9 ; $5F
 	map_const SS_ANNE_2F,                    20,  9 ; $60
 	map_const SS_ANNE_3F,                    10,  3 ; $61
@@ -236,10 +236,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const POKEMON_MANSION_2F,            15, 14 ; $D6
 	map_const POKEMON_MANSION_3F,            15,  9 ; $D7
 	map_const POKEMON_MANSION_B1F,           15, 14 ; $D8
-	map_const SAFARI_ZONE_EAST,              15, 13 ; $D9
-	map_const SAFARI_ZONE_NORTH,             20, 18 ; $DA
-	map_const SAFARI_ZONE_WEST,              15, 13 ; $DB
-	map_const SAFARI_ZONE_CENTER,            15, 13 ; $DC
+	map_const SAFARI_ZONE_EAST,              17, 13 ; $D9
+	map_const SAFARI_ZONE_NORTH,             23, 20 ; $DA
+	map_const SAFARI_ZONE_WEST,              18, 15 ; $DB
+	map_const SAFARI_ZONE_CENTER,            20, 17 ; $DC
 	map_const SAFARI_ZONE_CENTER_REST_HOUSE,  4,  4 ; $DD
 	map_const SAFARI_ZONE_SECRET_HOUSE,       4,  4 ; $DE
 	map_const SAFARI_ZONE_WEST_REST_HOUSE,    4,  4 ; $DF
