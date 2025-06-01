@@ -809,6 +809,7 @@ NEXTU
 wOptionsTextSpeedCursorX:: db
 wOptionsBattleAnimCursorX:: db
 wOptionsBattleStyleCursorX:: db
+wOptionsMusicStyleCursorX:: db
 wOptionsCancelCursorX:: db
 
 NEXTU
@@ -1782,6 +1783,19 @@ wPlayerMoney:: ds 3 ; BCD
 
 wRivalName:: ds NAME_LENGTH
 
+; bit 7 = battle animation
+; 0: On
+; 1: Off
+; bit 6 = battle style
+; 0: Shift
+; 1: Set
+; bits 0-3 = text speed (number of frames to delay after printing a letter)
+; 1: Fast
+; 3: Medium
+; 5: Slow
+; bit 4 = music style
+; 0: Gen1
+; 1: Gen2
 wOptions:: db
 
 wObtainedBadges:: flag_array NUM_BADGES

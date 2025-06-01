@@ -1,17 +1,18 @@
-CopyDebugName:
-	ld bc, NAME_LENGTH
-	jp CopyData
+;CopyDebugName:
+;	ld bc, NAME_LENGTH
+;	jp CopyData
 
 PrepareTitleScreen::
 	; These debug names are already copied later in PrepareOakSpeech.
 	; Removing the unused copies below has no apparent impact.
 	; CopyDebugName can also be safely deleted afterwards.
-	ld hl, DebugNewGamePlayerName
-	ld de, wPlayerName
-	call CopyDebugName
-	ld hl, DebugNewGameRivalName
-	ld de, wRivalName
-	call CopyDebugName
+		;These were removed to prevent interference with the code that determines music style upon Init.
+;	ld hl, DebugNewGamePlayerName
+;	ld de, wPlayerName
+;	call CopyDebugName
+;	ld hl, DebugNewGameRivalName
+;	ld de, wRivalName
+;	call CopyDebugName
 	xor a
 	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
