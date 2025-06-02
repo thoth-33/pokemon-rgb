@@ -239,6 +239,9 @@ FillBox:
 
 ; Load town map
 SetPal_TownMap:
+	ld a, [wWalkBikeSurfState]
+	cp a, 2
+	jr z, .surfMap
 	ld a, [wPlayerGender]
 	and a
 	jr z, .boyMap
@@ -247,7 +250,7 @@ SetPal_TownMap:
 	ld hl, W2_SpritePaletteMap
 	ld bc, $4
 	ld a, SPR_PAL_GREEN
-	jr .girlMap
+	jr .doneMap
 .boyMap
 
 	ld a, 2
@@ -255,7 +258,17 @@ SetPal_TownMap:
 	ld hl, W2_SpritePaletteMap
 	ld bc, $4
 	ld a, SPR_PAL_ORANGE
-.girlMap
+	jr .doneMap
+.surfMap
+	ld a, 2
+	ldh [rSVBK], a
+	CALL_INDIRECT LoadOverworldSpritePalettes
+	xor a
+	ld [W2_UseOBP1], a
+	ld hl, W2_SpritePaletteMap
+	ld bc, $4
+	ld a, SPR_PAL_EMOJI
+.doneMap
 	call FillMemory
 	ld bc, $4
 	ld a, SPR_PAL_BROWN
