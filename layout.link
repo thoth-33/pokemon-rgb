@@ -35,7 +35,7 @@ ROM0
 	"Header"
 	org $150
 	"Home"
-	org $1665
+	org $16ac
 	"LoadMonFrontSprite"
 	org $1db8
 	"JpPoint"
