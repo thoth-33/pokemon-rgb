@@ -288,10 +288,6 @@ OverworldLoopLessDelay::
 	call DoBikeSpeedup
 	jr .notRunning
 .normalPlayerSpriteAdvancement
-	; surf at 2x walking speed
-	ld a, [wWalkBikeSurfState]
-	cp $02
-	jr z, .speedUp
 ; Add running shoes
 ; Holding B makes you run at 2x walking speed
 	CheckEvent EVENT_GOT_RUNNING_SHOES
