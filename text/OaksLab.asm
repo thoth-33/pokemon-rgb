@@ -115,7 +115,7 @@ _OaksLabOak1ParcelThanksText::
 	cont "I don't run!"
 	done
 	
-_OaksLabOak1ParcelThanksText::
+_OaksLabOak1ByTheWayText::
 	text_start
 	para "By the way, I must"
 	line "ask you to do"
