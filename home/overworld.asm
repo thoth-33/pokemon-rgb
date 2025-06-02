@@ -294,6 +294,8 @@ OverworldLoopLessDelay::
 	jr z, .speedUp
 ; Add running shoes
 ; Holding B makes you run at 2x walking speed
+	CheckEvent EVENT_GOT_RUNNING_SHOES
+	jr z, .notRunning
 	ld a, [hJoyHeld]
 	and B_BUTTON
 	jr nz, .checkIfWalking
