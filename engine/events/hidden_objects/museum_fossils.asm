@@ -1,6 +1,7 @@
 AerodactylFossil:
 	ld a, FOSSIL_AERODACTYL
 	ld [wCurPartySpecies], a
+	ld d, PAL_MACHOP
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	tx_pre AerodactylFossilText
@@ -13,6 +14,7 @@ AerodactylFossilText::
 KabutopsFossil:
 	ld a, FOSSIL_KABUTOPS
 	ld [wCurPartySpecies], a
+	ld d, PAL_MACHOP
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	tx_pre KabutopsFossilText
@@ -27,7 +29,13 @@ DisplayMonFrontSpriteInBox:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
+	ld e, 7
+	farcall LoadSGBPalette
+	ld a, 2
+	ldh [rSVBK], a
+	ld [W2_ForceBGPUpdate], a
 	xor a
+	ldh [rSVBK], a
 	ldh [hWY], a
 	call SaveScreenTilesToBuffer1
 	ld a, MON_SPRITE_POPUP
