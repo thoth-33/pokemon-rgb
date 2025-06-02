@@ -598,6 +598,7 @@ OaksLabOakGivesPokedexScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_POKEDEX
+	SetEvent EVENT_GOT_RUNNING_SHOES
 	SetEvent EVENT_OAK_GOT_PARCEL
 	ld a, HS_LYING_OLD_MAN
 	ld [wMissableObjectIndex], a
@@ -1047,8 +1048,9 @@ OaksLabOak1Text:
 
 .DeliverParcelText:
 	text_far _OaksLabOak1DeliverParcelText
-	sound_get_key_item
 	text_far _OaksLabOak1ParcelThanksText
+	sound_get_key_item
+	text_far _OaksLabOak1ByTheWayText
 	text_end
 
 .PokemonAroundTheWorldText:

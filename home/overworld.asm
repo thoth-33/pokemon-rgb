@@ -132,6 +132,7 @@ OverworldLoopLessDelay::
 .noDirectionButtonsPressed
 	ld hl, wMiscFlags
 	res BIT_TURNING, [hl]
+	call SwitchRunningToWalkingSprites
 	call UpdateSprites
 	ld a, 1
 	ld [wCheckFor180DegreeTurn], a
@@ -283,7 +284,44 @@ OverworldLoopLessDelay::
 	bit BIT_LEDGE_OR_FISHING, a
 	jr nz, .normalPlayerSpriteAdvancement
 	call DoBikeSpeedup
+	call DoBikeSpeedup
+	call DoBikeSpeedup
+	jr .notRunning
 .normalPlayerSpriteAdvancement
+	; surf at 2x walking speed
+	ld a, [wWalkBikeSurfState]
+	cp $02
+	jr z, .speedUp
+; Add running shoes
+; Holding B makes you run at 2x walking speed
+	CheckEvent EVENT_GOT_RUNNING_SHOES
+	jr z, .notRunning
+	ld a, [hJoyHeld]
+	and B_BUTTON
+	jr nz, .checkIfWalking
+; running sprites
+; if reached here then player is not running, so check if we need to update sprites
+	ld a, [wWalkBikeSurfState]
+	and a ; WALKING?
+	jr nz, .notRunning ; if not walking, no need to update sprites
+	ld hl, wStatusFlags6
+	bit BIT_RUN_WALK, [hl]
+	jr z, .notRunning ; if wasn't running, no need to update sprites
+	res BIT_RUN_WALK, [hl]
+	call LoadWalkingPlayerSpriteGraphics
+	jr .notRunning
+.checkIfWalking
+	ld a, [wWalkBikeSurfState]
+	and a ; WALKING?
+	jr nz, .speedUp ; if not walking, no need to update sprites
+	ld hl, wStatusFlags6
+	bit BIT_RUN_WALK, [hl]
+	jr nz, .speedUp ; if already running, no need to update sprites
+	set BIT_RUN_WALK, [hl]
+	call LoadRunningPlayerSpriteGraphics
+.speedUp
+	call DoBikeSpeedup
+.notRunning
 	call AdvancePlayerSprite
 	ld a, [wWalkCounter]
 	and a
@@ -849,6 +887,16 @@ LoadPlayerSpriteGraphics::
 	jp z, LoadBikePlayerSpriteGraphics
 	dec a
 	jp z, LoadSurfingPlayerSpriteGraphics
+	jp LoadWalkingPlayerSpriteGraphics
+
+SwitchRunningToWalkingSprites: ; marcelnote - running sprites
+	ld a, [wWalkBikeSurfState]
+	and a ; WALKING?
+	ret nz ; if not walking, do nothing
+	ld hl, wStatusFlags6
+	bit BIT_RUN_WALK, [hl]
+	ret z ; if wasn't running, do nothing
+	res BIT_RUN_WALK, [hl]
 	jp LoadWalkingPlayerSpriteGraphics
 
 IsBikeRidingAllowed::
@@ -2020,6 +2068,17 @@ LoadBikePlayerSpriteGraphics::
 	ld de, GreenBikeSprite
 .boyBike
 	ld hl, vNPCSprites
+	jr LoadPlayerSpriteGraphicsCommon
+	
+LoadRunningPlayerSpriteGraphics::
+	ld de, RedRunSprite
+	ld a, [wPlayerGender]
+	and a
+	jr z, .boyRun
+	ld de, GreenRunSprite
+.boyRun
+	ld hl, vNPCSprites
+	jr LoadPlayerSpriteGraphicsCommon
 
 LoadPlayerSpriteGraphicsCommon::
 	push de
