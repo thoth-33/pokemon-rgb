@@ -1,11 +1,19 @@
 _BluesHouseDaisyRivalAtLabText::
 	text "Hi <PLAYER>!"
 	line "<RIVAL> is out at"
+IF DEF(_BLUE)
+	cont "PROF.OAK's lab."
+ELSE ; _RED
 	cont "Grandpa's lab."
+ENDC
 	done
 
 _BluesHouseDaisyOfferMapText::
+IF DEF(_BLUE)
+	text "PROF.OAK asked you"
+ELSE ; _RED
 	text "Grandpa asked you"
+ENDC
 	line "to run an errand?"
 	cont "Here, this will"
 	cont "help you!"

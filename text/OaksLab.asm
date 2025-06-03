@@ -1,6 +1,10 @@
 _OaksLabRivalGrampsIsntAroundText::
 	text "<RIVAL>: Yo"
+IF DEF(_BLUE)
+	line "<PLAYER>! OAK"
+ELSE ; _RED
 	line "<PLAYER>! Gramps"
+ENDC
 	cont "isn't around!"
 	done
 
@@ -200,7 +204,11 @@ _OaksLabGirlText::
 	done
 
 _OaksLabRivalFedUpWithWaitingText::
+IF DEF(_BLUE)
+	text "<RIVAL>: OAK!"
+ELSE ; _RED
 	text "<RIVAL>: Gramps!"
+ENDC
 	line "I'm fed up with"
 	cont "waiting!"
 	done
@@ -235,7 +243,11 @@ _OaksLabOakChooseMonText::
 
 _OaksLabRivalWhatAboutMeText::
 	text "<RIVAL>: Hey!"
+IF DEF(_BLUE)
+	line "OAK! What"
+ELSE ; _RED
 	line "Gramps! What"
+ENDC
 	cont "about me?"
 	done
 
@@ -290,12 +302,20 @@ _OaksLabRivalSmellYouLaterText::
 	cont "#MON fight to"
 	cont "toughen it up!"
 
+IF DEF(_BLUE)
+	para "<PLAYER>! OAK!"
+ELSE ; _RED
 	para "<PLAYER>! Gramps!"
+ENDC
 	line "Smell you later!"
 	done
 
 _OaksLabRivalGrampsText::
+IF DEF(_BLUE)
+	text "<RIVAL>: OAK!"
+ELSE ; _RED
 	text "<RIVAL>: Gramps!"
+ENDC
 	done
 
 _OaksLabRivalWhatDidYouCallMeForText::
@@ -357,7 +377,11 @@ _OaksLabOakThatWasMyDreamText::
 
 _OaksLabRivalLeaveItAllToMeText::
 	text "<RIVAL>: Alright"
+IF DEF(_BLUE)
+	line "OAK! Leave it"
+ELSE ; _RED
 	line "Gramps! Leave it"
+ENDC
 	cont "all to me!"
 
 	para "<PLAYER>, I hate to"
@@ -366,7 +390,11 @@ _OaksLabRivalLeaveItAllToMeText::
 
 	para "I know! I'll"
 	line "borrow a TOWN MAP"
+IF DEF(_BLUE)
+	cont "from my Mom!"
+ELSE ; _RED
 	cont "from my sis!"
+ENDC
 
 	para "I'll tell her not"
 	line "to lend you one,"
