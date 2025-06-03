@@ -257,7 +257,11 @@ SetPal_TownMap:
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
 	ld bc, $4
+IF DEF(_BLUE)
+	ld a, SPR_PAL_BLUE
+ELSE ; _RED
 	ld a, SPR_PAL_ORANGE
+ENDC
 	jr .doneMap
 .surfMap
 	ld a, 2

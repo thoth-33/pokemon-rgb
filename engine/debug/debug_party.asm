@@ -112,6 +112,7 @@ IF DEF(_DEBUG)
 	ld hl, wPokedexSeen
 	call DebugSetPokedexEntries
 	SetEvent EVENT_GOT_POKEDEX
+	SetEvent EVENT_GOT_RUNNING_SHOES
 
 	; Rival chose Squirtle,
 	; Player chose Charmander.

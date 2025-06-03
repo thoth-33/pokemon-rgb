@@ -48,5 +48,9 @@ PokedexTileGraphicsEnd:
 WorldMapTileGraphics: INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:
 
+IF DEF(_BLUE)
+PlayerCharacterTitleGraphics: INCBIN "gfx/title/rival.2bpp"
+ELSE ; _RED
 PlayerCharacterTitleGraphics: INCBIN "gfx/title/player.2bpp"
+ENDC
 PlayerCharacterTitleGraphicsEnd:

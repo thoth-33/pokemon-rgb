@@ -98,7 +98,11 @@ PidgeotPicFront::    INCBIN "gfx/pokemon/gsfront/pidgeot.pic"
 PidgeotPicBack::     INCBIN "gfx/pokemon/gsback/pidgeotb.pic"
 StarmiePicFront::    INCBIN "gfx/pokemon/gsfront/starmie.pic"
 StarmiePicBack::     INCBIN "gfx/pokemon/gsback/starmieb.pic"
+IF DEF(_BLUE)
+RedPicBack::         INCBIN "gfx/gstrainers/blueb.pic"
+ELSE
 RedPicBack::         INCBIN "gfx/gstrainers/redb.pic"
+ENDC
 GreenPicBack::       INCBIN "gfx/gstrainers/greenb.pic"
 OldManPicBack::      INCBIN "gfx/gstrainers/oldmanb.pic"
 
@@ -173,7 +177,12 @@ JugglerPic::       INCBIN "gfx/gstrainers/juggler.pic"
 TamerPic::         INCBIN "gfx/gstrainers/tamer.pic"
 BirdKeeperPic::    INCBIN "gfx/gstrainers/birdkeeper.pic"
 BlackbeltPic::     INCBIN "gfx/gstrainers/blackbelt.pic"
+IF DEF(_BLUE)
+Rival1Pic::        INCBIN "gfx/gstrainers/red.pic"
+ELSE ; _RED
 Rival1Pic::        INCBIN "gfx/gstrainers/rival1.pic"
+ENDC
+
 ProfOakPic::       INCBIN "gfx/gstrainers/prof.oak.pic"
 ChiefPic::
 ScientistPic::     INCBIN "gfx/gstrainers/scientist.pic"
@@ -190,8 +199,13 @@ KogaPic::          INCBIN "gfx/gstrainers/koga.pic"
 BlainePic::        INCBIN "gfx/gstrainers/blaine.pic"
 SabrinaPic::       INCBIN "gfx/gstrainers/sabrina.pic"
 GentlemanPic::     INCBIN "gfx/gstrainers/gentleman.pic"
+IF DEF(_BLUE)
+Rival2Pic::        INCBIN "gfx/gstrainers/rival4.pic"
+Rival3Pic::        INCBIN "gfx/gstrainers/rival5.pic"
+ELSE ; _RED
 Rival2Pic::        INCBIN "gfx/gstrainers/rival2.pic"
 Rival3Pic::        INCBIN "gfx/gstrainers/rival3.pic"
+ENDC
 LoreleiPic::       INCBIN "gfx/gstrainers/lorelei.pic"
 ChannelerPic::     INCBIN "gfx/gstrainers/channeler.pic"
 AgathaPic::        INCBIN "gfx/gstrainers/agatha.pic"

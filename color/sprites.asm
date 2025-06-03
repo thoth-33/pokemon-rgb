@@ -134,7 +134,11 @@ ColorOverworldSprite::
 	jr z, .flying
 	ld a, [wPlayerGender]
 	and a
+IF DEF(_BLUE)
+	ld a, SPR_PAL_BLUE
+ELSE ; _RED
 	ld a, SPR_PAL_ORANGE
+ENDC
 	jr z, .norandomColor
 	ld a, SPR_PAL_GREEN
 	jr .norandomColor
@@ -416,7 +420,11 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_ORANGE
 
 	; 0x02: SPRITE_BLUE
+IF DEF(_BLUE)
+	db SPR_PAL_ORANGE
+ELSE ; _RED
 	db SPR_PAL_BLUE
+ENDC
 
 	; 0x03: SPRITE_OAK
 	db SPR_PAL_BROWN
