@@ -127,7 +127,11 @@ IF GEN_2_GRAPHICS
 	ld a, [wPlayerGender] ; Gender check
 	and a
 	jr z, .boyBackPalette
+IF DEF(_BLUE)
+	ld a, PAL_ENGINEER
+ELSE
 	ld a, PAL_ERIKA
+ENDC
 	jr .gotPalette
 .boyBackPalette
 	ld a, PAL_HERO

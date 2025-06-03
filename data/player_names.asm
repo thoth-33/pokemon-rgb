@@ -31,9 +31,9 @@ DefaultNamesPlayer:
 
 DefaultNamesGirl:
 	db   "NEW NAME"
-	next "GREEN"
-	next "LEAF"
-	next "JILL"
+	next "YELLOW"
+	next "VOLT"
+	next "JANE"
 	db   "@"
 
 DefaultNamesRival:

@@ -27,9 +27,9 @@ DefaultNamesPlayerList:
 
 DefaultNamesGirlList:
 	db "NEW NAME@"
- 	db "GREEN@"
-	db "LEAF@"
-	db "JILL@"
+	db "YELLOW@"
+	db "VOLT@"
+	db "JANE@"
 
 DefaultNamesRivalList:
 	db "NEW NAME@"

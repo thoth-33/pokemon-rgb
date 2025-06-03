@@ -70,9 +70,9 @@ ENDC
 	nop
 	nop
 	nop
-	;ld a, [wStatusFlags6]
-	;bit BIT_DEBUG_MODE, a
-	;jp nz, .skipSpeech
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
+	jp nz, .skipSpeech
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -93,7 +93,7 @@ ENDC
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-
+.skipSpeech
 IF GEN_2_GRAPHICS
 	ld a, PAL_OAK
 ELSE
@@ -146,7 +146,7 @@ ENDC
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-.skipSpeech
+;.skipSpeech
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de, RedPicFront

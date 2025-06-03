@@ -249,7 +249,11 @@ SetPal_TownMap:
 	ldh [rSVBK], a
 	ld hl, W2_SpritePaletteMap
 	ld bc, $4
+IF DEF(_BLUE)
+	ld a, SPR_PAL_BROWN
+ELSE ; _RED
 	ld a, SPR_PAL_GREEN
+ENDC
 	jr .doneMap
 .boyMap
 
@@ -398,15 +402,17 @@ SetPal_Pokedex:
 	ld a, 2
 	ldh [rSVBK], a
 	farcall LoadSGBPalette
+IF DEF(_BLUE)
+	ld d, PAL_YELLOWMON
+ELSE
 	ld d, PAL_GREENMON
+ENDC
 	jr .girlDex
 		
 .boyDex
 	ld a, 2
 	ldh [rSVBK], a
-
 	farcall LoadSGBPalette
-
 IF DEF(_BLUE)
 	ld d, PAL_BLUEMON
 ELSE
@@ -889,10 +895,18 @@ SetPal_TrainerCard:
 	; Greens's palette
 	ld a, 2
 	ldh [rSVBK], a
-	ld d, PAL_ERIKA ; Green palette
+IF DEF(_BLUE)
+	ld d, PAL_ENGINEER
+ELSE
+	ld d, PAL_ERIKA
+ENDC
 	ld e, 4
 	farcall LoadSGBPalette
-	ld d, PAL_GREENMON ; Border
+IF DEF(_BLUE)
+	ld d, PAL_YELLOWMON
+ELSE
+	ld d, PAL_GREENMON
+ENDC
 	ld e, 5
 	farcall LoadSGBPalette
 	jr .EndTrainerCard

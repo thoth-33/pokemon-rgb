@@ -100,10 +100,11 @@ StarmiePicFront::    INCBIN "gfx/pokemon/gsfront/starmie.pic"
 StarmiePicBack::     INCBIN "gfx/pokemon/gsback/starmieb.pic"
 IF DEF(_BLUE)
 RedPicBack::         INCBIN "gfx/gstrainers/blueb.pic"
+GreenPicBack::       INCBIN "gfx/gstrainers/yellowb.pic"
 ELSE
 RedPicBack::         INCBIN "gfx/gstrainers/redb.pic"
-ENDC
 GreenPicBack::       INCBIN "gfx/gstrainers/greenb.pic"
+ENDC
 OldManPicBack::      INCBIN "gfx/gstrainers/oldmanb.pic"
 
 GastlyPicFront::     INCBIN "gfx/pokemon/gsfront/gastly.pic"

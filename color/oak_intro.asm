@@ -15,7 +15,11 @@ IF GEN_2_GRAPHICS
 	ld a, [wPlayerGender]
 	and a
 	jr z, .boyOak
+IF DEF(_BLUE)
+	ld a, PAL_ENGINEER
+ELSE
 	ld a, PAL_ERIKA
+ENDC
 	jr .girlOak
 .boyOak
 	ld a, PAL_HERO

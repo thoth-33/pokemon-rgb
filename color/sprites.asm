@@ -140,7 +140,11 @@ ELSE ; _RED
 	ld a, SPR_PAL_ORANGE
 ENDC
 	jr z, .norandomColor
+IF DEF(_BLUE)
+	ld a, SPR_PAL_BROWN
+ELSE
 	ld a, SPR_PAL_GREEN
+ENDC
 	jr .norandomColor
 .surfing
 	ld a, SPR_PAL_EMOJI
