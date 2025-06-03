@@ -1,17 +1,15 @@
-EXPORT CheckForPlayerNameInSRAM
-EXPORT InitOptions
-
 MainMenu:
-; Moved to home\init.asm
-;	call InitOptions
-;	xor a
-;	ld [wOptionsInitialized], a
-;	inc a
-;	ld [wSaveFileStatus], a
-;	call CheckForPlayerNameInSRAM
-;	jr nc, .mainMenuLoop
-	
-;	predef LoadSAV
+; Check save file
+	call InitOptions
+	xor a
+	ld [wOptionsInitialized], a
+	inc a
+	ld [wSaveFileStatus], a
+	call CheckForPlayerNameInSRAM
+	jr nc, .mainMenuLoop
+
+	predef LoadSAV
+
 .mainMenuLoop
 	ld c, 20
 	call DelayFrames
@@ -766,7 +764,7 @@ TextSpeedOptionData:
 	db  1, TEXT_DELAY_FAST
 	db  7, -1 ; end (default X coordinate)
 
-CheckForPlayerNameInSRAM:
+CheckForPlayerNameInSRAM::
 ; Check if the player name data in SRAM has a string terminator character
 ; (indicating that a name may have been saved there) and return whether it does
 ; in carry.
