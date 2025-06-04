@@ -76,7 +76,11 @@ FlyWarpDataPtr:
 	fly_warp_spec ROUTE_4,         .Route4
 	fly_warp_spec ROUTE_10,        .Route10
 
+IF DEF(_BLUE)
+.PalletTown:     fly_warp PALLET_TOWN,     13,  6
+ELSE
 .PalletTown:     fly_warp PALLET_TOWN,      5,  6
+ENDC
 .ViridianCity:   fly_warp VIRIDIAN_CITY,   23, 26
 .PewterCity:     fly_warp PEWTER_CITY,     13, 26
 .CeruleanCity:   fly_warp CERULEAN_CITY,   21, 18
