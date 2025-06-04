@@ -37,6 +37,8 @@ WildDataPointers:
 	dw Route23WildMons         ; ROUTE_23
 	dw Route24WildMons         ; ROUTE_24
 	dw Route25WildMons         ; ROUTE_25
+	dw Route28WildMons		   ; ROUTE_28
+	dw MtSilverWildMons		   ; MT.SILVER
 	dw NothingWildMons         ; REDS_HOUSE_1F
 	dw NothingWildMons
 	dw NothingWildMons
@@ -248,6 +250,9 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
+	dw MtSilver1FWildMons		   ; MT.SILVER CAVE 1F
+	dw MtSilver2FWildMons		   ; MT.SILVER CAVE 2F
+	dw MtSilver3FWildMons		   ; MT.SILVER CAVE 3F
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -274,6 +279,8 @@ INCLUDE "data/wild/maps/MtMoonB2F.asm"
 INCLUDE "data/wild/maps/Route4.asm"
 INCLUDE "data/wild/maps/Route24.asm"
 INCLUDE "data/wild/maps/Route25.asm"
+INCLUDE "data/wild/maps/Route28.asm"
+INCLUDE "data/wild/maps/MtSilver.asm"
 INCLUDE "data/wild/maps/Route9.asm"
 INCLUDE "data/wild/maps/Route5.asm"
 INCLUDE "data/wild/maps/Route6.asm"
@@ -321,3 +328,6 @@ INCLUDE "data/wild/maps/VictoryRoad2F.asm"
 INCLUDE "data/wild/maps/VictoryRoad3F.asm"
 INCLUDE "data/wild/maps/VictoryRoad1F.asm"
 INCLUDE "data/wild/maps/DiglettsCave.asm"
+INCLUDE "data/wild/maps/MtSilver1F.asm"
+INCLUDE "data/wild/maps/MtSilver2F.asm"
+INCLUDE "data/wild/maps/MtSilver3F.asm"

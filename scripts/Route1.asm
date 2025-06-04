@@ -22,7 +22,7 @@ Route1NoopScript:
 	ret
 
 Route1DefaultScript:
-	CheckEvent EVENT_ROUTE1_OAK_WANTS_BATTLE
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
 	ret z
 	ld hl, .PlayerCoordinatesArray
 	call ArePlayerCoordsInArray

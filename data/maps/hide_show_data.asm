@@ -40,6 +40,8 @@ MapHSPointers:
 	dw NoHS
 	dw Route24HS
 	dw Route25HS
+	dw NoHS ; ROUTE_28
+	dw NoHS ; MT_SILVER
 	dw NoHS
 	dw NoHS
 	dw BluesHouseHS
@@ -251,6 +253,9 @@ MapHSPointers:
 	dw NoHS
 	dw NoHS
 	dw NoHS
+	dw NoHS ; MT_SILVER_CAVE_1F
+	dw NoHS ; MT_SILVER_CAVE_2F
+	dw NoHS ; MT_SILVER_CAVE_3F
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 

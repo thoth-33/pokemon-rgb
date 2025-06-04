@@ -102,7 +102,7 @@ HallOfFameOakCongratulationsScript:
 	ld a, HS_OAKS_LAB_OAK_1 
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	SetEvent EVENT_ROUTE1_OAK_WANTS_BATTLE
+	SetEvent EVENT_PLAYER_IS_CHAMPION
 	ld a, SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
 	ld [wHallOfFameCurScript], a
 	ret

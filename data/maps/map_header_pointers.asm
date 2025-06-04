@@ -38,6 +38,8 @@ MapHeaderPointers::
 	dw Route23_h
 	dw Route24_h
 	dw Route25_h
+	dw Route28_h
+	dw MtSilver_h
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -249,4 +251,7 @@ MapHeaderPointers::
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h
+	dw MtSilver1F_h
+	dw MtSilver2F_h
+	dw MtSilver3F_h
 	assert_table_length NUM_MAPS

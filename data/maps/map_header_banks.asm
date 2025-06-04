@@ -38,6 +38,8 @@ MapHeaderBanks::
 	db BANK(Route23_h)
 	db BANK(Route24_h)
 	db BANK(Route25_h)
+	db BANK(Route28_h)
+	db BANK(MtSilver_h)
 	db BANK(RedsHouse1F_h)
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
@@ -249,4 +251,7 @@ MapHeaderBanks::
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
+	db BANK(MtSilver1F_h)
+	db BANK(MtSilver2F_h)
+	db BANK(MtSilver3F_h)
 	assert_table_length NUM_MAPS
