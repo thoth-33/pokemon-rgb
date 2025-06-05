@@ -29,7 +29,7 @@ Route22GateDefaultScript:
 	jp DisplayTextID
 .checkRoute28Entrance
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ret nz								; Player is champion
+	ret z			;set to z for debug	; Player is champion
 	ld hl, Route22GateScriptCoords2		; Player is not champion
 	call ArePlayerCoordsInArray
 	ret nc
@@ -40,13 +40,13 @@ Route22GateDefaultScript:
 	jp DisplayTextID
 
 Route22GateScriptCoords:
-	dbmapcoord  12,  2
-	dbmapcoord  13,  2
+	dbmapcoord  8,  2
+	dbmapcoord  9,  2
 	db -1 ; end
 
 Route22GateScriptCoords2:
-	dbmapcoord  3,  4
-	dbmapcoord  3,  5
+	dbmapcoord  1,  4
+	dbmapcoord  1,  5
 	db -1 ; end
 
 Route22GateMovePlayerDownScript:
@@ -115,15 +115,15 @@ Route22GateGuardGoRightAheadText:
 
 Route28GateGuardText:
 	text_asm
-	CheckEvent EVENT_PLAYER_IS_CHAMPION ; check if the player is champion
-	jr z, .notChampion
+;	CheckEvent EVENT_PLAYER_IS_CHAMPION ; check if the player is champion
+;	jr z, .notChampion
 	ld hl, Route22GateText_MtSilverCome ; Player is champion
 	call PrintText
 	jp TextScriptEnd
-.notChampion
-	ld hl, Route22GateText_MtSilver
-	call PrintText
-	jp TextScriptEnd
+;.notChampion
+;	ld hl, Route22GateText_MtSilver
+;	call PrintText
+;	jp TextScriptEnd ; this is not necessary as the coords above check for champ, but can be reused later when construction is complete
 
 Route28GateGuardStopText:
 	text_asm
@@ -132,7 +132,7 @@ Route28GateGuardStopText:
 	ld hl, Route22GateText_MtSilver
 	call PrintText
 	call Route22GateScript_MoveLeft
-	ld a, $1
+	ld a, SCRIPT_ROUTE22GATE_PLAYER_MOVING
 	ld [wRoute22GateCurScript], a
 	jp TextScriptEnd
 

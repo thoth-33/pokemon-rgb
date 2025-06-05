@@ -22,23 +22,19 @@ _Route22GateGuardGoRightAheadText::
 	text_end
 
 _Route22GateText_MtSilver::
-	text "MT.SILVER is"
-	line "this way."
-	para "It's a very"
-	line "dangerous place."
-	cont "You better stay"
-	cont "out of there."
+	text "The route to"
+	line "MT.SILVER is"
+	cont "still under"
+	cont "construction."
+	para "You should stay"
+	line "out for now."
 	done
 
 _Route22GateText_MtSilverCome::
-	text "You're the CHAMPION"
+	text "It's the CHAMPION"
 	line "of the LEAGUE!"
 	para "This is MT.SILVER."
-	para "Normally, I would"
-	line "not let you come"
-	cont "through, but"
-	cont "since you're very"
-	cont "strong, I'm sure"
-	cont "you will not have"
-	cont "any issues."
+	para "Perhaps you could"
+	line "help us clear the"
+	cont "new route!"
 	done

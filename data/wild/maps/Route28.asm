@@ -1,15 +1,15 @@
 Route28WildMons:
 	def_grass_wildmons 25 ; encounter rate
-    db 45, RHYHORN
-    db 40, PONYTA
-    db 42, RAPIDASH
-    db 40, RATICATE
-    db 40, POLIWHIRL
-    db 40, GOLBAT
-    db 42, TAUROS
-    db 42, ARBOK
-    db 41, DODUO
-    db 43, DODRIO
+    db 42, TANGELA
+    db 38, PONYTA
+    db 38, PONYTA
+    db 40, RAPIDASH
+    db 38, POLIWHIRL
+    db 38, GOLBAT
+    db 40, TAUROS
+    db 40, ARBOK
+    db 39, DODUO
+    db 41, DODRIO
 	end_grass_wildmons
 
 	def_water_wildmons 5 ; encounter rate

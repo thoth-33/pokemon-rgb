@@ -185,6 +185,9 @@ Route1OakExitScript:
 	ld a, HS_OAKS_LAB_OAK_1 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_OAKS_LAB_SCIENTIST 
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	call PlayDefaultMusic
 	ld a, SCRIPT_Route1_NOOP
 	ld [wRoute1CurScript], a

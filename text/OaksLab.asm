@@ -405,3 +405,10 @@ _OaksLabScientistText::
 	text "I study #MON as"
 	line "PROF.OAK's AIDE."
 	done
+	
+_OaksLabScientistPostGameText::
+	text "PROF.OAK took his"
+	line "last #MON to"
+	cont "go train and"
+	cont "build a new team!"
+	done

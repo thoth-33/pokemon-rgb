@@ -102,6 +102,18 @@ HallOfFameOakCongratulationsScript:
 	ld a, HS_OAKS_LAB_OAK_1 
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	ld a, HS_STARTER_BALL_1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_STARTER_BALL_2
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_STARTER_BALL_3
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_OAKS_LAB_SCIENTIST 
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	SetEvent EVENT_PLAYER_IS_CHAMPION
 	ld a, SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
 	ld [wHallOfFameCurScript], a
