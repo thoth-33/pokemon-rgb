@@ -86,7 +86,8 @@ ROMX $A
 	org $7ea9
 	"Battle Engine 4"
 ROMX $B
-	"Pics 3"
+	"Pics 3" ; empty
+	"Tilesets 4" ; Split from Tilesets 1 to make space
 	org $7b7b
 	"Battle Engine 5"
 ROMX $C
