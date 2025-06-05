@@ -29,7 +29,7 @@ Route22GateDefaultScript:
 	jp DisplayTextID
 .checkRoute28Entrance
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ret z			;set to z for debug	; Player is champion
+	ret nz			;set to z for debug	; Player is champion
 	ld hl, Route22GateScriptCoords2		; Player is not champion
 	call ArePlayerCoordsInArray
 	ret nc
@@ -131,7 +131,7 @@ Route28GateGuardStopText:
 	ld [wPlayerMovingDirection], a
 	ld hl, Route22GateText_MtSilver
 	call PrintText
-	call Route22GateScript_MoveLeft
+	call Route22GateScript_MoveRight
 	ld a, SCRIPT_ROUTE22GATE_PLAYER_MOVING
 	ld [wRoute22GateCurScript], a
 	jp TextScriptEnd
@@ -144,7 +144,7 @@ Route22GateText_MtSilverCome:
 	text_far _Route22GateText_MtSilverCome
 	text_end
 
-Route22GateScript_MoveLeft:
+Route22GateScript_MoveRight:
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_RIGHT

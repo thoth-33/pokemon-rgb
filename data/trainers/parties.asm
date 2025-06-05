@@ -648,6 +648,7 @@ MistyData:
 
 LtSurgeData:
 	db $FF, 21, VOLTORB, 18, PIKACHU, 24, RAICHU, 0
+	db $FF,  1, VOLTORB, 0 ; temp
 
 ErikaData:
 	db $FF, 29, VICTREEBEL, 24, TANGELA, 29, VILEPLUME, 0

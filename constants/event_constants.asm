@@ -783,6 +783,9 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 ; Post Game events
 	const_next $9E0
 	const EVENT_PLAYER_IS_CHAMPION
+	const EVENT_LT_SURGE_REMATCH
+	const EVENT_LT_SURGE_REMATCH_BEAT
+	const EVENT_LT_SURGE_TASK_DONE
 
 ; End of events
 	const_next $A00
