@@ -14,6 +14,17 @@ _Route28GuardText_Pass::
 	line "off all the birds."
 	done
 	
+_Route28LTSurgeText_Done::
+	text "Birds cleared."
+
+	para "No more air raids"
+	line "on Route 28!"
+
+	para "Mission complete."
+	line "Back to base!"
+	done
+	done
+	
 _Route28SignText::
 	text "ROUTE 28"
 	line "Under Construction"

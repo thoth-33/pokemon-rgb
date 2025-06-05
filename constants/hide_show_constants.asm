@@ -34,7 +34,7 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_D                ; 16
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
-	const HS_ROUTE_1_OAK		      	   ; Rest will be off by 1
+	const HS_ROUTE_1_OAK		      	   ; added
 	const HS_ROUTE_2_ITEM_1                ; 19 X
 	const HS_ROUTE_2_ITEM_2                ; 1A X
 	const HS_ROUTE_4_ITEM                  ; 1B X
@@ -49,6 +49,10 @@ DEF SHOW EQU $15
 	const HS_NUGGET_BRIDGE_GUY             ; 24
 	const HS_ROUTE_24_ITEM                 ; 25 X
 	const HS_ROUTE_25_ITEM                 ; 26 X
+	const HS_ROUTE_28_BIRD1                ; Post game
+	const HS_ROUTE_28_BIRD2                ; Post game
+	const HS_ROUTE_28_BIRD3                ; Post game
+	const HS_ROUTE_28_LT_SURGE             ; Post game
 	const HS_DAISY_SITTING                 ; 27
 	const HS_DAISY_WALKING                 ; 28
 	const HS_TOWN_MAP                      ; 29
@@ -60,7 +64,7 @@ DEF SHOW EQU $15
 	const HS_POKEDEX_1                     ; 2F
 	const HS_POKEDEX_2                     ; 30
 	const HS_OAKS_LAB_OAK_2                ; 31
-	const HS_OAKS_LAB_SCIENTIST            ; Rest off by 2
+	const HS_OAKS_LAB_SCIENTIST            ; added
 	const HS_VIRIDIAN_GYM_GIOVANNI         ; 32
 	const HS_VIRIDIAN_GYM_ITEM             ; 33 X
 	const HS_OLD_AMBER                     ; 34
@@ -125,7 +129,9 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_B2F_ITEM_1            ; 6F X
 	const HS_MT_MOON_B2F_ITEM_2            ; 70 X
 	const HS_CERULEAN_BULBASAUR            ; added
-	const HS_VERMILION_DOCK_MEW            ; Rest will be off by 4
+	const HS_VERMILION_GYM_LT_SURGE1       ; added
+	const HS_VERMILION_GYM_LT_SURGE2       ; added
+	const HS_VERMILION_DOCK_MEW            ; added
 	const HS_SS_ANNE_2F_RIVAL              ; 71
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 72 X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 73 X

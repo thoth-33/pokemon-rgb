@@ -38,7 +38,7 @@ _VermilionGymRematchPreBattleText::
 
  _VermilionGymRematchDefeatedText::
 	text "WHOA!"
-	line "You’re still a"
+	line "Kid is still a"
 	cont "walking thunder-"
 	cont "bolt!"
 	prompt
@@ -46,7 +46,7 @@ _VermilionGymRematchPreBattleText::
  _VermilionGymRematchVictoryText::
 	text "ZAPPED ya good!"
 	line "Tactics and raw"
-	cont "power—UNBEATABLE!"
+	cont "power. UNBEATABLE!"
 	
 	para "That’s how we"
 	line "do it in the"
@@ -57,7 +57,7 @@ _VermilionGymRematchPostBattleText::
 	text "You lit me up"
 	line "like a generator!"
 
-	para "No doubt—you've"
+	para "No doubt, you've"
 	line "earned that title,"
 	cont "CHAMPION."
 
@@ -68,4 +68,14 @@ _VermilionGymRematchPostBattleText::
 	line "fried."
 
 	para "Outta my way!"
+	done
+	
+_VermilionGymLTSurgeGoodLuckText::
+	text "Back on duty."
+
+	para "Those birds were"
+	line "a real live wire,"
+	cont "but nothin’ a"
+	cont "good shocking"
+	cont "couldn’t fix!"
 	done
