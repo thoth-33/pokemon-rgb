@@ -18,6 +18,7 @@ ret
 Route28DefaultScript:
 	CheckEvent EVENT_LT_SURGE_REMATCH_BEAT
 	jr nz, .SurgeWalkAndTalk
+	ret ; debug ret
 	ld hl, Route28ScriptGuardCoords
 	call ArePlayerCoordsInArray
 	ret nc

@@ -53,6 +53,11 @@ DEF SHOW EQU $15
 	const HS_ROUTE_28_BIRD2                ; Post game
 	const HS_ROUTE_28_BIRD3                ; Post game
 	const HS_ROUTE_28_LT_SURGE             ; Post game
+	const HS_MT_SILVER_ERIKA               ; Post game
+	const HS_MT_SILVER_BLAINE              ; Post game
+	const HS_MT_SILVER_KOGA 			   ; Post game
+	const HS_MT_SILVER_CAVE_GUARD1 		   ; Post game
+	const HS_MT_SILVER_CAVE_GUARD2 		   ; Post game
 	const HS_DAISY_SITTING                 ; 27
 	const HS_DAISY_WALKING                 ; 28
 	const HS_TOWN_MAP                      ; 29
@@ -85,6 +90,8 @@ DEF SHOW EQU $15
 	const HS_POKEMON_TOWER_7F_MR_FUJI      ; 43
 	const HS_MR_FUJIS_HOUSE_MR_FUJI        ; 44
 	const HS_CELADON_MANSION_EEVEE_GIFT    ; 45
+	const HS_CELADON_GYM_ERIKA1            ; added
+	const HS_CELADON_GYM_ERIKA2            ; added
 	const HS_GAME_CORNER_ROCKET            ; 46
 	const HS_WARDENS_HOUSE_ITEM            ; 47 X
 	const HS_POKEMON_MANSION_1F_ITEM_1     ; 48 X

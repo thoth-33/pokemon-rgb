@@ -66,8 +66,6 @@ VermilionGymLTSurgeAfterBattleScript:
 	jp z, VermilionGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	CheckEvent EVENT_LT_SURGE_REMATCH_BEAT
-	jr nz, VermilionGymLTSurgeReceiveTM24Script
 	CheckEvent EVENT_LT_SURGE_REMATCH
 	jr nz, LTSurgeRematchPostBattle
 VermilionGymLTSurgeReceiveTM24Script:

@@ -2080,7 +2080,8 @@ wRoute23CurScript:: db
 wSeafoamIslandsB4FCurScript:: db
 wRoute18Gate1FCurScript:: db
 wRoute28CurScript:: db
-	ds 5
+wMtSilverCurScript:: db
+	ds 4
 wGameProgressFlagsEnd::
 
 wPlayerGender::

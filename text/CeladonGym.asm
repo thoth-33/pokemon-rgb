@@ -218,3 +218,23 @@ _CeladonGymAfterBattleText8::
 	para "Wait 'til next"
 	line "time!"
 	done
+
+_CeladonGymRematchPreBattleText::
+	text "Battle again?"
+	done
+
+ _CeladonGymRematchDefeatedText::
+	text "You won"
+	prompt
+
+ _CeladonGymRematchVictoryText::
+	text "You lost"
+	prompt
+	
+_CeladonGymRematchPostBattleText::
+	text "Good battle!"
+	done
+	
+_CeladonGymErikaGoodLuckText::
+	text "I'm back"
+	done

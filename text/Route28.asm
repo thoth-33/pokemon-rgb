@@ -18,7 +18,7 @@ _Route28LTSurgeText_Done::
 	text "Birds cleared."
 
 	para "No more air raids"
-	line "on Route 28!"
+	line "on this route!"
 
 	para "Mission complete."
 	line "Back to base!"
@@ -26,6 +26,6 @@ _Route28LTSurgeText_Done::
 	done
 	
 _Route28SignText::
-	text "ROUTE 28"
+	text "NEW ROUTE:"
 	line "Under Construction"
 	done

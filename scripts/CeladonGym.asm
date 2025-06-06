@@ -35,6 +35,11 @@ CeladonGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_CELADONGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_CELADONGYM_END_BATTLE
 	dw_const CeladonGymErikaPostBattleScript,       SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
+	dw_const CeladonGymErikaExitScript,             SCRIPT_CELADONGYM_ERIKA_EXIT
+	dw_const CeladonGymNoopScript,                  SCRIPT_CELADONGYM_NOOP
+
+CeladonGymNoopScript:
+ret
 
 CeladonGymErikaPostBattleScript:
 	ld a, [wIsInBattle]
@@ -42,7 +47,9 @@ CeladonGymErikaPostBattleScript:
 	jp z, CeladonGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-
+	CheckEvent EVENT_ERIKA_REMATCH
+	jr nz, ErikaRematchPostBattle
+;fallthrough
 CeladonGymReceiveTM21:
 	ld a, TEXT_CELADONGYM_RAINBOWBADGE_INFO
 	ldh [hTextID], a
@@ -65,25 +72,71 @@ CeladonGymReceiveTM21:
 	set BIT_RAINBOWBADGE, [hl]
 	ld hl, wBeatGymFlags
 	set BIT_RAINBOWBADGE, [hl]
-
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_CELADON_GYM_TRAINER_0, EVENT_BEAT_CELADON_GYM_TRAINER_6
-
-	jp CeladonGymResetScripts
+	jp CeladonGymResetScripts	
+	 
+ErikaRematchPostBattle:
+	ld a, TEXT_CELADONGYM_REMATCH_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	ld a, CELADONGYM_ERIKA2
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wXCoord]
+	cp 5
+	jr nz, .player_standing_right
+	ld de, .ErikaWalkDownMovement
+	jr .move_sprite
+.player_standing_right
+	ld de, .ErikaWalkRightMovement
+.move_sprite
+	ld a, CELADONGYM_ERIKA2
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_CELADONGYM_ERIKA_EXIT
+	ld [wCeladonGymCurScript], a
+	jp CeladonGym_Script
+	
+.ErikaWalkRightMovement:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+.ErikaWalkDownMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+CeladonGymErikaExitScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld a, HS_CELADON_GYM_ERIKA2 
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	SetEvent EVENT_ERIKA_REMATCH_BEAT
+	ld a, SCRIPT_CELADONGYM_NOOP
+	ld [wCeladonGymCurScript], a
+	ret
 
 CeladonGym_TextPointers:
 	def_text_pointers
-	dw_const CeladonGymErikaText,            TEXT_CELADONGYM_ERIKA
-	dw_const CeladonGymCooltrainerF1Text,    TEXT_CELADONGYM_COOLTRAINER_F1
-	dw_const CeladonGymBeauty1Text,          TEXT_CELADONGYM_BEAUTY1
-	dw_const CeladonGymCooltrainerF2Text,    TEXT_CELADONGYM_COOLTRAINER_F2
-	dw_const CeladonGymBeauty2Text,          TEXT_CELADONGYM_BEAUTY2
-	dw_const CeladonGymCooltrainerF3Text,    TEXT_CELADONGYM_COOLTRAINER_F3
-	dw_const CeladonGymBeauty3Text,          TEXT_CELADONGYM_BEAUTY3
-	dw_const CeladonGymCooltrainerF4Text,    TEXT_CELADONGYM_COOLTRAINER_F4
-	dw_const CeladonGymRainbowBadgeInfoText, TEXT_CELADONGYM_RAINBOWBADGE_INFO
-	dw_const CeladonGymReceivedTM21Text,     TEXT_CELADONGYM_RECEIVED_TM21
-	dw_const CeladonGymTM21NoRoomText,       TEXT_CELADONGYM_TM21_NO_ROOM
+	dw_const CeladonGymErikaText,             TEXT_CELADONGYM_ERIKA
+	dw_const CeladonGymCooltrainerF1Text,     TEXT_CELADONGYM_COOLTRAINER_F1
+	dw_const CeladonGymBeauty1Text,           TEXT_CELADONGYM_BEAUTY1
+	dw_const CeladonGymCooltrainerF2Text,     TEXT_CELADONGYM_COOLTRAINER_F2
+	dw_const CeladonGymBeauty2Text,           TEXT_CELADONGYM_BEAUTY2
+	dw_const CeladonGymCooltrainerF3Text,     TEXT_CELADONGYM_COOLTRAINER_F3
+	dw_const CeladonGymBeauty3Text,           TEXT_CELADONGYM_BEAUTY3
+	dw_const CeladonGymCooltrainerF4Text,     TEXT_CELADONGYM_COOLTRAINER_F4
+	dw_const CeladonGymErikaRematchText,      TEXT_CELADONGYM_ERIKA_REMATCH
+	dw_const CeladonGymRematchPostBattleText, TEXT_CELADONGYM_REMATCH_POST_BATTLE	
+	dw_const CeladonGymRainbowBadgeInfoText,  TEXT_CELADONGYM_RAINBOWBADGE_INFO
+	dw_const CeladonGymReceivedTM21Text,      TEXT_CELADONGYM_RECEIVED_TM21
+	dw_const CeladonGymTM21NoRoomText,        TEXT_CELADONGYM_TM21_NO_ROOM
 
 CeladonGymTrainerHeaders:
 	def_trainers 2
@@ -113,7 +166,13 @@ CeladonGymErikaText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
+	CheckEvent EVENT_ERIKA_REMATCH_BEAT
+	jr nz, .postGame
 	ld hl, .PostBattleAdviceText
+	call PrintText
+	jr .done
+.postGame
+	ld hl, .PostGameGoodLuckText
 	call PrintText
 	jr .done
 .beforeBeat
@@ -147,6 +206,46 @@ CeladonGymErikaText:
 
 .PostBattleAdviceText:
 	text_far _CeladonGymErikaPostBattleAdviceText
+	text_end
+
+.PostGameGoodLuckText:
+	text_far _CeladonGymRematchPostBattleText
+	text_end
+	
+CeladonGymErikaRematchText:
+	text_asm
+	ld hl, .PreBattleRematchText
+ 	call PrintText
+ 	call Delay3
+ 	ld hl, wStatusFlags3
+ 	set BIT_TALKED_TO_TRAINER, [hl]
+ 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+ 	ld hl, CeladonGymRematchDefeatedText
+ 	ld de, CeladonGymRematchVictoryText
+ 	call SaveEndBattleTextPointers
+ 	ld a, OPP_ERIKA
+ 	ld [wCurOpponent], a
+ 	ld a, 2
+ 	ld [wTrainerNo], a
+	ld a, SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
+	ld [wCeladonGymCurScript], a
+	ld [wCurMapScript], a
+	jp TextScriptEnd
+	
+.PreBattleRematchText
+	text_far _CeladonGymRematchPreBattleText
+	text_end
+	
+CeladonGymRematchDefeatedText:
+	text_far _CeladonGymRematchDefeatedText
+	text_end
+
+CeladonGymRematchVictoryText:
+	text_far _CeladonGymRematchVictoryText
+	text_end
+
+CeladonGymRematchPostBattleText:
+	text_far _CeladonGymRematchPostBattleText
 	text_end
 
 CeladonGymRainbowBadgeInfoText:
