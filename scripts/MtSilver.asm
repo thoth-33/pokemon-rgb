@@ -122,14 +122,15 @@ MtSilverErikaExitScript:
 	ld a, HS_CELADON_GYM_ERIKA1 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
-	
-	; block changes here.
-	
 	ld a, SCRIPT_MT_SILVER_BLAINE
 	ld [wMtSilverCurScript], a	
 	ret
 	
 MtSilverBlaineScript:
+	CheckEvent EVENT_BLAINE_REMATCH_BEAT
+	call MtSilverStumpsScript
+	ret z
+
 MtSilverBlaineTalkScript:
 MtSilverBlaineExitScript:
 MtSilverKogaScript:
@@ -137,6 +138,51 @@ MtSilverKogaTalkScript:
 MtSilverKogaExitScript:
 MtSilverNoopScript:
 ret ; to-do
+
+MtSilverStumpsScript:
+	; Check if the current map matches the last visited map
+	ld a, [wCurMap]
+	ld hl, wLastMap
+	cp [hl]
+	jr nz, .replaceTiles	
+	; Run again after a battle
+	ld hl, wCurrentMapScriptFlags
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	ret z
+	
+.replaceTiles ; Set variables to avoid repeated runs
+	ld a, [wCurMap]
+	ld [wLastMap], a
+	ld hl, wCurrentMapScriptFlags
+	res BIT_CUR_MAP_LOADED_1, [hl]
+    ld a, 1
+    ld [wSkipRedraw], a
+
+	ld a, $83
+	ld [wNewTileBlockID], a
+	ld b, 10
+	ld c, 11
+	predef ReplaceTileBlock
+	ld a, $82
+	ld [wNewTileBlockID], a
+	ld b, 10
+	ld c, 12
+	predef ReplaceTileBlock	
+	ld a, $80
+	ld [wNewTileBlockID], a
+	ld b, 11
+	ld c, 12
+	predef ReplaceTileBlock
+	ld a, $81
+	ld [wNewTileBlockID], a
+	ld b, 11
+	ld c, 11
+	predef ReplaceTileBlock
+	ld b, 12
+	ld c, 11
+	predef ReplaceTileBlock
+	ret
 
 MtSilver_TextPointers:
 	def_text_pointers

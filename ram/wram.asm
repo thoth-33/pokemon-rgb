@@ -1631,7 +1631,8 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1
+; Used in Mt Silver script to make it run faster
+wSkipRedraw:: db
 
 wIsKeyItem:: db
 

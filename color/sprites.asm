@@ -108,6 +108,12 @@ ColorOverworldSprite::
 	cp BILLS_HOUSE
 	ld a, SPR_PAL_BROWN
 	jr z, .norandomColor
+	
+	; Erika is blue
+	ld a, [wCurMap]
+	cp MT_SILVER
+	ld a, SPR_PAL_BLUE
+	jr z, .norandomColor
 
 	; This is a (somewhat) random but consistent color
 	ldh a, [hSpriteOffset2]

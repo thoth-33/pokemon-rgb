@@ -1,4 +1,6 @@
 Route28_Script:
+	ld a, ROUTE_28
+	ld [wLastMap], a
 	call EnableAutoTextBoxDrawing
 	ld hl, Route28_ScriptPointers
 	ld a, [wRoute28CurScript]

@@ -2,7 +2,7 @@ _Route28GuardText_Stop::
 	text "These birds are"
 	line "slowing our work!"
 	para "We need a master"
-	line "of electric type"
+	line "of ELECTRIC-type"
 	cont "#MON to make a"
 	cont "big enough bolt"
 	cont "to scare all of"

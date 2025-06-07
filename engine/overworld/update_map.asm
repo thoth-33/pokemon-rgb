@@ -46,6 +46,11 @@ ReplaceTileBlock:
 	call CompareHLWithBC
 	ret c ; return if the replaced tile block is above the map view in memory
 
+	; Hack: used in MtSilver script to avoid slow down. Not used anywhere else.
+    ld a, [wSkipRedraw]
+    and a
+    ret nz
+
 RedrawMapView::
 	ld a, [wIsInBattle]
 	inc a

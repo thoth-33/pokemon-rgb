@@ -220,21 +220,51 @@ _CeladonGymAfterBattleText8::
 	done
 
 _CeladonGymRematchPreBattleText::
-	text "Battle again?"
+	text "Ah, hello again."
+
+	para "This tree has been"
+	line "unwell. I’ve been"
+	cont "tending to it."
+
+	para "You seek my help?"
+
+	para "Then let us do"
+	line "battle then."
+	
+	para "A gentle test of"
+	line "your resolve."
 	done
 
  _CeladonGymRematchDefeatedText::
-	text "You won"
+	text "Your will"
+	line "is steady as oak."
+
+	para "Very well, I shall"
+	line "aid you at once."
 	prompt
 
  _CeladonGymRematchVictoryText::
-	text "You lost"
+	text "Like leaves in the"
+	line "wind, I endure."
+
+	para "Perhaps you must"
+	line "handle this alone."
 	prompt
 	
 _CeladonGymRematchPostBattleText::
-	text "Good battle!"
+	text "Meet me where the"
+	line "trees stand."
+
+	para "I will do what"
+	line "must be done..."
 	done
 	
 _CeladonGymErikaGoodLuckText::
-	text "I'm back"
+	text "It grieved me to"
+	line "cut those trees."
+
+	para "But I trust you'll"
+	line "honor their loss."
+
+	para "Tread kindly."
 	done
