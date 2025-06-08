@@ -182,7 +182,10 @@ MtSilverStumpsScript:
 	ld b, 12
 	ld c, 11
 	predef ReplaceTileBlock
-	ret
+	ld a, [wXCoord]
+	cp $25
+	ret z
+	jpfar RedrawMapView
 
 MtSilver_TextPointers:
 	def_text_pointers

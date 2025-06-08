@@ -102,7 +102,7 @@ VermilionDockSSAnneLeavesScript:
 	ld d, $0
 	ld e, $9 ; increasing this one extends the animation and the tail end of the boat doesnt disappear.
 	ld a, [wXCoord]
-	cp 17
+	cp $12
 	jr nz, .shift_columns_up
 	dec e
 .shift_columns_up
