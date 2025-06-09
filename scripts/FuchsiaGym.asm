@@ -37,6 +37,10 @@ FuchsiaGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_FUCHSIAGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_FUCHSIAGYM_END_BATTLE
 	dw_const FuchsiaGymKogaPostBattleScript,        SCRIPT_FUCHSIAGYM_KOGA_POST_BATTLE
+	dw_const FuchsiaGymNoopScript,                  SCRIPT_FUCHSIAGYM_NOOP
+
+FuchsiaGymNoopScript:
+ret
 
 FuchsiaGymKogaPostBattleScript:
 	ld a, [wIsInBattle]
@@ -44,6 +48,8 @@ FuchsiaGymKogaPostBattleScript:
 	jp z, FuchsiaGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
+	CheckEvent EVENT_KOGA_REMATCH
+	jr nz, KogaRematchPostBattle
 ; fallthrough
 FuchsiaGymReceiveTM06:
 	ld a, TEXT_FUCHSIAGYM_KOGA_SOUL_BADGE_INFO
@@ -73,6 +79,73 @@ FuchsiaGymReceiveTM06:
 
 	jp FuchsiaGymResetScripts
 
+FuschiaGymSetFacingDirectionScript:
+	ld a, [wXCoord]
+	cp 3
+	jr z, .player_standing_left
+	cp 5
+	jr z, .player_standing_right
+	ld a, [wYCoord]
+	cp 9
+	jr z, .player_standing_top
+	ld a, PLAYER_DIR_UP ;fallthrough, player standing bottom
+	ld [wPlayerMovingDirection], a
+	xor a ; SPRITE_FACING_DOWN
+	jr .set_facing_direction
+.player_standing_left
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_LEFT
+	jr .set_facing_direction
+.player_standing_right
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_RIGHT
+	jr .set_facing_direction
+.player_standing_top
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_UP
+.set_facing_direction
+	ldh [hSpriteFacingDirection], a
+	ld a, FUCHSIAGYM_KOGA
+	ldh [hSpriteIndex], a
+	jp SetSpriteFacingDirectionAndDelay
+
+KogaRematchPostBattle:
+	call UpdateSprites
+	call FuschiaGymSetFacingDirectionScript
+	SetEvent EVENT_KOGA_REMATCH_BEAT
+	ld a, TEXT_FUCHSIAGYM_REMATCH_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	call GBFadeOutToBlack
+	ld a, HS_FUCHSIA_GYM_KOGA
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER_CAVE_GUARD1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER_CAVE_GUARD2
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_MT_SILVER_CAVE_WEEZING1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER_CAVE_WEEZING2
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call UpdateSprites
+	call GBFadeInFromBlack
+	xor a
+	ld [wJoyIgnore], a
+	ld hl, wCurrentMapScriptFlags
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	ld a, SCRIPT_FUCHSIAGYM_NOOP
+	ld [wFuchsiaGymCurScript], a
+	ld [wCurMapScript], a
+	ret
+
 FuchsiaGym_TextPointers:
 	def_text_pointers
 	dw_const FuchsiaGymKogaText,              TEXT_FUCHSIAGYM_KOGA
@@ -86,6 +159,7 @@ FuchsiaGym_TextPointers:
 	dw_const FuchsiaGymKogaSoulBadgeInfoText, TEXT_FUCHSIAGYM_KOGA_SOUL_BADGE_INFO
 	dw_const FuchsiaGymKogaReceivedTM06Text,  TEXT_FUCHSIAGYM_KOGA_RECEIVED_TM06
 	dw_const FuchsiaGymKogaTM06NoRoomText,    TEXT_FUCHSIAGYM_KOGA_TM06_NO_ROOM
+	dw_const FuchsiaGymRematchPostBattleText, TEXT_FUCHSIAGYM_REMATCH_POST_BATTLE
 
 FuchsiaGymTrainerHeaders:
 	def_trainers 2
@@ -113,7 +187,15 @@ FuchsiaGymKogaText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
+	CheckEvent EVENT_KOGA_REMATCH_BEAT
+	jr nz, .postGame
+	CheckEvent EVENT_KOGA_REMATCH
+	jr nz, .KogaRematch
 	ld hl, .PostBattleAdviceText
+	call PrintText
+	jr .done
+.postGame
+	ld hl, .PostGameGoodLuckText
 	call PrintText
 	jr .done
 .beforeBeat
@@ -135,6 +217,23 @@ FuchsiaGymKogaText:
 	ldh [hJoyHeld], a
 	ld a, SCRIPT_FUCHSIAGYM_KOGA_POST_BATTLE
 	ld [wFuchsiaGymCurScript], a
+	jr .done
+ .KogaRematch
+ 	ld hl, .PreBattleRematchText
+ 	call PrintText
+ 	call Delay3
+ 	ld hl, wStatusFlags3
+ 	set BIT_TALKED_TO_TRAINER, [hl]
+ 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+ 	ld hl, FuchsiaGymRematchDefeatedText
+ 	ld de, FuchsiaGymRematchVictoryText
+ 	call SaveEndBattleTextPointers
+ 	ld a, OPP_KOGA
+ 	ld [wCurOpponent], a
+ 	ld a, 2
+ 	ld [wTrainerNo], a
+	ld a, SCRIPT_FUCHSIAGYM_KOGA_POST_BATTLE
+	ld [wFuchsiaGymCurScript], a
 .done
 	jp TextScriptEnd
 
@@ -150,6 +249,14 @@ FuchsiaGymKogaText:
 	text_far _FuchsiaGymKogaPostBattleAdviceText
 	text_end
 
+.PreBattleRematchText
+	text_far _FuchsiaGymRematchPreBattleText
+	text_end
+
+.PostGameGoodLuckText
+	text_far _FuchsiaGymKogaGoodLuckText
+	text_end
+
 FuchsiaGymKogaSoulBadgeInfoText:
 	text_far _FuchsiaGymKogaSoulBadgeInfoText
 	text_end
@@ -162,6 +269,18 @@ FuchsiaGymKogaReceivedTM06Text:
 
 FuchsiaGymKogaTM06NoRoomText:
 	text_far _FuchsiaGymKogaTM06NoRoomText
+	text_end
+
+FuchsiaGymRematchDefeatedText:
+	text_far _FuchsiaGymRematchDefeatedText
+	text_end
+
+FuchsiaGymRematchVictoryText:
+	text_far _FuchsiaGymRematchVictoryText
+	text_end
+
+FuchsiaGymRematchPostBattleText:
+	text_far _FuchsiaGymRematchPostBattleText
 	text_end
 
 FuchsiaGymRocker1Text:

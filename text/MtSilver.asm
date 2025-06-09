@@ -41,7 +41,12 @@ _MtSilverCaveGuard1Text_Koga::
 	done
 	
 _MtSilverCaveGuard2Text_Done::
-	text "DONE"
+	text "Koga slipped past"
+	line "me again..."
+
+	para "But the air is"
+	line "breathable now."
+	cont "You may proceed!"
 	done
 	
 _MtSilverErikaText_Done::
@@ -68,7 +73,17 @@ _MtSilverBlaineText_Done::
 	done
 
 _MtSilverKogaText_Done::
-	text "DONE"
+	text "The toxin is gone."
+	line "Venomoth’s scales"
+	cont "filled the air."
+	
+	para "The wild poison"
+	line "types fled away."
+
+	para "Breathe easy."
+
+	para "My work is silent,"
+	line "my exit swifter."
 	done
 	
 _MtSilverWeezingText::

@@ -98,6 +98,7 @@ DEF SHOW EQU $15
 	const HS_CELADON_GYM_ERIKA2            ; added
 	const HS_GAME_CORNER_ROCKET            ; 46
 	const HS_WARDENS_HOUSE_ITEM            ; 47 X
+	const HS_FUCHSIA_GYM_KOGA              ; added
 	const HS_POKEMON_MANSION_1F_ITEM_1     ; 48 X
 	const HS_POKEMON_MANSION_1F_ITEM_2     ; 49 X
 	const HS_CINNABAR_GYM_BLAINE1          ; added

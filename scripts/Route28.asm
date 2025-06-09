@@ -168,6 +168,15 @@ Route28LTSurgeExitScript:
 	ld a, HS_VERMILION_GYM_LT_SURGE2 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_ROUTE_28_BIRD1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_ROUTE_28_BIRD2
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_ROUTE_28_BIRD3
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	ld a, SCRIPT_ROUTE28_NOOP
 	ld [wRoute28CurScript], a	
 	ret

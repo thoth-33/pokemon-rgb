@@ -137,15 +137,6 @@ VermilionGymLTSurgeExitScript:
 	ld a, HS_VERMILION_GYM_LT_SURGE1
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld a, HS_ROUTE_28_BIRD1
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_ROUTE_28_BIRD2
-	ld [wMissableObjectIndex], a
-	predef HideObject
-	ld a, HS_ROUTE_28_BIRD3
-	ld [wMissableObjectIndex], a
-	predef HideObject
 	SetEvent EVENT_LT_SURGE_REMATCH_BEAT
 	ld a, SCRIPT_VERMILIONGYM_NOOP
 	ld [wVermilionGymCurScript], a

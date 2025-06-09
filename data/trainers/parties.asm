@@ -660,6 +660,7 @@ ErikaData:
 
 KogaData:
 	db $FF, 37, KOFFING, 39, MUK, 37, KOFFING, 43, WEEZING, 0
+;	db $FF, 71, ARBOK, 69, GOLBAT, 70, MUK, 70, VENOMOTH, 72, NIDOKING, 75, WEEZING, 0
 	db $FF,  1, KOFFING, 0
 
 BlaineData:

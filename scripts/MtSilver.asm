@@ -14,7 +14,6 @@ MtSilver_ScriptPointers:
 	dw_const MtSilverBlaineExitScript,   SCRIPT_MT_SILVER_BLAINE_EXIT
 	dw_const MtSilverKogaScript,         SCRIPT_MT_SILVER_KOGA
 	dw_const MtSilverKogaTalkScript,     SCRIPT_MT_SILVER_KOGA_TALK
-	dw_const MtSilverKogaExitScript,     SCRIPT_MT_SILVER_KOGA_EXIT
 	dw_const MtSilverNoopScript,         SCRIPT_MT_SILVER_NOOP
 
 MtSilverErikaScript:
@@ -127,11 +126,9 @@ MtSilverErikaExitScript:
 	ret
 	
 MtSilverBlaineScript:
-	CheckEvent EVENT_BLAINE_REMATCH_BEAT
-	jr z, .BlaineWalk ; set to z for debug
 	call MtSilverStumpsScript
-	ret
-.BlaineWalk
+	CheckEvent EVENT_BLAINE_REMATCH_BEAT
+	ret nz ; set to nz for debug
 	ld hl, MtSilverScriptBlaineCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -245,14 +242,92 @@ MtSilverBlaineExitScript:
 	ret
 
 MtSilverKogaScript:
-	CheckEvent EVENT_KOGA_REMATCH_BEAT
 	call MtSilverBurnedScript
+	CheckEvent EVENT_KOGA_REMATCH_BEAT
 	ret z
+	ld hl, MtSilverScriptKogaCoords
+	call ArePlayerCoordsInArray
+	ret nc
+	xor a
+	ldh [hJoyHeld], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a	
+	ld a, HS_MT_SILVER_KOGA
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, MT_SILVER_KOGA
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wXCoord]
+	cp 14
+	jr z, .player_standing_left
+	ld de, .KogaWalkRightMovement
+	jr .move_sprite
+.player_standing_left
+	ld de, .KogaWalkLeftMovement
+.move_sprite
+	ld a, MT_SILVER_KOGA
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_MT_SILVER_KOGA_TALK
+	ld [wMtSilverCurScript], a	
+	ret
+	
+.KogaWalkLeftMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+.KogaWalkRightMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+MtSilverScriptKogaCoords:
+	dbmapcoord  14, 8
+	dbmapcoord  15, 8
+	db -1 ; end
 
 MtSilverKogaTalkScript:
-MtSilverKogaExitScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld [wJoyIgnore], a
+	call UpdateSprites
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_DOWN
+	ldh [hSpriteFacingDirection], a
+	ld a, MT_SILVER_KOGA
+	ldh [hSpriteIndex], a
+	call SetSpriteFacingDirectionAndDelay
+	ld a, TEXT_MT_SILVER_KOGA
+	ldh [hTextID], a
+	call DisplayTextID
+	call GBFadeOutToBlack
+	ld a, HS_FUCHSIA_GYM_KOGA
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_MT_SILVER_KOGA
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call UpdateSprites
+	call GBFadeInFromBlack
+	xor a
+	ld [wJoyIgnore], a
+	ld hl, wCurrentMapScriptFlags
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	ld a, SCRIPT_MT_SILVER_NOOP
+	ld [wMtSilverCurScript], a	
+	ret
+
 MtSilverNoopScript:
-ret ; to-do
+	call MtSilverBurnedScript
+	ret
 
 MtSilverStumpsScript:
 	; Check if the current map matches the last visited map
@@ -297,9 +372,9 @@ MtSilverStumpsScript:
 	ld b, 12
 	ld c, 11
 	predef ReplaceTileBlock
-	ld a, [wXCoord]
-	cp $25
-	ret z
+	ld a, [wXCoord] ; Dont redraw if too far right
+	cp $1e
+	ret nc
 	jpfar RedrawMapView
 
 MtSilverBurnedScript:
@@ -346,9 +421,14 @@ MtSilverBurnedScript:
 	ld b, 12
 	ld c, 11
 	predef ReplaceTileBlock
-	ld a, [wXCoord]
-	cp $25
-	ret z
+	ld a, [wXCoord] ; Dont redraw if too far right
+	cp $1e
+	ret nc
+	cp $10          ; Dont redraw if too far left
+	ret c
+	ld a, [wYCoord] ; Dont redraw if too far up
+	cp $10
+	ret c
 	jpfar RedrawMapView
 
 MtSilver_TextPointers:
