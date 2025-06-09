@@ -19,7 +19,7 @@ MtSilver_ScriptPointers:
 
 MtSilverErikaScript:
 	CheckEvent EVENT_ERIKA_REMATCH_BEAT
-	ret z
+	ret nz ; set to nz for debug
 	ld hl, MtSilverScriptErikaCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -128,12 +128,127 @@ MtSilverErikaExitScript:
 	
 MtSilverBlaineScript:
 	CheckEvent EVENT_BLAINE_REMATCH_BEAT
+	jr z, .BlaineWalk ; set to z for debug
 	call MtSilverStumpsScript
-	ret z
+	ret
+.BlaineWalk
+	ld hl, MtSilverScriptBlaineCoords
+	call ArePlayerCoordsInArray
+	ret nc
+	xor a
+	ldh [hJoyHeld], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a	
+	ld a, HS_MT_SILVER_BLAINE
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, MT_SILVER_BLAINE
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wYCoord]
+	cp 24
+	jr z, .player_standing_top
+	ld de, .BlaineWalkBottomMovement
+	jr .move_sprite
+.player_standing_top
+	ld de, .BlaineWalkTopMovement
+.move_sprite
+	ld a, MT_SILVER_BLAINE
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_MT_SILVER_BLAINE_TALK
+	ld [wMtSilverCurScript], a	
+	ret
+	
+.BlaineWalkBottomMovement:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+	
+.BlaineWalkTopMovement:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+	
+MtSilverScriptBlaineCoords:
+	dbmapcoord  31,   24
+	dbmapcoord  31,   25
+	db -1 ; end
 
 MtSilverBlaineTalkScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld a, TEXT_MT_SILVER_BLAINE
+	ldh [hTextID], a
+	call DisplayTextID
+	ld a, MT_SILVER_BLAINE
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wYCoord]
+	cp 24
+	jr z, .player_standing_top
+	ld de, .BlaineWalkUpMovement
+	jr .move_sprite
+.player_standing_top
+	ld de, .BlaineWalkDownMovement
+.move_sprite
+	ld a, MT_SILVER_BLAINE
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_MT_SILVER_BLAINE_EXIT
+	ld [wMtSilverCurScript], a	
+	ret
+	
+.BlaineWalkDownMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+	
+.BlaineWalkUpMovement:
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db -1 ; end
+
 MtSilverBlaineExitScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld a, HS_MT_SILVER_BLAINE
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_CINNABAR_GYM_BLAINE2 
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, SCRIPT_MT_SILVER_KOGA
+	ld [wMtSilverCurScript], a	
+	ret
+
 MtSilverKogaScript:
+	CheckEvent EVENT_KOGA_REMATCH_BEAT
+	call MtSilverBurnedScript
+	ret z
+
 MtSilverKogaTalkScript:
 MtSilverKogaExitScript:
 MtSilverNoopScript:
@@ -187,6 +302,55 @@ MtSilverStumpsScript:
 	ret z
 	jpfar RedrawMapView
 
+MtSilverBurnedScript:
+	; Check if the current map matches the last visited map
+	ld a, [wCurMap]
+	ld hl, wLastMap
+	cp [hl]
+	jr nz, .replaceTiles	
+	; Run again after a battle
+	ld hl, wCurrentMapScriptFlags
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	ret z
+	
+.replaceTiles ; Set variables to avoid repeated runs
+	ld a, [wCurMap]
+	ld [wLastMap], a
+	ld hl, wCurrentMapScriptFlags
+	res BIT_CUR_MAP_LOADED_1, [hl]
+    ld a, 1
+    ld [wSkipRedraw], a
+
+	ld a, $85
+	ld [wNewTileBlockID], a
+	ld b, 10
+	ld c, 11
+	predef ReplaceTileBlock
+	ld a, $7a
+	ld [wNewTileBlockID], a
+	ld b, 10
+	ld c, 12
+	predef ReplaceTileBlock	
+	ld b, 11
+	ld c, 12
+	predef ReplaceTileBlock
+	ld b, 12
+	ld c, 12
+	predef ReplaceTileBlock
+	ld a, $84
+	ld [wNewTileBlockID], a
+	ld b, 11
+	ld c, 11
+	predef ReplaceTileBlock
+	ld b, 12
+	ld c, 11
+	predef ReplaceTileBlock
+	ld a, [wXCoord]
+	cp $25
+	ret z
+	jpfar RedrawMapView
+
 MtSilver_TextPointers:
 	def_text_pointers
 	dw_const MtSilverTreeGuardText,  TEXT_MT_SILVER_TREE_GUARD
@@ -195,11 +359,15 @@ MtSilver_TextPointers:
     dw_const MtSilverErikaText,      TEXT_MT_SILVER_ERIKA
     dw_const MtSilverBlaineText,     TEXT_MT_SILVER_BLAINE
     dw_const MtSilverKogaText,       TEXT_MT_SILVER_KOGA
+	dw_const MtSilverWeezingText,    TEXT_MT_SILVER_WEEZING1
+	dw_const MtSilverWeezingText,    TEXT_MT_SILVER_WEEZING2
+	dw_const PickUpItemText,         TEXT_MT_SILVER_FULL_RESTORE
+	dw_const MtSilverSignText,       TEXT_MT_SILVER_SIGN
 	
 MtSilverTreeGuardText:
 	text_asm
 	CheckEvent EVENT_ERIKA_REMATCH_BEAT
-	jr z, .erika
+	jr z, .erika ; set to nz debug
 	CheckEvent EVENT_BLAINE_REMATCH_BEAT
 	jr nz, .done
 	;fallthrough
@@ -287,4 +455,21 @@ MtSilverKogaText:
 	
 MtSilverKogaText_Done:
 	text_far _MtSilverKogaText_Done
+	text_end
+	
+MtSilverWeezingText:
+	text_asm
+	ld hl, .Text
+	call PrintText
+	ld a, WEEZING
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
+.Text:
+	text_far _MtSilverWeezingText
+	text_end
+	
+MtSilverSignText:
+	text_far _MtSilverSignText
 	text_end

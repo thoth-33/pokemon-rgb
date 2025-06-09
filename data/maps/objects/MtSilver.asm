@@ -5,6 +5,9 @@
 	const_export MT_SILVER_ERIKA
 	const_export MT_SILVER_BLAINE
 	const_export MT_SILVER_KOGA
+	const_export MT_SILVER_WEEZING1
+	const_export MT_SILVER_WEEZING2
+	const_export MT_SILVER_FULL_RESTORE
 
 MtSilver_Object:
 	db $2C ; border block
@@ -13,6 +16,7 @@ MtSilver_Object:
 	warp_event 14,  3, MT_SILVER_CAVE_1F, 1
 
 	def_bg_events
+	bg_event  15,  5, TEXT_MT_SILVER_SIGN
 
 	def_object_events
 	object_event 24, 25, SPRITE_GUARD, STAY, RIGHT, TEXT_MT_SILVER_TREE_GUARD
@@ -21,5 +25,8 @@ MtSilver_Object:
 	object_event 31, 25, SPRITE_SILPH_WORKER_F, STAY, RIGHT, TEXT_MT_SILVER_ERIKA
 	object_event 27, 25, SPRITE_MIDDLE_AGED_MAN, STAY, RIGHT, TEXT_MT_SILVER_BLAINE
 	object_event 14,  4, SPRITE_KOGA, STAY, DOWN, TEXT_MT_SILVER_KOGA
+	object_event 13,  5, SPRITE_WEEZING, WALK, ANY_DIR, TEXT_MT_SILVER_WEEZING1
+	object_event 16,  5, SPRITE_WEEZING, WALK, ANY_DIR, TEXT_MT_SILVER_WEEZING2
+	object_event  6, 16, SPRITE_POKE_BALL, STAY, NONE, TEXT_MT_SILVER_FULL_RESTORE, FULL_RESTORE
 
 	def_warps_to MT_SILVER

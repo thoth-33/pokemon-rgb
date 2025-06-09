@@ -48,6 +48,11 @@ CinnabarGym_ScriptPointers:
 	dw_const CinnabarGymGetOpponentTextScript,  SCRIPT_CINNABARGYM_GET_OPPONENT_TEXT
 	dw_const CinnabarGymOpenGateScript,         SCRIPT_CINNABARGYM_OPEN_GATE
 	dw_const CinnabarGymBlainePostBattleScript, SCRIPT_CINNABARGYM_BLAINE_POST_BATTLE
+	dw_const CinnabarGymBlaineExitScript,       SCRIPT_CINNABARGYM_BLAINE_EXIT
+	dw_const CinnabarGymNoopScript,             SCRIPT_CINNABARGYM_NOOP
+
+CinnabarGymNoopScript:
+ret
 
 CinnabarGymDefaultScript:
 	ld a, [wOpponentAfterWrongAnswer]
@@ -142,7 +147,9 @@ CinnabarGymBlainePostBattleScript:
 	jp z, CinnabarGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-; fallthrough
+	CheckEvent EVENT_BLAINE_REMATCH
+	jr nz, BlaineRematchPostBattle
+;fallthrough
 CinnabarGymReceiveTM38:
 	ld a, TEXT_CINNABARGYM_BLAINE_VOLCANO_BADGE_INFO
 	ldh [hTextID], a
@@ -174,6 +181,59 @@ CinnabarGymReceiveTM38:
 
 	jp CinnabarGymResetScripts
 
+BlaineRematchPostBattle:
+	ld a, TEXT_CINNABARGYM_REMATCH_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	ld a, CINNABARGYM_BLAINE1
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wXCoord]
+	cp 3
+	jr z, .player_standing_vertical
+	ld de, .BlaineWalkDownMovement
+	jr .move_sprite
+.player_standing_vertical
+	ld de, .BlaineWalkRightMovement
+.move_sprite
+	ld a, CINNABARGYM_BLAINE1
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_CINNABARGYM_BLAINE_EXIT
+	ld [wCinnabarGymCurScript], a
+	jp CinnabarGym_Script
+	
+.BlaineWalkRightMovement:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+.BlaineWalkDownMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+CinnabarGymBlaineExitScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld a, HS_CINNABAR_GYM_BLAINE1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	SetEvent EVENT_BLAINE_REMATCH_BEAT
+	ld a, SCRIPT_CINNABARGYM_NOOP
+	ld [wCinnabarGymCurScript], a
+	ret
+
 CinnabarGym_TextPointers:
 	def_text_pointers
 	dw_const CinnabarGymBlaineText,                 TEXT_CINNABARGYM_BLAINE
@@ -184,10 +244,12 @@ CinnabarGym_TextPointers:
 	dw_const CinnabarGymSuperNerd5,                 TEXT_CINNABARGYM_SUPER_NERD5
 	dw_const CinnabarGymSuperNerd6,                 TEXT_CINNABARGYM_SUPER_NERD6
 	dw_const CinnabarGymSuperNerd7,                 TEXT_CINNABARGYM_SUPER_NERD7
+	dw_const CinnabarGymBlainePostGameText,         TEXT_CINNABARGYM_BLAINE_POSTGAME
 	dw_const CinnabarGymGymGuideText,               TEXT_CINNABARGYM_GYM_GUIDE
 	dw_const CinnabarGymBlaineVolcanoBadgeInfoText, TEXT_CINNABARGYM_BLAINE_VOLCANO_BADGE_INFO
 	dw_const CinnabarGymBlaineReceivedTM38Text,     TEXT_CINNABARGYM_BLAINE_RECEIVED_TM38
 	dw_const CinnabarGymBlaineTM38NoRoomText,       TEXT_CINNABARGYM_BLAINE_TM38_NO_ROOM
+	dw_const CinnabarGymRematchPostBattleText,      TEXT_CINNABARGYM_REMATCH_POST_BATTLE
 
 CinnabarGymStartBattleScript:
 	ldh a, [hSpriteIndex]
@@ -198,7 +260,7 @@ CinnabarGymStartBattleScript:
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
 	ld a, [wSpriteIndex]
-	cp CINNABARGYM_BLAINE
+	cp CINNABARGYM_BLAINE1
 	jr z, .blaine
 	ld a, SCRIPT_CINNABARGYM_OPEN_GATE
 	jr .not_blaine
@@ -219,6 +281,8 @@ CinnabarGymBlaineText:
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .afterBeat
+	CheckEvent EVENT_BLAINE_REMATCH
+	jr nz, .BlaineRematch
 	ld hl, .PostBattleAdviceText
 	call PrintText
 	jp TextScriptEnd
@@ -231,6 +295,24 @@ CinnabarGymBlaineText:
 	ld a, $7
 	ld [wGymLeaderNo], a
 	jp CinnabarGymStartBattleScript
+ .BlaineRematch
+ 	ld hl, .PreBattleRematchText
+ 	call PrintText
+ 	call Delay3
+ 	ld hl, wStatusFlags3
+ 	set BIT_TALKED_TO_TRAINER, [hl]
+ 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+ 	ld hl, CinnabarGymRematchDefeatedText
+ 	ld de, CinnabarGymRematchVictoryText
+ 	call SaveEndBattleTextPointers
+ 	ld a, OPP_BLAINE
+ 	ld [wCurOpponent], a
+ 	ld a, 2
+ 	ld [wTrainerNo], a
+	ld a, SCRIPT_CINNABARGYM_BLAINE_POST_BATTLE
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
+	jp TextScriptEnd
 
 .PreBattleText:
 	text_far _CinnabarGymBlainePreBattleText
@@ -246,6 +328,11 @@ CinnabarGymBlaineText:
 	text_far _CinnabarGymBlainePostBattleAdviceText
 	text_end
 
+	
+.PreBattleRematchText
+	text_far _CinnabarGymRematchPreBattleText
+	text_end
+
 CinnabarGymBlaineVolcanoBadgeInfoText:
 	text_far _CinnabarGymBlaineVolcanoBadgeInfoText
 	text_end
@@ -258,6 +345,18 @@ CinnabarGymBlaineReceivedTM38Text:
 
 CinnabarGymBlaineTM38NoRoomText:
 	text_far _CinnabarGymBlaineTM38NoRoomText
+	text_end
+	
+CinnabarGymRematchDefeatedText:
+	text_far _CinnabarGymRematchDefeatedText
+	text_end
+
+CinnabarGymRematchVictoryText:
+	text_far _CinnabarGymRematchVictoryText
+	text_end
+
+CinnabarGymRematchPostBattleText:
+	text_far _CinnabarGymRematchPostBattleText
 	text_end
 
 CinnabarGymSuperNerd1:
@@ -454,6 +553,16 @@ CinnabarGymSuperNerd7:
 
 .AfterBattleText:
 	text_far _CinnabarGymSuperNerd7AfterBattleText
+	text_end
+
+CinnabarGymBlainePostGameText:
+	text_asm
+	ld hl, CinnabarGymBlaineGoodLuckText
+	call PrintText
+	jp TextScriptEnd
+	
+CinnabarGymBlaineGoodLuckText:
+	text_far _CinnabarGymBlaineGoodLuckText
 	text_end
 
 CinnabarGymGymGuideText:

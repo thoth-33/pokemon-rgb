@@ -642,9 +642,11 @@ BrunoData:
 
 BrockData:
 	db $FF, 12, GEODUDE, 14, ONIX, 0
+	db $FF,  1, GEODUDE, 0
 
 MistyData:
 	db $FF, 18, STARYU, 21, STARMIE, 0
+	db $FF,  1, STARYU, 0
 
 LtSurgeData:
 	db $FF, 21, VOLTORB, 18, PIKACHU, 24, RAICHU, 0
@@ -658,12 +660,16 @@ ErikaData:
 
 KogaData:
 	db $FF, 37, KOFFING, 39, MUK, 37, KOFFING, 43, WEEZING, 0
+	db $FF,  1, KOFFING, 0
 
 BlaineData:
 	db $FF, 42, GROWLITHE, 40, PONYTA, 42, RAPIDASH, 47, ARCANINE, 0
+;	db $FF, 69, MAGMAR, 68, RAPIDASH, 69, FLAREON, 70, NINETALES, 70, CHARIZARD, 73, ARCANINE, 0	
+	db $FF,  1, GROWLITHE, 0 ; debug
 
 SabrinaData:
 	db $FF, 38, KADABRA, 37, MR_MIME, 38, VENOMOTH, 43, ALAKAZAM, 0
+	db $FF,  1, ABRA, 0
 
 GentlemanData:
 ; SS Anne 1F Rooms

@@ -109,7 +109,7 @@ ColorOverworldSprite::
 	ld a, SPR_PAL_BROWN
 	jr z, .norandomColor
 	
-	; Erika is blue
+	; Erika/Blaine/Koga are blue
 	ld a, [wCurMap]
 	cp MT_SILVER
 	ld a, SPR_PAL_BLUE
@@ -571,7 +571,7 @@ ENDC
 	; 0x2f: SPRITE_FISHER2
 	db SPR_PAL_RANDOM
 
-	; 0x30: SPRITE_BLACKBELT
+	; 0x30: SPRITE_KOGA
 	db SPR_PAL_RANDOM
 
 	; 0x31: SPRITE_GUARD ($30)
@@ -701,6 +701,9 @@ ENDC
 	db SPR_PAL_PURPLE
 	
 	; 0x-V: SPRITE_MEW
+	db SPR_PAL_PURPLE
+	
+	; 0x-W: SPRITE_WEEZING
 	db SPR_PAL_PURPLE
 	
 	; 0x3d: SPRITE_BALL

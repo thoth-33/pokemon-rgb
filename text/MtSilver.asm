@@ -21,11 +21,23 @@ _MtSilverTreeGuardText_Blaine::
 	done
 
 _MtSilverTreeGuardText_Done::
-	text "DONE"
+	text "BLAINE and ERIKA"
+	line "cleared the way!"
+
+	para "The path is wide"
+	line "open now."
 	done
 	
 _MtSilverCaveGuard1Text_Koga::
-	text "KOGA"
+	text "Toxic gas has"
+	line "filled the cave!"
+
+	para "POISON #MON"
+	line "have overrun it!"
+
+	para "We need a master"
+	line "of POISON-types"
+	cont "to clear it out!"
 	done
 	
 _MtSilverCaveGuard2Text_Done::
@@ -46,9 +58,25 @@ _MtSilverErikaText_Done::
 	done
 
 _MtSilverBlaineText_Done::
-	text "DONE"
+	text "The way is clear."
+
+	para "Controlled flame,"
+	line "guided purpose."
+	
+	para "ARCANINE and I"
+	line "handled it clean."
 	done
 
 _MtSilverKogaText_Done::
 	text "DONE"
+	done
+	
+_MtSilverWeezingText::
+	text "WEEZING: Whee..."
+	line "... zing..."
+	done
+	
+_MtSilverSignText::
+	text "MT.SILVER -"
+	line "DANGER AHEAD"
 	done

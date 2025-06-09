@@ -210,3 +210,45 @@ _CinnabarGymGymGuideBeatBlaineText::
 	text "<PLAYER>! You beat"
 	line "that fire brand!"
 	done
+	
+_CinnabarGymRematchPreBattleText::
+	text "A controlled burn?"
+	line "Risky business..."
+
+	para "Fire obeys only"
+	line "those who earn"
+	cont "its respect."
+
+	para "Face me again and"
+	line "prove yourself"
+	cont "worthy of the"
+	cont "flame's power!"
+	done
+
+ _CinnabarGymRematchDefeatedText::
+	text "Still too"
+	line "hot to handle!"
+	prompt
+
+ _CinnabarGymRematchVictoryText::
+	text "Burned"
+	line "out. Impressive!"
+	prompt
+	
+_CinnabarGymRematchPostBattleText::
+	text "Your resolve burns"
+	line "as hot as embers."
+
+	para "I'll see to it the"
+	line "flames stay where"
+	cont "they're meant to."
+
+	para "Leave it to me."
+	done
+	
+_CinnabarGymBlaineGoodLuckText::
+	text "Off to blaze a new"
+	line "trail, are you?"
+
+	para "Good luck!"
+	done

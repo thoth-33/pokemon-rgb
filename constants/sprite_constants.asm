@@ -93,6 +93,7 @@
 	const SPRITE_WIGGLYTUFF              ; $-T
 	const SPRITE_MEWTWO                  ; $-U
 	const SPRITE_MEW                     ; $-V
+	const SPRITE_WEEZING                 ; $-W
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e
