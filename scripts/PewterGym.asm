@@ -35,6 +35,11 @@ PewterGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_PEWTERGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_PEWTERGYM_END_BATTLE
 	dw_const PewterGymBrockPostBattle,              SCRIPT_PEWTERGYM_BROCK_POST_BATTLE
+	dw_const PewterGymBrockExitScript,              SCRIPT_PEWTERGYM_BROCK_EXIT
+	dw_const PewterGymNoopScript,                   SCRIPT_PEWTERGYM_NOOP
+
+PewterGymNoopScript:
+ret
 
 PewterGymBrockPostBattle:
 	ld a, [wIsInBattle]
@@ -42,6 +47,8 @@ PewterGymBrockPostBattle:
 	jp z, PewterGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
+	CheckEvent EVENT_BROCK_REMATCH
+	jr nz, BrockRematchPostBattle
 ; fallthrough
 PewterGymScriptReceiveTM34:
 	ld a, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
@@ -80,14 +87,69 @@ PewterGymScriptReceiveTM34:
 
 	jp PewterGymResetScripts
 
+BrockRematchPostBattle:
+	ld a, TEXT_PEWTERGYM_REMATCH_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	ld a, PEWTERGYM_BROCK1
+	ldh [hSpriteIndex], a
+	call SetSpriteMovementBytesToFF
+	ld a, [wXCoord]
+	cp 4
+	jr z, .player_standing_vertical
+	ld de, .BrockWalkDownMovement
+	jr .move_sprite
+.player_standing_vertical
+	ld de, .BrockWalkRightMovement
+.move_sprite
+	ld a, PEWTERGYM_BROCK1
+	ldh [hSpriteIndex], a
+	call MoveSprite
+	ld a, SCRIPT_PEWTERGYM_BROCK_EXIT
+	ld [wPewterGymCurScript], a
+	jp PewterGym_Script
+	
+.BrockWalkRightMovement:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_LEFT	
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+.BrockWalkDownMovement:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db -1 ; end
+	
+PewterGymBrockExitScript:
+	ld a, [wStatusFlags5]
+	bit BIT_SCRIPTED_NPC_MOVEMENT, a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld a, HS_PEWTER_GYM_BROCK1
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	SetEvent EVENT_BROCK_REMATCH_BEAT
+	ld a, SCRIPT_PEWTERGYM_NOOP
+	ld [wPewterGymCurScript], a
+	ret
+
 PewterGym_TextPointers:
 	def_text_pointers
 	dw_const PewterGymBrockText,             TEXT_PEWTERGYM_BROCK
 	dw_const PewterGymCooltrainerMText,      TEXT_PEWTERGYM_COOLTRAINER_M
+	dw_const PewterGymBrockPostGameText,     TEXT_PEWTERGYM_BROCK_POSTGAME
 	dw_const PewterGymGuideText,             TEXT_PEWTERGYM_GYM_GUIDE
 	dw_const PewterGymBrockWaitTakeThisText, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
 	dw_const PewterGymReceivedTM34Text,      TEXT_PEWTERGYM_RECEIVED_TM34
 	dw_const PewterGymTM34NoRoomText,        TEXT_PEWTERGYM_TM34_NO_ROOM
+	dw_const PewterGymRematchPostBattleText, TEXT_PEWTERGYM_REMATCH_POST_BATTLE
 
 PewterGymTrainerHeaders:
 	def_trainers 2
@@ -105,6 +167,8 @@ PewterGymBrockText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
+	CheckEvent EVENT_BROCK_REMATCH
+	jr nz, .BrockRematch
 	ld hl, .PostBattleAdviceText
 	call PrintText
 	jr .done
@@ -128,6 +192,24 @@ PewterGymBrockText:
 	ld a, SCRIPT_PEWTERGYM_BROCK_POST_BATTLE
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
+	jr .done
+.BrockRematch
+ 	ld hl, .PreBattleRematchText
+ 	call PrintText
+ 	call Delay3
+ 	ld hl, wStatusFlags3
+ 	set BIT_TALKED_TO_TRAINER, [hl]
+ 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+ 	ld hl, PewterGymRematchDefeatedText
+ 	ld de, PewterGymRematchVictoryText
+ 	call SaveEndBattleTextPointers
+ 	ld a, OPP_BROCK
+ 	ld [wCurOpponent], a
+ 	ld a, 2
+ 	ld [wTrainerNo], a
+	ld a, SCRIPT_PEWTERGYM_BROCK_POST_BATTLE
+	ld [wPewterGymCurScript], a
+	ld [wCurMapScript], a
 .done
 	jp TextScriptEnd
 
@@ -137,6 +219,32 @@ PewterGymBrockText:
 
 .PostBattleAdviceText:
 	text_far _PewterGymBrockPostBattleAdviceText
+	text_end
+
+.PreBattleRematchText
+	text_far _PewterGymRematchPreBattleText
+	text_end
+
+PewterGymRematchDefeatedText:
+	text_far _PewterGymRematchDefeatedText
+	text_end
+
+PewterGymRematchVictoryText:
+	text_far _PewterGymRematchVictoryText
+	text_end
+
+PewterGymRematchPostBattleText:
+	text_far _PewterGymRematchPostBattleText
+	text_end
+
+PewterGymBrockPostGameText:
+	text_asm
+	ld hl, PewterGymBrockGoodLuckText
+	call PrintText
+	jp TextScriptEnd
+	
+PewterGymBrockGoodLuckText:
+	text_far _PewterGymBrockGoodLuckText
 	text_end
 
 PewterGymBrockWaitTakeThisText:

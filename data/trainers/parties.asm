@@ -642,6 +642,7 @@ BrunoData:
 
 BrockData:
 	db $FF, 12, GEODUDE, 14, ONIX, 0
+;	db $FF, 70, GOLEM, 71, KABUTOPS, 71, OMASTAR, 72, AERODACTYL 74, RHYDON, 76, ONIX, 0
 	db $FF,  1, GEODUDE, 0
 
 MistyData:
@@ -670,6 +671,7 @@ BlaineData:
 
 SabrinaData:
 	db $FF, 38, KADABRA, 37, MR_MIME, 38, VENOMOTH, 43, ALAKAZAM, 0
+;	db $FF, 71, MR_MIME, 72, SLOWBRO, 72, JYNX, 73, GENGAR 75, HYPNO, 77, ALAKAZAM, 0
 	db $FF,  1, ABRA, 0
 
 GentlemanData:

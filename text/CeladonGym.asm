@@ -231,7 +231,7 @@ _CeladonGymRematchPreBattleText::
 	para "Then let us do"
 	line "battle then."
 	
-	para "A gentle test of"
+	para "A quick test of"
 	line "your resolve."
 	done
 

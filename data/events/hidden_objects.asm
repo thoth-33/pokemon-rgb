@@ -84,6 +84,7 @@ HiddenObjectMaps:
 	db VERMILION_CITY
 	db CERULEAN_CITY
 	db ROUTE_4
+	db MT_SILVER_CAVE_1F
 	db -1 ; end
 
 HiddenObjectPointers:
@@ -173,6 +174,7 @@ HiddenObjectPointers:
 	dw VermilionCityHiddenObjects
 	dw CeruleanCityHiddenObjects
 	dw Route4HiddenObjects
+	dw MtSilver1FHiddenObjects
 
 MACRO hidden_object
 	db \2 ; y coord
@@ -665,4 +667,8 @@ CeruleanCityHiddenObjects:
 
 Route4HiddenObjects:
 	hidden_object 40,  3, GREAT_BALL, HiddenItems
+	db -1 ; end
+
+MtSilver1FHiddenObjects:
+	hidden_object  1,  7, TM_SUBSTITUTE, HiddenItems
 	db -1 ; end

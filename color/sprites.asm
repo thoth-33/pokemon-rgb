@@ -114,6 +114,12 @@ ColorOverworldSprite::
 	cp MT_SILVER
 	ld a, SPR_PAL_BLUE
 	jr z, .norandomColor
+	
+	; Brock/Sabrina are blue
+	ld a, [wCurMap]
+	cp MT_SILVER_CAVE_1F
+	ld a, SPR_PAL_BLUE
+	jr z, .norandomColor
 
 	; This is a (somewhat) random but consistent color
 	ldh a, [hSpriteOffset2]
@@ -705,6 +711,12 @@ ENDC
 	
 	; 0x-W: SPRITE_WEEZING
 	db SPR_PAL_PURPLE
+	
+	; 0x-X: SPRITE_HYPNO
+	db SPR_PAL_BROWN
+	
+	; 0x-Y: SPRITE_EMPTY
+	db SPR_PAL_RANDOM
 	
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE

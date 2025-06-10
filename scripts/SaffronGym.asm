@@ -35,6 +35,10 @@ SaffronGym_ScriptPointers:
 	dw_const DisplayEnemyTrainerTextAndStartBattle, SCRIPT_SAFFRONGYM_START_BATTLE
 	dw_const EndTrainerBattle,                      SCRIPT_SAFFRONGYM_END_BATTLE
 	dw_const SaffronGymSabrinaPostBattle,           SCRIPT_SAFFRONGYM_SABRINA_POST_BATTLE
+	dw_const SaffronGymNoopScript,                  SCRIPT_SAFFRONGYM_NOOP
+
+SaffronGymNoopScript:
+ret
 
 SaffronGymSabrinaPostBattle:
 	ld a, [wIsInBattle]
@@ -42,7 +46,9 @@ SaffronGymSabrinaPostBattle:
 	jp z, SaffronGymResetScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-
+	CheckEvent EVENT_SABRINA_REMATCH
+	jr nz, SabrinaRematchPostBattle
+; fallthrough
 SaffronGymSabrinaReceiveTM46Script:
 	ld a, TEXT_SAFFRONGYM_SABRINA_MARSH_BADGE_INFO
 	ldh [hTextID], a
@@ -71,6 +77,65 @@ SaffronGymSabrinaReceiveTM46Script:
 
 	jp SaffronGymResetScripts
 
+SaffronGymSetFacingDirectionScript:
+	ld a, [wXCoord]
+	cp 8
+	jr z, .player_standing_left
+	cp 10
+	jr z, .player_standing_right
+	ld a, [wYCoord]
+	cp 7
+	jr z, .player_standing_top
+	ld a, PLAYER_DIR_UP ;fallthrough, player standing bottom
+	ld [wPlayerMovingDirection], a
+	xor a ; SPRITE_FACING_DOWN
+	jr .set_facing_direction
+.player_standing_left
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_LEFT
+	jr .set_facing_direction
+.player_standing_right
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_RIGHT
+	jr .set_facing_direction
+.player_standing_top
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_UP
+.set_facing_direction
+	ldh [hSpriteFacingDirection], a
+	ld a, SAFFRONGYM_SABRINA
+	ldh [hSpriteIndex], a
+	jp SetSpriteFacingDirectionAndDelay
+
+SabrinaRematchPostBattle:
+	call UpdateSprites
+	call SaffronGymSetFacingDirectionScript
+	SetEvent EVENT_SABRINA_REMATCH_BEAT
+	ld a, TEXT_SAFFRONGYM_REMATCH_POST_BATTLE
+	ldh [hTextID], a
+	call DisplayTextID
+	call GBFadeOutToBlack
+	ld a, HS_SAFFRON_GYM_SABRINA  
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER1F_HYPNO
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	call UpdateSprites
+	call GBFadeInFromBlack
+	xor a
+	ld [wJoyIgnore], a
+	ld hl, wCurrentMapScriptFlags
+	set BIT_CUR_MAP_LOADED_1, [hl]
+	ld a, SCRIPT_SAFFRONGYM_NOOP
+	ld [wSaffronGymCurScript], a
+	ld [wCurMapScript], a
+	ret
+
+
 SaffronGym_TextPointers:
 	def_text_pointers
 	dw_const SaffronGymSabrinaText,               TEXT_SAFFRONGYM_SABRINA
@@ -85,6 +150,7 @@ SaffronGym_TextPointers:
 	dw_const SaffronGymSabrinaMarshBadgeInfoText, TEXT_SAFFRONGYM_SABRINA_MARSH_BADGE_INFO
 	dw_const SaffronGymSabrinaReceivedTM46Text,   TEXT_SAFFRONGYM_SABRINA_RECEIVED_TM46
 	dw_const SaffronGymSabrinaTM46NoRoomText,     TEXT_SAFFRONGYM_SABRINA_TM46_NO_ROOM
+	dw_const SaffronGymRematchPostBattleText,     TEXT_SAFFRONGYM_REMATCH_POST_BATTLE
 
 SaffronGymTrainerHeaders:
 	def_trainers 2
@@ -114,7 +180,15 @@ SaffronGymSabrinaText:
 	call DisableWaitingAfterTextDisplay
 	jr .done
 .afterBeat
+	CheckEvent EVENT_SABRINA_REMATCH_BEAT
+	jr nz, .postGame
+	CheckEvent EVENT_SABRINA_REMATCH
+	jr nz, .SabrinaRematch
 	ld hl, .PostBattleAdviceText
+	call PrintText
+	jr .done
+.postGame
+	ld hl, .PostGameGoodLuckText
 	call PrintText
 	jr .done
 .beforeBeat
@@ -134,6 +208,23 @@ SaffronGymSabrinaText:
 	ld [wGymLeaderNo], a
 	ld a, SCRIPT_SAFFRONGYM_SABRINA_POST_BATTLE
 	ld [wSaffronGymCurScript], a
+	jr .done
+ .SabrinaRematch
+ 	ld hl, .PreBattleRematchText
+ 	call PrintText
+ 	call Delay3
+ 	ld hl, wStatusFlags3
+ 	set BIT_TALKED_TO_TRAINER, [hl]
+ 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
+ 	ld hl, SaffronGymRematchDefeatedText
+ 	ld de, SaffronGymRematchVictoryText
+ 	call SaveEndBattleTextPointers
+ 	ld a, OPP_SABRINA
+ 	ld [wCurOpponent], a
+ 	ld a, 2
+ 	ld [wTrainerNo], a
+	ld a, SCRIPT_SAFFRONGYM_SABRINA_POST_BATTLE
+	ld [wSaffronGymCurScript], a
 .done
 	jp TextScriptEnd
 
@@ -149,6 +240,26 @@ SaffronGymSabrinaText:
 
 .PostBattleAdviceText:
 	text_far _SaffronGymSabrinaPostBattleAdviceText
+	text_end
+
+.PreBattleRematchText
+	text_far _SaffronGymRematchPreBattleText
+	text_end
+
+.PostGameGoodLuckText
+	text_far _SaffronGymSabrinaGoodLuckText
+	text_end
+
+SaffronGymRematchDefeatedText:
+	text_far _SaffronGymRematchDefeatedText
+	text_end
+
+SaffronGymRematchVictoryText:
+	text_far _SaffronGymRematchVictoryText
+	text_end
+
+SaffronGymRematchPostBattleText:
+	text_far _SaffronGymRematchPostBattleText
 	text_end
 
 SaffronGymSabrinaMarshBadgeInfoText:

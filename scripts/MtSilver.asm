@@ -126,9 +126,11 @@ MtSilverErikaExitScript:
 	ret
 	
 MtSilverBlaineScript:
-	call MtSilverStumpsScript
 	CheckEvent EVENT_BLAINE_REMATCH_BEAT
-	ret nz ; set to nz for debug
+	jr z, .BlaineWalk ; set to z for debug
+	call MtSilverStumpsScript
+	ret
+.BlaineWalk
 	ld hl, MtSilverScriptBlaineCoords
 	call ArePlayerCoordsInArray
 	ret nc

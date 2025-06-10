@@ -79,7 +79,7 @@ FuchsiaGymReceiveTM06:
 
 	jp FuchsiaGymResetScripts
 
-FuschiaGymSetFacingDirectionScript:
+FuchsiaGymSetFacingDirectionScript:
 	ld a, [wXCoord]
 	cp 3
 	jr z, .player_standing_left
@@ -114,7 +114,7 @@ FuschiaGymSetFacingDirectionScript:
 
 KogaRematchPostBattle:
 	call UpdateSprites
-	call FuschiaGymSetFacingDirectionScript
+	call FuchsiaGymSetFacingDirectionScript
 	SetEvent EVENT_KOGA_REMATCH_BEAT
 	ld a, TEXT_FUCHSIAGYM_REMATCH_POST_BATTLE
 	ldh [hTextID], a

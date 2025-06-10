@@ -237,3 +237,45 @@ _SaffronGymYoungster4AfterBattleText::
 	line "used telepathy to"
 	cont "read your mind!"
 	done
+
+_SaffronGymRematchPreBattleText::
+	text "That HYPNO’s mind"
+	line "is unlike others."
+
+	para "If you can match"
+	line "my focus again..."
+
+	para "Only then will I"
+	line "subdue it."
+	done
+
+ _SaffronGymRematchDefeatedText::
+	text "Faltered."
+	line "It takes only a"
+	cont "thought to lose"
+	cont "a battle."
+	prompt
+
+ _SaffronGymRematchVictoryText::
+	text "My will"
+	line "is sharper than"
+	cont "ever before."
+	prompt
+	
+_SaffronGymRematchPostBattleText::
+	text "Very well..."
+
+	para "I will quell the"
+	line "disturbance."
+
+	para "Do not follow me."
+	done
+	
+_SaffronGymSabrinaGoodLuckText::
+	text "The mind contains"
+	line "many boundless"
+	cont "corridors."
+
+	para "That HYPNO merely"
+	line "lost its way."
+	done

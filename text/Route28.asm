@@ -11,7 +11,8 @@ _Route28GuardText_Stop::
 	
 _Route28GuardText_Pass::
 	text "LT.SURGE scared"
-	line "off all the birds."
+	line "off all the birds"
+	cont "in one big blast!"
 	
 	para "We can work now,"
 	line "uninterrupted."

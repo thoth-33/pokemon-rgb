@@ -31,7 +31,7 @@ _FuchsiaGymRematchPreBattleText::
 
 	para "If you seek my"
 	line "aid, you must"
-	cont "endure the sting"
+	cont "endure my sting"
 	cont "once more."
 
 	para "Let us begin."
