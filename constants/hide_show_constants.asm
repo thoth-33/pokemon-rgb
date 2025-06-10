@@ -230,17 +230,7 @@ DEF SHOW EQU $15
 	const HS_POKEMON_MANSION_B1F_ITEM_3    ; D6 X
 	const HS_POKEMON_MANSION_B1F_ITEM_4    ; D7 X
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; D8 X
-	const HS_SAFARI_ZONE_EAST_ITEM_1       ; D9 X
-	const HS_SAFARI_ZONE_EAST_ITEM_2       ; DA X
-	const HS_SAFARI_ZONE_EAST_ITEM_3       ; DB X
-	const HS_SAFARI_ZONE_EAST_ITEM_4       ; DC X
-	const HS_SAFARI_ZONE_NORTH_ITEM_1      ; DD X
-	const HS_SAFARI_ZONE_NORTH_ITEM_2      ; DE X
-	const HS_SAFARI_ZONE_WEST_ITEM_1       ; DF X
-	const HS_SAFARI_ZONE_WEST_ITEM_2       ; E0 X
-	const HS_SAFARI_ZONE_WEST_ITEM_3       ; E1 X
-	const HS_SAFARI_ZONE_WEST_ITEM_4       ; E2 X
-	const HS_SAFARI_ZONE_CENTER_ITEM       ; E3 X
+; Safari Zone moved
 	const HS_CERULEAN_CAVE_2F_ITEM_1       ; E4 X
 	const HS_CERULEAN_CAVE_2F_ITEM_2       ; E5 X
 	const HS_CERULEAN_CAVE_2F_ITEM_3       ; E6 X
@@ -268,3 +258,18 @@ DEF SHOW EQU $15
 	const HS_MT_SILVER1F_SABRINA           ; FD added
 	const HS_SAFFRON_GYM_SABRINA           ; FE added
 DEF NUM_HS_OBJECTS EQU const_value
+
+	const_def
+	const HS_SAFARI_ZONE_EAST_ITEM_1       ; D9 X
+	const HS_SAFARI_ZONE_EAST_ITEM_2       ; DA X
+	const HS_SAFARI_ZONE_EAST_ITEM_3       ; DB X
+	const HS_SAFARI_ZONE_EAST_ITEM_4       ; DC X
+	const HS_SAFARI_ZONE_NORTH_ITEM_1      ; DD X
+	const HS_SAFARI_ZONE_NORTH_ITEM_2      ; DE X
+	const HS_SAFARI_ZONE_WEST_ITEM_1       ; DF X
+	const HS_SAFARI_ZONE_WEST_ITEM_2       ; E0 X
+	const HS_SAFARI_ZONE_WEST_ITEM_3       ; E1 X
+	const HS_SAFARI_ZONE_WEST_ITEM_4       ; E2 X
+	const HS_SAFARI_ZONE_CENTER_ITEM       ; E3 X
+	
+DEF	NUM_EXTRA_HS_OBJECTS EQU const_value

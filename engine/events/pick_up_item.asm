@@ -7,7 +7,7 @@ PickUpItem:
 .missableObjectsListLoop
 	ld a, [hli]
 	cp $ff
-	ret z
+	jr z, .noObject
 	cp b
 	jr z, .isMissable
 	inc hl
@@ -32,7 +32,13 @@ PickUpItem:
 
 	ldh a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
+	CheckEvent EVENT_IN_EXTRA_MISSABLE_OBJECTS_MAP
+	jr nz, .hideExtra
 	predef HideObject
+	jr .continue
+.hideExtra
+	predef HideExtraObject
+.continue
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, FoundItemText
@@ -42,6 +48,9 @@ PickUpItem:
 	ld hl, NoMoreRoomForItemText
 .print
 	call PrintText
+	ret
+.noObject
+	pop bc
 	ret
 
 FoundItemText:

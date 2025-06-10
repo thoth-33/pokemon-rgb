@@ -2109,7 +2109,17 @@ wObtainedHiddenCoinsFlags:: flag_array MAX_HIDDEN_COINS
 ; $02 = surfing
 wWalkBikeSurfState:: db
 wPlayerFlying:: db ; 0 = not a bird, 1 = bird
-	ds 9
+
+UNION
+
+ds 16
+
+NEXTU
+
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 16
+wExtraMissableObjectFlagsEnd::
+
+ENDU
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2157,7 +2167,7 @@ wWhichDungeonWarp:: db
 
 wUnusedCardKeyGateID:: db
 
-	ds 8
+	ds 1
 
 wStatusFlags1:: db
 	ds 1
