@@ -100,6 +100,7 @@ SpriteSheetPointerTable:
 	overworld_sprite MewSprite, 12              ; SPRITE_MEW
 	overworld_sprite WeezingSprite, 12          ; SPRITE_WEEZING
 	overworld_sprite HypnoSprite, 12            ; SPRITE_HYPNO
+	overworld_sprite WhirlpoolSprite, 12        ; SPRITE_WHIRLPOOL
 	overworld_sprite EmptySprite, 4             ; SPRITE_EMPTY
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
