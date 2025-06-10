@@ -158,21 +158,14 @@ DEF SHOW EQU $15
 	const HS_VICTORY_ROAD_3F_ITEM_1        ; 92 X
 	const HS_VICTORY_ROAD_3F_ITEM_2        ; 93 X
 	const HS_VICTORY_ROAD_3F_BOULDER       ; 94
-	const HS_ROCKET_HIDEOUT_B1F_ITEM_1     ; 95 X
-	const HS_ROCKET_HIDEOUT_B1F_ITEM_2     ; 96 X
-	const HS_ROCKET_HIDEOUT_B2F_ITEM_1     ; 97 X
-	const HS_ROCKET_HIDEOUT_B2F_ITEM_2     ; 98 X
-	const HS_ROCKET_HIDEOUT_B2F_ITEM_3     ; 99 X
-	const HS_ROCKET_HIDEOUT_B2F_ITEM_4     ; 9A X
-	const HS_ROCKET_HIDEOUT_B3F_ITEM_1     ; 9B X
-	const HS_ROCKET_HIDEOUT_B3F_ITEM_2     ; 9C X
+; Rocket Hideout B1, B2, B3 moved
 	const HS_ROCKET_HIDEOUT_B4F_GIOVANNI   ; 9D
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_1     ; 9E X
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_2     ; 9F X
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_3     ; A0 X
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_4     ; A1
 	const HS_ROCKET_HIDEOUT_B4F_ITEM_5     ; A2
-;	const HS_SILPH_CO_2F_1                 ; -- XXX never (de)activated?
+	const HS_SILPH_CO_2F_1                 ; -- XXX never (de)activated?
 	const HS_SILPH_CO_2F_2                 ; A3
 	const HS_SILPH_CO_2F_3                 ; A4
 	const HS_SILPH_CO_2F_4                 ; A5
@@ -214,7 +207,7 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_9F_3                 ; C8
 	const HS_SILPH_CO_10F_1                ; C9
 	const HS_SILPH_CO_10F_2                ; CA
-;	const HS_SILPH_CO_10F_3                ; -- XXX never (de)activated?
+	const HS_SILPH_CO_10F_3                ; -- XXX never (de)activated?
 	const HS_SILPH_CO_10F_ITEM_1           ; CB X
 	const HS_SILPH_CO_10F_ITEM_2           ; CC X
 	const HS_SILPH_CO_10F_ITEM_3           ; CD X
@@ -222,23 +215,13 @@ DEF SHOW EQU $15
 	const HS_SILPH_CO_11F_2                ; CF
 	const HS_SILPH_CO_11F_3                ; D0
 ;	const HS_UNUSED_MAP_F4_1               ; -- XXX sprite doesn't exist
-	const HS_POKEMON_MANSION_2F_ITEM       ; D1 X
-	const HS_POKEMON_MANSION_3F_ITEM_1     ; D2 X
-	const HS_POKEMON_MANSION_3F_ITEM_2     ; D3 X
-	const HS_POKEMON_MANSION_B1F_ITEM_1    ; D4 X
-	const HS_POKEMON_MANSION_B1F_ITEM_2    ; D5 X
-	const HS_POKEMON_MANSION_B1F_ITEM_3    ; D6 X
-	const HS_POKEMON_MANSION_B1F_ITEM_4    ; D7 X
-	const HS_POKEMON_MANSION_B1F_ITEM_5    ; D8 X
+; Pokemon mansion moved
 ; Safari Zone moved
-	const HS_CERULEAN_CAVE_2F_ITEM_1       ; E4 X
-	const HS_CERULEAN_CAVE_2F_ITEM_2       ; E5 X
-	const HS_CERULEAN_CAVE_2F_ITEM_3       ; E6 X
+; Cerulean Cave 2F moved
 	const HS_MEWTWO                        ; E7 X
 	const HS_CERULEAN_CAVE_B1F_ITEM_1      ; E8 X
 	const HS_CERULEAN_CAVE_B1F_ITEM_2      ; E9 X
-	const HS_VICTORY_ROAD_1F_ITEM_1        ; EA X
-	const HS_VICTORY_ROAD_1F_ITEM_2        ; EB X
+; Victory Road 1F moved
 	const HS_CHAMPIONS_ROOM_OAK            ; EC
 	const HS_SEAFOAM_ISLANDS_1F_BOULDER_1  ; ED
 	const HS_SEAFOAM_ISLANDS_1F_BOULDER_2  ; EF
@@ -256,7 +239,14 @@ DEF SHOW EQU $15
 	const HS_MT_SILVER1F_HYPNO             ; FB added
 	const HS_MT_SILVER1F_BROCK             ; FC added
 	const HS_MT_SILVER1F_SABRINA           ; FD added
+	const HS_MT_SILVER1F_BOULDER1B
+	const HS_MT_SILVER1F_BOULDER2B
+	const HS_MT_SILVER1F_BOULDER3B
+	const HS_MT_SILVER1F_BOULDER1A
+	const HS_MT_SILVER1F_BOULDER2A
+	const HS_MT_SILVER1F_BOULDER3A
 	const HS_SAFFRON_GYM_SABRINA           ; FE added
+	
 DEF NUM_HS_OBJECTS EQU const_value
 
 	const_def
@@ -271,5 +261,26 @@ DEF NUM_HS_OBJECTS EQU const_value
 	const HS_SAFARI_ZONE_WEST_ITEM_3       ; E1 X
 	const HS_SAFARI_ZONE_WEST_ITEM_4       ; E2 X
 	const HS_SAFARI_ZONE_CENTER_ITEM       ; E3 X
+	const HS_POKEMON_MANSION_2F_ITEM       ; D1 X
+	const HS_POKEMON_MANSION_3F_ITEM_1     ; D2 X
+	const HS_POKEMON_MANSION_3F_ITEM_2     ; D3 X
+	const HS_POKEMON_MANSION_B1F_ITEM_1    ; D4 X
+	const HS_POKEMON_MANSION_B1F_ITEM_2    ; D5 X
+	const HS_POKEMON_MANSION_B1F_ITEM_3    ; D6 X
+	const HS_POKEMON_MANSION_B1F_ITEM_4    ; D7 X
+	const HS_POKEMON_MANSION_B1F_ITEM_5    ; D8 X
+	const HS_VICTORY_ROAD_1F_ITEM_1        ; EA X
+	const HS_VICTORY_ROAD_1F_ITEM_2        ; EB X
+	const HS_CERULEAN_CAVE_2F_ITEM_1       ; E4 X
+	const HS_CERULEAN_CAVE_2F_ITEM_2       ; E5 X
+	const HS_CERULEAN_CAVE_2F_ITEM_3       ; E6 X
+	const HS_ROCKET_HIDEOUT_B1F_ITEM_1     ; 95 X
+	const HS_ROCKET_HIDEOUT_B1F_ITEM_2     ; 96 X
+	const HS_ROCKET_HIDEOUT_B2F_ITEM_1     ; 97 X
+	const HS_ROCKET_HIDEOUT_B2F_ITEM_2     ; 98 X
+	const HS_ROCKET_HIDEOUT_B2F_ITEM_3     ; 99 X
+	const HS_ROCKET_HIDEOUT_B2F_ITEM_4     ; 9A X
+	const HS_ROCKET_HIDEOUT_B3F_ITEM_1     ; 9B X
+	const HS_ROCKET_HIDEOUT_B3F_ITEM_2     ; 9C X
 	
 DEF	NUM_EXTRA_HS_OBJECTS EQU const_value

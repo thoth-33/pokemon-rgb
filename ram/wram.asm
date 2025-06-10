@@ -1998,7 +1998,7 @@ wRedsHouse2FCurScript:: db
 wViridianMartCurScript:: db
 wRoute22GateCurScript:: db
 wCeruleanCityCurScript:: db
-	ds 7
+	ds 1
 wSSAnneBowCurScript:: db
 wViridianForestCurScript:: db
 wMuseum1FCurScript:: db
@@ -2060,7 +2060,7 @@ wCeruleanCaveB1FCurScript:: db
 wVictoryRoad1FCurScript:: db
 	ds 1
 wLancesRoomCurScript:: db
-	ds 4
+	ds 1
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
 	ds 1
@@ -2112,14 +2112,16 @@ wPlayerFlying:: db ; 0 = not a bird, 1 = bird
 
 UNION
 
-ds 16
+ds 18
 
 NEXTU
 
-wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS ; max size 16
+wExtraMissableObjectFlags:: flag_array NUM_EXTRA_HS_OBJECTS
 wExtraMissableObjectFlagsEnd::
 
 ENDU
+
+ds 9
 
 wTownVisitedFlag:: flag_array NUM_CITY_MAPS
 
@@ -2130,8 +2132,6 @@ wSafariSteps:: dw
 wFossilItem:: db
 ; mon that will result from the item
 wFossilMon:: db
-
-	ds 2
 
 ; trainer classes start at OPP_ID_OFFSET
 wEnemyMonOrTrainerClass:: db

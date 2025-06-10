@@ -1,4 +1,6 @@
 MtSilver1F_Script:
+	ld a, MT_SILVER_CAVE_1F
+	ld [wLastMap], a
 	call EnableAutoTextBoxDrawing
 	ld hl, MtSilver1F_ScriptPointers
 	ld a, [wMtSilver1FCurScript]
@@ -16,10 +18,7 @@ MtSilver1F_ScriptPointers:
 	
 MtSilver1FBrockScript:
 	CheckEvent EVENT_BROCK_REMATCH_BEAT
-	jr z, .BrockWalk ; set to z for debug
-	call MtSilver1FRocksScript
-	ret
-.BrockWalk
+	ret nz ; set to nz for debug
 	ld hl, MtSilver1FBrockCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -89,13 +88,34 @@ MtSilver1FBrockExitScript:
 	ld a, HS_PEWTER_GYM_BROCK2
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	
+	ld a, HS_MT_SILVER1F_BOULDER1B
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER1F_BOULDER2B
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_MT_SILVER1F_BOULDER3B
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	
+	ld a, HS_MT_SILVER1F_BOULDER1A
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_MT_SILVER1F_BOULDER2A
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_MT_SILVER1F_BOULDER3A
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	
 	ld a, SCRIPT_MT_SILVER1F_SABRINA
 	ld [wMtSilver1FCurScript], a	
 	ret
 	
 MtSilver1FSabrinaScript:
 	CheckEvent EVENT_SABRINA_REMATCH_BEAT
-	jr nz, .SabrinaWalk ; set to z for debug
+	jr z, .SabrinaWalk ; set to z for debug
 	ld hl, MtSilver1FHypnoCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -220,57 +240,6 @@ MtSilver1FSabrinaTalkScript:
 MtSilver1FNoopScript:
 ret ; to-do
 	
-MtSilver1FRocksScript:
-	; Check if the current map matches the last visited map
-	ld a, [wCurMap]
-	ld hl, wLastMap
-	cp [hl]
-	jr nz, .replaceTiles	
-	; Run again after a battle
-	ld hl, wCurrentMapScriptFlags
-	bit BIT_CUR_MAP_LOADED_1, [hl]
-	res BIT_CUR_MAP_LOADED_1, [hl]
-	ret z
-	
-.replaceTiles ; Set variables to avoid repeated runs
-	ld a, [wCurMap]
-	ld [wLastMap], a
-	ld hl, wCurrentMapScriptFlags
-	res BIT_CUR_MAP_LOADED_1, [hl]
-    ld a, 1
-    ld [wSkipRedraw], a
-
-	ld a, $7d
-	ld [wNewTileBlockID], a
-	ld b, 14
-	ld c, 3
-	predef ReplaceTileBlock
-	ld a, $0b
-	ld [wNewTileBlockID], a
-	ld b, 13
-	ld c, 3
-	predef ReplaceTileBlock	
-	ld a, $0a
-	ld [wNewTileBlockID], a
-	ld b, 13
-	ld c, 4
-	predef ReplaceTileBlock
-	ld a, $01
-	ld [wNewTileBlockID], a
-	ld b, 13
-	ld c, 5
-	predef ReplaceTileBlock
-	ld b, 12
-	ld c, 2
-	predef ReplaceTileBlock
-	ld b, 12
-	ld c, 3
-	predef ReplaceTileBlock
-	ld a, [wYCoord] ; Dont redraw on entrance
-	cp $23
-	ret z
-	jpfar RedrawMapView
-	
 MtSilver1F_TextPointers:
 	def_text_pointers
 	dw_const MtSilver1FRockGuardText,  TEXT_MT_SILVER1F_ROCK_GUARD
@@ -278,6 +247,14 @@ MtSilver1F_TextPointers:
     dw_const MtSilver1FHypnoText,      TEXT_MT_SILVER1F_HYPNO
     dw_const MtSilver1FBrockText,      TEXT_MT_SILVER1F_BROCK
     dw_const MtSilver1FSabrinaText,    TEXT_MT_SILVER1F_SABRINA
+	
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER1B
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER2B
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER3B
+	
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER1A
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER2A
+	dw_const BoulderText, TEXT_MT_SILVER1F_BOULDER3A
 	
 MtSilver1FRockGuardText:
 	text_asm

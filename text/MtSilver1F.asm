@@ -40,7 +40,7 @@ _MtSilver1FBrockText_Done::
 	text "Toughest job yet."
 
 	para "Even with ONIX,"
-	line "it took hours!"
+	line "it was tough!"
 
 	para "I carved a narrow"
 	line "path through it."
