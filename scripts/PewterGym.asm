@@ -239,6 +239,12 @@ PewterGymRematchPostBattleText:
 
 PewterGymBrockPostGameText:
 	text_asm
+	CheckEventReuseA EVENT_GOT_TM34
+	jr nz, .skip
+	call z, PewterGymScriptReceiveTM34
+	call DisableWaitingAfterTextDisplay
+	jp TextScriptEnd
+.skip
 	ld hl, PewterGymBrockGoodLuckText
 	call PrintText
 	jp TextScriptEnd

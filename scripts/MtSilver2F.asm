@@ -122,6 +122,9 @@ MtSilver2FMistyExitScript:
 	ld a, HS_CERULEAN_GYM_MISTY2 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_VIRIDIAN_GYM_GIOVANNI
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	ld a, SCRIPT_MT_SILVER2F_NOOP
 	ld [wMtSilver2FCurScript], a	
 	ret

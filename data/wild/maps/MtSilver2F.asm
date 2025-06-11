@@ -3,7 +3,12 @@ MtSilver2FWildMons:
 	db  45, GOLBAT
 	db  42, MACHOKE
 	db  45, RHYHORN
-	db  42, PARASECT
+IF DEF(_RED)
+	db  42, PINSIR
+ENDC
+IF DEF(_BLUE)
+	db  42, SCYTHER
+ENDC
 	db  50, GOLBAT
 	db  45, GOLBAT
 	db  45, GOLDUCK

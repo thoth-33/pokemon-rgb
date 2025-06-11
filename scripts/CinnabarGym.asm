@@ -557,6 +557,12 @@ CinnabarGymSuperNerd7:
 
 CinnabarGymBlainePostGameText:
 	text_asm
+	CheckEventReuseA EVENT_GOT_TM38
+	jr nz, .skip
+	call z, CinnabarGymReceiveTM38
+	call DisableWaitingAfterTextDisplay
+	jp TextScriptEnd
+.skip
 	ld hl, CinnabarGymBlaineGoodLuckText
 	call PrintText
 	jp TextScriptEnd

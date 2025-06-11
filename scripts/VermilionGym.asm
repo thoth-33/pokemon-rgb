@@ -317,6 +317,12 @@ VermilionGymSailorAfterBattleText:
 
 VermilionGymLTSurgePostGameText:
 	text_asm
+	CheckEventReuseA EVENT_GOT_TM24
+	jr nz, .skip
+	call z, VermilionGymLTSurgeReceiveTM24Script
+	call DisableWaitingAfterTextDisplay
+	jp TextScriptEnd
+.skip
 	ld hl, VermilionGymLTSurgeGoodLuckText
 	call PrintText
 	jp TextScriptEnd
