@@ -12,5 +12,15 @@ MtSilver2FWildMons:
 	db  48, MACHOKE
 	end_grass_wildmons
 
-	def_water_wildmons 0 ; encounter rate
+	def_water_wildmons 5 ; encounter rate
+    db 35, POLIWAG
+    db 38, POLIWAG
+    db 40, POLIWAG
+    db 42, POLIWAG
+    db 44, POLIWAG
+    db 40, POLIWHIRL
+    db 42, POLIWHIRL
+    db 44, POLIWHIRL
+    db 40, POLIWHIRL
+    db 45, POLIWHIRL
 	end_water_wildmons

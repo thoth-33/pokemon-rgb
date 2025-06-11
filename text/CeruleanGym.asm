@@ -131,3 +131,23 @@ _CeruleanGymGymGuideBeatMistyText::
 	line "we make a pretty"
 	cont "darn good team!"
 	done
+
+_CeruleanGymRematchPreBattleText::
+	text "Rematch?"
+	done
+
+ _CeruleanGymRematchDefeatedText::
+	text "You won"
+	prompt
+
+ _CeruleanGymRematchVictoryText::
+	text "You lost"
+	prompt
+	
+_CeruleanGymRematchPostBattleText::
+	text "I'll help"
+	done
+	
+_CeruleanGymMistyGoodLuckText::
+	text "I'm Back"
+	done

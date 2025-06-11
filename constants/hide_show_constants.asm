@@ -79,9 +79,7 @@ DEF SHOW EQU $15
 	const HS_OLD_AMBER                     ; 43
 	const HS_PEWTER_GYM_BROCK1             ; 44 added
 	const HS_PEWTER_GYM_BROCK2             ; 45 added
-	const HS_CERULEAN_CAVE_1F_ITEM_1       ; 46 X
-	const HS_CERULEAN_CAVE_1F_ITEM_2       ; 47 X
-	const HS_CERULEAN_CAVE_1F_ITEM_3       ; 48 X
+; Cerulean Cave 1F moved
 	const HS_POKEMON_TOWER_2F_RIVAL        ; 49
 	const HS_POKEMON_TOWER_3F_ITEM         ; 4A X
 	const HS_POKEMON_TOWER_4F_ITEM_1       ; 4B X
@@ -107,6 +105,7 @@ DEF SHOW EQU $15
 	const HS_CINNABAR_GYM_BLAINE2          ; 5F added
 	const HS_FIGHTING_DOJO_GIFT_1          ; 60
 	const HS_FIGHTING_DOJO_GIFT_2          ; 61
+	const HS_SAFFRON_GYM_SABRINA
 	const HS_SILPH_CO_1F_RECEPTIONIST      ; 62
 	const HS_VOLTORB_1                     ; 63 X
 	const HS_VOLTORB_2                     ; 64 X
@@ -145,6 +144,8 @@ DEF SHOW EQU $15
 	const HS_MT_MOON_B2F_ITEM_1            ; 85 X
 	const HS_MT_MOON_B2F_ITEM_2            ; 86 X
 	const HS_CERULEAN_BULBASAUR            ; 87 added
+	const HS_CERULEAN_GYM_MISTY1
+	const HS_CERULEAN_GYM_MISTY2
 	const HS_VERMILION_GYM_LT_SURGE1       ; 88 added
 	const HS_VERMILION_GYM_LT_SURGE2       ; 89 added
 	const HS_VERMILION_DOCK_MEW            ; 8A added
@@ -245,7 +246,11 @@ DEF SHOW EQU $15
 	const HS_MT_SILVER1F_BOULDER1A
 	const HS_MT_SILVER1F_BOULDER2A
 	const HS_MT_SILVER1F_BOULDER3A
-	const HS_SAFFRON_GYM_SABRINA           ; FE added
+	const HS_MT_SILVER2F_WHIRLPOOL1
+	const HS_MT_SILVER2F_WHIRLPOOL2
+	const HS_MT_SILVER2F_MISTY
+	const HS_MT_SILVER2F_ESCAPE_ROPE
+	const HS_MT_SILVER2F_TM_DRAGON_RAGE
 	
 DEF NUM_HS_OBJECTS EQU const_value
 
@@ -271,6 +276,9 @@ DEF NUM_HS_OBJECTS EQU const_value
 	const HS_POKEMON_MANSION_B1F_ITEM_5    ; D8 X
 	const HS_VICTORY_ROAD_1F_ITEM_1        ; EA X
 	const HS_VICTORY_ROAD_1F_ITEM_2        ; EB X
+	const HS_CERULEAN_CAVE_1F_ITEM_1       ; 46 X
+	const HS_CERULEAN_CAVE_1F_ITEM_2       ; 47 X
+	const HS_CERULEAN_CAVE_1F_ITEM_3       ; 48 X
 	const HS_CERULEAN_CAVE_2F_ITEM_1       ; E4 X
 	const HS_CERULEAN_CAVE_2F_ITEM_2       ; E5 X
 	const HS_CERULEAN_CAVE_2F_ITEM_3       ; E6 X

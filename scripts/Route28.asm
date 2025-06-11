@@ -20,7 +20,7 @@ ret
 Route28DefaultScript:
 	CheckEvent EVENT_LT_SURGE_REMATCH_BEAT
 	jr z, .SurgeWalkAndTalk ; set to z for debug
-	ld hl, Route28ScriptGuardCoords
+	ld hl, Route28GuardCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
@@ -34,7 +34,7 @@ Route28DefaultScript:
 	ld [wRoute28CurScript], a
 	jp DisplayTextID
 .SurgeWalkAndTalk
-	ld hl, Route28ScriptSurgeCoords
+	ld hl, Route28SurgeCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
@@ -76,12 +76,12 @@ Route28DefaultScript:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 	
-Route28ScriptGuardCoords:
+Route28GuardCoords:
 	dbmapcoord  22,  12
 	dbmapcoord  22,  13
 	db -1 ; end
 	
-Route28ScriptSurgeCoords:
+Route28SurgeCoords:
 	dbmapcoord  32,   7
 	dbmapcoord  31,   6
 	db -1 ; end
