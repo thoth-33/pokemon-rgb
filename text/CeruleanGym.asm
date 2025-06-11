@@ -133,21 +133,41 @@ _CeruleanGymGymGuideBeatMistyText::
 	done
 
 _CeruleanGymRematchPreBattleText::
-	text "Rematch?"
+	text "Whirlpools, huh?"
+	line "I've been working"
+	cont "on a new HM move"
+	cont "for just such a"
+	cont "situation."
+
+	para "Think you're ready"
+	line "to test it out?"
+	cont "Prove it."
 	done
 
  _CeruleanGymRematchDefeatedText::
-	text "You won"
+	text "Wow, okay!"
+	line "That is why you"
+	cont "are the CHAMP!"
 	prompt
 
  _CeruleanGymRematchVictoryText::
-	text "You lost"
+	text "Told you the tide"
+	line "was on my side!"
 	prompt
 	
 _CeruleanGymRematchPostBattleText::
-	text "I'll help"
+	text "Perfect chance to"
+	line "test the new HM."
+
+	para "I'll meet you back"
+	line "in the cave."
 	done
 	
 _CeruleanGymMistyGoodLuckText::
-	text "I'm Back"
+	text "Took some trying,"
+	line "but the HM worked."
+
+	para "The water is calm"
+	line "enough to cross."
+	cont "Happy to help!"
 	done

@@ -647,6 +647,7 @@ BrockData:
 
 MistyData:
 	db $FF, 18, STARYU, 21, STARMIE, 0
+;	db $FF, 71, SEADRA, 73, GOLDUCK, 73, LAPRAS, 74, SEAKING, 76, BLASTOISE, 77, STARMIE, 0
 	db $FF,  1, STARYU, 0
 
 LtSurgeData:
