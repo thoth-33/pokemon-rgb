@@ -21,3 +21,4 @@ DEF MAP_BORDER EQU 3
 	const TILEANIM_NONE          ; 0
 	const TILEANIM_WATER         ; 1
 	const TILEANIM_WATER_FLOWER  ; 2
+	const TILEANIM_WATER_LAVA	 ; 3

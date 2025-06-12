@@ -283,10 +283,17 @@ UpdateMovingBgTiles::
 	ret c
 	cp 21
 	jr z, .flower
-
-; water
-
+	
+	ld b, 0
+.water
+	ld a, b
+	and a 			; b=0, watertileset
+	jr z, .watertileset
+	ld hl, vTileset tile $00	; b=1, lavatileset
+	jr .continueAnimation
+.watertileset
 	ld hl, vTileset tile $14
+.continueAnimation
 	ld c, $10
 
 	ld a, [wMovingBGTilesCounter2]
@@ -316,7 +323,13 @@ UpdateMovingBgTiles::
 
 	xor a
 	ldh [hMovingBGTilesCounter1], a
-	ret
+
+	ld a, b
+	cp 1
+	ret z
+
+	inc b
+	jr .water
 
 .flower
 	xor a

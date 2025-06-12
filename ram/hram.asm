@@ -281,6 +281,7 @@ hVBlankOccurred:: db
 ; 0 = no animations (breaks Surf)
 ; 1 = water tile $14 is animated
 ; 2 = water tile $14 and flower tile $03 are animated
+; 3 = water tile $14 and lava tile $00 are animated
 hTileAnimations:: db
 
 hMovingBGTilesCounter1:: db

@@ -40,6 +40,7 @@ WildDataPointers:
 	dw Route28WildMons		   ; ROUTE_28
 	dw MtSilverWildMons		   ; MT.SILVER
 	dw NothingWildMons         ; REDS_HOUSE_1F
+	dw NothingWildMons		   ; CINNABAR VOLCANO TOP
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
@@ -107,7 +108,7 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw NothingWildMons
+	dw CinnabarVolcanoB1FWildMons	; CINNABAR VOLCANO B1F
 	dw NothingWildMons
 	dw NothingWildMons
 	dw VictoryRoad1FWildMons
@@ -250,9 +251,10 @@ WildDataPointers:
 	dw NothingWildMons
 	dw NothingWildMons
 	dw NothingWildMons
-	dw MtSilver1FWildMons		   ; MT.SILVER CAVE 1F
-	dw MtSilver2FWildMons		   ; MT.SILVER CAVE 2F
-	dw MtSilver3FWildMons		   ; MT.SILVER CAVE 3F
+	dw MtSilver1FWildMons
+	dw MtSilver2FWildMons
+	dw MtSilver3FWildMons
+	dw CinnabarVolcanoWildMons
 	assert_table_length NUM_MAPS
 	dw -1 ; end
 
@@ -331,3 +333,5 @@ INCLUDE "data/wild/maps/DiglettsCave.asm"
 INCLUDE "data/wild/maps/MtSilver1F.asm"
 INCLUDE "data/wild/maps/MtSilver2F.asm"
 INCLUDE "data/wild/maps/MtSilver3F.asm"
+INCLUDE "data/wild/maps/CinnabarVolcano.asm"
+INCLUDE "data/wild/maps/CinnabarVolcanoB1F.asm"

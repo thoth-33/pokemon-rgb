@@ -61,6 +61,7 @@ DEF SHOW EQU $15
 	const HS_MT_SILVER_CAVE_WEEZING1 	   ; 32 Post game
 	const HS_MT_SILVER_CAVE_WEEZING2 	   ; 33 Post game
 	const HS_MT_SILVER_CAVE_FULL_RESTORE   ; 34 Post game
+	const HS_MOLTRES
 	const HS_DAISY_SITTING                 ; 35
 	const HS_DAISY_WALKING                 ; 36
 	const HS_TOWN_MAP                      ; 37
@@ -120,7 +121,7 @@ DEF SHOW EQU $15
 	const HS_POWER_PLANT_ITEM_3            ; 6E X
 	const HS_POWER_PLANT_ITEM_4            ; 6F X
 	const HS_POWER_PLANT_ITEM_5            ; 70 X
-	const HS_MOLTRES                       ; 71 X
+	const HS_VICTORY_ROAD_2F_ITEM_0        ; 71 X
 	const HS_VICTORY_ROAD_2F_ITEM_1        ; 72 X
 	const HS_VICTORY_ROAD_2F_ITEM_2        ; 73 X
 	const HS_VICTORY_ROAD_2F_ITEM_3        ; 74 X
@@ -255,6 +256,10 @@ DEF SHOW EQU $15
 	const HS_MT_SILVER3F_ROCKET1
 	const HS_MT_SILVER3F_ROCKET2
 	const HS_MT_SILVER3F_ROCKET3
+	const HS_CINNABARVOLCANO_BOULDER1
+	const HS_CINNABARVOLCANO_BOULDER2
+	const HS_CINNABARVOLCANO_BOULDER3
+	const HS_CINNABARVOLCANO_BOULDER4
 	
 DEF NUM_HS_OBJECTS EQU const_value
 

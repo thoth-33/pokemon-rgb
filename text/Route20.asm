@@ -146,10 +146,61 @@ _Route20Swimmer9EndBattleText::
 	prompt
 
 _Route20Swimmer9AfterBattleText::
-	text "CINNABAR is a "
-	line "volcanic island!"
+	text "There's a volcano"
+	line "near CINNABAR!"
 	done
 
 _Route20SeafoamIslandsSignText::
 	text "SEAFOAM ISLANDS"
 	done
+
+
+_Route20Swimmer10BattleText::
+	text "Wait! How did you"
+	line "find this place?"
+	done
+
+_Route20Swimmer10EndBattleText::
+	text "Down"
+	line "and out!"
+	prompt
+
+_Route20Swimmer10AfterBattleText::
+	text "I come to swim"
+	line "here every day!"
+	done
+
+_Route20Fisher1ThatsANugget::
+	text "That's a NUGGET."
+
+	para "I can't give you"
+	line "any nuggets of"
+
+	para "wisdom, so that'll"
+	line "have to do!"
+	done
+
+_Route20Fisher1NoRoomText::
+	text "Make some room"
+	line "for this!"
+	done
+
+_Route20Fisher1GiveNugget::
+	text "Hi! Wow, I'm glad"
+	line "to see you."
+
+	para "You're the first"
+	line "visitor I've had"
+	cont "in a long time."
+
+	para "I'm super-happy!"
+	line "Let me give you a"
+	cont "little present."
+	prompt
+
+_Route20Fisher1GotNuggetText::
+	text "<PLAYER> got"
+	line "@"
+	text_ram wStringBuffer
+	text "!@"
+	text_end

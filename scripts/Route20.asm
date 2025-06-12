@@ -74,6 +74,8 @@ Route20_TextPointers:
 	dw_const Route20Swimmer7Text,           TEXT_ROUTE20_SWIMMER7
 	dw_const Route20Swimmer8Text,           TEXT_ROUTE20_SWIMMER8
 	dw_const Route20Swimmer9Text,           TEXT_ROUTE20_SWIMMER9
+	dw_const Route20Swimmer10Text,          TEXT_ROUTE20_SWIMMER10
+	dw_const Route20Fisher1Text,   	        TEXT_ROUTE20_FISHER1
 	dw_const Route20SeafoamIslandsSignText, TEXT_ROUTE20_SEAFOAM_ISLANDS_WEST_SIGN
 	dw_const Route20SeafoamIslandsSignText, TEXT_ROUTE20_SEAFOAM_ISLANDS_EAST_SIGN
 
@@ -99,6 +101,8 @@ Route20TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_20_TRAINER_8, 3, Route20Swimmer8BattleText, Route20Swimmer8EndBattleText, Route20Swimmer8AfterBattleText
 Route20TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_20_TRAINER_9, 4, Route20Swimmer9BattleText, Route20Swimmer9EndBattleText, Route20Swimmer9AfterBattleText
+Route20TrainerHeader10:
+	trainer EVENT_BEAT_ROUTE_20_TRAINER_10, 4, Route20Swimmer10BattleText, Route20Swimmer10EndBattleText, Route20Swimmer10AfterBattleText
 	db -1 ; end
 
 Route20Swimmer1Text:
@@ -283,4 +287,59 @@ Route20Swimmer9AfterBattleText:
 
 Route20SeafoamIslandsSignText:
 	text_far _Route20SeafoamIslandsSignText
+	text_end
+
+Route20Swimmer10Text:
+	text_asm
+	ld hl, Route20TrainerHeader10
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route20Swimmer10BattleText:
+	text_far _Route20Swimmer10BattleText
+	text_end
+
+Route20Swimmer10EndBattleText:
+	text_far _Route20Swimmer10EndBattleText
+	text_end
+
+Route20Swimmer10AfterBattleText:
+	text_far _Route20Swimmer10AfterBattleText
+	text_end
+
+Route20Fisher1Text:
+	text_asm
+	CheckAndSetEvent EVENT_GOT_NUGGET_OF_WISDOM
+	jr nz, .got_item
+	ld hl, .GiveNuggetText
+	call PrintText
+	lb bc, NUGGET, 1
+	call GiveItem
+	jr nc, .bag_full
+	ld hl, .GotNuggetText
+	jr .done
+.bag_full
+	ld hl, .NoRoomText
+	jr .done
+.got_item
+	ld hl, .ThatsANugget
+.done
+	call PrintText
+	jp TextScriptEnd
+
+.ThatsANugget:
+	text_far _Route20Fisher1ThatsANugget
+	text_end
+
+.NoRoomText:
+	text_far _Route20Fisher1NoRoomText
+	text_end
+
+.GiveNuggetText:
+	text_far _Route20Fisher1GiveNugget
+	text_end
+
+.GotNuggetText:
+	text_far _Route20Fisher1GotNuggetText
+	sound_get_item_1
 	text_end
