@@ -51,8 +51,11 @@ VermilionCityDefaultScript:
 	ld a, TEXT_VERMILIONCITY_SAILOR1
 	ldh [hTextID], a
 	call DisplayTextID
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	jr nz, .check_ticket	
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .ship_departed
+.check_ticket
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
@@ -168,8 +171,11 @@ VermilionCityGambler1Text:
 
 VermilionCitySailor1Text:
 	text_asm
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	jr nz, .welcome	
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .ship_departed
+.welcome
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_RIGHT
 	jr z, .greet_player
@@ -177,12 +183,25 @@ VermilionCitySailor1Text:
 	call ArePlayerCoordsInArray
 	jr nc, .greet_player_and_check_ticket
 .greet_player
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	jr nz, .greet_player_ship_has_returned
 	ld hl, .WelcomeToSSAnneText
 	call PrintText
 	jr .end
+.greet_player_ship_has_returned
+	ld hl, .ShipHasReturnedText
+	call PrintText
+	jr .end
 .greet_player_and_check_ticket
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	jr nz, .greet_player_ship_has_returned_and_check_ticket
 	ld hl, .DoYouHaveATicketText
 	call PrintText
+	jr .check_ticket
+.greet_player_ship_has_returned_and_check_ticket
+	ld hl, .DoYouHaveATicketTextAgain
+	call PrintText
+.check_ticket
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
@@ -216,6 +235,10 @@ VermilionCitySailor1Text:
 	text_far _VermilionCitySailor1DoYouHaveATicketText
 	text_end
 
+.DoYouHaveATicketTextAgain:
+	text_far _VermilionCitySailor1DoYouHaveATicketTextAgain
+	text_end
+	
 .FlashedTicketText:
 	text_far _VermilionCitySailor1FlashedTicketText
 	text_end
@@ -226,6 +249,10 @@ VermilionCitySailor1Text:
 
 .ShipSetSailText:
 	text_far _VermilionCitySailor1ShipSetSailText
+	text_end
+
+.ShipHasReturnedText:
+	text_far _VermilionCitySailor1ShipReturnedText
 	text_end
 
 VermilionCityGambler2Text:

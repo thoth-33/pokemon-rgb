@@ -27,7 +27,6 @@ _Route28LTSurgeText_Done::
 	para "Mission complete."
 	line "Back to base!"
 	done
-	done
 	
 _Route28SignText::
 	text "NEW ROUTE:"

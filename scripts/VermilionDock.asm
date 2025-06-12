@@ -61,6 +61,8 @@ VermilionDock_ScriptPointers:
 	dw_const EndTrainerBattle,                      SCRIPT_VERMILIONDOCK_END_BATTLE
 	
 VermilionDockSSAnneLeavesScript:
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ret nz
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a

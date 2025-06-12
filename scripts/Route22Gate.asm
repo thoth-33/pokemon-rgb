@@ -115,15 +115,15 @@ Route22GateGuardGoRightAheadText:
 
 Route28GateGuardText:
 	text_asm
-;	CheckEvent EVENT_PLAYER_IS_CHAMPION ; check if the player is champion
-;	jr z, .notChampion
-	ld hl, Route22GateText_MtSilverCome ; Player is champion
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	jr nz, .routeClear
+	ld hl, Route22GateText_MtSilverCome
 	call PrintText
 	jp TextScriptEnd
-;.notChampion
-;	ld hl, Route22GateText_MtSilver
-;	call PrintText
-;	jp TextScriptEnd ; this is not necessary as the coords above check for champ, but can be reused later when construction is complete
+.routeClear
+	ld hl, Route22GateText_MtSilverDone
+	call PrintText
+	jp TextScriptEnd
 
 Route28GateGuardStopText:
 	text_asm
@@ -142,6 +142,10 @@ Route22GateText_MtSilver:
 
 Route22GateText_MtSilverCome:
 	text_far _Route22GateText_MtSilverCome
+	text_end
+	
+Route22GateText_MtSilverDone:
+	text_far _Route22GateText_MtSilverDone
 	text_end
 
 Route22GateScript_MoveRight:
