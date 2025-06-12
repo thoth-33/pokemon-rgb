@@ -1,6 +1,7 @@
 roms := \
 	pokered.gbc \
 	pokeblue.gbc \
+	pokered_debug.gbc \
 	pokeblue_debug.gbc
 patches := \
 	pokered.patch \
@@ -19,6 +20,7 @@ rom_obj := \
 
 pokered_obj        := $(rom_obj:.o=_red.o)
 pokeblue_obj       := $(rom_obj:.o=_blue.o)
+pokered_debug_obj  := $(rom_obj:.o=_red_debug.o)
 pokeblue_debug_obj := $(rom_obj:.o=_blue_debug.o)
 pokered_vc_obj     := $(rom_obj:.o=_red_vc.o)
 pokeblue_vc_obj    := $(rom_obj:.o=_blue_vc.o)
@@ -50,6 +52,7 @@ RGBLINK ?= $(RGBDS)rgblink
 all: $(roms)
 red:        pokered.gbc
 blue:       pokeblue.gbc
+red_debug:  pokered_debug.gbc
 blue_debug: pokeblue_debug.gbc
 red_vc:     pokered.patch
 blue_vc:    pokeblue.patch
@@ -74,6 +77,7 @@ tidy:
 	      $(pokeblue_obj) \
 	      $(pokered_vc_obj) \
 	      $(pokeblue_vc_obj) \
+	      $(pokered_debug_obj) \
 	      $(pokeblue_debug_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
@@ -93,6 +97,7 @@ endif
 
 $(pokered_obj):        RGBASMFLAGS += -D _RED
 $(pokeblue_obj):       RGBASMFLAGS += -D _BLUE
+$(pokered_debug_obj):  RGBASMFLAGS += -D _RED -D _DEBUG
 $(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _DEBUG
 $(pokered_vc_obj):     RGBASMFLAGS += -D _RED -D _RED_VC
 $(pokeblue_vc_obj):    RGBASMFLAGS += -D _BLUE -D _BLUE_VC
@@ -121,6 +126,7 @@ endef
 # Dependencies for objects (drop _red and _blue from asm file basenames)
 $(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
 $(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
+$(foreach obj, $(pokered_debug_obj), $(eval $(call DEP,$(obj),$(obj:_red_debug.o=.asm))))
 $(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
 $(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm))))
 $(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
@@ -135,10 +141,12 @@ pokered_pad        = 0x00
 pokeblue_pad       = 0x00
 pokered_vc_pad     = 0x00
 pokeblue_vc_pad    = 0x00
+pokered_debug_pad  = 0xff
 pokeblue_debug_pad = 0xff
 
 pokered_opt        = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
 pokeblue_opt       = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_debug_opt  = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
 pokeblue_debug_opt = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
 pokered_vc_opt     = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
 pokeblue_vc_opt    = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
