@@ -16,7 +16,7 @@ ret
 
 MtSilver2FDefaultScript:
 	CheckEvent EVENT_MISTY_REMATCH_BEAT
-	ret nz ; set to nz for debug
+	ret z ; set to nz for debug
 	ld hl, MtSilver2FMistyCoords
 	call ArePlayerCoordsInArray
 	ret nc

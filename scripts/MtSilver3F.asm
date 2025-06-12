@@ -37,6 +37,9 @@ MtSilver3FGiovanniPostBattle:
 	ld a, HS_MT_SILVER3F_ROCKET3
 	ld [wMissableObjectIndex], a
 	predef HideObject
+	ld a, HS_SS_ANNE_BOW_OAK
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	CheckEventReuseA EVENT_GOT_TM27
 	jr nz, .skip ; in-case you never got the TM
 	ld a, HS_VIRIDIAN_GYM_GIOVANNI

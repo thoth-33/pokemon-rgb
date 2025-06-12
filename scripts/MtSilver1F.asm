@@ -18,7 +18,7 @@ MtSilver1F_ScriptPointers:
 	
 MtSilver1FBrockScript:
 	CheckEvent EVENT_BROCK_REMATCH_BEAT
-	ret nz ; set to nz for debug
+	ret z ; set to nz for debug
 	ld hl, MtSilver1FBrockCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -115,7 +115,7 @@ MtSilver1FBrockExitScript:
 	
 MtSilver1FSabrinaScript:
 	CheckEvent EVENT_SABRINA_REMATCH_BEAT
-	jr z, .SabrinaWalk ; set to z for debug
+	jr nz, .SabrinaWalk ; set to z for debug
 	ld hl, MtSilver1FHypnoCoords
 	call ArePlayerCoordsInArray
 	ret nc

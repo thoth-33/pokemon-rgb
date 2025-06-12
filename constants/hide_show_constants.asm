@@ -34,7 +34,6 @@ DEF SHOW EQU $15
 	const HS_SAFFRON_CITY_D                ; 16
 	const HS_SAFFRON_CITY_E                ; 17
 	const HS_SAFFRON_CITY_F                ; 18
-	const HS_ROUTE_1_OAK		      	   ; 19 added
 	const HS_ROUTE_2_ITEM_1                ; 1A X
 	const HS_ROUTE_2_ITEM_2                ; 1B X
 	const HS_ROUTE_4_ITEM                  ; 1C X
@@ -150,6 +149,7 @@ DEF SHOW EQU $15
 	const HS_VERMILION_GYM_LT_SURGE2       ; 89 added
 	const HS_VERMILION_DOCK_MEW            ; 8A added
 	const HS_SS_ANNE_2F_RIVAL              ; 8B
+	const HS_SS_ANNE_BOW_OAK
 	const HS_SS_ANNE_1F_ROOMS_ITEM         ; 8C X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_1       ; 8D X
 	const HS_SS_ANNE_2F_ROOMS_ITEM_2       ; 8E X

@@ -29,7 +29,7 @@ Route22GateDefaultScript:
 	jp DisplayTextID
 .checkRoute28Entrance
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ret z			;set to z for debug	; Player is champion
+	ret nz			;set to z for debug	; Player is champion
 	ld hl, Route22GateScriptCoords2		; Player is not champion
 	call ArePlayerCoordsInArray
 	ret nc

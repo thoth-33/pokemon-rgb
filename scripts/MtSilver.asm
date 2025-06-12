@@ -18,7 +18,7 @@ MtSilver_ScriptPointers:
 
 MtSilverErikaScript:
 	CheckEvent EVENT_ERIKA_REMATCH_BEAT
-	ret nz ; set to nz for debug
+	ret z ; set to nz for debug
 	ld hl, MtSilverErikaCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -127,7 +127,7 @@ MtSilverErikaExitScript:
 	
 MtSilverBlaineScript:
 	CheckEvent EVENT_BLAINE_REMATCH_BEAT
-	jr z, .BlaineWalk ; set to z for debug
+	jr nz, .BlaineWalk ; set to z for debug
 	call MtSilverStumpsScript
 	ret
 .BlaineWalk
