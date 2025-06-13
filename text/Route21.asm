@@ -135,3 +135,14 @@ _Route21Fisher4AfterBattleText::
 	text "Oh wait! I got a"
 	line "bite! Yeah!"
 	done
+	
+_Route21Sign1Text::
+	text "CINNABAR VOLCANO"
+	line "Cave Entrance."
+	done
+	
+_Route21Sign2Text::
+	text "ROUTE 21"
+	line "CINNABAR VOLCANO"
+	cont "- PALLET TOWN"
+	done

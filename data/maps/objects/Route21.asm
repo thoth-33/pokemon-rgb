@@ -17,6 +17,8 @@ Route21_Object:
 	warp_event  4, 67, CINNABAR_VOLCANO, 3
 
 	def_bg_events
+	bg_event   7, 83, TEXT_ROUTE21_SIGN1
+	bg_event  11, 69, TEXT_ROUTE21_SIGN2
 
 	def_object_events
 	object_event  4, 24, SPRITE_FISHER, STAY, LEFT, TEXT_ROUTE21_FISHER1, OPP_FISHER, 7

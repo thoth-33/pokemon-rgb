@@ -5,7 +5,7 @@ IF DEF(_RED)
 	db 33, GROWLITHE
 	db 35, KOFFING
 	db 32, PONYTA
-	db 34, MAGMAR
+	db 34, PONYTA
 	db 40, WEEZING
 	db 34, GRIMER
 	db 38, WEEZING
@@ -17,7 +17,7 @@ IF DEF(_BLUE)
 	db 33, VULPIX
 	db 35, GRIMER
 	db 32, PONYTA
-	db 34, MAGMAR
+	db 34, PONYTA
 	db 40, MUK
 	db 34, KOFFING
 	db 38, MUK

@@ -374,6 +374,8 @@ MtSilverStumpsScript:
 	ld b, 12
 	ld c, 11
 	predef ReplaceTileBlock
+	xor a
+    ld [wSkipRedraw], a
 	ld a, [wXCoord] ; Dont redraw if too far right
 	cp $1e
 	ret nc
@@ -423,6 +425,8 @@ MtSilverBurnedScript:
 	ld b, 12
 	ld c, 11
 	predef ReplaceTileBlock
+	xor a
+    ld [wSkipRedraw], a
 	ld a, [wXCoord] ; Dont redraw if too far right
 	cp $1e
 	ret nc

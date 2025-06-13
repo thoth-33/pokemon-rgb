@@ -142,6 +142,8 @@ INCLUDE "text/MtSilver.asm"
 INCLUDE "text/MtSilver1F.asm"
 INCLUDE "text/MtSilver2F.asm"
 INCLUDE "text/MtSilver3F.asm"
+INCLUDE "text/CinnabarVolcano.asm"
+INCLUDE "text/CinnabarVolcanoB1F.asm"
 INCLUDE "text/CinnabarVolcanoTop.asm"
 
 INCLUDE "data/text/text_3.asm"
