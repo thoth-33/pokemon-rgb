@@ -12,6 +12,7 @@ DungeonMaps1:
 	db ROCK_TUNNEL_B1F
 	db MT_SILVER_CAVE_1F
 	db MT_SILVER_CAVE_2F
+	db MT_SILVER_CAVE_3F
 	db -1 ; end
 
 ; GetBattleTransitionID_IsDungeonMap checks if wCurMap

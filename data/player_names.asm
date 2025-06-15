@@ -32,7 +32,7 @@ DefaultNamesPlayer:
 DefaultNamesGirl:
 	db   "NEW NAME"
 	next "YELLOW"
-	next "VOLT"
+	next "AMIE"
 	next "JANE"
 	db   "@"
 
