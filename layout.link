@@ -152,7 +152,7 @@ ROMX $1B
 	"Tilesets 3"
 ROMX $1C
 	"bank1C"
-	org $4a99
+	org $4a9a
 	"BattleTransition_BlackScreen"
 	org $5fb6
 	"InitPartyMenuBlkPacket"

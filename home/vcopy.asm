@@ -284,16 +284,13 @@ UpdateMovingBgTiles::
 	cp 21
 	jr z, .flower
 	
-	ld b, 0
-.water
-	ld a, b
-	and a 			; b=0, watertileset
-	jr z, .watertileset
-	ld hl, vTileset tile $00	; b=1, lavatileset
-	jr .continueAnimation
-.watertileset
+	ld b, 1
+;water
 	ld hl, vTileset tile $14
-.continueAnimation
+	jr .animateTiles
+.lava
+	ld hl, vTileset tile $00
+.animateTiles
 	ld c, $10
 
 	ld a, [wMovingBGTilesCounter2]
@@ -324,12 +321,14 @@ UpdateMovingBgTiles::
 	xor a
 	ldh [hMovingBGTilesCounter1], a
 
+	ld a, [hTileAnimations]
+	cp TILEANIM_WATER_LAVA
+	ret nz
 	ld a, b
-	cp 1
+	and a
 	ret z
-
-	inc b
-	jr .water
+	dec b
+	jr .lava
 
 .flower
 	xor a

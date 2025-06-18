@@ -114,9 +114,9 @@ _OaksLabOak1ParcelThanksText::
 	text_start
 	para "Hm? RUNNING SHOES?"
 	line "This isn't what I"
-	cont "ordered. Oh well,"
-	cont "you can take them."
-	cont "I don't run!"
+	cont "ordered. Oh well."
+	para "You can take them."
+	line "I don't run!"
 	done
 	
 _OaksLabOak1ByTheWayText::
