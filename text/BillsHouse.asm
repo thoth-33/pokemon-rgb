@@ -13,7 +13,7 @@ _BillsHouseBillImNotAPokemonText::
 	line "you, I screwed up"
 	cont "an experiment and"
 	cont "got combined with"
-	cont "a #MON!"
+	cont "a RATTATA!"
 
 	para "So, how about it?"
 	line "Help me out here!"

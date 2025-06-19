@@ -62,7 +62,7 @@
 	const SPRITE_BRUNO                   ; $3a
 	const SPRITE_LORELEI                 ; $3b
 	const SPRITE_SEEL                    ; $3c
-	const SPRITE_SANDSHREW               ; $-1 ;seven sprites inserted everything after this off by seven.
+	const SPRITE_SANDSHREW               ; $-1
 	const SPRITE_ODDISH                  ; $-2
 	const SPRITE_BULBASAUR               ; $-3
 	const SPRITE_OFFICER_JENNY           ; $-4	
@@ -95,6 +95,7 @@
 	const SPRITE_MEW                     ; $-V
 	const SPRITE_WEEZING                 ; $-W
 	const SPRITE_HYPNO                   ; $-X
+	const SPRITE_RATTATA                 ; $-Bill
 	const SPRITE_WHIRLPOOL               ; $-Y
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_EMPTY                   ; $-Z
