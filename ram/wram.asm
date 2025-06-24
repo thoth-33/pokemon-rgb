@@ -275,7 +275,10 @@ wPlayerMonNumber:: db
 ; the address of the menu cursor's current location within wTileMap
 wMenuCursorLocation:: dw
 
-	ds 2
+; index in party of currently battling mon
+wMaxDaycareLevel:: db
+
+	ds 1
 
 ; how many times should HandleMenuInput poll the joypad state before it returns?
 wMenuJoypadPollCount:: db
@@ -2063,7 +2066,6 @@ wLancesRoomCurScript:: db
 	ds 1
 wSilphCo10FCurScript:: db
 wSilphCo11FCurScript:: db
-	ds 1
 wFuchsiaGymCurScript:: db
 wSaffronGymCurScript:: db
 wCinnabarGymCurScript:: db
@@ -2087,6 +2089,11 @@ wCinnabarVolcanoCurScript:: db
 wCinnabarVolcanoB1FCurScript:: db
 wCinnabarVolcanoTopCurScript:: db
 wGameProgressFlagsEnd::
+
+wDifficulty::
+	; $00 = normal
+	; $01 = hard
+		ds 1
 
 wPlayerGender::
 	; $00 = male

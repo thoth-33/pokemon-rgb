@@ -1,6 +1,11 @@
 DisplayPokemonCenterDialogue_::
 	call SaveScreenTilesToBuffer1 ; save screen
+	ld a, [wDifficulty]
+	and a
+	ld hl, PokemonCenterWelcomeHardText
+	jr nz, .loadWelcome
 	ld hl, PokemonCenterWelcomeText
+.loadWelcome
 	call PrintText
 	ld hl, wStatusFlags4
 	bit BIT_USED_POKECENTER, [hl]
@@ -10,12 +15,69 @@ DisplayPokemonCenterDialogue_::
 	ld hl, ShallWeHealYourPokemonText
 	call PrintText
 .skipShallWeHealYourPokemon
+
+	; display cash on hand
+	ld a, [wDifficulty]
+	and a
+	jr z, .skipMoney
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+.skipMoney
+
 	call YesNoChoicePokeCenter ; yes/no menu
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .declinedHealing ; if the player chose No
+	jp nz, .declinedHealing ; if the player chose No
+
+	; have to pay on hard mode
+	ld a, [wDifficulty]
+	and a
+	jr z, .startHeal
+
+	; check if we can afford it
+	xor a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
+	ld a, $5
+	ldh [hMoney + 1], a
+	call HasEnoughMoney
+	jr nc, .enoughMoney
+	
+	; cant afford, heal anyway
+	ld hl, PokemonCenterCantAffordText
+	call PrintText
+	xor a
+	ld [wPlayerMoney], a
+	ld [wPlayerMoney + 1], a
+	ld [wPlayerMoney + 2], a
+	jr .startHeal
+	
+	; can afford, take money
+.enoughMoney
+	xor a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
+	ld a, $5
+	ld [wPriceTemp + 1], a
+	ld hl, wPriceTemp + 2
+	ld de, wPlayerMoney + 2
+	ld c, $3
+	predef SubBCDPredef
+
+.startHeal
 	call SetLastBlackoutMap
 	call LoadScreenTilesFromBuffer1 ; restore screen
+
+	; update money display
+	ld a, [wDifficulty]
+	and a
+	jr z, .skipMoneyUpdate
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+.skipMoneyUpdate
+
 	ld hl, NeedYourPokemonText
 	call PrintText
 	ld a, $18
@@ -47,6 +109,14 @@ DisplayPokemonCenterDialogue_::
 
 PokemonCenterWelcomeText:
 	text_far _PokemonCenterWelcomeText
+	text_end
+	
+PokemonCenterWelcomeHardText:
+	text_far _PokemonCenterWelcomeHardText
+	text_end
+
+PokemonCenterCantAffordText:
+	text_far _PokemonCenterCantAffordText
 	text_end
 
 ShallWeHealYourPokemonText:

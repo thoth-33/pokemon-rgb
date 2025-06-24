@@ -280,7 +280,9 @@ DisplayTwoOptionMenu:
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wTwoOptionMenuID]
-	cp NORTH_WEST_MENU
+	cp BOY_GIRL_MENU
+	jr z, .specialMenu
+	cp EASY_HARD_MENU
 	jr z, .specialMenu
 	cp NO_YES_MENU
 	jr nz, .notNoYesMenu

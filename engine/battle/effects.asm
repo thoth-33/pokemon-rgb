@@ -549,6 +549,9 @@ StatModifierDownEffect:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .statModifierDownEffect
+	ld a, [wDifficulty]
+	and a
+	jr nz, .statModifierDownEffect
 	call BattleRandom
 	cp 25 percent + 1 ; chance to miss by in regular battle
 	jp c, MoveMissed

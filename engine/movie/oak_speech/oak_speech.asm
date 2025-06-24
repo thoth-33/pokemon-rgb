@@ -70,9 +70,38 @@ ENDC
 	nop
 	nop
 	nop
+
+.MenuCursorLoop ; difficulty menu
+	ld hl, DifficultyText
+ 	call PrintText
+ 	call DifficultyChoice
+	ld a, [wCurrentMenuItem]
+	ld [wDifficulty], a
+	cp 0 ; normal
+	jr z, .SelectedNormalMode
+	cp 1 ; hard
+	jr z, .SelectedHardMode
+	; space for more game modes down the line
+.SelectedNormalMode
+	ld hl, NormalModeText
+	call PrintText
+	jp .YesNoNormalHard
+.SelectedHardMode
+	ld hl, HardModeText
+	call PrintText
+.YesNoNormalHard ; Give the player a brief description of each game mode and make sure that's what they want
+  	call YesNoNormalHardChoice
+	ld a, [wCurrentMenuItem]
+	cp 0
+	jr z, .doneLoop
+	jp .MenuCursorLoop ; If player says no, back to difficulty selection
+.doneLoop
+   	call ClearScreen ; clear the screen before resuming normal intro
+
 	ld a, [wStatusFlags6]
 	bit BIT_DEBUG_MODE, a
 	jp nz, .skipSpeech
+
 	ld de, ProfOakPic
 	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -221,6 +250,7 @@ ENDC
 	call DelayFrames
 	call GBFadeOutToWhite
 	jp ClearScreen
+	
 OakSpeechText1:
 	text_far _OakSpeechText1
 	text_end
@@ -248,6 +278,16 @@ boyConfirm:
 	text_end
 girlConfirm:
 	text_far _girlConfirm
+	text_end
+
+NormalModeText:
+	text_far _NormalModeText
+	text_end
+HardModeText:
+	text_far _HardModeText
+	text_end
+DifficultyText:
+	text_far _DifficultyText
 	text_end
 
 FadeInIntroPic:
@@ -312,21 +352,59 @@ IntroDisplayPicCenteredOrUpperRight:
 	ldh [hStartTileID], a
 	predef_jump CopyUncompressedPicToTilemap
 	
-	; displays boy/girl choice
-	BoyGirlChoice::
- 	   call SaveScreenTilesToBuffer1
- 	   call InitBoyGirlTextBoxParameters
- 	   jr DisplayBoyGirlChoice
+; displays boy/girl choice
+BoyGirlChoice::
+	call SaveScreenTilesToBuffer1
+	call InitBoyGirlTextBoxParameters
+	jr DisplayBoyGirlChoice
     
-	InitBoyGirlTextBoxParameters::
-	   ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
- 	   ld [wTwoOptionMenuID], a
- 	   coord hl, 13, 7 
- 	   ld bc, $80e
- 	   ret
+InitBoyGirlTextBoxParameters::
+	ld a, BOY_GIRL_MENU
+	ld [wTwoOptionMenuID], a
+	coord hl, 13, 7 
+	ld bc, $80e
+	ret
  	   
-	DisplayBoyGirlChoice::
-   	   ld a, $14
-   	   ld [wTextBoxID], a
-   	   call DisplayTextBoxID
-   	   jp LoadScreenTilesFromBuffer1
+DisplayBoyGirlChoice::
+	ld a, $14
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	jp LoadScreenTilesFromBuffer1
+	
+; displays difficulty choice
+DifficultyChoice::
+	call SaveScreenTilesToBuffer1
+	call InitDifficultyTextBoxParameters
+	jr DisplayDifficultyChoice
+
+InitDifficultyTextBoxParameters::
+  	ld a, EASY_HARD_MENU ; loads the value for the difficulty menu
+	ld [wTwoOptionMenuID], a
+	coord hl, 5, 5
+	ld bc, $606 ; Cursor Pos
+	ret
+	
+DisplayDifficultyChoice::
+	ld a, $14
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	jp LoadScreenTilesFromBuffer1
+
+; display yes/no choice
+YesNoNormalHardChoice::
+	call SaveScreenTilesToBuffer1
+	call InitYesNoNormalHardTextBoxParameters
+	jr DisplayYesNoNormalHardChoice
+
+InitYesNoNormalHardTextBoxParameters::
+  	ld a, YES_NO_MENU
+	ld [wTwoOptionMenuID], a
+	coord hl, 7, 5
+	ld bc, $608 ; Cursor Pos
+	ret
+	
+DisplayYesNoNormalHardChoice::
+	ld a, $14
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	jp LoadScreenTilesFromBuffer1

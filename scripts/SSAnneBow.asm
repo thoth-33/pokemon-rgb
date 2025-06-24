@@ -23,6 +23,7 @@ SSAnneBowOakPostBattleScript:
 	ld [wJoyIgnore], a
 	ld a, TEXT_SSANNEBOW_OAK_POSTBATTLE
 	ldh [hTextID], a
+	SetEvents EVENT_OAK_BEAT
 	call DisplayTextID
 	ld a, SSANNEBOW_OAK
 	ldh [hSpriteIndex], a

@@ -4,7 +4,13 @@ UseItem_::
 	ld a, [wCurItem]
 	cp HM01
 	jp nc, ItemUseTMHM
+	ld a, [wDifficulty]
+	and a
+	ld hl, ItemUsePtrTableHard
+	jr nz, .hardItems
 	ld hl, ItemUsePtrTable
+.hardItems
+	ld a, [wCurItem]
 	dec a
 	add a
 	ld c, a
@@ -100,6 +106,92 @@ ItemUsePtrTable:
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+
+ItemUsePtrTableHard:
+; entries correspond to item ids
+	dw ItemUseBall       ; MASTER_BALL
+	dw ItemUseBall       ; ULTRA_BALL
+	dw ItemUseBall       ; GREAT_BALL
+	dw ItemUseBall       ; POKE_BALL
+	dw ItemUseTownMap    ; TOWN_MAP
+	dw ItemUseBicycle    ; BICYCLE
+	dw ItemUseSurfboard  ; SURFBOARD
+	dw ItemUseBall       ; SAFARI_BALL
+	dw ItemUsePokedex    ; POKEDEX
+	dw ItemUseEvoStone   ; MOON_STONE
+	dw ItemUseMedicine   ; ANTIDOTE
+	dw ItemUseMedicine   ; BURN_HEAL
+	dw ItemUseMedicine   ; ICE_HEAL
+	dw ItemUseMedicine   ; AWAKENING
+	dw ItemUseMedicine   ; PARLYZ_HEAL
+	dw ItemUseMedicine   ; FULL_RESTORE
+	dw ItemUseMedicine   ; MAX_POTION
+	dw ItemUseMedicine   ; HYPER_POTION
+	dw ItemUseMedicine   ; SUPER_POTION
+	dw ItemUseMedicine   ; POTION
+	dw ItemUseBait       ; BOULDERBADGE
+	dw ItemUseRock       ; CASCADEBADGE
+	dw UnusableItem      ; THUNDERBADGE
+	dw UnusableItem      ; RAINBOWBADGE
+	dw UnusableItem      ; SOULBADGE
+	dw UnusableItem      ; MARSHBADGE
+	dw UnusableItem      ; VOLCANOBADGE
+	dw UnusableItem      ; EARTHBADGE
+	dw ItemUseEscapeRope ; ESCAPE_ROPE
+	dw ItemUseRepel      ; REPEL
+	dw UnusableItem      ; OLD_AMBER
+	dw ItemUseEvoStone   ; FIRE_STONE
+	dw ItemUseEvoStone   ; THUNDER_STONE
+	dw ItemUseEvoStone   ; WATER_STONE
+	dw ItemUseVitamin    ; HP_UP
+	dw ItemUseVitamin    ; PROTEIN
+	dw ItemUseVitamin    ; IRON
+	dw ItemUseVitamin    ; CARBOS
+	dw ItemUseVitamin    ; CALCIUM
+	dw ItemUseVitamin    ; RARE_CANDY
+	dw UnusableItem      ; DOME_FOSSIL
+	dw UnusableItem      ; HELIX_FOSSIL
+	dw UnusableItem      ; SECRET_KEY
+	dw UnusableItem      ; ITEM_2C
+	dw UnusableItem      ; BIKE_VOUCHER
+	dw ItemUseXAccuracy  ; X_ACCURACY
+	dw ItemUseEvoStone   ; LEAF_STONE
+	dw ItemUseCardKey    ; CARD_KEY
+	dw UnusableItem      ; NUGGET
+	dw UnusableItem      ; ITEM_32
+	dw ItemUsePokeDoll   ; POKE_DOLL
+	dw ItemUseMedicine   ; FULL_HEAL
+	dw ItemUseVitamin    ; REVIVE
+	dw ItemUseVitamin    ; MAX_REVIVE
+	dw ItemUseGuardSpec  ; GUARD_SPEC
+	dw ItemUseSuperRepel ; SUPER_REPEL
+	dw ItemUseMaxRepel   ; MAX_REPEL
+	dw ItemUseDireHit    ; DIRE_HIT
+	dw UnusableItem      ; COIN
+	dw ItemUseVitamin    ; FRESH_WATER
+	dw ItemUseVitamin    ; SODA_POP
+	dw ItemUseVitamin    ; LEMONADE
+	dw UnusableItem      ; S_S_TICKET
+	dw UnusableItem      ; GOLD_TEETH
+	dw ItemUseXStat      ; X_ATTACK
+	dw ItemUseXStat      ; X_DEFEND
+	dw ItemUseXStat      ; X_SPEED
+	dw ItemUseXStat      ; X_SPECIAL
+	dw ItemUseCoinCase   ; COIN_CASE
+	dw ItemUseOaksParcel ; OAKS_PARCEL
+	dw ItemUseItemfinder ; ITEMFINDER
+	dw UnusableItem      ; SILPH_SCOPE
+	dw ItemUsePokeFlute  ; POKE_FLUTE
+	dw UnusableItem      ; LIFT_KEY
+	dw UnusableItem      ; EXP_ALL
+	dw ItemUseOldRod     ; OLD_ROD
+	dw ItemUseGoodRod    ; GOOD_ROD
+	dw ItemUseSuperRod   ; SUPER_ROD
+	dw ItemUsePPUp       ; PP_UP
+	dw ItemUsePPUp       ; ETHER
+	dw ItemUsePPUp       ; MAX_ETHER
+	dw ItemUsePPUp       ; ELIXER
+	dw ItemUsePPUp       ; MAX_ELIXER
 
 ItemUseBall:
 
@@ -1330,12 +1422,53 @@ ItemUseMedicine:
 	ld b, 1
 	jp CalcStats ; recalculate stats
 .useRareCandy
-	push hl
+	push hl ; push from original code
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc ; hl now points to level
+	push hl ; preserve value of mon's level, gets lost in the level cap code
+	ld b, MAX_LEVEL
+	ld a, [wDifficulty]
+	and a
+	jr z, .next1 ; no level caps if not on hard mode
+	CheckEvent EVENT_OAK_BEAT
+	jr nz, .next1
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ld b, 85
+	jr nz, .next1
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld b, 80
+	jr nz, .next1
+	farcall GetBadgesObtained
+	cp 8
+	ld b, 65
+	jr nc, .next1
+	cp 7
+	ld b, 55
+	jr nc, .next1
+	cp 6
+	ld b, 50
+	jr nc, .next1
+	cp 5
+	ld b, 45
+	jr nc, .next1
+	cp 4
+	ld b, 40
+	jr nc, .next1
+	cp 3
+	ld b, 30
+	jr nc, .next1
+	cp 2
+	ld b, 25
+	jr nc, .next1
+	cp 1
+	ld b, 20
+	jr nc, .next1
+	ld b, 15
+.next1
+	pop hl ; retrieve mon level
 	ld a, [hl] ; a = level
-	cp MAX_LEVEL
-	jr z, .vitaminNoEffect ; can't raise level above 100
+	cp b ; MAX_LEVEL on normal mode, level cap on hard mode
+	jr z, .vitaminNoEffect ; can't raise level above cap
 	inc a
 	ld [hl], a ; store incremented level
 	ld [wCurEnemyLevel], a
@@ -1705,6 +1838,9 @@ ItemUsePokeFlute:
 	ld hl, PlayedFluteNoEffectText
 	jp PrintText
 .inBattle
+	ld a, [wDifficulty]
+	and a
+	jp nz, ItemUseNotTime
 	xor a
 	ld [wWereAnyMonsAsleep], a
 	ld b, ~SLP_MASK

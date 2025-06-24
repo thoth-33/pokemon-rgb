@@ -165,6 +165,23 @@ _PokemonCenterWelcomeText::
 	cont "perfect health!"
 	prompt
 
+_PokemonCenterWelcomeHardText::
+	text "Welcome to our"
+	line "#MON CENTER!"
+
+	para "We heal your"
+	line "#MON for a"
+	cont "fee of ¥500."
+	prompt
+
+_PokemonCenterCantAffordText::
+	text "You can't afford"
+	line "treatment?"
+	
+	para "Fine, I will give"
+	line "you a discount."
+	prompt
+
 _ShallWeHealYourPokemonText::
 	text "Shall we heal your"
 	line "#MON?"

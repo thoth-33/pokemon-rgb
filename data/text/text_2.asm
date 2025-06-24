@@ -1820,3 +1820,9 @@ _girlConfirm::
     line "You're a girl."
     cont "I knew that."
     prompt
+
+_DifficultyText::
+   text "Please select"
+   line "a difficulty."
+   done
+   

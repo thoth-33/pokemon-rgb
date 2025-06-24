@@ -67,11 +67,56 @@ DaycareGentlemanText:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	callfar CalcLevelFromExperience
+	
+	push bc
+	ld b, MAX_LEVEL
+	ld a, [wDifficulty]
+	and a
+	jr z, .next1 ; no level cap on normal mode
+	CheckEvent EVENT_OAK_BEAT
+	jr nz, .next1
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ld b, 85
+	jr nz, .next1
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld b, 80
+	jr nz, .next1
+	farcall GetBadgesObtained
+	cp 8
+	ld b, 65 ; Venusaur/Charizard/Blastoise's level
+	jr nc, .next1
+	cp 7
+	ld b, 55
+	jr nc, .next1
+	cp 6
+	ld b, 50
+	jr nc, .next1
+	cp 5
+	ld b, 45
+	jr nc, .next1
+	cp 4
+	ld b, 40
+	jr nc, .next1
+	cp 3
+	ld b, 30
+	jr nc, .next1
+	cp 2
+	ld b, 25
+	jr nc, .next1
+	cp 1
+	ld b, 20
+	jr nc, .next1
+	ld b, 15
+.next1
+	ld a, b
+	ld [wMaxDaycareLevel], a
 	ld a, d
-	cp MAX_LEVEL
+	cp b
+	pop bc
 	jr c, .skipCalcExp
 
-	ld d, MAX_LEVEL
+	ld a, [wMaxDaycareLevel]
+	ld d, a
 	callfar CalcExperience
 	ld hl, wDayCareMonExp
 	ldh a, [hExperience]
@@ -80,7 +125,8 @@ DaycareGentlemanText:
 	ld [hli], a
 	ldh a, [hExperience + 2]
 	ld [hl], a
-	ld d, MAX_LEVEL
+	ld a, [wMaxDaycareLevel]
+	ld d, a
 
 .skipCalcExp
 	xor a

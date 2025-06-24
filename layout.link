@@ -41,7 +41,7 @@ ROM0
 	"JpPoint" 
 ROMX $1
 	"bank1"
-	org $425b
+;	org $425b
 	"Mew Base Stats"
 ROMX $2
 	"Sound Effect Headers 1"

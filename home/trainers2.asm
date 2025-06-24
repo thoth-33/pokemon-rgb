@@ -5,9 +5,14 @@ GetTrainerInformation::
 	jr nz, .linkBattle
 	ld a, BANK(TrainerPicAndMoneyPointers)
 	call BankswitchHome
+	ld a, [wDifficulty]
+	and a
+	ld hl, TrainerPicAndMoneyPointersHard
+	jr nz, .hardMode
+	ld hl, TrainerPicAndMoneyPointers
+.hardMode
 	ld a, [wTrainerClass]
 	dec a
-	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $5
 	call AddNTimes
 	ld de, wTrainerPicPointer

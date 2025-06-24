@@ -1387,6 +1387,9 @@ EnemySendOutFirstMon:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .next4
+	ld a, [wDifficulty] 
+	and a
+	jr nz, .next4
 	ld a, [wOptions]
 	bit BIT_BATTLE_SHIFT, a
 	jr nz, .next4
@@ -3999,6 +4002,47 @@ CheckForDisobedience:
 	ld a, [wPlayerID]
 	cp [hl]
 	jr nz, .monIsTraded
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+; what level might disobey?
+	CheckEvent EVENT_OAK_BEAT
+	ld a, 101
+	jr nz, .next
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ld a, 85
+	jr nz, .next
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld a, 80
+	jr nz, .next
+	farcall GetBadgesObtained
+	cp 8
+	ld a, 65
+	jr nc, .next
+	cp 7
+	ld a, 55
+	jr nc, .next
+	cp 6
+	ld a, 50
+	jr nc, .next
+	cp 5
+	ld a, 45
+	jr nc, .next
+	cp 4
+	ld a, 40
+	jr nc, .next
+	cp 3
+	ld a, 30
+	jr nc, .next
+	cp 2
+	ld a, 25
+	jr nc, .next
+	cp 1
+	ld a, 20
+	jr nc, .next
+	ld a, 15
+	jp .next
+.NormalMode
 	inc hl
 	ld a, [wPlayerID + 1]
 	cp [hl]
@@ -6159,11 +6203,18 @@ LoadEnemyMonData:
 	jr nz, .storeDVs
 	ld a, [wIsInBattle]
 	cp $2 ; is it a trainer battle?
+	jr nz, .wildMon
 ; fixed DVs for trainer mon
+	ld a, [wDifficulty]
+	and a
+	ld a, ATKDEFDV_TRAINER_HARD
+	ld b, SPDSPCDV_TRAINER_HARD
+	jr nz, .storeDVs
 	ld a, ATKDEFDV_TRAINER
 	ld b, SPDSPCDV_TRAINER
-	jr z, .storeDVs
+	jr .storeDVs
 ; random DVs for wild mon
+.wildMon
 	call BattleRandom
 	ld b, a
 	call BattleRandom
@@ -6634,6 +6685,9 @@ ApplyBadgeStatBoosts:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
+	ld a, [wDifficulty]
+	and a
+	ret nz
 	ld a, [wObtainedBadges]
 	ld b, a
 	ld hl, wBattleMonAttack

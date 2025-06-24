@@ -328,3 +328,63 @@ _TradeCenterOpponentText::
 _ColosseumOpponentText::
 	text "!"
 	done
+
+_NormalModeText::
+	text "You have chosen"
+	line "NORMAL MODE!"
+
+	para "Classic #MON."
+	line "No difficulty"
+	cont "changes made."
+	
+	para "Continue on"
+	line "NORMAL MODE?"
+	done
+
+_HardModeText::
+	text "You have chosen"
+	line "HARD MODE!"
+
+	para "Your #MON will"
+	line "not gain STAT-"
+	cont "EXP from battles."
+
+	para "Badge stat boosts"
+	line "are disabled."
+
+	para "Enemy trainer's"
+	line "#MON have"
+	cont "higher stats."
+
+	para "The BATTLE STYLE"
+	line "is locked to SET."
+
+	para "Enemy stat lower-"
+	line "ing moves don't"
+	cont "have 1/4 chance"
+	cont "to miss."
+
+	para "Many healing items"
+	line "cannot be used"
+	cont "in battle."
+
+	para "Your #MON's"
+	line "levels are capped"
+	cont "based on story"
+	cont "progression."
+
+	para "#MON traded to"
+	line "you disobey you"
+	cont "at lower levels."
+	
+	para "You will earn less"
+	line "money from win-"
+	cont "ning battles."
+
+	para "And #CENTERS"
+	line "may charge you to"
+	cont "heal your team."
+	
+	para "Continue on"
+	line "HARD MODE?"
+	done

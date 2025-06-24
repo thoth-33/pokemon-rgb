@@ -357,22 +357,24 @@ CableClubOptionsText:
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 7
-	ld b, 8
-	ld c, 14
+	hlcoord 4, 6
+	ld b, 10 ;height
+	ld c, 14 ; width
 	call TextBoxBorder
-	hlcoord 5, 9
+	hlcoord 5, 8
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 9
+	hlcoord 12, 8
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 11
+	hlcoord 17, 10
 	call PrintNumBadges
-	hlcoord 16, 13
+	hlcoord 16, 12
 	call PrintNumOwnedMons
-	hlcoord 13, 15
+	hlcoord 13, 14
 	call PrintPlayTime
+	hlcoord 13, 16
+	call PrintHardMode
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 30
@@ -382,8 +384,8 @@ PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 0
-	ld b, $8
-	ld c, $e
+	ld b, 10 ; height
+	ld c, 14 ; width
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -399,6 +401,8 @@ PrintSaveScreenText:
 	call PrintNumOwnedMons
 	hlcoord 13, 8
 	call PrintPlayTime
+	hlcoord 13, 10
+	call PrintHardMode
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 30
@@ -433,12 +437,28 @@ PrintPlayTime:
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
+	
+PrintHardMode:
+	ld a, [wDifficulty]
+	and a
+	ld de, SaveScreenHardText
+	jr nz, .placeDiff
+	ld de, SaveScreenNormalText
+.placeDiff
+	jp PlaceString
 
 SaveScreenInfoText:
 	db   "PLAYER"
 	next "BADGES    "
 	next "#DEX    "
-	next "TIME@"
+	next "TIME"
+	next "MODE@"
+
+SaveScreenNormalText:
+	db "NORMAL@"
+
+SaveScreenHardText:
+	db "  HARD@"
 
 DisplayOptionMenu:
 	hlcoord 0, 0
@@ -520,11 +540,11 @@ DisplayOptionMenu:
 	bit BIT_D_UP, b
 	jr nz, .upPressed
 	cp 6 ; cursor in Battle Animation section?
-	jr z, .cursorInBattleAnimation
+	jp z, .cursorInBattleAnimation
 	cp 10 ; cursor in Battle Style section?
-	jr z, .cursorInBattleStyle
+	jp z, .cursorInBattleStyle
 	cp 14 ; cursor in Music Style section?
-	jr z, .cursorInMusicStyle
+	jp z, .cursorInMusicStyle
 	cp 16 ; cursor on Cancel?
 	jr z, .loop
 .cursorInTextSpeed
@@ -583,8 +603,15 @@ DisplayOptionMenu:
 	ld [wOptionsBattleAnimCursorX], a
 	jp .eraseOldMenuCursor
 .cursorInBattleStyle
+	ld a, [wDifficulty]
+	and a
+	jr nz, .lockedToSet
 	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
 	xor 1 ^ 10 ; toggle between 1 and 10
+	ld [wOptionsBattleStyleCursorX], a
+	jp .eraseOldMenuCursor
+.lockedToSet
+	ld a, 10 ; SET mode cursor position
 	ld [wOptionsBattleStyleCursorX], a
 	jp .eraseOldMenuCursor
 .cursorInMusicStyle
@@ -681,6 +708,9 @@ SetOptionsFromCursorPositions:
 	jr .checkMusicStyle
 .battleStyleShift
 	res BIT_BATTLE_SHIFT, d
+	ld a, [wDifficulty]
+	and a
+	jr nz, .battleStyleSet
 .checkMusicStyle
 	ld a, [wOptionsMusicStyleCursorX] ; music style cursor X coordinate
 	cp 10
@@ -723,6 +753,10 @@ SetCursorPositionsFromOptions:
 	hlcoord 0, 6
 	call .placeUnfilledRightArrow
 ;	sla c
+	ld a, [wDifficulty]
+	and a
+	ld a, 10
+	jr nz, .storeBattleStyleCursorX
 	ld a, b
 	bit BIT_BATTLE_SHIFT, a
 	ld a, 1

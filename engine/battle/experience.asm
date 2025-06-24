@@ -28,6 +28,9 @@ GainExperience:
 	ld hl, wEnemyMonBaseStats
 	ld c, NUM_STATS
 .gainStatExpLoop
+	ld a, [wDifficulty]
+	and a
+	jr nz, .nextBaseStat
 	ld a, [hli]
 	ld b, a ; enemy mon base stat
 	ld a, [de] ; stat exp
@@ -117,6 +120,47 @@ GainExperience:
 	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
+	ld a, [wPlayerID]
+	cp [hl]
+	jr nz, .next1
+	ld a, [wDifficulty]
+	and a
+	jr z, .next1 ; no level caps if not on hard mode
+	CheckEvent EVENT_OAK_BEAT
+	jr nz, .next1
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ld d, 85
+	jr nz, .next1
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld d, 80
+	jr nz, .next1
+	call GetBadgesObtained
+	cp 8
+	ld d, 65
+	jr nc, .next1
+	cp 7
+	ld d, 55
+	jr nc, .next1
+	cp 6
+	ld d, 50
+	jr nc, .next1
+	cp 5
+	ld d, 45
+	jr nc, .next1
+	cp 4
+	ld d, 40
+	jr nc, .next1
+	cp 3
+	ld d, 30
+	jr nc, .next1
+	cp 2
+	ld d, 25
+	jr nc, .next1
+	cp 1
+	ld d, 20
+	jr nc, .next1
+	ld d, 15
+.next1
 	callfar CalcExperience ; get max exp
 ; compare max exp with current exp
 	ldh a, [hExperience]
@@ -382,3 +426,19 @@ GrewLevelText:
 	text_far _GrewLevelText
 	sound_level_up
 	text_end
+
+; function to count the set bits in wObtainedBadges
+; OUTPUT:
+; a = set bits in wObtainedBadges
+GetBadgesObtained::
+	push hl
+	push bc
+	push de
+	ld hl, wObtainedBadges
+	ld b, $1
+	call CountSetBits
+	pop de
+	pop bc
+	pop hl
+	ld a, [wNumSetBits]
+	ret
