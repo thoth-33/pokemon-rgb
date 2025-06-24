@@ -6,10 +6,10 @@ Route28WildMons:
     db 40, RAPIDASH
     db 38, POLIWHIRL
     db 38, GOLBAT
-    db 40, TAUROS
     db 40, ARBOK
     db 39, DODUO
     db 41, DODRIO
+	db 40, TAUROS
 	end_grass_wildmons
 
 	def_water_wildmons 5 ; encounter rate

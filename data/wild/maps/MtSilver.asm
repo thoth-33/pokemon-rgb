@@ -6,10 +6,10 @@ MtSilverWildMons:
     db 42, RAPIDASH
     db 40, POLIWHIRL
     db 40, GOLBAT
-    db 42, TAUROS
     db 42, ARBOK
     db 41, DODUO
     db 43, DODRIO
+	db 42, TAUROS
 	end_grass_wildmons
 
 	def_water_wildmons 5 ; encounter rate
