@@ -519,17 +519,35 @@ SetPal_TitleScreen:
 	ld d, a
 	ld e, 0
 
+	ld a, [wPlayerGender] ; Gender check
+	and a
+	jr nz, .girlColor
+	
 	ld a, 2
 	ldh [rSVBK], a
 
 	farcall LoadSGBPalette
 
-	ld d, PAL_LOGO2 ; Title logo
-	ld e, 1
-	farcall LoadSGBPalette
-
 	ld d, PAL_LOGO1
 	ld e, 2
+	farcall LoadSGBPalette
+	jr .boyColor
+
+.girlColor
+	
+	ld a, 2
+	ldh [rSVBK], a
+
+	farcall LoadSGBPalette
+	
+	ld d, PAL_LOGO3
+	ld e, 2
+	farcall LoadSGBPalette
+	
+.boyColor	
+	
+	ld d, PAL_LOGO2 ; Title logo
+	ld e, 1
 	farcall LoadSGBPalette
 
 	ld d, PAL_BLACK

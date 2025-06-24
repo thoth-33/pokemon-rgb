@@ -273,5 +273,6 @@ IF GEN_2_GRAPHICS
 	const PAL_AGATHA        ; $E9
 	const PAL_LANCE         ; $EA
 	const PAL_HERO          ; $EB
+	const PAL_LOGO3         ; $EC
 ENDC
 DEF NUM_SGB_PALS EQU const_value

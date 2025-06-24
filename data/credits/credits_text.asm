@@ -68,7 +68,7 @@ CreditsTextPointers:
 	assert_table_length NUM_CRED_STRINGS
 
 CredVersion:
-	db -8, "RGB VERSION STAFF@"
+	db -8, "RGBY VERSION STAFF@"
 CredTajiri:
 	db -6, "SATOSHI TAJIRI@"
 CredTaOota:
