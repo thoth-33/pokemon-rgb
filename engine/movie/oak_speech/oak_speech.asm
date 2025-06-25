@@ -397,7 +397,7 @@ YesNoNormalHardChoice::
 	jr DisplayYesNoNormalHardChoice
 
 InitYesNoNormalHardTextBoxParameters::
-  	ld a, YES_NO_MENU
+  	ld a, NO_YES_MENU
 	ld [wTwoOptionMenuID], a
 	coord hl, 7, 5
 	ld bc, $608 ; Cursor Pos

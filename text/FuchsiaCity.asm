@@ -117,3 +117,16 @@ _FuchsiaCityFossilSignKabutoText::
 _FuchsiaCityFossilSignUndeterminedText::
 	text "..."
 	done
+
+_FuchsiaCityCooltrainerText::
+	text "You don't have"
+	line "enough BADGES."
+
+	para "KOGA only battles"
+	line "those proven in"
+	cont "battle."
+
+	para "Come back when"
+	line "you've earned at"
+	cont "least five BADGES."
+	done

@@ -120,46 +120,11 @@ GainExperience:
 	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
-	ld a, [wPlayerID]
-	cp [hl]
-	jr nz, .next1
 	ld a, [wDifficulty]
 	and a
 	jr z, .next1 ; no level caps if not on hard mode
-	CheckEvent EVENT_OAK_BEAT
-	jr nz, .next1
-	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
-	ld d, 85
-	jr nz, .next1
-	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ld d, 80
-	jr nz, .next1
-	call GetBadgesObtained
-	cp 8
-	ld d, 65
-	jr nc, .next1
-	cp 7
-	ld d, 55
-	jr nc, .next1
-	cp 6
-	ld d, 50
-	jr nc, .next1
-	cp 5
-	ld d, 45
-	jr nc, .next1
-	cp 4
-	ld d, 40
-	jr nc, .next1
-	cp 3
-	ld d, 30
-	jr nc, .next1
-	cp 2
-	ld d, 25
-	jr nc, .next1
-	cp 1
-	ld d, 20
-	jr nc, .next1
-	ld d, 15
+	call GetLevelCap
+	ld d, a
 .next1
 	callfar CalcExperience ; get max exp
 ; compare max exp with current exp
@@ -441,4 +406,42 @@ GetBadgesObtained::
 	pop bc
 	pop hl
 	ld a, [wNumSetBits]
+	ret
+	
+GetLevelCap::	
+	CheckEvent EVENT_OAK_BEAT
+	ld a, 100
+	ret nz
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	ld a, 85
+	ret nz
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld a, 80
+	ret nz
+	call GetBadgesObtained
+	cp 8
+	ld a, 65
+	ret nc
+	cp 7
+	ld a, 55
+	ret nc
+	cp 6
+	ld a, 50
+	ret nc
+	cp 5
+	ld a, 45
+	ret nc
+	cp 4
+	ld a, 40
+	ret nc
+	cp 3
+	ld a, 30
+	ret nc
+	cp 2
+	ld a, 25
+	ret nc
+	cp 1
+	ld a, 20
+	ret nc
+	ld a, 15
 	ret

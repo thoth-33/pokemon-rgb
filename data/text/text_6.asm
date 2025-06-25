@@ -192,6 +192,13 @@ _ItemUseNotTimeText::
 	line "This isn't the"
 	cont "time to use that! "
 	prompt
+	
+_TooStrongToCatchText::
+	text "This #MON is"
+	line "too strong for"
+	cont "you to catch"
+	cont "right now!"
+	prompt
 
 _ItemUseNotYoursToUseText::
 	text "This isn't yours"

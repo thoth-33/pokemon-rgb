@@ -4006,42 +4006,11 @@ CheckForDisobedience:
 	and a
 	jr z, .NormalMode
 ; what level might disobey?
-	CheckEvent EVENT_OAK_BEAT
-	ld a, 101
-	jr nz, .next
-	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
-	ld a, 85
-	jr nz, .next
-	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ld a, 80
-	jr nz, .next
-	farcall GetBadgesObtained
-	cp 8
-	ld a, 65
-	jr nc, .next
-	cp 7
-	ld a, 55
-	jr nc, .next
-	cp 6
-	ld a, 50
-	jr nc, .next
-	cp 5
-	ld a, 45
-	jr nc, .next
-	cp 4
-	ld a, 40
-	jr nc, .next
-	cp 3
-	ld a, 30
-	jr nc, .next
-	cp 2
-	ld a, 25
-	jr nc, .next
-	cp 1
-	ld a, 20
-	jr nc, .next
-	ld a, 15
-	jp .next
+	callfar GetLevelCap
+	cp 100
+	jr z, .next
+	dec a
+	jr .next
 .NormalMode
 	inc hl
 	ld a, [wPlayerID + 1]

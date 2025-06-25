@@ -373,9 +373,9 @@ _HardModeText::
 	cont "based on story"
 	cont "progression."
 
-	para "#MON traded to"
-	line "you disobey you"
-	cont "at lower levels."
+	para "#MON might"
+	line "disobey you at"
+	cont "the level cap."
 	
 	para "You will earn less"
 	line "money from win-"

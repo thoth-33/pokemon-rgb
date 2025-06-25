@@ -216,6 +216,17 @@ ItemUseBall:
 	cp MONS_PER_BOX
 	jp z, BoxFullCannotThrowBall
 
+; Hard mode, can't throw balls at pokemon above level cap
+	ld a, [wDifficulty]
+	and a
+	jr z, .canUseBall ; skip on normal mode
+	callfar GetLevelCap
+	ld b, a                ; b = max allowed level
+	ld a, [wEnemyMonLevel]
+	inc a
+	cp b
+	jp nc, TooStrongToCatch
+
 .canUseBall
 	xor a
 	ld [wCapturedMonSpecies], a
@@ -1430,45 +1441,13 @@ ItemUseMedicine:
 	ld a, [wDifficulty]
 	and a
 	jr z, .next1 ; no level caps if not on hard mode
-	CheckEvent EVENT_OAK_BEAT
-	jr nz, .next1
-	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
-	ld b, 85
-	jr nz, .next1
-	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ld b, 80
-	jr nz, .next1
-	farcall GetBadgesObtained
-	cp 8
-	ld b, 65
-	jr nc, .next1
-	cp 7
-	ld b, 55
-	jr nc, .next1
-	cp 6
-	ld b, 50
-	jr nc, .next1
-	cp 5
-	ld b, 45
-	jr nc, .next1
-	cp 4
-	ld b, 40
-	jr nc, .next1
-	cp 3
-	ld b, 30
-	jr nc, .next1
-	cp 2
-	ld b, 25
-	jr nc, .next1
-	cp 1
-	ld b, 20
-	jr nc, .next1
-	ld b, 15
+	callfar GetLevelCap
+	ld b, a
 .next1
 	pop hl ; retrieve mon level
 	ld a, [hl] ; a = level
 	cp b ; MAX_LEVEL on normal mode, level cap on hard mode
-	jr z, .vitaminNoEffect ; can't raise level above cap
+	jr nc, .vitaminNoEffect ; can't raise level above cap ; Carry is better than zero here.
 	inc a
 	ld [hl], a ; store incremented level
 	ld [wCurEnemyLevel], a
@@ -2427,6 +2406,10 @@ ItemUseNoEffect:
 ItemUseNotTime:
 	ld hl, ItemUseNotTimeText
 	jr ItemUseFailed
+	
+TooStrongToCatch:
+	ld hl, TooStrongToCatchText
+	jr ItemUseFailed
 
 ItemUseNotYoursToUse:
 	ld hl, ItemUseNotYoursToUseText
@@ -2463,6 +2446,10 @@ ItemUseFailed:
 
 ItemUseNotTimeText:
 	text_far _ItemUseNotTimeText
+	text_end
+	
+TooStrongToCatchText:
+	text_far _TooStrongToCatchText
 	text_end
 
 ItemUseNotYoursToUseText:

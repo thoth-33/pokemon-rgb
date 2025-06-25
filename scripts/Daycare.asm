@@ -73,40 +73,8 @@ DaycareGentlemanText:
 	ld a, [wDifficulty]
 	and a
 	jr z, .next1 ; no level cap on normal mode
-	CheckEvent EVENT_OAK_BEAT
-	jr nz, .next1
-	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
-	ld b, 85
-	jr nz, .next1
-	CheckEvent EVENT_PLAYER_IS_CHAMPION
-	ld b, 80
-	jr nz, .next1
-	farcall GetBadgesObtained
-	cp 8
-	ld b, 65 ; Venusaur/Charizard/Blastoise's level
-	jr nc, .next1
-	cp 7
-	ld b, 55
-	jr nc, .next1
-	cp 6
-	ld b, 50
-	jr nc, .next1
-	cp 5
-	ld b, 45
-	jr nc, .next1
-	cp 4
-	ld b, 40
-	jr nc, .next1
-	cp 3
-	ld b, 30
-	jr nc, .next1
-	cp 2
-	ld b, 25
-	jr nc, .next1
-	cp 1
-	ld b, 20
-	jr nc, .next1
-	ld b, 15
+	callfar GetLevelCap
+	ld b, a
 .next1
 	ld a, b
 	ld [wMaxDaycareLevel], a

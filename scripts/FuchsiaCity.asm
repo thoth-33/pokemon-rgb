@@ -1,5 +1,22 @@
 FuchsiaCity_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ld a, [wDifficulty] ; return if not on hard mode
+	and a
+	ret z
+	ld hl, wCurrentMapScriptFlags ; check only once per map load
+	bit BIT_CUR_MAP_LOADED_1, [hl]
+	res BIT_CUR_MAP_LOADED_1, [hl]
+	ret z
+	callfar GetBadgesObtained
+	cp 5
+	ld a, HS_FUCHSIA_COOLTRAINER
+	ld [wMissableObjectIndex], a
+	jr c, .notEnoughBadges
+	predef HideObject
+	ret
+.notEnoughBadges
+	predef ShowObject
+	ret
 
 FuchsiaCity_TextPointers:
 	def_text_pointers
@@ -13,6 +30,7 @@ FuchsiaCity_TextPointers:
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_SLOWPOKE
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_LAPRAS
 	dw_const FuchsiaCityPokemonText,         TEXT_FUCHSIACITY_FOSSIL
+	dw_const FuchsiaCityCooltrainerText,     TEXT_FUCHSIACITY_COOLTRAINER_M	
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN1
 	dw_const FuchsiaCitySignText,            TEXT_FUCHSIACITY_SIGN2
 	dw_const FuchsiaCitySafariGameSignText,  TEXT_FUCHSIACITY_SAFARI_GAME_SIGN
@@ -46,6 +64,10 @@ FuchsiaCityYoungster2Text:
 
 FuchsiaCityPokemonText:
 	text_far _FuchsiaCityPokemonText
+	text_end
+	
+FuchsiaCityCooltrainerText:
+	text_far _FuchsiaCityCooltrainerText
 	text_end
 
 FuchsiaCitySignText:
