@@ -42,7 +42,7 @@ ROM0
 ROMX $1
 	"bank1"
 ;	org $425b
-	"Mew Base Stats"
+;	"Mew Base Stats"
 ROMX $2
 	"Sound Effect Headers 1"
 ;	"Music Headers 1"
