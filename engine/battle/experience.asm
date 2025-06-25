@@ -409,14 +409,17 @@ GetBadgesObtained::
 	ret
 	
 GetLevelCap::	
-	CheckEvent EVENT_OAK_BEAT
+	CheckEvent EVENT_E4_REMATCH
 	ld a, 100
 	ret nz
-	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
+	CheckEvent EVENT_OAK_BEAT
 	ld a, 85
 	ret nz
-	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
 	ld a, 80
+	ret nz
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	ld a, 75
 	ret nz
 	call GetBadgesObtained
 	cp 8

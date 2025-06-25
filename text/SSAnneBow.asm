@@ -109,4 +109,9 @@ _SSAnneBowOakPostBattleText::
 	line "whenever you can"
 	cont "to show me your"
 	cont "#DEX!"
+	
+	para "Oh, by the way,"
+	line "I hear the Elite"
+	cont "Four have been"
+	cont "asking about you."
 	done

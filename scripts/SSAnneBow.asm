@@ -66,6 +66,30 @@ SSAnneBowOakExitScript:
 	ld a, HS_OAKS_LAB_OAK_1 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+	ld a, HS_LORELEISROOM_LORELEI
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_LORELEISROOM_LORELEI_REMATCH
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_BRUNOSROOM_BRUNO
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_BRUNOSROOM_BRUNO_REMATCH
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_AGATHASROOM_AGATHA
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_AGATHASROOM_AGATHA_REMATCH
+	ld [wMissableObjectIndex], a
+	predef ShowObject
+	ld a, HS_LANCESROOM_LANCE
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_LANCESROOM_LANCE_REMATCH
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	ld a, SCRIPT_SSANNEBOW_DEFAULT
 	ld [wSSAnneBowCurScript], a	
 	ret

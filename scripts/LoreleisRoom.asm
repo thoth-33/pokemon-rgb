@@ -16,6 +16,8 @@ LoreleiShowOrHideExitBlock:
 	ret z
 	ld hl, wElite4Flags
 	set BIT_STARTED_ELITE_4, [hl]
+	CheckEvent EVENT_OAK_BEAT
+	jr nz, .Rematch
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	jr z, .blockExitToNextRoom
 	ld a, $5
@@ -26,6 +28,11 @@ LoreleiShowOrHideExitBlock:
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
+.Rematch
+	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_1
+	jr z, .blockExitToNextRoom
+	ld a, $5
+	jr .setExitBlock
 
 ResetLoreleiScript:
 	xor a ; SCRIPT_LORELEISROOM_DEFAULT
@@ -112,19 +119,26 @@ LoreleisRoomLoreleiEndBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetLoreleiScript
+	CheckEvent EVENT_OAK_BEAT
+	ld a, TEXT_LORELEISROOM_LORELEI_REMATCH
+	jr nz, .Rematch
 	ld a, TEXT_LORELEISROOM_LORELEI
+.Rematch
 	ldh [hTextID], a
 	jp DisplayTextID
 
 LoreleisRoom_TextPointers:
 	def_text_pointers
 	dw_const LoreleisRoomLoreleiText,            TEXT_LORELEISROOM_LORELEI
+	dw_const LoreleisRoomLoreleiRematchText,     TEXT_LORELEISROOM_LORELEI_REMATCH
 	dw_const LoreleisRoomLoreleiDontRunAwayText, TEXT_LORELEISROOM_DONT_RUN_AWAY
 
 LoreleisRoomTrainerHeaders:
 	def_trainers
 LoreleisRoomTrainerHeader0:
 	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleisRoomLoreleiBeforeBattleText, LoreleisRoomLoreleiEndBattleText, LoreleisRoomLoreleiAfterBattleText
+LoreleisRoomTrainerHeader1:
+	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_1, 0, LoreleisRoomLoreleiRematchBeforeBattleText, LoreleisRoomLoreleiRematchEndBattleText, LoreleisRoomLoreleiRematchAfterBattleText	
 	db -1 ; end
 
 LoreleisRoomLoreleiText:
@@ -143,6 +157,24 @@ LoreleisRoomLoreleiEndBattleText:
 
 LoreleisRoomLoreleiAfterBattleText:
 	text_far _LoreleisRoomLoreleiAfterBattleText
+	text_end
+
+LoreleisRoomLoreleiRematchText:
+	text_asm
+	ld hl, LoreleisRoomTrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+LoreleisRoomLoreleiRematchBeforeBattleText:
+	text_far _LoreleisRoomLoreleiRematchBeforeBattleText
+	text_end
+
+LoreleisRoomLoreleiRematchEndBattleText:
+	text_far _LoreleisRoomLoreleiRematchEndBattleText
+	text_end
+
+LoreleisRoomLoreleiRematchAfterBattleText:
+	text_far _LoreleisRoomLoreleiRematchAfterBattleText
 	text_end
 
 LoreleisRoomLoreleiDontRunAwayText:

@@ -91,11 +91,17 @@ HallOfFameOakCongratulationsScript:
 	ld [wJoyIgnore], a
 	inc a ; PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
+	CheckEvent EVENT_OAK_BEAT
+	ld a, TEXT_HALLOFFAME_REMATCH_OAK
+	jr nz, .RematchText
 	ld a, TEXT_HALLOFFAME_OAK
+.RematchText
 	ldh [hTextID], a
 	call DisplayTextID
 	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
+	CheckEvent EVENT_PLAYER_IS_CHAMPION
+	jr nz, .skip ; dont reapply these after the first time around. Messes with post-game
 	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -114,6 +120,7 @@ HallOfFameOakCongratulationsScript:
 	ld a, HS_OAKS_LAB_SCIENTIST 
 	ld [wMissableObjectIndex], a
 	predef ShowObject
+.skip
 	SetEvent EVENT_PLAYER_IS_CHAMPION
 	ld a, SCRIPT_HALLOFFAME_RESET_EVENTS_AND_SAVE
 	ld [wHallOfFameCurScript], a
@@ -122,7 +129,12 @@ HallOfFameOakCongratulationsScript:
 HallOfFame_TextPointers:
 	def_text_pointers
 	dw_const HallOfFameOakText, TEXT_HALLOFFAME_OAK
+	dw_const HallOfFameRematchOakText, TEXT_HALLOFFAME_REMATCH_OAK
 
 HallOfFameOakText:
 	text_far _HallOfFameOakText
+	text_end
+
+HallOfFameRematchOakText:
+	text_far _HallOfFameRematchOakText
 	text_end
