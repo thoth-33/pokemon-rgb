@@ -19,8 +19,12 @@ HandleMenuInput_::
 .loop2
 	push hl
 	ld a, [wPartyMenuAnimMonEnabled]
-	and a ; is it a pokemon selection menu?
-	jr z, .getJoypadState
+	cp $40
+	jr c, .getJoypadState
+	jr z, .orginalAnimation
+	farcall LearnMoveAnimatePartyMon
+	jr .getJoypadState
+.orginalAnimation
 	farcall AnimatePartyMon ; shake mini sprite of selected pokemon
 .getJoypadState
 	pop hl

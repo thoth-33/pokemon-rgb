@@ -1,5 +1,9 @@
 LearnMove:
+	ld a, [wIsInBattle]
+	and a
+	jr z, .skip
 	call SaveScreenTilesToBuffer1
+.skip
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -29,6 +33,10 @@ DontAbandonLearning:
 	jp c, AbandonLearning
 	push hl
 	push de
+	push af
+	ld a, 1
+	callfar HidePartySprites
+	pop af
 	ld [wNamedObjectIndex], a
 	call GetMoveName
 	ld hl, OneTwoAndText
@@ -74,6 +82,8 @@ DontAbandonLearning:
 	jp PrintLearnedMove
 
 AbandonLearning:
+	ld a, 1
+	callfar HidePartySprites
 	ld hl, AbandonLearningText
 	call PrintText
 	hlcoord 14, 7
@@ -86,10 +96,20 @@ AbandonLearning:
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
 	call PrintText
+	ld a, [wIsInBattle]
+	and a
+	jr z, .skip
+	call LoadScreenTilesFromBuffer1
+.skip
 	ld b, 0
 	ret
 
 PrintLearnedMove:
+	ld a, [wIsInBattle]
+	and a
+	jr z, .skip
+	call LoadScreenTilesFromBuffer1
+.skip
 	ld hl, LearnedMove1Text
 	call PrintText
 	ld b, 1
@@ -99,6 +119,7 @@ TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
+	callfar ShowMoveInfo ; movetype info
 	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
@@ -116,15 +137,17 @@ TryingToLearn:
 	call CopyData
 	callfar FormatMovesString
 	pop hl
-.loop
+.LearnMoveLoop
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
-	hlcoord 4, 7
+	hlcoord 0, 12
 	ld b, 4
-	ld c, 14
-	call TextBoxBorder
-	hlcoord 6, 8
+	ld c, 18
+	call TextBoxBorder	
+	callfar ShowForgetMoveBox
+	callfar LearnMovePartyIcon
+	hlcoord 2, 13
 	ld de, wMovesString
 	ldh a, [hUILayoutFlags]
 	set BIT_SINGLE_SPACED_LINES, a
@@ -134,9 +157,9 @@ TryingToLearn:
 	res BIT_SINGLE_SPACED_LINES, a
 	ldh [hUILayoutFlags], a
 	ld hl, wTopMenuItemY
-	ld a, 8
+	ld a, 13
 	ld [hli], a ; wTopMenuItemY
-	ld a, 5
+	ld a, 1
 	ld [hli], a ; wTopMenuItemX
 	xor a
 	ld [hli], a ; wCurrentMenuItem
@@ -148,12 +171,18 @@ TryingToLearn:
 	ld [hl], 0 ; wLastMenuItem
 	ld hl, hUILayoutFlags
 	set BIT_DOUBLE_SPACED_MENU, [hl]
-	call HandleMenuInput
+	ld a, $50
+	ld [wPartyMenuAnimMonEnabled], a
+	call HandleMenuInput_
+	push af
+	xor a
+	ld [wPartyMenuAnimMonEnabled], a
+	pop af
 	ld hl, hUILayoutFlags
 	res BIT_DOUBLE_SPACED_MENU, [hl]
-	push af
-	call LoadScreenTilesFromBuffer1
-	pop af
+	;push af
+	;call LoadScreenTilesFromBuffer1
+	;pop af
 	pop hl
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
@@ -175,10 +204,12 @@ TryingToLearn:
 	and a
 	ret
 .hm
+	ld a, 1
+	callfar HidePartySprites
 	ld hl, HMCantDeleteText
 	call PrintText
 	pop hl
-	jr .loop
+	jp .LearnMoveLoop
 .cancel
 	scf
 	ret

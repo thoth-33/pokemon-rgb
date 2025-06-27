@@ -111,3 +111,4 @@ PredefPointers::
 	add_predef OaksAideScript
 	add_predef ShowExtraObject
 	add_predef HideExtraObject
+	add_predef PrintBufferedMoveType

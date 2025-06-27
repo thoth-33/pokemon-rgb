@@ -81,6 +81,42 @@ GetAnimationSpeed:
 	pop bc
 	ld a, c
 	jr .incTimer
+	
+LearnMoveAnimatePartyMon::
+	ld hl, PartyMonSpeeds
+	ld a, [hl]
+	ld c, a
+	add a
+	ld b, a
+	ld a, [wAnimCounter]
+	and a
+	jr z, .incTimer
+	cp c
+	jr z, .animateSprite
+.incTimer
+	inc a
+	cp b
+	jr nz, .skipResetTimer
+	xor a ; reset timer
+.skipResetTimer
+	ld [wAnimCounter], a
+	farcall ShowForgetMoveInfo ; Updates the move to forget information. Hacky but works
+	jp DelayFrame
+.animateSprite
+	push bc
+	ld hl, wShadowOAMSprite00TileID
+	ld de, $4
+	ld b, $4
+.mon_loop
+	ld a, [hl]
+	xor 2
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .mon_loop
+	pop bc
+	ld a, c
+	jr .incTimer
 
 ; Party mon animations cycle between 2 frames.
 ; The members of the PartyMonSpeeds array specify the number of V-blanks

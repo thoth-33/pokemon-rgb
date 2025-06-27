@@ -425,24 +425,31 @@ GetLevelCap::
 	cp 8
 	ld a, 65
 	ret nc
+	ld a, [wNumSetBits]
 	cp 7
 	ld a, 55
 	ret nc
+	ld a, [wNumSetBits]
 	cp 6
 	ld a, 50
 	ret nc
+	ld a, [wNumSetBits]
 	cp 5
 	ld a, 45
 	ret nc
+	ld a, [wNumSetBits]
 	cp 4
 	ld a, 40
 	ret nc
+	ld a, [wNumSetBits]
 	cp 3
 	ld a, 30
 	ret nc
+	ld a, [wNumSetBits]
 	cp 2
 	ld a, 25
 	ret nc
+	ld a, [wNumSetBits]
 	cp 1
 	ld a, 20
 	ret nc
