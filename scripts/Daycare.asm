@@ -67,23 +67,21 @@ DaycareGentlemanText:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	callfar CalcLevelFromExperience
-	
-	push bc
 	ld b, MAX_LEVEL
 	ld a, [wDifficulty]
 	and a
+	ld a, b
+	ld [wMaxLevel], a
 	jr z, .next1 ; no level cap on normal mode
 	callfar GetLevelCap
+	ld a, [wMaxLevel]
 	ld b, a
 .next1
-	ld a, b
-	ld [wMaxDaycareLevel], a
 	ld a, d
 	cp b
-	pop bc
 	jr c, .skipCalcExp
 
-	ld a, [wMaxDaycareLevel]
+	ld a, [wMaxLevel]
 	ld d, a
 	callfar CalcExperience
 	ld hl, wDayCareMonExp
@@ -93,7 +91,7 @@ DaycareGentlemanText:
 	ld [hli], a
 	ldh a, [hExperience + 2]
 	ld [hl], a
-	ld a, [wMaxDaycareLevel]
+	ld a, [wMaxLevel]
 	ld d, a
 
 .skipCalcExp

@@ -120,10 +120,11 @@ GainExperience:
 	ld [wCurSpecies], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
-	ld a, [wDifficulty]
+	ld a, [wDifficulty] ; Check if player is on hard mode
 	and a
 	jr z, .next1 ; no level caps if not on hard mode
 	call GetLevelCap
+	ld a, [wMaxLevel]
 	ld d, a
 .next1
 	callfar CalcExperience ; get max exp
@@ -393,65 +394,47 @@ GrewLevelText:
 	text_end
 
 ; function to count the set bits in wObtainedBadges
-; OUTPUT:
-; a = set bits in wObtainedBadges
+; returns the number of badges in wNumSetBits
 GetBadgesObtained::
-	push hl
-	push bc
 	push de
 	ld hl, wObtainedBadges
 	ld b, $1
 	call CountSetBits
 	pop de
-	pop bc
-	pop hl
-	ld a, [wNumSetBits]
 	ret
 	
+; returns the level cap in wMaxLevel
 GetLevelCap::	
 	CheckEvent EVENT_E4_REMATCH
 	ld a, 100
-	ret nz
+	jr nz, .storeValue
 	CheckEvent EVENT_OAK_BEAT
 	ld a, 85
-	ret nz
+	jr nz, .storeValue
 	CheckEvent EVENT_GIOVANNI_REMATCH_BEAT
 	ld a, 80
-	ret nz
+	jr nz, .storeValue
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
 	ld a, 75
-	ret nz
+	jr nz, .storeValue
 	call GetBadgesObtained
-	cp 8
-	ld a, 65
-	ret nc
 	ld a, [wNumSetBits]
-	cp 7
-	ld a, 55
-	ret nc
-	ld a, [wNumSetBits]
-	cp 6
-	ld a, 50
-	ret nc
-	ld a, [wNumSetBits]
-	cp 5
-	ld a, 45
-	ret nc
-	ld a, [wNumSetBits]
-	cp 4
-	ld a, 40
-	ret nc
-	ld a, [wNumSetBits]
-	cp 3
-	ld a, 30
-	ret nc
-	ld a, [wNumSetBits]
-	cp 2
-	ld a, 25
-	ret nc
-	ld a, [wNumSetBits]
-	cp 1
-	ld a, 20
-	ret nc
-	ld a, 15
+	ld hl, BadgeLevelRestrictions
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+.storeValue
+	ld [wMaxLevel], a
 	ret
+
+BadgeLevelRestrictions:
+    db 15 ; Onix
+    db 20 ; Starmie
+    db 25 ; Raichu
+    db 30 ; Vileplume
+    db 40 ; Alakazam
+    db 45 ; Weezing
+    db 50 ; Arcanine
+    db 55 ; Rhydon
+    db 65 ; Champion's starter

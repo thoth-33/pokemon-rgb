@@ -4002,20 +4002,15 @@ CheckForDisobedience:
 	ld a, [wPlayerID]
 	cp [hl]
 	jr nz, .monIsTraded
-	ld a, [wDifficulty]
+	ld a, [wDifficulty] ; Check if player is on hard mode
 	and a
-	jr z, .NormalMode
-; what level might disobey?
-	callfar GetLevelCap
-	cp 100
-	jr z, .next
-	dec a
-	jr .next
-.NormalMode
-	inc hl
-	ld a, [wPlayerID + 1]
-	cp [hl]
 	jp z, .canUseMove
+	callfar GetLevelCap
+	ld a, [wMaxLevel]
+	cp 100 ; prevent pokemon from disobeying at level 100
+	jr z, .next
+	dec a ; Lowers cut off by 1 so pokemon at the cap might disobey
+	jr .next
 ; it was traded
 .monIsTraded
 ; what level might disobey?

@@ -8,6 +8,7 @@ FuchsiaCity_Script:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	callfar GetBadgesObtained
+	ld a, [wNumSetBits]
 	cp 5
 	ld a, HS_FUCHSIA_COOLTRAINER
 	ld [wMissableObjectIndex], a

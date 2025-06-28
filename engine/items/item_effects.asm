@@ -221,9 +221,10 @@ ItemUseBall:
 	and a
 	jr z, .canUseBall ; skip on normal mode
 	callfar GetLevelCap
-	ld b, a                ; b = max allowed level
+	ld a, [wMaxLevel]
+	ld b, a
 	ld a, [wEnemyMonLevel]
-	inc a
+	dec a ; force a carry if values are equal
 	cp b
 	jp nc, TooStrongToCatch
 
@@ -1433,18 +1434,19 @@ ItemUseMedicine:
 	ld b, 1
 	jp CalcStats ; recalculate stats
 .useRareCandy
-	push hl ; push from original code
+	push hl
 	ld bc, wPartyMon1Level - wPartyMon1
 	add hl, bc ; hl now points to level
-	push hl ; preserve value of mon's level, gets lost in the level cap code
+	push hl ; store mon's level
 	ld b, MAX_LEVEL
 	ld a, [wDifficulty]
 	and a
 	jr z, .next1 ; no level caps if not on hard mode
 	callfar GetLevelCap
+	ld a, [wMaxLevel]
 	ld b, a
 .next1
-	pop hl ; retrieve mon level
+	pop hl ; retrieve mon's level
 	ld a, [hl] ; a = level
 	cp b ; MAX_LEVEL on normal mode, level cap on hard mode
 	jr nc, .vitaminNoEffect ; can't raise level above cap ; Carry is better than zero here.
