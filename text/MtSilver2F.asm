@@ -1,5 +1,6 @@
 _MtSilver2FWhirlpoolText::
-	text "Woosh, woosh!"
+	text "It's a vicious"
+	line "whirlpool!"
 	
 	para "GUARD: Hold up!"
 	line "It's not safe."
@@ -18,8 +19,8 @@ _MtSilver2FWaterGuardText_Done::
 	text "The whirlpools are"
 	line "gone now, but a"
 	cont "group of men in"
-	cont "uniform, let by a"
-	cont "man in a suit"
+	cont "uniform, led by"
+	cont "a man in a suit"
 	cont "rushed past me."
 
 	para "Be careful, okay?"
