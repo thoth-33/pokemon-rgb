@@ -429,12 +429,12 @@ GetLevelCap::
 	ret
 
 BadgeLevelRestrictions:
-    db 15 ; Onix
-    db 20 ; Starmie
-    db 25 ; Raichu
-    db 30 ; Vileplume
-    db 40 ; Alakazam
-    db 45 ; Weezing
-    db 50 ; Arcanine
-    db 55 ; Rhydon
-    db 65 ; Champion's starter
+    db 15 ; 0 badges
+    db 20 ; 1 badge
+    db 25 ; 2 badges
+    db 30 ; 3 badges
+    db 40 ; 4 badges
+    db 45 ; 5 badges
+    db 50 ; 6 badges
+    db 55 ; 7 badges
+    db 65 ; 8 badges

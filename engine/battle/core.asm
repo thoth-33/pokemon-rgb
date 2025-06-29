@@ -4041,12 +4041,36 @@ CheckForDisobedience:
 	ld a, c
 	cp d
 	jp nc, .canUseMove
+	; hard mode uses a custom formula for disobedience
+	; scales with mon level
+	; at lowest cap (15), chance to obey is ~55%
+	; at highest cap (85), chance to obey is ~82%
+	push bc
+	ld a, [wDifficulty]
+	and a
+	jp z, .loop1
+	; c = 128 + 3d/4
+	ld a, d         ; a = wBattleMonLevel
+	srl a           ; a = level / 2
+	add d           ; a = 1.5 * level
+	srl a           ; a = 3 * level / 4
+	add 128         ; base 50% + scaled obey
+	ld c, a         ; c = obey threshold
+	; b = 255 - d/4
+	ld a, d         ; a = wBattleMonLevel
+	srl a           ; a = level / 2
+	srl a           ; a = level / 4
+	ld b, a         ; b = level / 4
+	ld a, $ff       ; a = $ff, start at the top
+	sub b           ; a = 255 - level / 4
+	ld b, a         ; b = 255 - level / 4
 .loop1
 	call BattleRandom
 	swap a
 	cp b
 	jr nc, .loop1
 	cp c
+	pop bc
 	jp c, .canUseMove
 .loop2
 	call BattleRandom
