@@ -6,7 +6,6 @@ INCLUDE "data/pokemon/mew.asm"
 INCLUDE "engine/battle/safari_zone.asm"
 INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
-INCLUDE "data/items/prices.asm"
 INCLUDE "data/items/names.asm"
 INCLUDE "data/text/unused_names.asm"
 INCLUDE "engine/gfx/sprite_oam.asm"
@@ -382,6 +381,8 @@ SECTION "Itemfinder 2", ROMX
 INCLUDE "engine/menus/league_pc.asm"
 INCLUDE "engine/events/hidden_items.asm"
 INCLUDE "engine/menus/learn_move.asm"
+INCLUDE "data/items/prices.asm"
+
 
 SECTION "bank1E", ROMX
 

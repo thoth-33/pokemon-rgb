@@ -95,7 +95,12 @@ InitList:
 	ld [wUnusedNamePointer], a
 	ld a, d
 	ld [wUnusedNamePointer + 1], a
+	ld a, [wDifficulty]
+	and a
+	ld bc, ItemPricesHard
+	jr nz, .gotPriceTable
 	ld bc, ItemPrices
+.gotPriceTable
 	ld a, c
 	ld [wItemPrices], a
 	ld a, b

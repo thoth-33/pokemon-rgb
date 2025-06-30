@@ -1,7 +1,8 @@
 PromptUserToPlaySlots:
 	call SaveScreenTilesToBuffer2
 	ld a, BANK(DisplayTextIDInit)
-	ASSERT BANK(DisplayTextIDInit) == 1 << BIT_NO_AUTO_TEXT_BOX
+;	ASSERT BANK(DisplayTextIDInit) == 1 << BIT_NO_AUTO_TEXT_BOX
+	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 	ld [wAutoTextBoxDrawingControl], a ; 1 << BIT_NO_AUTO_TEXT_BOX
 	ld b, a ; BANK(DisplayTextIDInit)
 	ld hl, DisplayTextIDInit

@@ -99,3 +99,105 @@ ItemPrices::
 	bcd3 0     ; FLOOR_11F
 	bcd3 0     ; FLOOR_B4F
 	assert_table_length NUM_ITEMS + NUM_FLOORS
+
+ItemPricesHard::
+	table_width 3
+	bcd3 0     ; MASTER_BALL
+	bcd3 1800  ; ULTRA_BALL <-----
+	bcd3 900   ; GREAT_BALL <-----
+	bcd3 300   ; POKE_BALL <-----
+	bcd3 0     ; TOWN_MAP
+	bcd3 0     ; BICYCLE
+	bcd3 0     ; SURFBOARD
+	bcd3 1000  ; SAFARI_BALL X-----
+	bcd3 0     ; POKEDEX
+	bcd3 0     ; MOON_STONE
+	bcd3 150   ; ANTIDOTE <-----
+	bcd3 350   ; BURN_HEAL <-----
+	bcd3 350   ; ICE_HEAL <-----
+	bcd3 300   ; AWAKENING <-----
+	bcd3 300   ; PARLYZ_HEAL <-----
+	bcd3 4500  ; FULL_RESTORE <-----
+	bcd3 3500  ; MAX_POTION <-----
+	bcd3 2500  ; HYPER_POTION <-----
+	bcd3 1000  ; SUPER_POTION <-----
+	bcd3 500   ; POTION <-----
+	bcd3 0     ; BOULDERBADGE
+	bcd3 0     ; CASCADEBADGE
+	bcd3 0     ; THUNDERBADGE
+	bcd3 0     ; RAINBOWBADGE
+	bcd3 0     ; SOULBADGE
+	bcd3 0     ; MARSHBADGE
+	bcd3 0     ; VOLCANOBADGE
+	bcd3 0     ; EARTHBADGE
+	bcd3 800   ; ESCAPE_ROPE <-----
+	bcd3 500   ; REPEL  <-----
+	bcd3 0     ; OLD_AMBER
+	bcd3 3100  ; FIRE_STONE <-----
+	bcd3 3100  ; THUNDER_STONE <-----
+	bcd3 3100  ; WATER_STONE <-----
+	bcd3 9800  ; HP_UP X-----
+	bcd3 9800  ; PROTEIN X-----
+	bcd3 9800  ; IRON X-----
+	bcd3 9800  ; CARBOS X-----
+	bcd3 9800  ; CALCIUM X-----
+	bcd3 4800  ; RARE_CANDY X-----
+	bcd3 0     ; DOME_FOSSIL
+	bcd3 0     ; HELIX_FOSSIL
+	bcd3 0     ; SECRET_KEY
+	bcd3 0     ; ITEM_2C
+	bcd3 0     ; BIKE_VOUCHER
+	bcd3 1450  ; X_ACCURACY <-----
+	bcd3 3100  ; LEAF_STONE <-----
+	bcd3 0     ; CARD_KEY
+	bcd3 5000  ; NUGGET >-----
+	bcd3 9800  ; ITEM_32
+	bcd3 1000  ; POKE_DOLL X-----
+	bcd3 900   ; FULL_HEAL <-----
+	bcd3 2200  ; REVIVE <-----
+	bcd3 4000  ; MAX_REVIVE X-----
+	bcd3 1000  ; GUARD_SPEC <-----
+	bcd3 750   ; SUPER_REPEL <-----
+	bcd3 1000  ; MAX_REPEL <-----
+	bcd3 950   ; DIRE_HIT <-----
+	bcd3 10    ; COIN X-----
+	bcd3 250   ; FRESH_WATER <-----
+	bcd3 350   ; SODA_POP <-----
+	bcd3 400   ; LEMONADE <-----
+	bcd3 0     ; S_S_TICKET
+	bcd3 0     ; GOLD_TEETH
+	bcd3 750   ; X_ATTACK <-----
+	bcd3 850   ; X_DEFEND <-----
+	bcd3 550   ; X_SPEED <-----
+	bcd3 550   ; X_SPECIAL <-----
+	bcd3 0     ; COIN_CASE
+	bcd3 0     ; OAKS_PARCEL
+	bcd3 0     ; ITEMFINDER
+	bcd3 0     ; SILPH_SCOPE
+	bcd3 0     ; POKE_FLUTE
+	bcd3 0     ; LIFT_KEY
+	bcd3 0     ; EXP_ALL
+	bcd3 0     ; OLD_ROD
+	bcd3 0     ; GOOD_ROD
+	bcd3 0     ; SUPER_ROD
+	bcd3 0     ; PP_UP
+	bcd3 0     ; ETHER
+	bcd3 0     ; MAX_ETHER
+	bcd3 0     ; ELIXER
+	bcd3 0     ; MAX_ELIXER
+	assert_table_length NUM_ITEMS
+	bcd3 0     ; FLOOR_B2F
+	bcd3 0     ; FLOOR_B1F
+	bcd3 0     ; FLOOR_1F
+	bcd3 0     ; FLOOR_2F
+	bcd3 0     ; FLOOR_3F
+	bcd3 0     ; FLOOR_4F
+	bcd3 0     ; FLOOR_5F
+	bcd3 0     ; FLOOR_6F
+	bcd3 0     ; FLOOR_7F
+	bcd3 0     ; FLOOR_8F
+	bcd3 0     ; FLOOR_9F
+	bcd3 0     ; FLOOR_10F
+	bcd3 0     ; FLOOR_11F
+	bcd3 0     ; FLOOR_B4F
+	assert_table_length NUM_ITEMS + NUM_FLOORS

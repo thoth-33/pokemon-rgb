@@ -379,7 +379,9 @@ _HardModeText::
 	
 	para "You will earn less"
 	line "money from win-"
-	cont "ning battles."
+	cont "ning battles and"
+	cont "items will cost"
+	cont "more to purchase."
 
 	para "And #CENTERS"
 	line "may charge you to"

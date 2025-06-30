@@ -79,10 +79,16 @@ ENDC
 	ld [wDifficulty], a
 	and a
 	jr z, .SelectedNormalMode
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
+	jp nz, .done
 	ld hl, HardModeText
 	call PrintText
 	jp .YesNoNormalHard
 .SelectedNormalMode
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
+	jp nz, .done
 	ld hl, NormalModeText
 	call PrintText
 .YesNoNormalHard ; Give the player a brief description of each game mode and make sure that's what they want
@@ -137,7 +143,6 @@ ENDC
   	call BoyGirlChoice ; added routine at the end of this file
    	ld a, [wCurrentMenuItem]
    	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
-
 	and a
 	jr z, .redHero
 	ld hl, girlConfirm
@@ -146,6 +151,9 @@ ENDC
 	ld hl, boyConfirm
 .greenHero
   	call PrintText
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
+	jp nz, .skipSpeech2
 	call GBFadeOutToWhite
 
 	call GetRedPalID ; HAX
@@ -171,7 +179,7 @@ ENDC
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-;.skipSpeech
+.skipSpeech2
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de, RedPicFront

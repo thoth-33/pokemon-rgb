@@ -26,7 +26,12 @@ VendingMachineMenu::
 	ld de, DrinkText
 	call PlaceString
 	hlcoord 9, 6
+	ld a, [wDifficulty]
+	and a
 	ld de, DrinkPriceText
+	jr z, .gotPriceTable
+	ld de, DrinkPriceHardText
+.gotPriceTable
 	call PlaceString
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
@@ -95,6 +100,12 @@ DrinkPriceText:
 	next "¥300"
 	next "¥350"
 	next "@"
+	
+DrinkPriceHardText:
+	db   "¥250"
+	next "¥350"
+	next "¥400"
+	next "@"
 
 VendingMachineText4:
 	text_far _VendingMachineText4
@@ -113,7 +124,12 @@ VendingMachineText7:
 	text_end
 
 LoadVendingMachineItem:
+	ld a, [wDifficulty]
+	and a
 	ld hl, VendingPrices
+	jr z, .gotPriceTable
+	ld hl, VendingPricesHard
+.gotPriceTable
 	ld a, [wCurrentMenuItem]
 	add a
 	add a

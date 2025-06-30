@@ -11,6 +11,12 @@ AskName:
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
 	call GetMonName
+	ld a, [wStatusFlags6]
+	bit BIT_DEBUG_MODE, a
+	jr z, .notDebug
+	pop hl
+	jr nz, .declinedNickname
+.notDebug
 	ld hl, DoYouWantToNicknameText
 	call PrintText
 	hlcoord 14, 7
