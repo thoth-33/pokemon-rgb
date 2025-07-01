@@ -145,7 +145,6 @@ PewterGym_TextPointers:
 	dw_const PewterGymBrockText,             TEXT_PEWTERGYM_BROCK
 	dw_const PewterGymCooltrainerMText,      TEXT_PEWTERGYM_COOLTRAINER_M
 	dw_const PewterGymGuideText,             TEXT_PEWTERGYM_GYM_GUIDE
-	dw_const PewterGymBlankText,             TEXT_PEWTERGYM_BLANK
 	dw_const PewterGymBrockPostGameText,     TEXT_PEWTERGYM_BROCK_POSTGAME
 	dw_const PewterGymBrockWaitTakeThisText, TEXT_PEWTERGYM_BROCK_WAIT_TAKE_THIS
 	dw_const PewterGymReceivedTM34Text,      TEXT_PEWTERGYM_RECEIVED_TM34
@@ -337,8 +336,4 @@ PewterGymGuideFreeServiceText:
 
 PewterGymGuidePostBattleText:
 	text_far _PewterGymGuidePostBattleText
-	text_end
-
-PewterGymBlankText:
-	text_far _PewterGymBlankText
 	text_end

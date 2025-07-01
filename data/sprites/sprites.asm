@@ -30,6 +30,13 @@ SpriteSheetPointerTable:
 	overworld_sprite BikeShopClerkSprite, 12    ; SPRITE_BIKE_SHOP_CLERK
 	overworld_sprite MrFujiSprite, 12           ; SPRITE_MR_FUJI
 	overworld_sprite GiovanniSprite, 12         ; SPRITE_GIOVANNI
+	overworld_sprite BlaineSprite, 12           ; SPRITE_BLAINE
+	overworld_sprite BrockSprite, 12            ; SPRITE_BROCK
+	overworld_sprite ErikaSprite, 12            ; SPRITE_ERIKA
+	overworld_sprite KogaSprite, 12             ; SPRITE_KOGA
+	overworld_sprite MistySprite, 12            ; SPRITE_MISTY
+	overworld_sprite SabrinaSprite, 12          ; SPRITE_SABRINA
+	overworld_sprite SurgeSprite, 12            ; SPRITE_SURGE
 	overworld_sprite RocketSprite, 12           ; SPRITE_ROCKET
 	overworld_sprite ChannelerSprite, 12        ; SPRITE_CHANNELER
 	overworld_sprite WaiterSprite, 12           ; SPRITE_WAITER
@@ -54,7 +61,7 @@ SpriteSheetPointerTable:
 	overworld_sprite WardenSprite, 12           ; SPRITE_WARDEN
 	overworld_sprite CaptainSprite, 12          ; SPRITE_CAPTAIN
 	overworld_sprite FisherSprite, 12           ; SPRITE_FISHER
-	overworld_sprite KogaSprite, 12             ; SPRITE_KOGA
+	overworld_sprite BlackBeltSprite, 12        ; SPRITE_BLACKBELT
 	overworld_sprite GuardSprite, 12            ; SPRITE_GUARD
 	overworld_sprite GuardSprite, 12            ; SPRITE_UNUSED_GUARD
 	overworld_sprite MomSprite, 12              ; SPRITE_MOM
@@ -102,7 +109,6 @@ SpriteSheetPointerTable:
 	overworld_sprite HypnoSprite, 12            ; SPRITE_HYPNO
 	overworld_sprite RattataSprite, 12          ; SPRITE_RATTATA
 	overworld_sprite WhirlpoolSprite, 12        ; SPRITE_WHIRLPOOL
-	overworld_sprite EmptySprite, 4             ; SPRITE_EMPTY
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL
 	overworld_sprite BoulderSprite, 4           ; SPRITE_BOULDER

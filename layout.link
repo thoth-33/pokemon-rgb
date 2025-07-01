@@ -56,7 +56,7 @@ ROMX $4
 	"Font Graphics"
 	"Battle Engine 1"
 ROMX $5
-	"NPC Sprites 2"
+	; lots of space here
 	"Battle Engine 2"
 ROMX $6
 	"Maps 1"
@@ -91,11 +91,12 @@ ROMX $B
 	org $7b7b
 	"Battle Engine 5"
 ROMX $C
-	"Pics 4"
+	"Pics 4" ; empty
+	"NPC Sprites 2"
 	org $7f2b
 	"Battle Engine 6"
 ROMX $D
-	"Pics 5"
+	"Pics 5" ; empty
 	org $7244
 	"Slot Machines"
 ROMX $E

@@ -58,7 +58,3 @@ _PewterGymBrockGoodLuckText::
 	para "Fossils, rubble..."
 	line "So much history."
 	done
-	
-_PewterGymBlankText::
-	text "..."
-	prompt

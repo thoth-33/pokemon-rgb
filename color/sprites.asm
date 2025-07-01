@@ -108,18 +108,6 @@ ColorOverworldSprite::
 	cp BILLS_HOUSE
 	ld a, SPR_PAL_BROWN
 	jr z, .norandomColor
-	
-	; Erika/Blaine/Koga are blue
-	ld a, [wCurMap]
-	cp MT_SILVER
-	ld a, SPR_PAL_BLUE
-	jr z, .norandomColor
-	
-	; Brock/Sabrina are blue
-	ld a, [wCurMap]
-	cp MT_SILVER_CAVE_1F
-	ld a, SPR_PAL_BLUE
-	jr z, .norandomColor
 
 	; This is a (somewhat) random but consistent color
 	ldh a, [hSpriteOffset2]
@@ -504,6 +492,27 @@ ENDC
 
 	; 0x17: SPRITE_GIOVANNI
 	db SPR_PAL_BLUE
+	
+	; 0x+1: SPRITE_BLAINE
+	db SPR_PAL_ORANGE
+	
+	; 0x+2: SPRITE_BROCK
+	db SPR_PAL_BROWN
+	
+	; 0x+3: SPRITE_ERIKA
+	db SPR_PAL_GREEN
+	
+	; 0x+4: SPRITE_KOGA
+	db SPR_PAL_PURPLE
+	
+	; 0x+5: SPRITE_MISTY
+	db SPR_PAL_ORANGE
+	
+	; 0x+6: SPRITE_SABRINA
+	db SPR_PAL_PURPLE
+	
+	; 0x+7: SPRITE_SURGE
+	db SPR_PAL_GREEN
 
 	; 0x18: SPRITE_ROCKET
 	db SPR_PAL_BROWN
@@ -577,8 +586,8 @@ ENDC
 	; 0x2f: SPRITE_FISHER2
 	db SPR_PAL_RANDOM
 
-	; 0x30: SPRITE_KOGA
-	db SPR_PAL_RANDOM
+	; 0x30: SPRITE_BLACKBELT
+	db SPR_PAL_BROWN
 
 	; 0x31: SPRITE_GUARD ($30)
 	db SPR_PAL_BLUE
@@ -715,14 +724,11 @@ ENDC
 	; 0x-X: SPRITE_HYPNO
 	db SPR_PAL_BROWN
 	
-	; 0x-Bill: SPRITE_RATTATA
+	; 0x-Y: SPRITE_RATTATA
 	db SPR_PAL_PURPLE
 	
-	; 0x-Y: SPRITE_WHIRLPOOL
+	; 0x-Z: SPRITE_WHIRLPOOL
 	db SPR_PAL_EMOJI
-
-	; 0x-Z: SPRITE_EMPTY
-	db SPR_PAL_RANDOM
 	
 	; 0x3d: SPRITE_BALL
 	db SPR_PAL_ORANGE

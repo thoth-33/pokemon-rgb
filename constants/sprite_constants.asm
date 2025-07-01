@@ -25,6 +25,13 @@
 	const SPRITE_BIKE_SHOP_CLERK         ; $15
 	const SPRITE_MR_FUJI                 ; $16
 	const SPRITE_GIOVANNI                ; $17
+	const SPRITE_BLAINE                  ; $+1
+	const SPRITE_BROCK                   ; $+2
+	const SPRITE_ERIKA                   ; $+3
+	const SPRITE_KOGA                    ; $+4
+	const SPRITE_MISTY                   ; $+5
+	const SPRITE_SABRINA                 ; $+6
+	const SPRITE_SURGE                   ; $+7
 	const SPRITE_ROCKET                  ; $18
 	const SPRITE_CHANNELER               ; $19
 	const SPRITE_WAITER                  ; $1a
@@ -49,7 +56,7 @@
 	const SPRITE_WARDEN                  ; $2d
 	const SPRITE_CAPTAIN                 ; $2e
 	const SPRITE_FISHER                  ; $2f
-	const SPRITE_KOGA                    ; $30
+	const SPRITE_BLACKBELT               ; $30
 	const SPRITE_GUARD                   ; $31
 	const SPRITE_UNUSED_GUARD            ; $32
 	const SPRITE_MOM                     ; $33
@@ -95,10 +102,9 @@
 	const SPRITE_MEW                     ; $-V
 	const SPRITE_WEEZING                 ; $-W
 	const SPRITE_HYPNO                   ; $-X
-	const SPRITE_RATTATA                 ; $-Bill
-	const SPRITE_WHIRLPOOL               ; $-Y
+	const SPRITE_RATTATA                 ; $-Y
+	const SPRITE_WHIRLPOOL               ; $-Z
 DEF FIRST_STILL_SPRITE EQU const_value
-	const SPRITE_EMPTY                   ; $-Z
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e
 	const SPRITE_BOULDER                 ; $3f
