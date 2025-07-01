@@ -138,12 +138,12 @@ ColorOverworldSprite::
 	ret
 	
 .colorHero
+	ld a, [wPlayerFlying]
+	and a
+	jr nz, .flying
 	ld a, [wWalkBikeSurfState]
 	cp a, 2
 	jr z, .surfing
-	ld a, [wPlayerFlying]
-	cp a, $1
-	jr z, .flying
 	ld a, [wPlayerGender]
 	and a
 IF DEF(_BLUE)

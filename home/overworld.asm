@@ -831,13 +831,14 @@ HandleFlyWarpOrDungeonWarp::
 	call Delay3
 	xor a
 	ld [wBattleResult], a
-	ld [wWalkBikeSurfState], a
 	ld [wIsInBattle], a
 	ld [wMapPalOffset], a
 	ld hl, wStatusFlags6
 	set BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_ALWAYS_ON_BIKE, [hl]
 	call LeaveMapAnim
+	xor a
+	ld [wWalkBikeSurfState], a
 	ld a, BANK(PrepareForSpecialWarp)
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
