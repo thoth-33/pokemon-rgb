@@ -198,7 +198,6 @@ MtSilver1FPlayerMovingScript:
 	ld a, TEXT_MT_SILVER1F_PSYCH_GUARD
 	ldh [hTextID], a
 	call DisplayTextID
-	SetEvent EVENT_SABRINA_REMATCH
 	ld a, SCRIPT_MT_SILVER1F_SABRINA
 	ld [wMtSilver1FCurScript], a	
 	ret

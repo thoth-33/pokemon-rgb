@@ -1,9 +1,6 @@
 _MtSilver2FWhirlpoolText::
 	text "It's a vicious"
 	line "whirlpool!"
-	
-	para "GUARD: Hold up!"
-	line "It's not safe."
 	prompt
 	
 _MtSilver2FWaterGuardText_Misty::

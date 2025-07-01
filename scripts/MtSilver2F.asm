@@ -9,6 +9,7 @@ MtSilver2F_ScriptPointers:
 	dw_const MtSilver2FDefaultScript,    SCRIPT_MT_SILVER2F_DEFAULT
 	dw_const MtSilver2FMistyTalkScript,  SCRIPT_MT_SILVER2F_MISTY_TALK
 	dw_const MtSilver2FMistyExitScript,  SCRIPT_MT_SILVER2F_MISTY_EXIT
+	dw_const MtSilver2FPlayerMoveScript, SCRIPT_MT_SILVER2F_PLAYER_MOVING
 	dw_const MtSilver2FNoopScript,       SCRIPT_MT_SILVER2F_NOOP
 
 MtSilver2FNoopScript:
@@ -16,7 +17,19 @@ ret
 
 MtSilver2FDefaultScript:
 	CheckEvent EVENT_MISTY_REMATCH_BEAT
-	ret z ; set to nz for debug
+	jr nz, .MistyWalk ; set to z for debug
+	ld hl, MtSilver2FWhirlCoords
+	call ArePlayerCoordsInArray
+	ret nc
+	ld a, TEXT_MT_SILVER2F_WHIRLPOOL1
+	ldh [hTextID], a
+	call MtSilver2FScript_MoveLeft
+	ld hl, wMovementFlags
+	set BIT_SPINNING, [hl]
+	ld a, SCRIPT_MT_SILVER2F_PLAYER_MOVING
+	ld [wMtSilver2FCurScript], a
+	jp DisplayTextID
+.MistyWalk
 	ld hl, MtSilver2FMistyCoords
 	call ArePlayerCoordsInArray
 	ret nc
@@ -58,10 +71,59 @@ MtSilver2FDefaultScript:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 	
+MtSilver2FWhirlCoords:
+	dbmapcoord  8, 18
+	dbmapcoord  9, 18
+	db -1 ; end		
+	
 MtSilver2FMistyCoords:
 	dbmapcoord  1,   20
 	dbmapcoord  2,   20
 	db -1 ; end
+	
+MtSilver2FScript_MoveLeft:
+	ld hl, wSimulatedJoypadStatesEnd
+	ld a, D_LEFT
+	ld [hli], a
+	ld [hl], a
+	ld a, [wXCoord]
+	cp 8
+	jr z, .shortSpin
+	ld a, D_LEFT
+	inc hl
+	ld [hl], a
+	ld a, $3
+	jr .gotSpin
+.shortSpin
+	ld a, $2
+	jr .gotSpin
+.gotSpin
+	ld [wSimulatedJoypadStatesIndex], a
+	ld [wJoyIgnore], a
+	jp StartSimulatingJoypadStates
+	
+MtSilver2FPlayerMoveScript:
+	ld a, [wSimulatedJoypadStatesIndex]
+	and a
+	ret nz
+	xor a
+	ld [wJoyIgnore], a
+	ld hl, wMovementFlags
+	res BIT_SPINNING, [hl]
+	call Delay3
+	ld a, SPRITE_FACING_UP
+	ldh [hSpriteFacingDirection], a
+	ld a, MT_SILVER2F_WATER_GUARD
+	ldh [hSpriteIndex], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	call SetSpriteFacingDirectionAndDelay
+	ld a, TEXT_MT_SILVER2F_WATER_GUARD
+	ldh [hTextID], a
+	call DisplayTextID
+	ld a, SCRIPT_MT_SILVER2F_DEFAULT
+	ld [wMtSilver2FCurScript], a	
+	ret
 	
 MtSilver2FMistyTalkScript:
 	ld a, [wStatusFlags5]
@@ -140,10 +202,9 @@ MtSilver2F_TextPointers:
 	
 MtSilver2FWhirlpoolText:
 	text_asm
-	SetEvent EVENT_MISTY_REMATCH
+	xor a
+	ld [wJoyIgnore], a
 	ld hl, .Wooshing
-	call PrintText
-	ld hl, MtSilver2FWaterGuardText_Misty
 	call PrintText
 	jp TextScriptEnd
 
