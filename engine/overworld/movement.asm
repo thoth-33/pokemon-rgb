@@ -603,6 +603,19 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
+	ld a, [wCurMap]
+	cp FUCHSIA_CITY
+	jr nz, .noLaprasCheck
+	ld a, c
+	cp $14 ; water tile
+	jr nz, .noLaprasCheck
+	ld h, HIGH(wSpriteStateData1)
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld a, [hl]
+	cp SPRITE_LAPRAS ; lapras in fuchsia city
+	jr z, .skipTileCheck
+.noLaprasCheck
 	ld a, [wTilesetCollisionPtr]
 	ld l, a
 	ld a, [wTilesetCollisionPtr+1]
@@ -613,6 +626,7 @@ CanWalkOntoTile:
 	jr z, .impassable
 	cp c
 	jr nz, .tilePassableLoop
+.skipTileCheck
 	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6
