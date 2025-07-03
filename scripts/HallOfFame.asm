@@ -58,7 +58,7 @@ HallOfFameResetEventsAndSaveScript:
 	jp Init
 
 HallOfFameDefaultScript:
-	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, HallOfFameEntryMovement
@@ -98,7 +98,7 @@ HallOfFameOakCongratulationsScript:
 .RematchText
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, PAD_A | PAD_B | PAD_SELECT | PAD_START | PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
 	jr nz, .skip ; dont reapply these after the first time around. Messes with post-game

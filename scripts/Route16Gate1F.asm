@@ -42,7 +42,7 @@ Route16Gate1FDefaultScript:
 .next_to_counter
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, SCRIPT_ROUTE16GATE1F_GUARD
 	ld [wRoute16Gate1FCurScript], a
@@ -59,7 +59,7 @@ Route16Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 
 Route16Gate1FGuardScript:

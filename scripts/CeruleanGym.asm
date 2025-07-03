@@ -45,7 +45,7 @@ CeruleanGymMistyPostBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanGymResetScripts
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_MISTY_REMATCH
 	jr nz, MistyRematchPostBattle

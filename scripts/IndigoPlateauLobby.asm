@@ -8,8 +8,8 @@ IndigoPlateauLobby_Script:
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	; Reset Elite Four events if the player started challenging them before
 	ld hl, wElite4Flags
-	bit B_PAD_STARTED_ELITE_4, [hl]
-	res B_PAD_STARTED_ELITE_4, [hl]
+	bit BIT_STARTED_ELITE_4, [hl]
+	res BIT_STARTED_ELITE_4, [hl]
 	ret z
 	ResetEventRange INDIGO_PLATEAU_EVENTS_START, EVENT_LANCES_ROOM_LOCK_DOOR
 	ret

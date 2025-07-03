@@ -64,7 +64,7 @@ VermilionGymLTSurgeAfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff ; did we lose?
 	jp z, VermilionGymResetScripts
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_LT_SURGE_REMATCH
 	jr nz, LTSurgeRematchPostBattle

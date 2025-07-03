@@ -15,7 +15,7 @@ LoreleiShowOrHideExitBlock:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	ld hl, wElite4Flags
-	set B_PAD_STARTED_ELITE_4, [hl]
+	set BIT_STARTED_ELITE_4, [hl]
 	CheckEvent EVENT_OAK_BEAT
 	jr nz, .Rematch
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0

@@ -18,7 +18,7 @@ MtSilver3FGiovanniPostBattle:
 	ld a, [wIsInBattle]
 	cp $ff
 	ret z
-	ld a, PAD_RIGHT | PAD_LEFT | PAD_UP | PAD_DOWN
+	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_MT_SILVER3F_GIOVANNI_POSTBATTLE
 	ldh [hTextID], a
