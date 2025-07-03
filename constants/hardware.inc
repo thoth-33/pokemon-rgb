@@ -295,6 +295,8 @@ DEF B_AUD3ENA_ENABLE EQU 7 ; 1 = channel is active [r/w]
 ; Audio channel 3 length timer [wo]
 DEF rAUD3LEN EQU $FF1B
 
+DEF AUD3LEN_TIMER EQU %00_111111 ; initial length timer (0-63) [wo]
+
 ; -- AUD3LEVEL / NR32 ($FF1C) -------------------------------------------------
 ; Audio channel 3 volume
 DEF rAUD3LEVEL EQU $FF1C
