@@ -2,7 +2,7 @@ SECTION "HRAM", HRAM
 
 ; Initialized to 16.
 ; Decremented each input iteration if the player
-; presses the reset sequence (A+B+SEL+START).
+; presses the reset sequence (A+B+SEL+PAD_START).
 ; Soft reset when 0 is reached.
 hSoftReset:: db
 

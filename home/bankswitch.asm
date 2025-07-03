@@ -6,14 +6,14 @@ BankswitchHome::
 	ld [wBankswitchHomeSavedROMBank], a
 	ld a, [wBankswitchHomeTemp]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 BankswitchBack::
 ; returns from BankswitchHome
 	ld a, [wBankswitchHomeSavedROMBank]
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 Bankswitch::
@@ -27,7 +27,7 @@ Bankswitch::
 	push af
 	ld a, b
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ld bc, .Return
 	push bc
 	ldh a, [hColorHackTmp] ; [hColorHackTmps]
@@ -37,6 +37,6 @@ Bankswitch::
 	pop bc
 	ld a, b
 	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ldh a, [hColorHackTmp] ; [hColorHackTmps]
 	ret

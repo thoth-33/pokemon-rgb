@@ -83,13 +83,13 @@ MtSilver2FMistyCoords:
 	
 MtSilver2FScript_MoveLeft:
 	ld hl, wSimulatedJoypadStatesEnd
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	ld [hli], a
 	ld [hl], a
 	ld a, [wXCoord]
 	cp 8
 	jr z, .shortSpin
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	inc hl
 	ld [hl], a
 	ld a, $3

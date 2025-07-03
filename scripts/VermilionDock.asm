@@ -24,12 +24,12 @@ VermilionDock_Script:
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [hli], a
 	ld [hli], a
 	ld a, [wXCoord]
 	cp $12
-	ld a, D_UP
+	ld a, PAD_UP
 	jr nz, .moveUp ; fall through
 	ld [hli], a
 	jr .moveLeft
@@ -317,7 +317,7 @@ TruckCheck:
 	set BIT_CUR_MAP_USED_ELEVATOR, [hl] ; wait until the next time the player presses left
 	ret z
 	ldh a, [hJoyHeld]
-	bit BIT_D_LEFT, a ; is player pressing left
+	bit B_PAD_LEFT, a ; is player pressing left
 	ret z
 	res BIT_CUR_MAP_USED_ELEVATOR, [hl]
 	ld a, $ff

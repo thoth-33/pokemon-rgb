@@ -23,7 +23,7 @@ ClearBgMap::
 	jr .next
 	ld a, l
 .next
-	ld de, BG_MAP_WIDTH * BG_MAP_HEIGHT
+	ld de, TILEMAP_WIDTH * TILEMAP_HEIGHT
 	ld l, e
 .loop
 	ld [hli], a
@@ -64,10 +64,10 @@ RedrawRowOrColumn::
 ; improve efficiency.
 AutoBgMapTransfer:: ; HAXED function
 	ld a, BANK(RefreshWindow)
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	call RefreshWindow
 	ldh a, [hLoadedROMBank]
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	ret
 
 ; HAX: Squeeze this little function in here
@@ -91,7 +91,7 @@ SECTION "JpPoint", ROM0
 ; so it's fine.
 TransferBgRows::
 	ld a, BANK(WindowTransferBgRowsAndColors)
-	ld [MBC1RomBank], a
+	ld [rROMB], a
 	jp WindowTransferBgRowsAndColors
 
 ; Copies [hVBlankCopyBGNumRows] rows from hVBlankCopyBGSource to hVBlankCopyBGDest.
@@ -156,7 +156,7 @@ VBlankCopyDouble::
 	ldh [hVBlankCopyDoubleSize], a
 
 .loop
-REPT LEN_2BPP_TILE / 4 - 1
+REPT TILE_SIZE / 4 - 1
 	pop de
 	ld [hl], e
 	inc l
@@ -233,7 +233,7 @@ VBlankCopy::
 	ldh [hVBlankCopySize], a
 
 .loop
-REPT LEN_2BPP_TILE / 2 - 1
+REPT TILE_SIZE / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
