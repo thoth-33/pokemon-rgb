@@ -29,7 +29,7 @@ _InitSound::
 	ld [hli], a ; rAUD1SWEEP, rAUD2SWEEP, rAUD3ENA, rAUD4SWEEP ; sweep = 0
 
 	ld [hli], a ; rAUD1LEN, rAUD2LEN, rAUD3LEN, rAUD4LEN ; length/wavepattern = 0
-	ld a, $8    ; AUD1ENV_UP, AUD2ENV_UP, unsued bit in rAUD3LEVEL, AUD4ENV_UP
+	ld a, $8    ; AUD1ENV_UP, AUD2ENV_UP, AUD1ENV_UP (mistake?), AUD4ENV_UP
 	ld [hli], a ; rAUD1ENV, rAUD2ENV, rAUD3LEVEL, rAUD4ENV ; envelope = 0
 	xor a
 	ld [hli], a ; rAUD1LOW, rAUD2LOW, rAUD3LOW, rAUD4POLY ; frequency lo = 0
@@ -453,7 +453,7 @@ UpdateChannels:
 	ret
 
 .ch3_noise_sampling
-	ld a, AUD3LEN_TIMER ; sound length
+	ld a, AUD1LEN_TIMER ; mistake?
 	ldh [rAUD3LEN], a
 	xor a
 	ldh [rAUD3ENA], a
@@ -3098,7 +3098,7 @@ ClearChannel:
 	ld [hli], a ; rAUD1SWEEP, rAUD2SWEEP, rAUD3ENA, rAUD4SWEEP ; sweep = 0
 
 	ld [hli], a ; rAUD1LEN, rAUD2LEN, rAUD3LEN, rAUD4LEN ; length/wavepattern = 0
-	ld a, $8    ; AUD1ENV_UP, AUD2ENV_UP, unsued bit in rAUD3LEVEL, AUD4ENV_UP
+	ld a, $8    ; AUD1ENV_UP, AUD2ENV_UP, AUD1ENV_UP (mistake?), AUD4ENV_UP
 	ld [hli], a ; rAUD1ENV, rAUD2ENV, rAUD3LEVEL, rAUD4ENV ; envelope = 0
 	xor a
 	ld [hli], a ; rAUD1LOW, rAUD2LOW, rAUD3LOW, rAUD4POLY ; frequency lo = 0
