@@ -4977,6 +4977,18 @@ ApplyAttackToPlayerPokemon:
 ; loop until a random number in the range [0, b) is found
 ; this differs from the range when the player attacks, which is [1, b)
 ; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
+; Remove advantage on hardmode.
+	ld a, [wDifficulty]
+	and a
+	jr z, .loop ; if not hardmode, go to normal loop, else fall through.
+.hardloop
+	call BattleRandom
+	and a
+	jr z, .hardloop
+	cp b
+	jr nc, .hardloop
+	ld b, a
+	jr .storeDamage
 .loop
 	call BattleRandom
 	cp b
