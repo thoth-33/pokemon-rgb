@@ -39,7 +39,7 @@ DisplayPokemonCenterDialogue_::
 	xor a
 	ldh [hMoney], a
 	ldh [hMoney + 2], a
-	ld a, $5
+	ld a, $2
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
@@ -58,7 +58,7 @@ DisplayPokemonCenterDialogue_::
 	xor a
 	ld [wPriceTemp], a
 	ld [wPriceTemp + 2], a
-	ld a, $5
+	ld a, $2
 	ld [wPriceTemp + 1], a
 	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2

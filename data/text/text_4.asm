@@ -171,7 +171,7 @@ _PokemonCenterWelcomeHardText::
 
 	para "We heal your"
 	line "#MON for a"
-	cont "fee of ¥500."
+	cont "fee of ¥200."
 	prompt
 
 _PokemonCenterCantAffordText::
