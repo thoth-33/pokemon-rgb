@@ -60,3 +60,9 @@ _DaycareGentlemanMonNeedsMoreTimeText::
 	cont "needs some more"
 	cont "time with me."
 	prompt
+
+_DayCareMonAtCapText::
+	text "This #MON is"
+	line "too strong for me"
+	cont "to train further."
+	prompt

@@ -1212,6 +1212,18 @@ _HitXTimesText::
 	text_decimal wEnemyNumHits, 1, 1
 	text " times!"
 	prompt
+	
+_AtLevelCapTextNoExpAllText::
+	text_ram wNameBuffer
+	text " is at"
+	line "the level cap!"
+	prompt
+	
+_AtLevelCapWithExpAllText::
+	text_ram wNameBuffer
+	text "'s EXP.ALL"
+	line "share is lost!"
+	prompt
 
 _GainedText::
 	text_ram wNameBuffer

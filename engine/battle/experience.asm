@@ -156,8 +156,34 @@ GainExperience:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
+	
+	; Hard mode: Dont give gained EXP message to mons at level cap
+	push bc ; exp is stored in bcd
+	push de
+	ld d, MAX_LEVEL
+	ld a, [wDifficulty]
+	and a
+	jr z, .notHardMode
+	callfar GetLevelCap
+	ld a, [wMaxLevel]
+	ld d, a
+.notHardMode
+	ld a, [wWhichPokemon]         ; a = index (0–5) of Pokémon gaining EXP
+	ld hl, wPartyMon1Level        ; hl = address of level for party slot 0
+	ld bc, PARTYMON_STRUCT_LENGTH ; bc = size of each party mon struct
+	call AddNTimes                ; hl += bc * a
+	ld a, [hl]                    ; a = level of the Pokémon gaining EXP
+	cp d
+	pop de ; restore experience value
+	pop bc
+	jr nz, .notAtCap
+	ld hl, AtLevelCapText
+	jr .printText
+.notAtCap
 	ld hl, GainedText
+.printText
 	call PrintText
+	
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 IF GEN_2_GRAPHICS
@@ -391,6 +417,23 @@ ExpPointsText:
 GrewLevelText:
 	text_far _GrewLevelText
 	sound_level_up
+	text_end
+	
+AtLevelCapText:
+	text_asm
+	ld a, [wBoostExpByExpAll]
+	ld hl, AtLevelCapWithExpAllText
+	and a
+	ret nz
+	ld hl, AtLevelCapTextNoExpAllText
+	ret
+	
+AtLevelCapTextNoExpAllText:
+	text_far _AtLevelCapTextNoExpAllText
+	text_end
+	
+AtLevelCapWithExpAllText:
+	text_far _AtLevelCapWithExpAllText
 	text_end
 
 ; function to count the set bits in wObtainedBadges
