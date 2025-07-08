@@ -1774,6 +1774,9 @@ SendOutMon:
 	res USING_TRAPPING_MOVE, [hl]
 	ld a, $1
 	ldh [hWhoseTurn], a
+	ld a, [wCurPartySpecies]
+	ld b, a
+	push bc ; store wCurPartySpecies for playing of cry
 	ld a, POKE_BALL
 	ld [wCurItem], a
 	ld a, SENDTOSS_ANIM
@@ -1782,7 +1785,9 @@ SendOutMon:
 	call PlayMoveAnimation
 	hlcoord 4, 11
 	predef AnimateSendingOutMon
-	ld a, [wCurPartySpecies]
+	pop bc ; retrieve wCurPartySpecies for playing of cry
+	ld a, b
+	ld [wCurPartySpecies], a
 	call PlayCry
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1
