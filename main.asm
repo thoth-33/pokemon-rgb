@@ -122,6 +122,7 @@ INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/events/evolve_trade.asm"
 INCLUDE "engine/battle/move_effects/substitute.asm"
 INCLUDE "engine/menus/pc.asm"
+INCLUDE "engine/pokemon/calc_stats.asm"
 
 
 SECTION "Play Time", ROMX
