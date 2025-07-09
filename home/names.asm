@@ -28,21 +28,20 @@ GetItemName::
 ; given an item ID at [wNamedObjectIndex], store the name of the item in wNameBuffer
 	push hl
 	push bc
-	ld a, [wNamedObjectIndex]
-	cp HM01 ; is this a TM/HM?
-	jr nc, .Machine
-
-	ld [wNameListIndex], a
 	ld a, ITEM_NAME
 	ld [wNameListType], a
+	ld a, [wNamedObjectIndex]
+	ld [wNameListIndex], a
+	cp HM01 ; is this a TM/HM?
+	jr nc, .Machine
 	ld a, BANK(ItemNames)
+	jr .Finish
+.Machine
+;	call GetMachineName
+	ld a, BANK(tmhmNames)
+.Finish
 	ld [wPredefBank], a
 	call GetName
-	jr .Finish
-
-.Machine
-	call GetMachineName
-.Finish
 	ld de, wNameBuffer
 	pop bc
 	pop hl

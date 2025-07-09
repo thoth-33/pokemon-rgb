@@ -142,7 +142,11 @@ DisplayListMenuIDLoop::
 .skipGettingQuantity
 	ld a, [wCurItem]
 	ld [wNameListIndex], a
+	cp HM01
 	ld a, BANK(ItemNames)
+	jr c, .notTMHM
+	ld a, BANK(tmhmNames)
+.notTMHM
 	ld [wPredefBank], a
 	call GetName
 	jr .storeChosenEntry

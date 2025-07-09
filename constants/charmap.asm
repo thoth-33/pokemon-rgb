@@ -170,8 +170,8 @@
 	charmap ".",         $e8
 
 	charmap "ァ",         $e9 ; katakana small a, unused
-	charmap "ゥ",         $ea ; katakana small u, unused
-	charmap "ェ",         $eb ; katakana small e, unused
+	charmap "%",         $ea ; katakana small u, unused ; TM
+	charmap "&",         $eb ; katakana small e, unused ; HM
 
 	charmap "▷",         $ec
 	charmap "▶",         $ed

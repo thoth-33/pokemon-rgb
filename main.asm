@@ -123,6 +123,7 @@ INCLUDE "engine/events/evolve_trade.asm"
 INCLUDE "engine/battle/move_effects/substitute.asm"
 INCLUDE "engine/menus/pc.asm"
 INCLUDE "engine/pokemon/calc_stats.asm"
+INCLUDE "data/items/tmhm_names.asm"
 
 
 SECTION "Play Time", ROMX
