@@ -329,6 +329,7 @@ Route24DamianText:
 
 Route24Text_Damian1:
 	text_far _Route24DamianText1
+	text_waitbutton
 	text_end
 
 Route24Text_Damian2:

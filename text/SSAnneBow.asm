@@ -111,7 +111,7 @@ _SSAnneBowOakPostBattleText::
 	cont "#DEX!"
 	
 	para "Oh, by the way,"
-	line "I hear the Elite"
-	cont "Four have been"
+	line "I hear the ELITE"
+	cont "FOUR have been"
 	cont "asking about you."
 	done

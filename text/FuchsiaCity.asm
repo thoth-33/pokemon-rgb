@@ -122,9 +122,9 @@ _FuchsiaCityCooltrainerText::
 	text "You don't have"
 	line "enough BADGES."
 
-	para "KOGA only battles"
+	para "KOGA only faces"
 	line "those proven in"
-	cont "battle."
+	cont "GYM battles."
 
 	para "Come back when"
 	line "you've earned at"
