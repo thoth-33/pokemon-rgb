@@ -311,22 +311,8 @@ TryWalking:
 
 ; update the walking animation parameters for a sprite that is currently walking
 UpdateSpriteInWalkingAnimation:
-	ldh a, [hCurrentSpriteOffset]
-	add $7
-	ld l, a
-	ld a, [hl]                       ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
-	inc a
-	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER]++
-	cp $4
-	jr nz, .noNextAnimationFrame
-	xor a
-	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER] = 0
-	inc l
-	ld a, [hl]                       ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
-	inc a
-	and $3
-	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
-.noNextAnimationFrame
+	ld c, 4
+	call DoSpriteWalkingAnimation
 	ldh a, [hCurrentSpriteOffset]
 	add $3
 	ld l, a
@@ -383,10 +369,48 @@ UpdateSpriteInWalkingAnimation:
 	ld c, [hl]                       ; x#SPRITESTATEDATA1_XSTEPVECTOR
 	ld [hl], a                       ; [x#SPRITESTATEDATA1_XSTEPVECTOR] = 0
 	ret
+	
+DoSpriteWalkingAnimation:
+	ldh a, [hCurrentSpriteOffset]
+	add $7
+	ld l, a
+
+	ld a, [hl]                       ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
+	inc a
+	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER]++
+	cp c
+	ret c
+	xor a
+	ld [hli], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER] = 0
+	ld a, [hl]                       ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
+	inc a
+	and $3
+	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
+	ret	
 
 ; update [x#SPRITESTATEDATA2_MOVEMENTDELAY] for sprites in the delayed state (x#SPRITESTATEDATA1_MOVEMENTSTATUS)
 UpdateSpriteMovementDelay:
-	ld h, HIGH(wSpriteStateData2)
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld a, [hl]
+	ld c, 12
+	cp SPRITE_SWIMMER
+	jr z, .done
+	cp SPRITE_LAPRAS
+	jr z, .done
+	cp SPRITE_OMANYTE
+	jr z, .done
+	ld c, 6
+	cp SPRITE_ARTICUNO
+	jr z, .done
+	cp SPRITE_ZAPDOS
+	jr z, .done
+	cp SPRITE_MOLTRES
+.done	
+	push af
+	call z, DoSpriteWalkingAnimation
+	
+	inc h
 	ldh a, [hCurrentSpriteOffset]
 	add $6
 	ld l, a
@@ -399,13 +423,17 @@ UpdateSpriteMovementDelay:
 	jr .moving
 .tickMoveCounter
 	dec [hl]                ; x#SPRITESTATEDATA2_MOVEMENTDELAY
-	jr nz, notYetMoving
+	jr nz, .notYetWalking
 .moving
 	dec h
 	ldh a, [hCurrentSpriteOffset]
 	inc a
 	ld l, a
 	ld [hl], $1             ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] = 1 (mark as ready to move)
+.notYetWalking
+	pop af
+	jp z, UpdateSpriteImage	
+	
 notYetMoving:
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
