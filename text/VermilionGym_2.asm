@@ -33,7 +33,7 @@ _VermilionGymLTSurgeReceivedTM24Text::
 _TM24ExplanationText::
 	text_start
 
-	para "TM24 contains"
+	para "This % contains"
 	line "THUNDERBOLT!"
 
 	para "Teach it to an"

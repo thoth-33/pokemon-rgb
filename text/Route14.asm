@@ -1,6 +1,6 @@
 _Route14CooltrainerM1BattleText::
 	text "You need to use"
-	line "TMs to teach good"
+	line "%s to teach good"
 	cont "moves to #MON!"
 	done
 
@@ -10,7 +10,7 @@ _Route14CooltrainerM1EndBattleText::
 	prompt
 
 _Route14CooltrainerM1AfterBattleText::
-	text "You have some HMs"
+	text "You have some &s"
 	line "right? #MON"
 	cont "can't ever forget"
 	cont "those moves."
@@ -33,10 +33,10 @@ _Route14CooltrainerM2AfterBattleText::
 	done
 
 _Route14CooltrainerM3BattleText::
-	text "TMs are on sale"
+	text "%s are on sale"
 	line "in CELADON!"
 	cont "But, only a few"
-	cont "people have HMs!"
+	cont "people have &s!"
 	done
 
 _Route14CooltrainerM3EndBattleText::

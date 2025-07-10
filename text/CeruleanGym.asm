@@ -18,7 +18,7 @@ _CeruleanGymMistyPreBattleText::
 	done
 
 _CeruleanGymMistyTM11ExplanationText::
-	text "TM11 teaches"
+	text "This % teaches"
 	line "BUBBLEBEAM!"
 
 	para "Use it on an"
@@ -42,12 +42,12 @@ _CeruleanGymMistyCascadeBadgeInfoText::
 	cont "open new paths!"
 
 	para "You can also have"
-	line "my favorite TM!"
+	line "my favorite %!"
 	done
 
 _CeruleanGymMistyReceivedTM11Text::
 	text "<PLAYER> received"
-	line "TM11!@"
+	line "%BUBBLEBEAM!@"
 	text_end
 
 _CeruleanGymMistyTM11NoRoomText::
@@ -135,7 +135,7 @@ _CeruleanGymGymGuideBeatMistyText::
 _CeruleanGymRematchPreBattleText::
 	text "Whirlpools, huh?"
 	line "I've been working"
-	cont "on a new HM move"
+	cont "on a new & move"
 	cont "for just such a"
 	cont "situation."
 
@@ -157,7 +157,7 @@ _CeruleanGymRematchPreBattleText::
 	
 _CeruleanGymRematchPostBattleText::
 	text "Perfect chance to"
-	line "test the new HM."
+	line "test the new &."
 
 	para "I'll meet you back"
 	line "in the cave."
@@ -165,7 +165,7 @@ _CeruleanGymRematchPostBattleText::
 	
 _CeruleanGymMistyGoodLuckText::
 	text "Took some trying,"
-	line "but the HM worked."
+	line "but the & worked."
 
 	para "The water is calm"
 	line "enough to cross."

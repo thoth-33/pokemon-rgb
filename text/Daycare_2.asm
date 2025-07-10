@@ -20,7 +20,7 @@ _DaycareGentlemanOnlyHaveOneMonText::
 _DaycareGentlemanCantAcceptMonWithHMText::
 	text "I can't accept a"
 	line "#MON that"
-	cont "knows an HM move."
+	cont "knows an & move."
 	done
 
 _DaycareGentlemanHeresYourMonText::

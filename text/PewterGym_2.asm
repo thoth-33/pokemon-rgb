@@ -19,25 +19,25 @@ _PewterGymBrockWaitTakeThisText::
 
 _PewterGymReceivedTM34Text::
 	text "<PLAYER> received"
-	line "TM34!@"
+	line "%BIDE!@"
 	text_end
 
 _TM34ExplanationText::
 	text_start
 
-	para "A TM contains a"
+	para "A % contains a"
 	line "technique that"
 	cont "can be taught to"
 	cont "#MON!"
 
-	para "A TM is good only"
+	para "A % is good only"
 	line "once! So when you"
 	cont "use one to teach"
 	cont "a new technique,"
 	cont "pick the #MON"
 	cont "carefully!"
 
-	para "TM34 contains"
+	para "This % contains"
 	line "BIDE!"
 
 	para "Your #MON will"

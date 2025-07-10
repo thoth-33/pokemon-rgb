@@ -33,7 +33,7 @@ _FuchsiaGymKogaReceivedTM06Text::
 
 _FuchsiaGymKogaTM06ExplanationText::
 	text_start
-	para "TM06 contains"
+	para "This % contains"
 	line "TOXIC!"
 
 	para "It is a secret"

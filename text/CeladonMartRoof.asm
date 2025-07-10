@@ -76,13 +76,13 @@ _CeladonMartRoofLittleGirlYayLemonadeText::
 
 _CeladonMartRoofLittleGirlReceivedTM49Text::
 	text "<PLAYER> received"
-	line "TM49!@"
+	line "%TRI ATTACK!@"
 	text_end
 
 _CeladonMartRoofLittleGirlTM49ExplanationText::
 	text_start
 
-	para "TM49 contains"
+	para "This % contains"
 	line "TRI ATTACK!@"
 	text_end
 

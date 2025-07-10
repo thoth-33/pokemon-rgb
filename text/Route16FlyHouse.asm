@@ -10,11 +10,11 @@ _Route16FlyHouseBrunetteGirlText::
 
 _Route16FlyHouseBrunetteGirlReceivedHM02Text::
 	text "<PLAYER> received"
-	line "HM02!@"
+	line "&FLY!@"
 	text_end
 
 _Route16FlyHouseBrunetteGirlHM02ExplanationText::
-	text "HM02 is FLY."
+	text "This & is FLY."
 	line "It will take you"
 	cont "back to any town."
 

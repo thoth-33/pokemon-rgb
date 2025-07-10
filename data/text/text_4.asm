@@ -152,7 +152,7 @@ _ForgotAndText::
 	prompt
 
 _HMCantDeleteText::
-	text "HM techniques"
+	text "& techniques"
 	line "can't be deleted!"
 	prompt
 

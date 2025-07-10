@@ -52,7 +52,7 @@ _CinnabarGymBlaineReceivedTM38Text::
 _CinnabarGymBlaineTM38ExplanationText::
 	text_start
 
-	para "TM38 contains"
+	para "This % contains"
 	line "FIRE BLAST!"
 
 	para "Teach it to fire-"

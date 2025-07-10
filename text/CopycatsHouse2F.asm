@@ -36,7 +36,7 @@ _CopycatsHouse2FCopycatReceivedTM31Text::
 _CopycatsHouse2FCopycatTM31Explanation1Text::
 	text_start
 
-	para "TM31 contains my"
+	para "This % is my"
 	line "favorite, MIMIC!"
 
 	para "Use it on a good"
@@ -45,7 +45,8 @@ _CopycatsHouse2FCopycatTM31Explanation1Text::
 
 _CopycatsHouse2FCopycatTM31Explanation2Text::
 	text "<PLAYER>: Hi!"
-	line "Thanks for TM31!"
+	line "Thanks you for"
+	cont "%MIMIC!"
 
 	para "<PLAYER>: Pardon?"
 

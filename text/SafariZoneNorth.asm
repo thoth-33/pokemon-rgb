@@ -27,7 +27,7 @@ _SafariZoneNorthTrainerTips2Text::
 _SafariZoneNorthTrainerTips3Text::
 	text "TRAINER TIPS"
 
-	para "Win a free HM for"
+	para "Win a free & for"
 	line "finding the"
 	cont "SECRET HOUSE!"
 	done

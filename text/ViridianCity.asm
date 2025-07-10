@@ -74,21 +74,21 @@ ViridianCityFisherYouCanHaveThisText::
 	line "about a DROWZEE"
 	cont "eating my dream."
 	cont "What's this?"
-	cont "Where did this TM"
+	cont "Where did this %"
 	cont "come from?"
 
 	para "This is spooky!"
 	line "Here, you can"
-	cont "have this TM."
+	cont "have this %."
 	prompt
 
 _ViridianCityFisherReceivedTM42Text::
 	text "<PLAYER> received"
-	line "TM42!@"
+	line "%DREAM EATER!@"
 	text_end
 
 _ViridianCityFisherTM42ExplanationText::
-	text "TM42 contains"
+	text "This % contains"
 	line "DREAM EATER..."
 	cont "...Snore..."
 	done

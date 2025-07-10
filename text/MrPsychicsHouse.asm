@@ -13,7 +13,7 @@ _MrPsychicsHouseMrPsychicReceivedTM29Text::
 	text_end
 
 _MrPsychicsHouseMrPsychicTM29ExplanationText::
-	text "TM29 is PSYCHIC!"
+	text "This is %PSYCHIC!"
 
 	para "It can lower the"
 	line "target's SPECIAL"

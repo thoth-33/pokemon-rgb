@@ -1,6 +1,6 @@
 _CinnabarLabMetronomeRoomScientist1Text::
 	text "Tch-tch-tch!"
-	line "I made a cool TM!"
+	line "I made a cool %!"
 
 	para "It can cause all"
 	line "kinds of fun!"

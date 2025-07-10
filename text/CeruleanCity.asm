@@ -70,7 +70,7 @@ _CeruleanCityRocketText::
 
 _CeruleanCityRocketReceivedTM28Text::
 	text "<PLAYER> recovered"
-	line "TM28!@"
+	line "%DIG!@"
 	text_end
 
 _CeruleanCityRocketIBetterGetMovingText::
@@ -96,7 +96,7 @@ _CeruleanCityRocketIGiveUpText::
 
 _CeruleanCityRocketIllReturnTheTMText::
 	text "OK! I'll return"
-	line "the TM I stole!"
+	line "the % I stole!"
 	prompt
 
 _CeruleanCityCooltrainerMText::

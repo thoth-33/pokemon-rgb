@@ -51,7 +51,7 @@ _WardensHouseWardenReceivedHM04Text::
 	text_end
 
 _WardensHouseWardenHM04ExplanationText::
-	text "WARDEN: HM04"
+	text "WARDEN: This &"
 	line "teaches STRENGTH!"
 
 	para "It lets #MON"
@@ -64,10 +64,10 @@ _WardensHouseWardenHM04ExplanationText::
 	cont "in SAFARI ZONE?"
 
 	para "If you do, you"
-	line "win an HM!"
+	line "win an &!"
 
 	para "I hear it's the"
-	line "rare SURF HM."
+	line "rare &SURF."
 	done
 
 _WardensHouseWardenHM04NoRoomText::

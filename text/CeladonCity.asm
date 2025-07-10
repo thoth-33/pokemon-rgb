@@ -47,7 +47,7 @@ _CeladonCityGramps3ReceivedTM41Text::
 	text_end
 
 _CeladonCityGramps3TM41ExplanationText::
-	text "TM41 teaches"
+	text "This % teaches"
 	line "SOFTBOILED!"
 
 	para "Only one #MON"

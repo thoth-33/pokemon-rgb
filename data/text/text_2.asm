@@ -471,15 +471,15 @@ _JustAMomentText::
 
 TMNotebookText::
 	text "It's a pamphlet"
-	line "on TMs."
+	line "on %s."
 
 	para "..."
 
-	para "There are 50 TMs"
+	para "There are 50 %s"
 	line "in all."
 
 	para "There are also 5"
-	line "HMs that can be"
+	line "&s that can be"
 	cont "used repeatedly."
 
 	para "SILPH CO.@"
@@ -1393,7 +1393,7 @@ _PartyMenuBattleText::
 	done
 
 _PartyMenuUseTMText::
-	text "Use TM on which"
+	text "Use % on which"
 	line "#MON?"
 	done
 

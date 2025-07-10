@@ -154,11 +154,11 @@ _PPRestoredText::
 	prompt
 
 _BootedUpTMText::
-	text "Booted up a TM!"
+	text "Booted up a %!"
 	prompt
 
 _BootedUpHMText::
-	text "Booted up an HM!"
+	text "Booted up an &!"
 	prompt
 
 _TeachMachineMoveText::
