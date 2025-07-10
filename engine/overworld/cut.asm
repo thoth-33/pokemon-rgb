@@ -101,7 +101,7 @@ InitCutAnimOAM:
 	call WriteCutAnimationOAMBlock
 	ld hl, wShadowOAMSprite36Attributes
 	ld de, 4
-	ld a, $36 ; Overwrite attributes (use palette 7, green)
+	ld a, $36 ; Overwrite attributes
 	ld c, e
 .loop
 	ld [hl], a
@@ -129,7 +129,7 @@ WriteCutAnimationOAMBlock:
 	db $fc, OAM_PAL1 | SPR_PAL_HM
 	db $fd, OAM_PAL1 | SPR_PAL_HM 
 	db $fe, OAM_PAL1 | SPR_PAL_HM 
-	db $ff, OAM_PAL1 | SPR_PAL_HM ; Uses palette 7 (green, specifically for cut trees)
+	db $ff, OAM_PAL1 | SPR_PAL_HM
 
 GetCutAnimationOffsets:
 	ld hl, wSpritePlayerStateData1YPixels

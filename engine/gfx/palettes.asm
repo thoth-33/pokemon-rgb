@@ -119,7 +119,7 @@ DetermineBackSpritePaletteID:
 
 IF GEN_2_GRAPHICS	
     ld a, [wBattleType]   ; Old man?
-    cp 1
+    cp BATTLE_TYPE_OLD_MAN
     jr nz, .notOldMan
 	ld a, PAL_BROCK
 	jr .gotPalette

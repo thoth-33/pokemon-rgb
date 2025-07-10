@@ -705,7 +705,7 @@ SetPal_Overworld:
 	ld [hli], a
 
 	; Pokecenter uses OBP1 when healing pokemons; also cut animation
-	ld a, %10010000
+	ld a, %10000000
 	ld [W2_UseOBP1], a
 
 	CALL_INDIRECT LoadOverworldSpritePalettes
