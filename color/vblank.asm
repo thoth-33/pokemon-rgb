@@ -93,22 +93,16 @@ RefreshPalettesPreVBlank:
 	call SetBlackColor
 	jr .end
 .obpNotBlack
-
+	; Palettes flash according to set bits
+	ld a, [W2_UseOBP1]
+	ld c, a
 .doNextSprPal
 	ld e, 4
-
-	ld a, [W2_UseOBP1]
-	and a
-	jr z, .obp0
-	ld a, 11
-	cp b
-	jr nc, .obp0
-.obp1
-	ldh a, [rOBP1]
-	ld d, a
-	jr .doNextSprColor
-.obp0
+	rrc c ; set c if bit is 1
 	ldh a, [rOBP0]
+	jr nc, .obp0
+	ldh a, [rOBP1]
+.obp0
 	ld d, a
 
 .doNextSprColor

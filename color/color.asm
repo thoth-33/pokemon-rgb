@@ -250,7 +250,7 @@ SetPal_TownMap:
 	ld hl, W2_SpritePaletteMap
 	ld bc, $4
 IF DEF(_BLUE)
-	ld a, SPR_PAL_BROWN
+	ld a, SPR_PAL_YELLOW
 ELSE ; _RED
 	ld a, SPR_PAL_GREEN
 ENDC
@@ -303,6 +303,7 @@ ENDC
 	ld [hl], 1
 
 	xor a
+	ld [W2_UseOBP1], a
 	ldh [rSVBK], a
 	ret
 
@@ -496,8 +497,8 @@ SetPal_Slots:
 
 	CALL_INDIRECT LoadAttackSpritePalettes
 
-	xor a
-	ld [W2_UseOBP1], a
+;	xor a
+;	ld [W2_UseOBP1], a
 
 	ld hl, SlotSpritePaletteMap
 	ld a, BANK(SlotSpritePaletteMap)
@@ -506,6 +507,7 @@ SetPal_Slots:
 	call FarCopyData
 
 	xor a
+	ld [W2_UseOBP1], a
 	ldh [rSVBK], a
 	
 	; Wait 3 frames to allow tilemap updates to apply.
@@ -703,7 +705,7 @@ SetPal_Overworld:
 	ld [hli], a
 
 	; Pokecenter uses OBP1 when healing pokemons; also cut animation
-	ld a, 1
+	ld a, %10010000
 	ld [W2_UseOBP1], a
 
 	CALL_INDIRECT LoadOverworldSpritePalettes
@@ -780,6 +782,7 @@ SetPal_PartyMenu:
 	ld a, 3
 	ld [W2_StaticPaletteMapChanged], a
 	xor a
+	ld [W2_UseOBP1], a
 	ld [W2_TileBasedPalettes], a
 	ldh [rSVBK], a
 	ret
@@ -901,7 +904,7 @@ SetPal_GameFreakIntro:
 	; Everything else will use palette 0 by default
 
 	; Use OBP1 just for the shooting star
-	ld a, 1
+	ld a, %11110000
 	ld [W2_UseOBP1], a
 
 	xor a

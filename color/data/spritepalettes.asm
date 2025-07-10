@@ -36,16 +36,16 @@ SpritePalettes: ; Taken from pokemon GSC.
 	RGB 13,13,13
 	RGB 0,0,0
 
-; PAL_OW_TREE
+; PAL_OW_YELLOW
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 26,23,0
+	RGB 0,0,0
+
+; PAL_OW_HM ; boulders, trees
 	RGB 22,31,10
 	RGB 12,25,1
 	RGB 5,14,0
-	RGB 7,7,7
-
-; PAL_OW_ROCK
-	RGB 27,31,27
-	RGB 24,18,7
-	RGB 20,15,3
 	RGB 7,7,7
 
 SpritePalettesNite: ; Taken from pokemon GSC.
@@ -86,13 +86,13 @@ SpritePalettesNite: ; Taken from pokemon GSC.
 	RGB 13,13,13
 	RGB 0,0,0
 
-; PAL_OW_TREE
-	RGB 15,14,24
-	RGB 08,13,19
-	RGB 00,11,13
-	RGB 00,00,00
+; PAL_OW_YELLOW
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 26,23,0
+	RGB 0,0,0
 
-; PAL_OW_ROCK
+; PAL_OW_HM ; boulders, trees
 	RGB 15,14,24
 	RGB 12,09,15
 	RGB 08,04,05
@@ -136,18 +136,17 @@ SpritePalettesPokecenter: ; Taken from pokemon GSC.
 	RGB 13,13,13
 	RGB 0,0,0
 
-; PAL_OW_TREE
-	RGB 22,31,10
-	RGB 12,25,1
-	RGB 5,14,0
-	RGB 7,7,7
+; PAL_OW_YELLOW
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 26,23,0
+	RGB 0,0,0
 
-; PAL_OW_ROCK
+; PAL_OW_HM ; boulders, trees
 	RGB 27,31,27
 	RGB 24,18,7
 	RGB 20,15,3
 	RGB 7,7,7
-
 
 AttackSpritePalettes:
 	; GREY
