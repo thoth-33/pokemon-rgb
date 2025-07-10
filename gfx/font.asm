@@ -54,3 +54,10 @@ ELSE ; _RED
 PlayerCharacterTitleGraphics: INCBIN "gfx/title/player.2bpp"
 ENDC
 PlayerCharacterTitleGraphicsEnd:
+
+IF DEF(_BLUE)
+GirlCharacterTitleGraphics: INCBIN "gfx/title/altgirl.2bpp"
+ELSE ; _RED
+GirlCharacterTitleGraphics: INCBIN "gfx/title/girl.2bpp"
+ENDC
+GirlCharacterTitleGraphicsEnd:

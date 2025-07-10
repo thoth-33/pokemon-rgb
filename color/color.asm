@@ -531,6 +531,10 @@ SetPal_TitleScreen:
 	ld d, PAL_LOGO1
 	ld e, 2
 	farcall LoadSGBPalette
+	
+	ld d, PAL_HERO
+	ld e, 0
+	farcall LoadSGBPalette_Sprite	
 	jr .boyColor
 
 .girlColor
@@ -544,6 +548,14 @@ SetPal_TitleScreen:
 	ld e, 2
 	farcall LoadSGBPalette
 	
+IF DEF(_BLUE)
+	ld d, PAL_ENGINEER
+ELSE ; _RED
+	ld d, PAL_ERIKA
+ENDC
+	ld e, 0
+	farcall LoadSGBPalette_Sprite
+	
 .boyColor	
 	
 	ld d, PAL_LOGO2 ; Title logo
@@ -553,14 +565,6 @@ SetPal_TitleScreen:
 	ld d, PAL_BLACK
 	ld e, 3
 	farcall LoadSGBPalette
-
-IF GEN_2_GRAPHICS
-	ld d, PAL_HERO
-ELSE
-	ld d, PAL_REDMON
-ENDC
-	ld e, 0
-	farcall LoadSGBPalette_Sprite
 
 	; Start drawing the palette map
 

@@ -320,10 +320,17 @@ ScrollTitleScreenGameVersion:
 	ret
 
 DrawPlayerCharacter:
+	ld a, [wPlayerGender] ; Gender check
+	and a
+	ld hl, GirlCharacterTitleGraphics
+	ld bc, GirlCharacterTitleGraphicsEnd - GirlCharacterTitleGraphics
+	ld a, BANK(GirlCharacterTitleGraphics)
+	jr nz, .girlTitle
 	ld hl, PlayerCharacterTitleGraphics
-	ld de, vSprites
 	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
 	ld a, BANK(PlayerCharacterTitleGraphics)
+.girlTitle
+	ld de, vSprites
 	call FarCopyData2
 	call ClearSprites
 	xor a
