@@ -69,10 +69,10 @@ EmotionBubblesPointerTable:
 
 EmotionBubblesOAMBlock:
 ; tile ID, attributes
-	db $f8, 0
-	db $f9, 0
-	db $fa, 0
-	db $fb, 0
+	db $f8, SPR_PAL_EMOJI
+	db $f9, SPR_PAL_EMOJI
+	db $fa, SPR_PAL_EMOJI
+	db $fb, SPR_PAL_EMOJI
 
 EmotionBubbles:
 ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"

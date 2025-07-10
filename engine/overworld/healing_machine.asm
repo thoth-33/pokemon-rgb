@@ -78,14 +78,14 @@ PokeCenterFlashingMonitorAndHealBall:
 ; HAXed to use palette 4
 PokeCenterOAMData:
 	; heal machine monitor
-	dbsprite  6,  4,  4,  4, $7c, OAM_PAL1 | SPR_PAL_HM
+	dbsprite  6,  4,  4,  4, $7c, OAM_PAL1 | SPR_PAL_EMOJI
 	; poke balls 1-6
-	dbsprite  6,  5,  0,  3, $7d, OAM_PAL1 | SPR_PAL_HM
-	dbsprite  7,  5,  0,  3, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_HM
-	dbsprite  6,  6,  0,  0, $7d, OAM_PAL1 | SPR_PAL_HM
-	dbsprite  7,  6,  0,  0, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_HM
-	dbsprite  6,  6,  0,  5, $7d, OAM_PAL1 | SPR_PAL_HM
-	dbsprite  7,  6,  0,  5, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_HM
+	dbsprite  6,  5,  0,  3, $7d, OAM_PAL1 | SPR_PAL_EMOJI
+	dbsprite  7,  5,  0,  3, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_EMOJI
+	dbsprite  6,  6,  0,  0, $7d, OAM_PAL1 | SPR_PAL_EMOJI
+	dbsprite  7,  6,  0,  0, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_EMOJI
+	dbsprite  6,  6,  0,  5, $7d, OAM_PAL1 | SPR_PAL_EMOJI
+	dbsprite  7,  6,  0,  5, $7d, OAM_PAL1 | OAM_XFLIP | SPR_PAL_EMOJI
 
 ; d = value to xor with palette
 FlashSprite8Times:

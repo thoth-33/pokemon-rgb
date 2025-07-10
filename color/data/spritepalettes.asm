@@ -30,19 +30,19 @@ SpritePalettes: ; Taken from pokemon GSC.
 	RGB 18,4,18
 	RGB 0,0,0
 
-; PAL_OW_EMOJI
-	RGB 31,31,31
-	RGB 31,31,31
-	RGB 13,13,13
-	RGB 0,0,0
-
 ; PAL_OW_YELLOW
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 26,23,0
 	RGB 0,0,0
 
-; PAL_OW_HM ; boulders, trees
+; PAL_OW_EMOJI
+	RGB 31,31,31
+	RGB 31,31,31
+	RGB 13,13,13
+	RGB 0,0,0
+
+; PAL_OW_HM ; trees
 	RGB 22,31,10
 	RGB 12,25,1
 	RGB 5,14,0
@@ -80,19 +80,19 @@ SpritePalettesNite: ; Taken from pokemon GSC.
 	RGB 18,4,18
 	RGB 0,0,0
 
-; PAL_OW_EMOJI
-	RGB 31,31,31
-	RGB 31,31,31
-	RGB 13,13,13
-	RGB 0,0,0
-
 ; PAL_OW_YELLOW
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 26,23,0
 	RGB 0,0,0
 
-; PAL_OW_HM ; boulders, trees
+; PAL_OW_EMOJI
+	RGB 31,31,31
+	RGB 31,31,31
+	RGB 13,13,13
+	RGB 0,0,0
+
+; PAL_OW_HM ; boulders
 	RGB 15,14,24
 	RGB 12,09,15
 	RGB 08,04,05
@@ -130,23 +130,23 @@ SpritePalettesPokecenter: ; Taken from pokemon GSC.
 	RGB 18,4,18
 	RGB 0,0,0
 
-; PAL_OW_EMOJI
-	RGB 31,31,31
-	RGB 31,31,31
-	RGB 13,13,13
-	RGB 0,0,0
-
 ; PAL_OW_YELLOW
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 26,23,0
 	RGB 0,0,0
 
-; Heal Machine pokeballs and screen
+; healing machine and poke balls
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 31,7,1
 	RGB 0,0,0
+
+; boulder in warden's house
+	RGB 27,31,27
+	RGB 24,18,7
+	RGB 20,15,3
+	RGB 7,7,7
 
 AttackSpritePalettes:
 	; GREY
@@ -190,7 +190,7 @@ AttackSpritePalettes:
 	RGB 12,0,13
 	RGB 0,0,0
 
-PartySpritePalettes:
+PartySpritePalettes: ; These need to be in the same order as OW sprites for Fly Menu to load Hero palettes correctly. 
 	; RED
 	RGB 27,31,27
 	RGB 31,19,10
@@ -211,26 +211,27 @@ PartySpritePalettes:
 	RGB 31,19,10
 	RGB 15,10,3
 	RGB 0,0,0
-	; PINK
+	; PURPLE
 	RGB 27,31,27
 	RGB 31,19,10
-	RGB 30,16,17
+	RGB 18,4,18
+	RGB 0,0,0
+	; YELLOW
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 26,23,0
 	RGB 0,0,0
 	; GRAY
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 13,13,13
 	RGB 0,0,0
-	; YELLOW
+	; PINK
 	RGB 27,31,27
 	RGB 31,19,10
-	RGB 29,29,5
+	RGB 30,16,17
 	RGB 0,0,0
-	; PURPLE
-	RGB 27,31,27
-	RGB 31,19,10
-	RGB 18,4,18
-	RGB 0,0,0
+
 
 ; Not related to sprites, move this somewhere else?
 SlotPaletteMap:

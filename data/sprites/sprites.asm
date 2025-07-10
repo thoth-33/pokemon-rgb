@@ -108,6 +108,7 @@ SpriteSheetPointerTable:
 	overworld_sprite WeezingSprite, 12          ; SPRITE_WEEZING
 	overworld_sprite HypnoSprite, 12            ; SPRITE_HYPNO
 	overworld_sprite RattataSprite, 12          ; SPRITE_RATTATA
+	overworld_sprite OmanyteSprite, 12          ; SPRITE_OMANYTE
 	overworld_sprite WhirlpoolSprite, 12        ; SPRITE_WHIRLPOOL
 	overworld_sprite PokeBallSprite, 4          ; SPRITE_POKE_BALL
 	overworld_sprite FossilSprite, 4            ; SPRITE_FOSSIL

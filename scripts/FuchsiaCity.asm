@@ -151,36 +151,37 @@ FuchsiaCityLaprasSignText:
 	text_far _FuchsiaCityLaprasSignText
 	text_end
 
+; always Omanyte incase player only takes helix fossil at MtMoon
 FuchsiaCityFossilSignText:
 	text_asm
-	CheckEvent EVENT_GOT_DOME_FOSSIL
-	jr nz, .got_dome_fossil
-	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
-	jr nz, .got_helix_fossil
-	ld hl, .UndeterminedText
-	call PrintText
-	jr .done
-.got_dome_fossil
+;	CheckEvent EVENT_GOT_DOME_FOSSIL
+;	jr nz, .got_dome_fossil
+;	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
+;	jr nz, .got_helix_fossil
+;	ld hl, .UndeterminedText
+;	call PrintText
+;	jr .done
+;.got_dome_fossil
 	ld hl, .OmanyteText
 	call PrintText
 	ld a, OMANYTE
-	jr .display
-.got_helix_fossil
-	ld hl, .KabutoText
-	call PrintText
-	ld a, KABUTO
-.display
+;	jr .display
+;.got_helix_fossil
+;	ld hl, .KabutoText
+;	call PrintText
+;	ld a, KABUTO
+;.display
 	call DisplayPokedex
-.done
+;.done
 	jp TextScriptEnd
 
 .OmanyteText:
 	text_far _FuchsiaCityFossilSignOmanyteText
 	text_end
 
-.KabutoText:
-	text_far _FuchsiaCityFossilSignKabutoText
-	text_end
+;.KabutoText:
+;	text_far _FuchsiaCityFossilSignKabutoText
+;	text_end
 
 .UndeterminedText:
 	text_far _FuchsiaCityFossilSignUndeterminedText

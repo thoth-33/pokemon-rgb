@@ -103,7 +103,8 @@
 	const SPRITE_WEEZING                 ; $-W
 	const SPRITE_HYPNO                   ; $-X
 	const SPRITE_RATTATA                 ; $-Y
-	const SPRITE_WHIRLPOOL               ; $-Z
+	const SPRITE_OMANYTE                 ; $-Z
+	const SPRITE_WHIRLPOOL               ; $-#
 DEF FIRST_STILL_SPRITE EQU const_value
 	const SPRITE_POKE_BALL               ; $3d
 	const SPRITE_FOSSIL                  ; $3e
