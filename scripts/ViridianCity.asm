@@ -129,11 +129,11 @@ ViridianCity_TextPointers:
 	def_text_pointers
 	dw_const ViridianCityYoungster1Text,                     TEXT_VIRIDIANCITY_YOUNGSTER1
 	dw_const ViridianCityGambler1Text,                       TEXT_VIRIDIANCITY_GAMBLER1
+	dw_const ViridianCityOldManText,                         TEXT_VIRIDIANCITY_OLD_MAN
 	dw_const ViridianCityYoungster2Text,                     TEXT_VIRIDIANCITY_YOUNGSTER2
 	dw_const ViridianCityGirlText,                           TEXT_VIRIDIANCITY_GIRL
 	dw_const ViridianCityOldManSleepyText,                   TEXT_VIRIDIANCITY_OLD_MAN_SLEEPY
 	dw_const ViridianCityFisherText,                         TEXT_VIRIDIANCITY_FISHER
-	dw_const ViridianCityOldManText,                         TEXT_VIRIDIANCITY_OLD_MAN
 	dw_const ViridianCitySignText,                           TEXT_VIRIDIANCITY_SIGN
 	dw_const ViridianCityTrainerTips1Text,                   TEXT_VIRIDIANCITY_TRAINER_TIPS1
 	dw_const ViridianCityTrainerTips2Text,                   TEXT_VIRIDIANCITY_TRAINER_TIPS2

@@ -114,7 +114,11 @@ ColorOverworldSprite::
 	; This is a (somewhat) random but consistent color
 	ldh a, [hSpriteOffset2]
 	swap a
-	and 3
+.randomloop
+	cp 6
+	jr c, .norandomColor
+	sub 6
+	jr .randomloop
 
 .norandomColor
 
