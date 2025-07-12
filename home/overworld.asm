@@ -2566,7 +2566,40 @@ rept 18
 	ld [hli], a
 endr
 	ld [hl], "┘"
+; blank space
+	ld a, " "
+	ld hl, $9C21
+	rept 18
+	ld [hli], a
+endr
+	ld hl, $9C41
+	rept 18
+	ld [hli], a
+endr
 
+; clear palettes
+	ld a, 1
+	ldh [rVBK], a
+	ld a, 7
+	ld hl, $9C00
+rept 20
+	ld [hli], a
+endr
+	ld hl, $9C20
+rept 20
+	ld [hli], a
+endr
+	ld hl, $9C40
+rept 20
+	ld [hli], a
+endr
+	ld hl, $9C60
+rept 20
+	ld [hli], a
+endr
+	xor a
+	ldh [rVBK], a
+	
 ; text here
 
 ; Draw coordinate and timer

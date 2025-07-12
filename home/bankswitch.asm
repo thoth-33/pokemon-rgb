@@ -40,3 +40,8 @@ Bankswitch::
 	ld [rROMB], a
 	ldh a, [hColorHackTmp] ; [hColorHackTmps]
 	ret
+
+SetCurBank::
+	ldh [hLoadedROMBank], a
+	ld [rROMB], a
+	ret
