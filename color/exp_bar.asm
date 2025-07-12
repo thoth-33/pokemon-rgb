@@ -1,3 +1,6 @@
+DEF EXP_BAR_START EQU $90
+DEF EXP_BAR_END   EQU $98
+
 AnimateEXPBarAgain:
 	call LoadMonData
 	call IsCurrentMonBattleMon
@@ -5,8 +8,8 @@ AnimateEXPBarAgain:
 	xor a
 	ld [wEXPBarPixelLength], a
 	hlcoord 17, 11
-	ld a, $c0
-	ld c, $08
+	ld a, EXP_BAR_START
+	ld c, TILE_WIDTH
 .loop
 	ld [hld], a
 	dec c
@@ -37,11 +40,11 @@ AnimateEXPBar:
 	sub b
 	jr z, .done
 	ld b, a
-	ld c, $08
+	ld c, TILE_WIDTH
 	hlcoord 17, 11
 .loop1
 	ld a, [hl]
-	cp $c8
+	cp EXP_BAR_END
 	jr nz, .loop2
 	dec hl
 	dec c
@@ -55,7 +58,7 @@ AnimateEXPBar:
 	jr z, .done
 	jr .loop1
 .done
-	ld bc, $08
+	ld bc, TILE_WIDTH
 	hlcoord 10, 11
 	ld de, wTileMapBackup + 10 + 11 * 20
 	call CopyData

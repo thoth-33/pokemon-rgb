@@ -7209,7 +7209,7 @@ PrintEXPBar:
 	jr .loop
 .skip
 	ld b, a
-	ld a, $c0
+	ld a, EXP_BAR_START
 	add c
 .loop2
 	ld [hld], a
@@ -7218,7 +7218,7 @@ PrintEXPBar:
 	ld a, b
 	and a
 	jr nz, .loop
-	ld a, $c0
+	ld a, EXP_BAR_START
 	jr .loop2
 
 CalcEXPBarPixelLength:
