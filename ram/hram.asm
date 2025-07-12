@@ -182,7 +182,7 @@ hDivideBCDQuotient::
 hDivideBCDBuffer::
 	ds 3 ; BCD number
 
-	ds 1
+;	ds 1
 
 hSerialReceivedNewData:: db
 ; $01 = using external clock
@@ -197,6 +197,7 @@ hSerialReceiveData:: db
 hSCX:: db
 hSCY:: db
 hWY::  db
+hWUp:: db
 
 hJoyLast::     db
 hJoyReleased:: db

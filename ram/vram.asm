@@ -11,7 +11,8 @@ vBGMap1:: ds TILEMAP_AREA
 NEXTU
 ; battle/menu
 vSprites::  ds $80 tiles
-vFont::     ds $80 tiles
+    ds $20 tiles
+vFont::     ds $60 tiles
 vFrontPic:: ds 7 * 7 tiles
 vBackPic::  ds 7 * 7 tiles
 

@@ -687,7 +687,7 @@ CheckMapConnections::
 	ld b, a
 	ld a, [wCurrentMapHeight2]
 	cp b
-	jr nz, .didNotEnterConnectedMap
+	jp nz, .didNotEnterConnectedMap
 	ld a, [wSouthConnectedMap]
 	ld [wCurMap], a
 	ld a, [wSouthConnectedMapYAlignment] ; new Y coordinate upon entering south map
@@ -718,6 +718,7 @@ CheckMapConnections::
 ; x#SPRITESTATEDATA2_IMAGEBASEOFFSET without loading any tile patterns.
 	farcall InitMapSprites
 	call LoadTileBlockMap
+	call DrawMapLabel
 	jp OverworldLoopLessDelay
 
 .didNotEnterConnectedMap
@@ -2534,4 +2535,43 @@ LoadDestinationWarpPosition::
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
+	ret
+
+DrawMapLabel:
+; Text Box 
+; technically less cycles than calling TextBoxBorder, which isnt doing anything here.
+; tends not to draw fully on first pass. Tried delay frame with no luck
+; top rail
+	ld hl, $9C00
+	ld a, "┌"
+	ld [hli], a
+	inc a ; "─"
+rept 18
+	ld [hli], a
+endr
+	inc a ; "┐"
+	ld [hl], a	
+; left/right rails
+	inc a ; "│"
+	ld [$9C20], a
+	ld [$9C40], a
+	ld [$9C33], a
+	ld [$9C53], a
+; bottom rail
+	ld hl, $9C60
+	inc a ; "└"
+	ld [hli], a
+	ld a, "─"
+rept 18
+	ld [hli], a
+endr
+	ld [hl], "┘"
+
+; text here
+
+; Draw coordinate and timer
+	ld a, 112
+	ldh [hWY], a
+	ld a, 60
+	ldh [hWUp], a
 	ret
