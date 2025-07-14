@@ -1,27 +1,3 @@
-; Handles sprite attributes
-
-DEF ATK_PAL_GREY    EQU 0
-DEF ATK_PAL_BLUE    EQU 1
-DEF ATK_PAL_RED     EQU 2
-DEF ATK_PAL_BROWN   EQU 3
-DEF ATK_PAL_YELLOW  EQU 4
-DEF ATK_PAL_GREEN   EQU 5
-DEF ATK_PAL_ICE     EQU 6
-DEF ATK_PAL_PURPLE  EQU 7
-; 8: color based on attack type
-; 9: don't change color palette (assume it's already set properly from elsewhere)
-
-
-DEF SPR_PAL_ORANGE  EQU 0
-DEF SPR_PAL_BLUE    EQU 1
-DEF SPR_PAL_GREEN   EQU 2
-DEF SPR_PAL_BROWN   EQU 3
-DEF SPR_PAL_PURPLE  EQU 4
-DEF SPR_PAL_YELLOW  EQU 5
-DEF SPR_PAL_EMOJI   EQU 6
-DEF SPR_PAL_HM      EQU 7
-DEF SPR_PAL_RANDOM  EQU 8
-
 LoadOverworldSpritePalettes:
 	ldh a, [rSVBK]
 	ld b, a

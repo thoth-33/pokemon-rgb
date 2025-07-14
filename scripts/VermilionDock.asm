@@ -186,10 +186,10 @@ VermilionDock_EmitSmokePuff:
 
 VermilionDockOAMBlock:
 ; tile ID, attributes
-	db $fc, $13
-	db $fd, $13
-	db $fe, $13
-	db $ff, $13
+	db $fc, OAM_PAL1 | SPR_PAL_BROWN
+	db $fd, OAM_PAL1 | SPR_PAL_BROWN
+	db $fe, OAM_PAL1 | SPR_PAL_BROWN
+	db $ff, OAM_PAL1 | SPR_PAL_BROWN
 
 VermilionDock_SyncScrollWithLY:
 	ld h, d

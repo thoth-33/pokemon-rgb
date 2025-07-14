@@ -88,7 +88,7 @@ StatusScreenManager:
 	ld [wStatsMenuData], a
 	ld hl, wStatusFlags2
 	res BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $77
+	ld a, MAX_VOLUME
 	ldh [rAUDVOL], a
 	call GBPalWhiteOut
 	jp ClearScreen
@@ -111,8 +111,8 @@ StatusScreenManager_UpdateJumptableIndex:
 StatusScreenManager_Init:
 	ld hl, wStatusFlags2
 	set BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $33
-	ldh [rAUDVOL], a ; Reduce the volume
+	ld a, (3 & AUDVOL_RIGHT) | ((3 << 4) & AUDVOL_LEFT)
+	ldh [rAUDVOL], a ; Set volume to 3
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites

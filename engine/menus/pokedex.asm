@@ -403,7 +403,7 @@ ShowPokedexData:
 ShowPokedexDataInternal:
 	ld hl, wStatusFlags2
 	set BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $33 ; 3/7 volume
+	ld a, (3 & AUDVOL_RIGHT) | ((3 << 4) & AUDVOL_LEFT) ; 3/7 volume
 	ldh [rAUDVOL], a
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
@@ -594,7 +594,7 @@ ShowPokedexDataInternal:
 	call GBPalNormal
 	ld hl, wStatusFlags2
 	res BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $77 ; max volume
+	ld a, MAX_VOLUME
 	ldh [rAUDVOL], a
 	ret
 

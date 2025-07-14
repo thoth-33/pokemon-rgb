@@ -74,7 +74,7 @@ CopyMonPicFromBGToSpriteVRAM_orig: ; Name changed so color hack can hijack this
 	ld [hli], a
 	ld a, d
 	ld [hli], a
-	ld a, OAM_PAL1 | 4 ; HAX: use palette 4
+	ld a, OAM_PAL1 | ATK_PAL_YELLOW ; Yellow is 4, but none of the palettes match
 	ld [hli], a
 	inc d
 	dec c
