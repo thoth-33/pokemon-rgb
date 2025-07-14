@@ -354,11 +354,11 @@ ItemUseBall:
 	ldh [hMultiplier], a
 	call Multiply
 
-; Determine BallFactor. It's 8 for Great Balls and 12 for the others.
+; Determine BallFactor. It's 12 for Poke Balls and 8 for the others.
 	ld a, [wCurItem]
-	cp GREAT_BALL
+	cp POKE_BALL
 	ld a, 12
-	jr nz, .skip1
+	jr z, .skip1
 	ld a, 8
 
 .skip1
