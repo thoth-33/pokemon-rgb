@@ -61,22 +61,54 @@ DrawHP_:
 	pop de
 	ret
 
+DEF NUM_STAT_PAGES = 2
+; DEF STAT_SCREEN_PAGE_MASK = %0111_1111
 
-; Predef 0x37
-StatusScreen:
-	call LoadMonData
-	ld a, [wMonDataLocation]
-	cp BOX_DATA
-	jr c, .DontRecalculate
-; mon is in a box or daycare
-	ld a, [wLoadedMonBoxLevel]
-	ld [wLoadedMonLevel], a
-	ld [wCurEnemyLevel], a
-	ld hl, wLoadedMonHPExp - 1
-	ld de, wLoadedMonStats
-	ld b, $1
-	call CalcStats ; Recalculate stats
-.DontRecalculate
+StatusScreenManager:
+	ldh a, [hTileAnimations]
+	push af
+	xor a
+	ldh [hTileAnimations], a
+	ld a, [wJumptableIndex]
+	push af
+	call StatusScreenManager_Init
+.loop
+	ld hl, StatusScreenManager_Jumptable
+	ld a, [wJumptableIndex]
+	and JUMPTABLE_INDEX_MASK
+	call CallFunctionInTable
+	ld a, [wJumptableIndex]
+	and JUMPTABLE_EXIT
+	jr z, .loop
+	pop af
+	ld [wJumptableIndex], a
+	pop af
+	ldh [hTileAnimations], a
+	xor a
+	ld [wStatsMenuData], a
+	ld hl, wStatusFlags2
+	res BIT_NO_AUDIO_FADE_OUT, [hl]
+	ld a, $77
+	ldh [rAUDVOL], a
+	call GBPalWhiteOut
+	jp ClearScreen
+
+StatusScreenManager_Jumptable:
+	const_def
+	dw_const StatusScreenManager_WaitForInput, SSM_WAIT_FOR_INPUT
+	dw_const StatusScreenManager_LoadMon,      SSM_LOAD_MON
+	dw_const StatusScreenManager_ShowPage,     SSM_SHOW_PAGE
+
+; input: h, new index
+; preserves exit flag
+StatusScreenManager_UpdateJumptableIndex:
+	ld a, [wJumptableIndex]
+	and JUMPTABLE_EXIT
+	or h
+	ld [wJumptableIndex], a
+	ret
+
+StatusScreenManager_Init:
 	ld hl, wStatusFlags2
 	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33
@@ -101,11 +133,164 @@ StatusScreen:
 	ld hl, vChars2 tile $72
 	lb bc, BANK(PTile), 1
 	call CopyVideoDataDouble ; bold P (for PP)
-	ldh a, [hTileAnimations]
-	push af
+	; jr StatusScreenManager_LoadMon
+
+StatusScreenManager_LoadMon:
+	call LoadMonData
+	ld a, [wMonDataLocation]
+	cp BOX_DATA
+	jr c, .DontRecalculate
+; mon is in a box or daycare
+	ld a, [wLoadedMonBoxLevel]
+	ld [wLoadedMonLevel], a
+	ld [wCurEnemyLevel], a
+	ld hl, wLoadedMonHPExp - 1
+	ld de, wLoadedMonStats
+	ld b, $1
+	call CalcStats ; Recalculate stats
+.DontRecalculate
+	call GBPalWhiteOutWithDelay3
+	hlcoord 1, 0
+	lb bc, 7, 7
+	call ClearScreenArea
+	hlcoord 2, 7
+	nop
+	ld [hl], "<DOT>"
+	dec hl
+	ld [hl], "№"
+	ld a, [wMonHIndex]
+	ld [wPokedexNum], a
+	ld [wCurSpecies], a
+	predef IndexToPokedex
+	hlcoord 3, 7
+	ld de, wPokedexNum
+	lb bc, LEADING_ZEROES | 1, 3
+	call PrintNumber ; Pokémon no.
+	call StatusScreenManager_ShowPage
+	call Delay3
+	call GBPalNormal
+	ld b, SET_PAL_STATUS_SCREEN
+	call RunPaletteCommand
+	hlcoord 1, 0
+	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
+	ld a, [wCurPartySpecies]
+	call PlayCry
+	ld h, SSM_WAIT_FOR_INPUT
+	jp StatusScreenManager_UpdateJumptableIndex
+
+StatusScreenManager_WaitForInput:
+	call DelayFrame
+	call Joypad
+	ldh a, [hJoyPressed]
+	ld b, a
+	and PAD_A | PAD_B | PAD_CTRL_PAD
+	ret z
+	bit B_PAD_B, b
+	jr nz, .quit
+	bit B_PAD_RIGHT, b
+	jp nz, .nextPage
+	bit B_PAD_LEFT, b
+	jp nz, .prevPage
+	ld a, [wMonDataLocation]
+	ld c, a
+	dec c ; ENEMY_PARTY_DATA
+	ld a, [wEnemyPartyCount]
+	jr z, .storeCount	
+	dec c ; ENEMY_PARTY_DATA
+	ld a, [wBoxCount]
+	jr z, .storeCount
+	ld a, [wPartyCount]
+.storeCount
+	ld [wBuffer], a
+	dec a ; only 1 mon?
+	ret z 
+	bit B_PAD_UP, b
+	jr nz, .prevMon
+	bit B_PAD_DOWN, b
+	jr nz, .nextMon
+	ret
+.quit
+	ld a, [wJumptableIndex]
+	or JUMPTABLE_EXIT
+	ld [wJumptableIndex], a
+	ret
+.prevMon
+	ld a, [wWhichPokemon]
+	and a
+	jr nz, .noWrap
+	ld a, [wBuffer]
+.noWrap
+	dec a
+	jr .writeWhichMon
+.nextMon
+	ld a, [wBuffer]
+	ld b, a
+	ld a, [wWhichPokemon]
+	inc a
+	cp b
+	jr nz, .writeWhichMon
 	xor a
-	ldh [hTileAnimations], a
-IF GEN_2_GRAPHICS
+.writeWhichMon
+	ld [wWhichPokemon], a
+	ld h, a
+	ld a, [wMonDataLocation]
+	cp ENEMY_PARTY_DATA
+	jr z, .noSaveMenuItem
+	cp BOX_DATA
+	ld a, h
+	ld [wPartyAndBillsPCSavedMenuItem], a
+	ld a, [wWhichPokemon]
+	ld hl, wBoxMonNicks
+	jr z, .namesStored
+	ld hl, wPartyMonNicks
+.namesStored	
+	call GetPartyMonName
+	ld hl, wNameBuffer
+	ld de, wStringBuffer
+	ld bc, NAME_LENGTH
+	call CopyData
+.noSaveMenuItem
+	ld h, SSM_LOAD_MON
+	jp StatusScreenManager_UpdateJumptableIndex
+.nextPage
+	ld a, [wStatsMenuData]
+	inc a
+	cp NUM_STAT_PAGES
+	ret z
+	ld [wStatsMenuData], a
+	jr .showPage
+.prevPage
+	ld a, [wStatsMenuData]
+	and a
+	ret z
+	dec a
+	ld [wStatsMenuData], a
+.showPage
+	ld h, SSM_SHOW_PAGE
+	jp StatusScreenManager_UpdateJumptableIndex
+
+StatusScreenManager_ShowPage:
+	ld hl, .pageFuncs
+	ld a, [wStatsMenuData]
+	; and STAT_SCREEN_PAGE_MASK
+	call CallFunctionInTable
+	ld h, SSM_WAIT_FOR_INPUT
+	jp StatusScreenManager_UpdateJumptableIndex
+.pageFuncs
+	dw StatusScreenManager_StatsPage
+	dw StatusScreenManager_MovesPage
+
+StatusScreenManager_StatsPage:
+	hlcoord 8, 0
+	lb bc, 8, 12
+	call ClearScreenArea
+	hlcoord 0, 8
+	lb bc, 10, 20
+	call ClearScreenArea
+	hlcoord 19, 9
+	lb bc, 8, 6
+	call DrawLineBox ; Draws the box around types, ID No. and OT
+	IF GEN_2_GRAPHICS
 	hlcoord 19, 3
 	lb bc, 2, 8
 ELSE
@@ -113,14 +298,6 @@ ELSE
 	lb bc, 6, 10
 ENDC
 	call DrawLineBox ; Draws the box around name, HP and status
-	hlcoord 2, 7
-	nop
-	ld [hl], "<DOT>"
-	dec hl
-	ld [hl], "№"
-	hlcoord 19, 9
-	lb bc, 8, 6
-	call DrawLineBox ; Draws the box around types, ID No. and OT
 	hlcoord 10, 9
 	ld de, Type1Text
 	call PlaceString ; "TYPE1/"
@@ -128,7 +305,7 @@ ENDC
 	predef DrawHP
 	ld hl, wStatusScreenHPBarColor
 	call GetHealthBarColor
-	ld b, SET_PAL_STATUS_SCREEN
+;	ld b, SET_PAL_STATUS_SCREEN
 	call StatusScreenHook ; HAX: Draws EXP bar if GEN_2_GRAPHICS is set
 	hlcoord 16, 6
 	ld de, wLoadedMonStatus
@@ -170,18 +347,7 @@ ENDC
 	lb bc, LEADING_ZEROES | 2, 5
 	call PrintNumber ; ID Number
 	ld d, $0
-	call PrintStatsBox
-	call Delay3
-	call GBPalNormal
-	hlcoord 1, 0
-	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
-	ld a, [wCurPartySpecies]
-	call PlayCry
-	call WaitForTextScrollButtonPress
-	pop af
-	ldh [hTileAnimations], a
-	ret
-
+	jp PrintStatsBox
 .GetStringPointer
 	ld a, [wMonDataLocation]
 	add a
@@ -300,11 +466,8 @@ StatsText:
 	next "SPEED"
 	next "SPECIAL@"
 
-StatusScreen2:
-	ldh a, [hTileAnimations]
-	push af
+StatusScreenManager_MovesPage:
 	xor a
-	ldh [hTileAnimations], a
 	ldh [hAutoBGTransferEnabled], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
@@ -314,8 +477,8 @@ StatusScreen2:
 	ld bc, NUM_MOVES
 	call CopyData
 	callfar FormatMovesString
-	hlcoord 9, 2
-	lb bc, 5, 10
+	hlcoord 8, 0
+	lb bc, 7, 11
 	call ClearScreenArea ; Clear under name
 IF GEN_2_GRAPHICS
 	call StatusScreen2Hook
@@ -422,7 +585,7 @@ ENDC
 	lb bc, 3, 7
 	call PrintNumber ; exp
 	call CalcExpToLevelUp
-	ld de, wLoadedMonExp
+	ld de, wLoadedMonExpToNextLevel
 	hlcoord 7, 6
 	lb bc, 3, 7
 	call PrintNumber ; exp needed to level up
@@ -437,25 +600,20 @@ ENDC
 	call PlaceString
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
-	call Delay3
-	call WaitForTextScrollButtonPress ; wait for button
-	pop af
-	ldh [hTileAnimations], a
-	ld hl, wStatusFlags2
-	res BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, $77
-	ldh [rAUDVOL], a
-	call GBPalWhiteOut
-	jp ClearScreen
+	jp Delay3
 
 CalcExpToLevelUp:
+	ld de, wLoadedMonExpToNextLevel
+	ld hl, wLoadedMonExp
+	ld bc, 3
+	call CopyData
 	ld a, [wLoadedMonLevel]
 	cp MAX_LEVEL
 	jr z, .atMaxLevel
 	inc a
 	ld d, a
 	callfar CalcExperience
-	ld hl, wLoadedMonExp + 2
+	ld hl, wLoadedMonExpToNextLevel + 2
 	ldh a, [hExperience + 2]
 	sub [hl]
 	ld [hld], a
@@ -467,7 +625,7 @@ CalcExpToLevelUp:
 	ld [hld], a
 	ret
 .atMaxLevel
-	ld hl, wLoadedMonExp
+	ld hl, wLoadedMonExpToNextLevel
 	xor a
 	ld [hli], a
 	ld [hli], a

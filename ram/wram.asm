@@ -352,7 +352,7 @@ wMenuWrappingEnabled:: db
 ; whether to check for 180-degree turn (0 = don't, 1 = do)
 wCheckFor180DegreeTurn:: db
 
-	ds 1
+wStatsMenuData:: db
 
 wMissableObjectIndex:: db
 
@@ -1383,7 +1383,9 @@ wTempTilesetNumTiles:: db
 ; so that it can be restored when the player is done with the pokemart NPC
 wSavedListScrollOffset:: db
 
-	ds 2
+	ds 1
+; save which function to call next
+wJumptableIndex:: db
 
 ; base coordinates of frame block
 wBaseCoordX:: db
@@ -1585,7 +1587,12 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
+UNION
+; Reuse already used memory area
+wLoadedMonExpToNextLevel:: ds 3
+NEXTU
 wMovesString:: ds 56
+ENDU
 
 wUnusedCurMapTilesetCopy:: db
 

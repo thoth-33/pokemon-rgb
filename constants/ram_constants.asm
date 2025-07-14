@@ -156,3 +156,8 @@ DEF NUM_BADGES EQU const_value
 	const_def
 	const BIT_PLAYER_LOWER_Y ; 0
 	const BIT_PLAYER_LOWER_X ; 1
+
+; wJumptableIndex
+DEF JUMPTABLE_INDEX_MASK = %0111_1111
+	const_def 7
+	shift_const JUMPTABLE_EXIT

@@ -11,6 +11,11 @@ ShowMoveInfo:
 	ld de, wBuffer
 	ld a, BANK(Moves)
 	call FarCopyData
+	; bold P (for PP)
+	ld de, PTile
+	ld hl, vChars2 tile $72
+	lb bc, BANK(PTile), 1
+	call CopyVideoDataDouble
 	; add a pop-up with the new move's info
 	hlcoord 0, 0
 	lb bc, 4, 18
@@ -267,9 +272,9 @@ HidePartySprites:
 	jr nz, .loop
 	ret
   
-LearnLabelText:    db " LEARNS", "@"
+LearnLabelText:    db " GAINS", "@"
 ForgetsLabelText:  db "BY FORGETTING", "@"
-MovePPLabel:       db "PP:", "@"
+MovePPLabel:       db "<BOLD_P><BOLD_P>:", "@"
 MovePwrLabel:      db "PWR:", "@"
 MoveAccLabel:      db "ACC:", "@"
 NullMoveInfoLabel: db "---@"

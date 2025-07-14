@@ -224,6 +224,9 @@ BillsPCDeposit:
 	jp c, BillsPCMenu
 	call DisplayDepositWithdrawMenu
 	jp nc, BillsPCMenu
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
+	call GetPartyMonName
 	ld a, [wCurPartySpecies]
 
 	call PlayCry
@@ -420,7 +423,28 @@ DisplayDepositWithdrawMenu:
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld [wPartyAndBillsPCSavedMenuItem], a
+	call SaveScreenTilesToBuffer1
 .loop
+	; find name length
+	ld b, NAME_LENGTH
+	ld hl, wStringBuffer
+.nameloop
+	ld a, [hli]
+	cp "@"
+	jr z, .foundLength
+	dec b
+	jr nz, .nameloop
+.foundLength
+	ld a, NAME_LENGTH
+	sub b ; a = NAME_LENGTH - b = actual length
+	ld c, a
+	; Draw border and show the mon's name
+	hlcoord 8, 7
+	ld b, 1
+	call TextBoxBorder
+	hlcoord 9, 8
+	ld de, wStringBuffer
+	call PlaceString
 	call HandleMenuInput
 	bit B_PAD_B, a
 	jr nz, .exit
@@ -436,7 +460,7 @@ DisplayDepositWithdrawMenu:
 	scf
 	ret
 .viewStats
-	call SaveScreenTilesToBuffer1
+;	call SaveScreenTilesToBuffer1
 	ld a, [wParentMenuItem]
 	and a
 	ld a, PLAYER_PARTY_DATA
@@ -444,8 +468,9 @@ DisplayDepositWithdrawMenu:
 	ld a, BOX_DATA
 .next2
 	ld [wMonDataLocation], a
-	predef StatusScreen
-	predef StatusScreen2
+	predef StatusScreenManager
+;	predef StatusScreen
+;	predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
 	call RunDefaultPaletteCommand
