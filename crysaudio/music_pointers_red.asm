@@ -103,7 +103,15 @@ Gen1Music:
 
 MuteMusic:
 	table_width 3
-rept 46
+rept 15
+	dba Music_Nothing
+endr
+	dba Music_PkmnHealed
+rept 16
+	dba Music_Nothing
+endr
+	dba Music_JigglypuffSong
+rept 13
 	dba Music_Nothing
 endr
 	assert_table_length NUM_MUSIC_SONGS

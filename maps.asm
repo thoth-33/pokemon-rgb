@@ -1165,6 +1165,7 @@ WardensHouse_Blocks: INCBIN "maps/WardensHouse.blk"
 
 INCLUDE "data/maps/headers/SafariZoneGate.asm"
 INCLUDE "scripts/SafariZoneGate.asm"
+INCLUDE "scripts/SafariZoneGate_2.asm"
 INCLUDE "data/maps/objects/SafariZoneGate.asm"
 SafariZoneGate_Blocks: INCBIN "maps/SafariZoneGate.blk"
 

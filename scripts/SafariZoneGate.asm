@@ -87,6 +87,7 @@ SafariZoneGateLeavingSafariScript:
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
+	ld [wSafariSteps], a
 	ld a, PAD_DOWN
 	ld c, 3
 	call SafariZoneEntranceAutoWalk
@@ -146,83 +147,9 @@ SafariZoneGateSafariZoneWorker1Text:
 	text_end
 
 SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
-	text_far _SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText
 	text_asm
-	ld a, MONEY_BOX
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jp nz, .PleaseComeAgain
-	xor a
-	ldh [hMoney], a
-	ld a, $05
-	ldh [hMoney + 1], a
-	ld a, $00
-	ldh [hMoney + 2], a
-	call HasEnoughMoney
-	jr nc, .success
-	ld hl, .NotEnoughMoneyText
-	call PrintText
-	jr .CantPayWalkDown
-
-.success
-	xor a
-	ld [wPriceTemp], a
-	ld a, $05
-	ld [wPriceTemp + 1], a
-	ld a, $00
-	ld [wPriceTemp + 2], a
-	ld hl, wPriceTemp + 2
-	ld de, wPlayerMoney + 2
-	ld c, 3
-	predef SubBCDPredef
-	ld a, MONEY_BOX
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	ld hl, .MakePaymentText
-	call PrintText
-	ld a, 30
-	ld [wNumSafariBalls], a
-	ld a, HIGH(502)
-	ld [wSafariSteps], a
-	ld a, LOW(502)
-	ld [wSafariSteps + 1], a
-	ld a, PAD_UP
-	ld c, 3
-	call SafariZoneEntranceAutoWalk
-	SetEvent EVENT_IN_SAFARI_ZONE
-	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
-	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING
-	ld [wSafariZoneGateCurScript], a
-	jr .done
-
-.PleaseComeAgain
-	ld hl, .PleaseComeAgainText
-	call PrintText
-.CantPayWalkDown
-	ld a, PAD_DOWN
-	ld c, 1
-	call SafariZoneEntranceAutoWalk
-	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING_DOWN
-	ld [wSafariZoneGateCurScript], a
-.done
+	callfar SafariZoneGatePrintSafariZoneWorker1WouldYouLikeToJoinText
 	jp TextScriptEnd
-
-.MakePaymentText
-	text_far _SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText
-	sound_get_item_1
-	text_far _SafariZoneGateSafariZoneWorker1CallYouOnThePAText
-	text_end
-
-.PleaseComeAgainText
-	text_far _SafariZoneGateSafariZoneWorker1PleaseComeAgainText
-	text_end
-
-.NotEnoughMoneyText
-	text_far _SafariZoneGateSafariZoneWorker1NotEnoughMoneyText
-	text_end
 
 SafariZoneGateSafariZoneWorker1LeavingEarlyText:
 	text_far _SafariZoneGateSafariZoneWorker1LeavingEarlyText
@@ -271,26 +198,5 @@ SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText:
 
 SafariZoneGateSafariZoneWorker2Text:
 	text_asm
-	ld hl, .FirstTimeHereText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	ld hl, .YoureARegularHereText
-	jr nz, .print_text
-	ld hl, .SafariZoneExplanationText
-.print_text
-	call PrintText
+	callfar SafariZoneGatePrintSafariZoneWorker2Text
 	jp TextScriptEnd
-
-.FirstTimeHereText
-	text_far _SafariZoneGateSafariZoneWorker2FirstTimeHereText
-	text_end
-
-.SafariZoneExplanationText
-	text_far _SafariZoneGateSafariZoneWorker2SafariZoneExplanationText
-	text_end
-
-.YoureARegularHereText
-	text_far _SafariZoneGateSafariZoneWorker2YoureARegularHereText
-	text_end

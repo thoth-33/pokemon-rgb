@@ -1393,8 +1393,8 @@ _PartyMenuBattleText::
 	done
 
 _PartyMenuUseTMText::
-	text "Use % on which"
-	line "#MON?"
+	text "Use % or & on"
+	line "which #MON?"
 	done
 
 _PartyMenuSwapMonText::
