@@ -14,7 +14,7 @@ ELSE
 ENDC
 	dw FlareonPicFront, FlareonPicBack
 
-	db TACKLE, SAND_ATTACK, QUICK_ATTACK, EMBER ; level 1 learnset
+	db TACKLE, TAIL_WHIP, QUICK_ATTACK, EMBER ; level 1 learnset
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
