@@ -161,9 +161,9 @@ ItemPricesHard::
 	bcd3 1000  ; MAX_REPEL <-----
 	bcd3 950   ; DIRE_HIT <-----
 	bcd3 10    ; COIN X-----
-	bcd3 250   ; FRESH_WATER <-----
-	bcd3 350   ; SODA_POP <-----
-	bcd3 400   ; LEMONADE <-----
+	bcd3 0     ; FRESH_WATER >----- These three are sale prices only.
+	bcd3 0     ; SODA_POP >-----
+	bcd3 0     ; LEMONADE >-----
 	bcd3 0     ; S_S_TICKET
 	bcd3 0     ; GOLD_TEETH
 	bcd3 750   ; X_ATTACK <-----

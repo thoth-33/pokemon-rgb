@@ -150,3 +150,10 @@ _VendingMachineText6::
 _VendingMachineText7::
 	text "Not thirsty!"
 	done
+
+_VendingMachineText8::
+	text "You put the money"
+	line "you have in the"
+	cont "machine and"
+	cont "press the button."
+	done

@@ -37,7 +37,7 @@ VendingMachineMenu::
 	res BIT_NO_TEXT_DELAY, [hl]
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .notThirsty
+	jp nz, .notThirsty
 	ld a, [wCurrentMenuItem]
 	cp 3 ; chose Cancel?
 	jr z, .notThirsty
@@ -48,6 +48,26 @@ VendingMachineMenu::
 	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
+	
+	ld a, [wStatusFlags1]
+	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
+	jr nz, .nofallback	
+	ld b, FRESH_WATER
+	call IsItemInBag
+	jr nz, .nofallback
+	ld b, SODA_POP
+	call IsItemInBag
+	jr nz, .nofallback	
+	ld b, LEMONADE
+	call IsItemInBag
+	jr nz, .nofallback	
+	xor a
+	ld [wCurrentMenuItem], a
+	ld hl, VendingMachineText8
+	call PrintText
+	jr .enoughMoney
+.nofallback
+
 	ld hl, VendingMachineText4
 	jp PrintText
 .enoughMoney
@@ -121,6 +141,10 @@ VendingMachineText6:
 
 VendingMachineText7:
 	text_far _VendingMachineText7
+	text_end
+	
+VendingMachineText8:
+	text_far _VendingMachineText8
 	text_end
 
 LoadVendingMachineItem:
