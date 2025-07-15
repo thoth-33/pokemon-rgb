@@ -594,7 +594,7 @@ ShowPokedexDataInternal:
 	call GBPalNormal
 	ld hl, wStatusFlags2
 	res BIT_NO_AUDIO_FADE_OUT, [hl]
-	ld a, MAX_VOLUME
+	ld a, AUDVOL_RIGHT | AUDVOL_LEFT
 	ldh [rAUDVOL], a
 	ret
 

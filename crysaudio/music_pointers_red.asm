@@ -2,6 +2,7 @@
 ; entries correspond to MUSIC_* constants
 
 Gen2Music:
+	table_width 3
 	dba Music_Nothing
 	dba Music_PalletTown
 	dba Music_PokemonCenter
@@ -48,8 +49,10 @@ Gen2Music:
 	dba Music_LookHiker
 	dba Music_LookLass
 	dba Music_LookOfficer
+	assert_table_length NUM_MUSIC_SONGS
 
 Gen1Music:
+	table_width 3
 	dba Music_Nothing
 	dba Music_RBYPalletTown
 	dba Music_Pokecenter
@@ -96,8 +99,11 @@ Gen1Music:
 	dba Music_MeetEvilTrainer
 	dba Music_MeetFemaleTrainer
 	dba Music_MeetMaleTrainer
-	
+	assert_table_length NUM_MUSIC_SONGS
+
 MuteMusic:
+	table_width 3
 rept 46
 	dba Music_Nothing
 endr
+	assert_table_length NUM_MUSIC_SONGS

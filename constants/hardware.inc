@@ -237,9 +237,7 @@ DEF B_AUD1HIGH_LEN_ENABLE EQU 6 ; 1 = reset the channel after the length timer e
 
 DEF AUD1HIGH_PERIOD_HIGH EQU %00000_111 ; upper 3 bits of the channel's period [r/w]
 
-; -- AUD2SWEEP / NR20 ($FF15) -------------------------------------------------
-; Audio channel 2 sweep
-DEF rAUD2SWEEP EQU $FF15
+; -- $FF15 is unused ----------------------------------------------------------
 
 ; -- AUD2LEN / NR21 ($FF16) ---------------------------------------------------
 ; Audio channel 2 length timer and duty cycle
@@ -321,9 +319,7 @@ DEF B_AUD3HIGH_LEN_ENABLE EQU 6 ; 1 = reset the channel after the length timer e
 
 DEF AUD3HIGH_PERIOD_HIGH EQU %00000_111 ; upper 3 bits of the channel's period [r/w]
 
-; -- AUD4SWEEP / NR40 ($FF1F) -------------------------------------------------
-; Audio channel 4 sweep
-DEF rAUD4SWEEP EQU $FF1F
+; -- $FF1F is unused ----------------------------------------------------------
 
 ; -- AUD4LEN / NR41 ($FF20) ---------------------------------------------------
 ; Audio channel 4 length timer
