@@ -2537,10 +2537,7 @@ LoadDestinationWarpPosition::
 	ld [rROMB], a
 	ret
 
-DrawMapLabel:
-; Text Box 
-; technically less cycles than calling TextBoxBorder, which isnt doing anything here.
-; tends not to draw fully on first pass. Tried delay frame with no luck
+DrawMapLabel: ; Problems with partial draws
 ; top rail
 	ld hl, $9C00
 	ld a, "┌"
@@ -2554,11 +2551,9 @@ endr
 ; left/right rails
 	inc a ; "│"
 	ld [$9C20], a
-	ld [$9C40], a
 	ld [$9C33], a
-	ld [$9C53], a
 ; bottom rail
-	ld hl, $9C60
+	ld hl, $9C40
 	inc a ; "└"
 	ld [hli], a
 	ld a, "─"
@@ -2569,10 +2564,6 @@ endr
 ; blank space
 	ld a, " "
 	ld hl, $9C21
-	rept 18
-	ld [hli], a
-endr
-	ld hl, $9C41
 	rept 18
 	ld [hli], a
 endr
@@ -2593,17 +2584,20 @@ endr
 rept 20
 	ld [hli], a
 endr
-	ld hl, $9C60
-rept 20
-	ld [hli], a
-endr
 	xor a
 	ldh [rVBK], a
 	
-; text here
-
-; Draw coordinate and timer
-	ld a, 112
+; Show map legend
+	call LoadFontTilePatterns
+	ld a, [wCurMap]
+	ld e, a
+	farcall GetMapName
+	ld hl, $9C22
+	ld de, wNameBuffer
+	call PlaceString
+	
+; coordinate and timer
+	ld a, 120
 	ldh [hWY], a
 	ld a, 60
 	ldh [hWUp], a

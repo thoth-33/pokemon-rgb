@@ -586,6 +586,14 @@ LoadTownMapEntry:
 	ld l, a
 	ret
 
+GetMapName::
+	ld a, e
+	call LoadTownMapEntry
+	ld de, wNameBuffer
+	ld bc, NAME_BUFFER_LENGTH
+	call CopyData
+	ret
+
 INCLUDE "data/maps/town_map_entries.asm"
 
 INCLUDE "data/maps/names.asm"
