@@ -717,7 +717,11 @@ CheckMapConnections::
 	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
 ; x#SPRITESTATEDATA2_IMAGEBASEOFFSET without loading any tile patterns.
+	ldh a, [hWUp]
+	and a
+	jr nz, .skipreload
 	farcall InitMapSprites
+.skipreload
 	call LoadTileBlockMap
 	call DrawMapLabel
 	jp OverworldLoopLessDelay
