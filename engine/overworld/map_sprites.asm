@@ -164,6 +164,9 @@ LoadMapSpriteTilePatterns:
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .skipFirstLoad ; if so, skip loading data into the lower half
+	ldh a, [rLCDC]
+	bit B_LCDC_ENABLE, a ; is the LCD enabled?
+	jr nz, .skipFirstLoad ; if LCD is on, transfer during V-blank
 	ld a, b
 	ld b, 0
 	call FarCopyData2 ; load tile pattern data for sprite when standing still
@@ -185,6 +188,9 @@ LoadMapSpriteTilePatterns:
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .loadWhileLCDOn
+	ldh a, [rLCDC]
+	bit B_LCDC_ENABLE, a ; is the LCD enabled?
+	jr nz, .loadWhileLCDOn ; if LCD is on, transfer during V-blank
 	pop af
 	pop hl
 	set 3, h ; add $800 ($80 tiles) to hl (1 << 3 == $8)
@@ -270,6 +276,9 @@ InitOutsideMapSprites:
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a ; reloading upper half of tile patterns after displaying text?
 	jr nz, .loadSpriteSet ; if so, forcibly reload the sprite set
+	ldh a, [rLCDC]
+	bit B_LCDC_ENABLE, a ; is the LCD enabled?
+	jr nz, .loadSpriteSet ; if LCD is on, transfer during V-blank
 	ld a, [wSpriteSetID]
 	cp b ; has the sprite set ID changed?
 	jr z, .skipLoadingSpriteSet ; if not, don't load it again

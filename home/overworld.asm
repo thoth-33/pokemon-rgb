@@ -2594,9 +2594,9 @@ endr
 	ldh [rVBK], a
 	
 ; Show map legend
-	ld a, [wFontLoaded]
-	set BIT_FONT_LOADED, a
-	ld [wFontLoaded], a
+;	ld a, [wFontLoaded]
+;	set BIT_FONT_LOADED, a
+;	ld [wFontLoaded], a
 	call LoadFontTilePatterns
 	ld a, [wCurMap]
 	ld e, a
@@ -2626,7 +2626,7 @@ MapLabelTimer:
 	ld [wSpriteSetID], a
 	farcall InitMapSprites
 	call UpdateSprites
-	ld a, [wFontLoaded]
-	res BIT_FONT_LOADED, a
-	ld [wFontLoaded], a
+;	ld a, [wFontLoaded]
+;	res BIT_FONT_LOADED, a
+;	ld [wFontLoaded], a
 	ret
