@@ -15,18 +15,7 @@ VBlank::
 
 	ld a, [wDisableVBlankWYUpdate]
 	and a
-	jr nz, .ok
-	
-	ldh a, [hWUp]
-	and a
-	jr z, .pass2
-	dec a
-	ldh [hWUp], a
-	jr nz, .pass2
-	ld a, 160
-	ldh [hWY], a
-.pass2
-	
+	jr nz, .ok	
 	ldh a, [hWY]
 	ldh [rWY], a
 .ok

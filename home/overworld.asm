@@ -41,6 +41,7 @@ EnterMap::
 OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
+	call MapLabelTimer
 	call DelayFrame
 	call LoadGBPal
 	ld a, [wMovementFlags]
@@ -2539,6 +2540,7 @@ LoadDestinationWarpPosition::
 
 DrawMapLabel: ; Problems with partial draws
 ; top rail
+	call DisableLCD
 	ld hl, $9C00
 	ld a, "┌"
 	ld [hli], a
@@ -2564,7 +2566,7 @@ endr
 ; blank space
 	ld a, " "
 	ld hl, $9C21
-	rept 18
+rept 18
 	ld [hli], a
 endr
 
@@ -2588,6 +2590,9 @@ endr
 	ldh [rVBK], a
 	
 ; Show map legend
+	ld a, [wFontLoaded]
+	set BIT_FONT_LOADED, a
+	ld [wFontLoaded], a
 	call LoadFontTilePatterns
 	ld a, [wCurMap]
 	ld e, a
@@ -2595,10 +2600,29 @@ endr
 	ld hl, $9C22
 	ld de, wNameBuffer
 	call PlaceString
+	call EnableLCD	
 	
 ; coordinate and timer
 	ld a, 120
 	ldh [hWY], a
 	ld a, 60
 	ldh [hWUp], a
+	ret
+	
+MapLabelTimer:
+	ldh a, [hWUp]
+	and a
+	ret z
+	dec a
+	ldh [hWUp], a
+	ret nz
+	ld a, 160
+	ldh [hWY], a
+	xor a
+	ld [wSpriteSetID], a
+	farcall InitMapSprites
+	call UpdateSprites
+	ld a, [wFontLoaded]
+	res BIT_FONT_LOADED, a
+	ld [wFontLoaded], a
 	ret
