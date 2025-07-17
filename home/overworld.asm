@@ -2542,69 +2542,90 @@ LoadDestinationWarpPosition::
 	ld [rROMB], a
 	ret
 
-DrawMapLabel: ; Problems with partial draws
-; top rail
-	call DisableLCD
-	ld hl, $9C00
-	ld a, "┌"
-	ld [hli], a
-	inc a ; "─"
-rept 18
-	ld [hli], a
-endr
-	inc a ; "┐"
-	ld [hl], a	
-; left/right rails
-	inc a ; "│"
-	ld [$9C20], a
-	ld [$9C33], a
-; bottom rail
-	ld hl, $9C40
-	inc a ; "└"
-	ld [hli], a
-	ld a, "─"
-rept 18
-	ld [hli], a
-endr
-	ld [hl], "┘"
-; blank space
-	ld a, " "
-	ld hl, $9C21
-rept 18
-	ld [hli], a
-endr
-
-; clear palettes
-	ld a, 1
-	ldh [rVBK], a
-	ld a, 7
-	ld hl, $9C00
-rept 20
-	ld [hli], a
-endr
-	ld hl, $9C20
-rept 20
-	ld [hli], a
-endr
-	ld hl, $9C40
-rept 20
-	ld [hli], a
-endr
-	xor a
-	ldh [rVBK], a
+DrawMapLabel: ; Lag spike, would require reorganizing vram to negate. 
+	ldh a, [hWUp]
+	and a
+	ret nz
 	
-; Show map legend
-;	ld a, [wFontLoaded]
-;	set BIT_FONT_LOADED, a
-;	ld [wFontLoaded], a
-	call LoadFontTilePatterns
-	ld a, [wCurMap]
-	ld e, a
-	farcall GetMapName
-	ld hl, $9C22
-	ld de, wNameBuffer
-	call PlaceString
-	call EnableLCD	
+; clear palettes
+    ld a, 1
+    ldh [rVBK], a
+    ld a, 7
+    ld hl, wMapLabelTileMapBuffer
+rept 20
+    ld [hli], a
+endr
+    ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+rept 20
+    ld [hli], a
+endr
+    ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+rept 20
+    ld [hli], a
+endr
+    ld de, wMapLabelTileMapBuffer
+    ld hl, vBGMap1
+    lb bc, BANK(FontGraphics), 2 * TILEMAP_WIDTH + SCREEN_WIDTH
+    call CopyVideoData	
+    xor a
+    ldh [rVBK], a	
+	
+; top
+    ld hl, wMapLabelTileMapBuffer
+    ld a, "┌"
+    ld [hli], a
+    inc a ; "─"
+rept 18
+    ld [hli], a
+endr
+    inc a ; "┐"
+    ld [hl], a    
+; middle
+    ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    ld a, "│"
+    ld [hli], a
+    ld a, " "
+rept 18
+    ld [hli], a
+endr
+    ld [hl], "│"
+; bottom
+    ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+    ld a, "└"
+    ld [hli], a
+    ld a, "─"
+rept 18
+    ld [hli], a
+endr
+    ld [hl], "┘"
+
+; show map legend
+    ld a, [wCurMap]
+    ld e, a
+    farcall GetMapName    
+; find name length
+    ld b, SCREEN_WIDTH
+    ld hl, wNameBuffer
+.loop
+    ld a, [hli]
+    cp "@"
+    jr z, .foundLength
+    dec b
+    jr nz, .loop
+.foundLength
+    srl b
+    ld c, b
+    ld b, 0
+    ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    add hl, bc
+    ld de, wNameBuffer
+    call PlaceString
+    
+	call LoadFontTilePatterns    
+    ld de, wMapLabelTileMapBuffer
+    ld hl, vBGMap1
+    lb bc, BANK(FontGraphics), 2 * TILEMAP_WIDTH + SCREEN_WIDTH
+    call CopyVideoData		
 	
 ; coordinate and timer
 	ld a, 120
@@ -2626,7 +2647,5 @@ MapLabelTimer:
 	ld [wSpriteSetID], a
 	farcall InitMapSprites
 	call UpdateSprites
-;	ld a, [wFontLoaded]
-;	res BIT_FONT_LOADED, a
-;	ld [wFontLoaded], a
 	ret
+	
