@@ -41,6 +41,7 @@ EnterMap::
 OverworldLoop::
 	call DelayFrame
 OverworldLoopLessDelay::
+	call PhaseMapLabelDraw
 	call MapLabelTimer
 	call DelayFrame
 	call LoadGBPal
@@ -723,7 +724,7 @@ CheckMapConnections::
 	farcall InitMapSprites
 .skipreload
 	call LoadTileBlockMap
-	call DrawMapLabel
+	call SetMapLabelTimer
 	jp OverworldLoopLessDelay
 
 .didNotEnterConnectedMap
@@ -2542,10 +2543,15 @@ LoadDestinationWarpPosition::
 	ld [rROMB], a
 	ret
 
-DrawMapLabel: ; Lag spike, would require reorganizing vram to negate. 
+PhaseMapLabelDraw:
+	ld a, [hWY]
+	cp 120
+	ret z
 	ldh a, [hWUp]
-	and a
-	ret nz
+	cp 60
+	ret c
+	cp 66
+	jr c, .phase2
 	
 ; clear palettes
     ld a, 1
@@ -2555,22 +2561,53 @@ DrawMapLabel: ; Lag spike, would require reorganizing vram to negate.
 rept 20
     ld [hli], a
 endr
-    ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
-rept 20
-    ld [hli], a
-endr
-    ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
-rept 20
-    ld [hli], a
-endr
     ld de, wMapLabelTileMapBuffer
     ld hl, vBGMap1
-    lb bc, BANK(FontGraphics), 2 * TILEMAP_WIDTH + SCREEN_WIDTH
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
     call CopyVideoData	
     xor a
     ldh [rVBK], a	
+	ret
 	
-; top
+.phase2
+	cp 65
+	jr c, .phase3
+	ld a, 1
+    ldh [rVBK], a
+    ld a, 7
+	ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+rept 20
+    ld [hli], a
+endr
+    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    ld hl, vBGMap1 + TILEMAP_WIDTH
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData	
+    xor a
+    ldh [rVBK], a	
+	ret
+	
+.phase3
+	cp 64
+	jr c, .phase4
+	ld a, 1
+    ldh [rVBK], a
+    ld a, 7
+	ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+rept 20
+    ld [hli], a
+endr
+    ld de, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+    ld hl, vBGMap1 + (TILEMAP_WIDTH * 2)
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData	
+    xor a
+    ldh [rVBK], a	
+	ret
+	
+.phase4	; top
+	cp 63
+	jr c, .phase5
     ld hl, wMapLabelTileMapBuffer
     ld a, "┌"
     ld [hli], a
@@ -2578,9 +2615,16 @@ endr
 rept 18
     ld [hli], a
 endr
-    inc a ; "┐"
-    ld [hl], a    
-; middle
+    ld [hl], "┐" 
+    ld de, wMapLabelTileMapBuffer
+    ld hl, vBGMap1
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData	
+	ret
+
+.phase5	; middle
+	cp 62
+	jr c, .phase6
     ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
     ld a, "│"
     ld [hli], a
@@ -2589,16 +2633,7 @@ rept 18
     ld [hli], a
 endr
     ld [hl], "│"
-; bottom
-    ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
-    ld a, "└"
-    ld [hli], a
-    ld a, "─"
-rept 18
-    ld [hli], a
-endr
-    ld [hl], "┘"
-
+	
 ; show map legend
     ld a, [wCurMap]
     ld e, a
@@ -2619,18 +2654,38 @@ endr
     ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
     add hl, bc
     ld de, wNameBuffer
-    call PlaceString
-    
-	call LoadFontTilePatterns    
-    ld de, wMapLabelTileMapBuffer
-    ld hl, vBGMap1
-    lb bc, BANK(FontGraphics), 2 * TILEMAP_WIDTH + SCREEN_WIDTH
-    call CopyVideoData		
+    call PlaceString  	
+    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    ld hl, vBGMap1 + TILEMAP_WIDTH
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData	
+	ret
+
+.phase6	; bottom
+	cp 61
+	jr c, .phase7
+    ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+    ld a, "└"
+    ld [hli], a
+    ld a, "─"
+rept 18
+    ld [hli], a
+endr
+    ld [hl], "┘"
+	ld de, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+    ld hl, vBGMap1 + (TILEMAP_WIDTH * 2)
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData
+	ret
 	
-; coordinate and timer
+.phase7
+	call LoadFontTilePatterns 
 	ld a, 120
 	ldh [hWY], a
-	ld a, 60
+	ret
+
+SetMapLabelTimer:
+	ld a, 66
 	ldh [hWUp], a
 	ret
 	

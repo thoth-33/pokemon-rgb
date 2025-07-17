@@ -378,6 +378,8 @@ wNPCMovementScriptBank:: db
 UNION
 wMapLabelTileMapBuffer:: ds 2 * TILEMAP_WIDTH + SCREEN_WIDTH
 wMapLavelTileMapBufferEnd::
+wMapLabelCurMap::    db
+wMapLabelDrawing::   db
 
 NEXTU
 wVermilionDockTileMapBuffer:: ds 5 * TILEMAP_WIDTH + SCREEN_WIDTH
