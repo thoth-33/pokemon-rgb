@@ -2548,7 +2548,7 @@ PhaseMapLabelDraw:
 	cp 120
 	ret z
 	ldh a, [hWUp]
-	cp 60
+	cp 54
 	ret c
 	cp 66
 	jr c, .phase2
@@ -2561,10 +2561,6 @@ PhaseMapLabelDraw:
 rept 20
     ld [hli], a
 endr
-    ld de, wMapLabelTileMapBuffer
-    ld hl, vBGMap1
-    lb bc, BANK(FontGraphics), SCREEN_WIDTH
-    call CopyVideoData	
     xor a
     ldh [rVBK], a	
 	ret
@@ -2579,10 +2575,6 @@ endr
 rept 20
     ld [hli], a
 endr
-    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
-    ld hl, vBGMap1 + TILEMAP_WIDTH
-    lb bc, BANK(FontGraphics), SCREEN_WIDTH
-    call CopyVideoData	
     xor a
     ldh [rVBK], a	
 	ret
@@ -2597,17 +2589,52 @@ endr
 rept 20
     ld [hli], a
 endr
-    ld de, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
-    ld hl, vBGMap1 + (TILEMAP_WIDTH * 2)
-    lb bc, BANK(FontGraphics), SCREEN_WIDTH
-    call CopyVideoData	
     xor a
     ldh [rVBK], a	
 	ret
 	
-.phase4	; top
+.phase4
 	cp 63
 	jr c, .phase5
+	ld a, 1
+    ldh [rVBK], a
+    ld de, wMapLabelTileMapBuffer
+    ld hl, vBGMap1
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData
+	xor a
+    ldh [rVBK], a	
+	ret
+	
+.phase5
+	cp 62
+	jr c, .phase6
+	ld a, 1
+    ldh [rVBK], a
+    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    ld hl, vBGMap1 + TILEMAP_WIDTH
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData
+	xor a
+    ldh [rVBK], a
+	ret
+	
+.phase6
+	cp 61
+	jr c, .phase7
+	ld a, 1
+    ldh [rVBK], a
+	ld de, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
+    ld hl, vBGMap1 + (TILEMAP_WIDTH * 2)
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData
+	xor a
+    ldh [rVBK], a
+	ret
+	
+.phase7	; top
+	cp 60
+	jr c, .phase8
     ld hl, wMapLabelTileMapBuffer
     ld a, "┌"
     ld [hli], a
@@ -2616,15 +2643,11 @@ rept 18
     ld [hli], a
 endr
     ld [hl], "┐" 
-    ld de, wMapLabelTileMapBuffer
-    ld hl, vBGMap1
-    lb bc, BANK(FontGraphics), SCREEN_WIDTH
-    call CopyVideoData	
 	ret
 
-.phase5	; middle
-	cp 62
-	jr c, .phase6
+.phase8	; middle
+	cp 59
+	jr c, .phase9
     ld hl, wMapLabelTileMapBuffer + TILEMAP_WIDTH
     ld a, "│"
     ld [hli], a
@@ -2655,15 +2678,11 @@ endr
     add hl, bc
     ld de, wNameBuffer
     call PlaceString  	
-    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
-    ld hl, vBGMap1 + TILEMAP_WIDTH
-    lb bc, BANK(FontGraphics), SCREEN_WIDTH
-    call CopyVideoData	
 	ret
 
-.phase6	; bottom
-	cp 61
-	jr c, .phase7
+.phase9	; bottom
+	cp 58
+	jr c, .phase10
     ld hl, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
     ld a, "└"
     ld [hli], a
@@ -2672,13 +2691,36 @@ rept 18
     ld [hli], a
 endr
     ld [hl], "┘"
+	ret
+	
+.phase10
+	cp 57
+	jr c, .phase11
+    ld de, wMapLabelTileMapBuffer
+    ld hl, vBGMap1
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData	
+	ret
+	
+.phase11
+	cp 56
+	jr c, .phase12
+    ld de, wMapLabelTileMapBuffer + TILEMAP_WIDTH
+    ld hl, vBGMap1 + TILEMAP_WIDTH
+    lb bc, BANK(FontGraphics), SCREEN_WIDTH
+    call CopyVideoData
+	ret
+	
+.phase12
+	cp 55
+	jr c, .phase13
 	ld de, wMapLabelTileMapBuffer + (TILEMAP_WIDTH * 2)
     ld hl, vBGMap1 + (TILEMAP_WIDTH * 2)
     lb bc, BANK(FontGraphics), SCREEN_WIDTH
     call CopyVideoData
 	ret
 	
-.phase7
+.phase13
 	call LoadFontTilePatterns 
 	ld a, 120
 	ldh [hWY], a
