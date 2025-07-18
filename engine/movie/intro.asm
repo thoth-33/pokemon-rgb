@@ -324,7 +324,14 @@ PlayShootingStar:
 	call DelayFrames
 	farcall AnimateShootingStar
 	push af
-	; A `call LoadPresentsGraphic` here was removed in localization
+	hlcoord 7, 11   ; starting coordinate
+	ld a, $67       ; starting tile ID
+	ld c, $06       ; number of tiles
+.loop
+	ld [hli], a
+	inc a
+	dec c
+	jr nz, .loop
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation
 	ld c, 40

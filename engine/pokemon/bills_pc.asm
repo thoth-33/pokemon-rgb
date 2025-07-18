@@ -146,8 +146,8 @@ BillsPCMenu:
 	ld [wPlayerMonNumber], a
 	ld hl, WhatText
 	call PrintText
-	hlcoord 9, 14
-	ld b, 2
+	hlcoord 9, 13
+	ld b, 3
 	ld c, 9
 	call TextBoxBorder
 	ld a, [wCurrentBoxNum]
@@ -156,17 +156,24 @@ BillsPCMenu:
 	jr c, .singleDigitBoxNum
 ; two digit box num
 	sub 9
-	hlcoord 17, 16
+	hlcoord 17, 15
 	ld [hl], "1"
 	add "0"
 	jr .next
 .singleDigitBoxNum
 	add "1"
 .next
-	ldcoord_a 18, 16
-	hlcoord 10, 16
+	ldcoord_a 18, 15
+	hlcoord 10, 15
 	ld de, BoxNoPCText
 	call PlaceString
+	hlcoord 11, 16
+	ld de, wBoxCount
+	lb bc, 1, 2
+	call PrintNumber
+	hlcoord 13, 16
+	ld de, OutOfTwentyText
+	call PlaceString	
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
@@ -357,6 +364,9 @@ BillsPCMenuText:
 
 BoxNoPCText:
 	db "BOX No.@"
+	
+OutOfTwentyText:
+	db "/20 <PK><MN>@"
 
 KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
