@@ -74,6 +74,16 @@ _SaffronGymSabrinaTM46NoRoomText::
 	line "of other items!"
 	done
 
+_SaffronGymLevelCapLowText::
+	text "Now your level"
+	line "cap is 40."
+	done
+	
+_SaffronGymLevelCapHighText::
+	text "Now your level"
+	line "cap is 45."
+	done
+
 _SaffronGymGuideChampInMakingText::
 	text "Yo! Champ in"
 	line "making!"

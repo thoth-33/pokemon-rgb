@@ -12,7 +12,7 @@ _FuchsiaGymKogaPostBattleAdviceText::
 _FuchsiaGymKogaSoulBadgeInfoText::
 	text "Now that you have"
 	line "the SOULBADGE,"
-	cont "the DEFENSE of"
+	cont "the SPEED of"
 	cont "your #MON"
 	cont "increases!"
 
@@ -44,6 +44,12 @@ _FuchsiaGymKogaTM06ExplanationText::
 _FuchsiaGymKogaTM06NoRoomText::
 	text "Make space for"
 	line "this, child!"
+	done
+
+_FuchsiaGymLevelCapText::
+	text "You may now raise"
+	line "your #MON to a"
+	cont "level cap of 50."
 	done
 
 _FuchsiaGymRocker1BattleText::

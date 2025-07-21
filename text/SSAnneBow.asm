@@ -115,3 +115,9 @@ _SSAnneBowOakPostBattleText::
 	cont "FOUR have been"
 	cont "asking about you."
 	done
+	
+_SSAnneBowLevelCapText::
+	text "Have you tried"
+	line "raising a #MON"
+	cont "to level 85 yet?"
+	done

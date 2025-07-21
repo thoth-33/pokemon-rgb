@@ -53,3 +53,13 @@ _HallOfFameRematchOakText::
 	cont "achievements"
 	cont "inspire us all!"
 	done
+	
+_HallOfFameLevelCapText::
+	text "You can now raise"
+	line "your #MON to"
+	cont "level 75!"
+
+_HallOfFameLevelCapRematchText::
+	text "You can now raise"
+	line "your #MON to"
+	cont "level 100!"

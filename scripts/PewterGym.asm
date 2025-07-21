@@ -68,6 +68,13 @@ PewterGymScriptReceiveTM34:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_PEWTERGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_BOULDERBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -150,6 +157,7 @@ PewterGym_TextPointers:
 	dw_const PewterGymReceivedTM34Text,      TEXT_PEWTERGYM_RECEIVED_TM34
 	dw_const PewterGymTM34NoRoomText,        TEXT_PEWTERGYM_TM34_NO_ROOM
 	dw_const PewterGymRematchPostBattleText, TEXT_PEWTERGYM_REMATCH_POST_BATTLE
+	dw_const PewterGymLevelCapText,          TEXT_PEWTERGYM_LEVEL_CAP
 
 PewterGymTrainerHeaders:
 	def_trainers 2
@@ -265,6 +273,10 @@ PewterGymReceivedTM34Text:
 
 PewterGymTM34NoRoomText:
 	text_far _PewterGymTM34NoRoomText
+	text_end
+
+PewterGymLevelCapText:
+	text_far _PewterGymLevelCapText
 	text_end
 
 PewterGymBrockReceivedBoulderBadgeText:

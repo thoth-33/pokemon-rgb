@@ -22,8 +22,15 @@ MtSilver3FGiovanniPostBattle:
 	ld [wJoyIgnore], a
 	ld a, TEXT_MT_SILVER3F_GIOVANNI_POSTBATTLE
 	ldh [hTextID], a
-	SetEvents EVENT_GIOVANNI_REMATCH_BEAT
 	call DisplayTextID
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_MT_SILVER3F_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode
+	SetEvents EVENT_GIOVANNI_REMATCH_BEAT
 	call GBFadeOutToBlack
 	ld a, HS_MT_SILVER3F_GIOVANNI
 	ld [wMissableObjectIndex], a
@@ -62,6 +69,7 @@ MtSilver3F_TextPointers:
 	dw_const MtSilver3FRocket2Text,            TEXT_MT_SILVER3F_ROCKET2
 	dw_const MtSilver3FRocket3Text,            TEXT_MT_SILVER3F_ROCKET3
 	dw_const MtSilver3FGiovanniPostBattleText, TEXT_MT_SILVER3F_GIOVANNI_POSTBATTLE
+	dw_const MtSilver3FLevelCapText,           TEXT_MT_SILVER3F_LEVEL_CAP
 	
 MtSilver3FGiovanniText:
 	text_asm
@@ -155,4 +163,8 @@ MtSilver3FRocket3EndBattleText:
 
 MtSilver3FRocket3AfterBattleText:
 	text_far _MtSilver3FRocket3AfterBattleText
+	text_end
+	
+MtSilver3FLevelCapText:
+	text_far _MtSilver3FLevelCapText
 	text_end

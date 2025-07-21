@@ -68,6 +68,17 @@ CeladonGymReceiveTM21:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	CheckEvent EVENT_BEAT_SABRINA
+	ld a, TEXT_CELADONGYM_LEVEL_LOW_CAP
+	jr z, .capFound
+	ld a, TEXT_CELADONGYM_LEVEL_HIGH_CAP
+.capFound
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_RAINBOWBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -137,6 +148,8 @@ CeladonGym_TextPointers:
 	dw_const CeladonGymRainbowBadgeInfoText,  TEXT_CELADONGYM_RAINBOWBADGE_INFO
 	dw_const CeladonGymReceivedTM21Text,      TEXT_CELADONGYM_RECEIVED_TM21
 	dw_const CeladonGymTM21NoRoomText,        TEXT_CELADONGYM_TM21_NO_ROOM
+	dw_const CeladonGymLevelCapLowText,       TEXT_CELADONGYM_LEVEL_LOW_CAP
+	dw_const CeladonGymLevelCapHighText,      TEXT_CELADONGYM_LEVEL_HIGH_CAP
 
 CeladonGymTrainerHeaders:
 	def_trainers 2
@@ -260,6 +273,14 @@ CeladonGymReceivedTM21Text:
 
 CeladonGymTM21NoRoomText:
 	text_far _CeladonGymTM21NoRoomText
+	text_end
+
+CeladonGymLevelCapLowText:
+	text_far _CeladonGymLevelCapLowText
+	text_end
+	
+CeladonGymLevelCapHighText:
+	text_far _CeladonGymLevelCapHighText
 	text_end
 
 CeladonGymCooltrainerF1Text:

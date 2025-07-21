@@ -25,6 +25,13 @@ SSAnneBowOakPostBattleScript:
 	ldh [hTextID], a
 	SetEvents EVENT_OAK_BEAT
 	call DisplayTextID
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_SSANNEBOW_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode
 	ld a, SSANNEBOW_OAK
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
@@ -103,6 +110,7 @@ SSAnneBow_TextPointers:
 	dw_const SSAnneBowSailor3Text,       TEXT_SSANNEBOW_SAILOR3
 	dw_const SSAnneBowOakText,           TEXT_SSANNEBOW_OAK
 	dw_const SSAnneBowOakPostBattleText, TEXT_SSANNEBOW_OAK_POSTBATTLE
+	dw_const SSAnneBowLevelCapText,      TEXT_SSANNEBOW_LEVEL_CAP
 
 SSAnneBowOakText:
 	text_asm	
@@ -201,4 +209,8 @@ SSAnneBowSailor3EndBattleText:
 
 SSAnneBowSailor3AfterBattleText:
 	text_far _SSAnneBowSailor3AfterBattleText
+	text_end
+
+SSAnneBowLevelCapText:
+	text_far _SSAnneBowCooltrainerMText
 	text_end

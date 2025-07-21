@@ -98,6 +98,17 @@ HallOfFameOakCongratulationsScript:
 .RematchText
 	ldh [hTextID], a
 	call DisplayTextID
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	CheckEvent EVENT_OAK_BEAT
+	ld a, TEXT_HALLOFFAME_REMATCH_LEVEL_CAP
+	jr nz, .RematchCapText
+	ld a, TEXT_HALLOFFAME_LEVEL_CAP
+.RematchCapText
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_PLAYER_IS_CHAMPION
@@ -128,8 +139,10 @@ HallOfFameOakCongratulationsScript:
 
 HallOfFame_TextPointers:
 	def_text_pointers
-	dw_const HallOfFameOakText, TEXT_HALLOFFAME_OAK
-	dw_const HallOfFameRematchOakText, TEXT_HALLOFFAME_REMATCH_OAK
+	dw_const HallOfFameOakText,             TEXT_HALLOFFAME_OAK
+	dw_const HallOfFameRematchOakText,      TEXT_HALLOFFAME_REMATCH_OAK
+	dw_const HallOfFameLevelCapText,        TEXT_HALLOFFAME_LEVEL_CAP
+	dw_const HallOfFameLevelCapRematchText, TEXT_HALLOFFAME_REMATCH_LEVEL_CAP
 
 HallOfFameOakText:
 	text_far _HallOfFameOakText
@@ -137,4 +150,12 @@ HallOfFameOakText:
 
 HallOfFameRematchOakText:
 	text_far _HallOfFameRematchOakText
+	text_end
+	
+HallOfFameLevelCapText:
+	text_far _HallOfFameLevelCapText
+	text_end
+
+HallOfFameLevelCapRematchText:
+	text_far _HallOfFameLevelCapRematchText
 	text_end

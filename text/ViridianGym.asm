@@ -84,6 +84,12 @@ _ViridianGymGiovanniTM27NoRoomText::
 	line "space for this!"
 	done
 
+_ViridianGymLevelCapText::
+	text "You have a level"
+	line "cap of 65 to face"
+	cont "the ELITE FOUR."
+	done
+
 _ViridianGymCooltrainerM1BattleText::
 	text "Heh! You must be"
 	line "running out of"

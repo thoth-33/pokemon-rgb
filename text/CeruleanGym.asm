@@ -54,6 +54,11 @@ _CeruleanGymMistyTM11NoRoomText::
 	text "You better make"
 	line "room for this!"
 	done
+	
+_CeruleanGymLevelCapText::
+	text "And now your"
+	line "level cap is 25!"
+	done
 
 _CeruleanGymMistyReceivedCascadeBadgeText::
 	text "Wow!"

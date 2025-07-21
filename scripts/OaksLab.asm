@@ -1187,12 +1187,21 @@ OaksLabRivalAmIGreatOrWhatText:
 
 OaksLabRivalSmellYouLaterText:
 	text_asm
+	ld a, [wDifficulty]
+	and a
 	ld hl, .Text
+	jr z, .NormalMode
+	ld hl, .HardText
+.NormalMode
 	call PrintText
 	jp TextScriptEnd
 
 .Text:
 	text_far _OaksLabRivalSmellYouLaterText
+	text_end
+	
+.HardText:
+	text_far _OaksLabRivalSmellYouLaterHardText
 	text_end
 
 OaksLabRivalGrampsText:

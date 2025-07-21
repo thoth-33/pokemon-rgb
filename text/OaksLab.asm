@@ -309,6 +309,27 @@ ELSE ; _RED
 ENDC
 	line "Smell you later!"
 	done
+	
+_OaksLabRivalSmellYouLaterHardText::
+	text "<RIVAL>: Okay!"
+	line "I'll make my"
+	cont "#MON fight to"
+	cont "toughen it up!"
+
+	para "With no badges,"
+	line "my level cap is"
+	cont "only 15."
+	
+	para "I will go get"
+	line "some to raise it!"
+
+IF DEF(_BLUE)
+	para "<PLAYER>! OAK!"
+ELSE ; _RED
+	para "<PLAYER>! Gramps!"
+ENDC
+	line "Smell you later!"
+	done
 
 _OaksLabRivalGrampsText::
 IF DEF(_BLUE)

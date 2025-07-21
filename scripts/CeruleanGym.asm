@@ -68,6 +68,13 @@ CeruleanGymReceiveTM11:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_CERULEANGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_CASCADEBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -157,6 +164,7 @@ CeruleanGym_TextPointers:
 	dw_const CeruleanGymMistyReceivedTM11Text,     TEXT_CERULEANGYM_MISTY_RECEIVED_TM11
 	dw_const CeruleanGymMistyTM11NoRoomText,       TEXT_CERULEANGYM_MISTY_TM11_NO_ROOM
 	dw_const CeruleanGymRematchPostBattleText,     TEXT_CERULEANGYM_REMATCH_POST_BATTLE
+	dw_const CeruleanGymLevelCapText,              TEXT_CERULEANGYM_LEVEL_CAP
 
 
 CeruleanGymTrainerHeaders:
@@ -267,6 +275,10 @@ CeruleanGymMistyReceivedTM11Text:
 
 CeruleanGymMistyTM11NoRoomText:
 	text_far _CeruleanGymMistyTM11NoRoomText
+	text_end
+	
+CeruleanGymLevelCapText:
+	text_far _CeruleanGymLevelCapText
 	text_end
 
 CeruleanGymMistyReceivedCascadeBadgeText:

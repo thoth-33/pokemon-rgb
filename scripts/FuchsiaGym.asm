@@ -49,7 +49,7 @@ FuchsiaGymKogaPostBattleScript:
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_KOGA_REMATCH
-	jr nz, KogaRematchPostBattle
+	jp nz, KogaRematchPostBattle
 ; fallthrough
 FuchsiaGymReceiveTM06:
 	ld a, TEXT_FUCHSIAGYM_KOGA_SOUL_BADGE_INFO
@@ -69,6 +69,13 @@ FuchsiaGymReceiveTM06:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_FUCHSIAGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_SOULBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -160,6 +167,7 @@ FuchsiaGym_TextPointers:
 	dw_const FuchsiaGymKogaReceivedTM06Text,  TEXT_FUCHSIAGYM_KOGA_RECEIVED_TM06
 	dw_const FuchsiaGymKogaTM06NoRoomText,    TEXT_FUCHSIAGYM_KOGA_TM06_NO_ROOM
 	dw_const FuchsiaGymRematchPostBattleText, TEXT_FUCHSIAGYM_REMATCH_POST_BATTLE
+	dw_const FuchsiaGymLevelCapText,          TEXT_FUCHSIAGYM_LEVEL_CAP
 
 FuchsiaGymTrainerHeaders:
 	def_trainers 2
@@ -269,6 +277,10 @@ FuchsiaGymKogaReceivedTM06Text:
 
 FuchsiaGymKogaTM06NoRoomText:
 	text_far _FuchsiaGymKogaTM06NoRoomText
+	text_end
+
+FuchsiaGymLevelCapText:
+	text_far _FuchsiaGymLevelCapText
 	text_end
 
 FuchsiaGymRematchDefeatedText:

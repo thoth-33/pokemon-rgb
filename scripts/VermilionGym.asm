@@ -86,6 +86,13 @@ VermilionGymLTSurgeReceiveTM24Script:
 	ldh [hTextID], a
 	call DisplayTextID
 .gym_victory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_VERMILIONGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_THUNDERBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -154,6 +161,7 @@ VermilionGym_TextPointers:
 	dw_const VermilionGymLTSurgeReceivedTM24Text,     TEXT_VERMILIONGYM_LT_SURGE_RECEIVED_TM24
 	dw_const VermilionGymLTSurgeTM24NoRoomText,       TEXT_VERMILIONGYM_LT_SURGE_TM24_NO_ROOM
 	dw_const VermilionGymRematchPostBattleText,       TEXT_VERMILIONGYM_REMATCH_POST_BATTLE
+	dw_const VermilionGymLevelCapText,                TEXT_VERMILIONGYM_LEVEL_CAP
 
 VermilionGymTrainerHeaders:
 	def_trainers 2
@@ -243,6 +251,10 @@ VermilionGymLTSurgeReceivedTM24Text:
 
 VermilionGymLTSurgeTM24NoRoomText:
 	text_far _VermilionGymLTSurgeTM24NoRoomText
+	text_end
+	
+VermilionGymLevelCapText:
+	text_far _VermilionGymLevelCapText
 	text_end
 
 VermilionGymLTSurgeReceivedThunderBadgeText:

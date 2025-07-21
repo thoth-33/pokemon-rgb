@@ -153,6 +153,13 @@ ViridianGymReceiveTM27:
 	ldh [hTextID], a
 	call DisplayTextID
 .gym_victory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_VIRIDIANGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_EARTHBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -183,6 +190,7 @@ ViridianGym_TextPointers:
 	dw_const ViridianGymGiovanniEarthBadgeInfoText, TEXT_VIRIDIANGYM_GIOVANNI_EARTH_BADGE_INFO
 	dw_const ViridianGymGiovanniReceivedTM27Text,   TEXT_VIRIDIANGYM_GIOVANNI_RECEIVED_TM27
 	dw_const ViridianGymGiovanniTM27NoRoomText,     TEXT_VIRIDIANGYM_GIOVANNI_TM27_NO_ROOM
+	dw_const ViridianGymLevelCapText,               TEXT_VIRIDIANGYM_LEVEL_CAP
 
 ViridianGymTrainerHeaders:
 	def_trainers 2
@@ -274,6 +282,10 @@ ViridianGymGiovanniTM27ExplanationText:
 
 ViridianGymGiovanniTM27NoRoomText:
 	text_far _ViridianGymGiovanniTM27NoRoomText
+	text_end
+
+ViridianGymLevelCapText:
+	text_far _ViridianGymLevelCapText
 	text_end
 
 ViridianGymCooltrainerM1Text:

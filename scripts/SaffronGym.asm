@@ -47,7 +47,7 @@ SaffronGymSabrinaPostBattle:
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	CheckEvent EVENT_SABRINA_REMATCH
-	jr nz, SabrinaRematchPostBattle
+	jp nz, SabrinaRematchPostBattle
 ; fallthrough
 SaffronGymSabrinaReceiveTM46Script:
 	ld a, TEXT_SAFFRONGYM_SABRINA_MARSH_BADGE_INFO
@@ -67,6 +67,17 @@ SaffronGymSabrinaReceiveTM46Script:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	CheckEvent EVENT_BEAT_ERIKA
+	ld a, TEXT_CELADONGYM_LEVEL_LOW_CAP
+	jr z, .capFound
+	ld a, TEXT_CELADONGYM_LEVEL_HIGH_CAP
+.capFound
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_MARSHBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -151,6 +162,8 @@ SaffronGym_TextPointers:
 	dw_const SaffronGymSabrinaReceivedTM46Text,   TEXT_SAFFRONGYM_SABRINA_RECEIVED_TM46
 	dw_const SaffronGymSabrinaTM46NoRoomText,     TEXT_SAFFRONGYM_SABRINA_TM46_NO_ROOM
 	dw_const SaffronGymRematchPostBattleText,     TEXT_SAFFRONGYM_REMATCH_POST_BATTLE
+	dw_const SaffronGymLevelCapLowText,           TEXT_SAFFRONGYM_LEVEL_LOW_CAP
+	dw_const SaffronGymLevelCapHighText,          TEXT_SAFFRONGYM_LEVEL_HIGH_CAP
 
 SaffronGymTrainerHeaders:
 	def_trainers 2
@@ -274,6 +287,14 @@ SaffronGymSabrinaReceivedTM46Text:
 
 SaffronGymSabrinaTM46NoRoomText:
 	text_far _SaffronGymSabrinaTM46NoRoomText
+	text_end
+
+SaffronGymLevelCapLowText:
+	text_far _SaffronGymLevelCapLowText
+	text_end
+	
+SaffronGymLevelCapHighText:
+	text_far _SaffronGymLevelCapHighText
 	text_end
 
 SaffronGymChanneler1Text:

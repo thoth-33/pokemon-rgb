@@ -45,6 +45,12 @@ _TM34ExplanationText::
 	cont "battle then pay"
 	cont "it back double!"
 	done
+	
+_PewterGymLevelCapText::
+	text "Oh, and your"
+	line "level cap has"
+	cont "raised to 20."
+	done
 
 _PewterGymTM34NoRoomText::
 	text "You don't have"

@@ -68,6 +68,12 @@ _CinnabarGymBlaineTM38NoRoomText::
 	line "gift!"
 	done
 
+_CinnabarGymLevelCapText::
+	text "See if you can"
+	line "reach your new"
+	cont "level cap of 55."
+	done
+
 _CinnabarGymSuperNerd1BattleText::
 	text "Do you know how"
 	line "hot #MON fire"

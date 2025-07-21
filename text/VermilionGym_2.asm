@@ -13,7 +13,7 @@ _VermilionGymLTSurgePostBattleAdviceText::
 _VermilionGymLTSurgeThunderBadgeInfoText::
 	text "The THUNDERBADGE"
 	line "cranks up your"
-	cont "#MON's SPEED!"
+	cont "#MON's DEFENSE!"
 
 	para "It also lets your"
 	line "#MON FLY any"
@@ -43,6 +43,12 @@ _TM24ExplanationText::
 _VermilionGymLTSurgeTM24NoRoomText::
 	text "Yo kid, make room"
 	line "in your pack!"
+	done
+
+_VermilionGymLevelCapText::
+	text "Now your level"
+	line "cap is boosted"
+	cont "to 30!"
 	done
 
 _VermilionGymLTSurgeReceivedThunderBadgeText::

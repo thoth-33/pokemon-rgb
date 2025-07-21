@@ -34,6 +34,12 @@ _MtSilver3FGiovanniPostBattleText::
 	line "a cruise instead."
 	done
 	
+_MtSilver3FLevelCapText::
+	text "You could probably"
+	line "raise #MON to"
+	cont "level 80 now."
+	done
+	
 _MtSilver3FRocket1BattleText::
 	text "You again?!"
 	para "How do you keep"

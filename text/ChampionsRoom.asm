@@ -156,10 +156,10 @@ _ChampionsRoomRivalRematchIntroText::
 	cont "take you down!"
 
 	para "Ready to hand"
-        line "over that title?"
+    line "over that title?"
 
-        para "Let's do this!"
-        line "No holding back!"
+    para "Let's do this!"
+    line "No holding back!"
 	done
 
 _RivalRematchDefeatedText::

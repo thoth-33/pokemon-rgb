@@ -168,6 +168,13 @@ CinnabarGymReceiveTM38:
 	ldh [hTextID], a
 	call DisplayTextID
 .gymVictory
+	ld a, [wDifficulty]
+	and a
+	jr z, .NormalMode
+	ld a, TEXT_CINNABARGYM_LEVEL_CAP
+	ldh [hTextID], a
+	call DisplayTextID
+.NormalMode	
 	ld hl, wObtainedBadges
 	set BIT_VOLCANOBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -250,6 +257,7 @@ CinnabarGym_TextPointers:
 	dw_const CinnabarGymBlaineReceivedTM38Text,     TEXT_CINNABARGYM_BLAINE_RECEIVED_TM38
 	dw_const CinnabarGymBlaineTM38NoRoomText,       TEXT_CINNABARGYM_BLAINE_TM38_NO_ROOM
 	dw_const CinnabarGymRematchPostBattleText,      TEXT_CINNABARGYM_REMATCH_POST_BATTLE
+	dw_const CinnabarGymLevelCapText,               TEXT_CINNABARGYM_LEVEL_CAP
 
 CinnabarGymStartBattleScript:
 	ldh a, [hSpriteIndex]
@@ -345,6 +353,10 @@ CinnabarGymBlaineReceivedTM38Text:
 
 CinnabarGymBlaineTM38NoRoomText:
 	text_far _CinnabarGymBlaineTM38NoRoomText
+	text_end
+
+CinnabarGymLevelCapText:
+	text_far _CinnabarGymLevelCapText
 	text_end
 	
 CinnabarGymRematchDefeatedText:
