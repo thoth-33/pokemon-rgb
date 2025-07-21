@@ -7,6 +7,13 @@ _WouldYouLikeToSaveText::
 	text "Would you like to"
 	line "SAVE the game?"
 	done
+	
+_YouCantSaveHereText::
+	text "You cannot SAVE"
+	line "the game here!"
+	cont "You must be in"
+	cont "a #CENTER."
+	prompt
 
 _GameSavedText::
 	text "<PLAYER> saved"
@@ -383,9 +390,13 @@ _HardModeText::
 	cont "items will cost"
 	cont "more to purchase."
 
-	para "And #CENTERS"
-	line "may charge you to"
-	cont "heal your team."
+	para "#CENTERS may"
+	line "charge you to"
+	cont "heal your team"
+	cont "and they will be"
+	cont "the only place"
+	cont "you can SAVE."
+	
 	
 	para "Continue on"
 	line "HARD MODE?"

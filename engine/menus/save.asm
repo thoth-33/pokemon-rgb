@@ -141,6 +141,24 @@ LoadSAVIgnoreBadCheckSum:
 
 SaveSAV:
 	farcall PrintSaveScreenText
+	; Hard-mode: anti-save scum
+	ld a, [wDifficulty]
+	and a
+	jr z, .canSave ; can always save on normal
+	ld a, [wCurMap]
+	cp CELADON_HOTEL
+	jr z, .cantSave
+	cp INDIGO_PLATEAU_LOBBY
+	jr z, .canSave
+	cp REDS_HOUSE_1F
+	jr z, .canSave
+	ld a, [wCurMapTileset]
+	cp POKECENTER
+	jr z, .canSave
+.cantSave
+	ld hl, YouCantSaveHereText
+	jp PrintText
+.canSave
 	ld hl, WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
@@ -187,6 +205,10 @@ SaveSAVConfirm:
 
 WouldYouLikeToSaveText:
 	text_far _WouldYouLikeToSaveText
+	text_end
+	
+YouCantSaveHereText:
+	text_far _YouCantSaveHereText
 	text_end
 
 GameSavedText:
