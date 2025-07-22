@@ -256,18 +256,29 @@ LoadSGB:
 	xor a
 	ld [wOnSGB], a
 	call CheckSGB
-	;ret nc
-	nop
-	ld a, $1
+	ld a, 1
 	ld [wOnSGB], a
-	ld a, [wOnCGB]
-	and a
-	;jr z, .asm_7203f
-	nop
-	nop
-	ret
-	; Deleted the end of this function which loads the SGB border and stuff
-
+	di
+	call PrepareSuperNintendoVRAMTransfer
+	ei
+	ld a, 1
+	ld [wCopyingSGBTileData], a
+	ld de, ChrTrnPacket
+	ld hl, SGBBorderGraphics
+	call CopyGfxToSuperNintendoVRAM
+	xor a
+	ld [wCopyingSGBTileData], a
+	ld de, PctTrnPacket
+	ld hl, BorderPalettes
+	call CopyGfxToSuperNintendoVRAM
+	xor a
+	ld [wCopyingSGBTileData], a
+	ld de, PalTrnPacket
+	ld hl, SuperPalettes
+	call CopyGfxToSuperNintendoVRAM
+	call ClearVram
+	ld hl, MaskEnCancelPacket
+	jp SendSGBPacket
 SECTION "PrepareSuperNintendoVRAMTransfer", ROMX
 
 PrepareSuperNintendoVRAMTransfer:
@@ -486,4 +497,4 @@ INCLUDE "data/pokemon/palettes.asm"
 ; SGB border not needed in color hack
 ;INCLUDE "data/sgb/sgb_palettes.asm"
 
-;INCLUDE "data/sgb/sgb_border.asm"
+INCLUDE "data/sgb/sgb_border.asm"

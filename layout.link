@@ -57,6 +57,7 @@ ROMX $4
 	"Battle Engine 1"
 ROMX $5
 	; lots of space here
+	"Engine Save"
 	"Battle Engine 2"
 ROMX $6
 	"Maps 1"
@@ -160,8 +161,7 @@ ROMX $1C
 	org $6075
 	"PrepareSuperNintendoVRAMTransfer"
 	"bank1C_extension"
-	org $75e8
-	"Engine Save"
+;	org $75e8
 ROMX $1D
 	"Maps 19"
 	"Itemfinder 1"

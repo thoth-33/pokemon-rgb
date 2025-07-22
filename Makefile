@@ -144,12 +144,12 @@ pokeblue_vc_pad    = 0x00
 pokered_debug_pad  = 0xff
 pokeblue_debug_pad = 0xff
 
-pokered_opt        = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
-pokeblue_opt       = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
-pokered_debug_opt  = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
-pokeblue_debug_opt = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
-pokered_vc_opt     = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
-pokeblue_vc_opt    = -Cjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_opt        = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
+pokeblue_opt       = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_debug_opt  = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
+pokeblue_debug_opt = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
+pokered_vc_opt     = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON RED"
+pokeblue_vc_opt    = -csjv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
