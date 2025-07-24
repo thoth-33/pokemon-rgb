@@ -415,8 +415,8 @@ RockTunnelPokecenterHiddenObjects:
 	db -1 ; end
 
 ViridianForestHiddenObjects:
-	hidden_object  1, 24, POTION, HiddenItems
-	hidden_object 16, 48, ANTIDOTE, HiddenItems
+	hidden_object  1, 18, POTION, HiddenItems
+	hidden_object 16, 42, ANTIDOTE, HiddenItems
 	db -1 ; end
 
 MtMoon3HiddenObjects:
@@ -430,8 +430,8 @@ IndigoPlateauHiddenObjects:
 	db -1 ; end
 
 Route25HiddenObjects:
-	hidden_object 38,  3, ETHER, HiddenItems
-	hidden_object 10,  1, ELIXER, HiddenItems
+	hidden_object 38,  5, ETHER, HiddenItems
+	hidden_object 10,  3, ELIXER, HiddenItems
 	db -1 ; end
 
 Route9HiddenObjects:
@@ -484,7 +484,7 @@ SafariZoneEntranceHiddenObjects:
 	db -1 ; end
 
 SafariZoneWestHiddenObjects:
-	hidden_object  6,  5, REVIVE, HiddenItems
+	hidden_object  6,  9, REVIVE, HiddenItems
 	db -1 ; end
 
 SilphCo5FHiddenObjects:
@@ -624,7 +624,7 @@ Route11HiddenObjects:
 	db -1 ; end
 
 Route12HiddenObjects:
-	hidden_object  2, 63, HYPER_POTION, HiddenItems
+	hidden_object  2, 61, HYPER_POTION, HiddenItems
 	db -1 ; end
 
 SilphCo11FHiddenObjects:
@@ -662,7 +662,7 @@ VermilionCityHiddenObjects:
 	db -1 ; end
 
 CeruleanCityHiddenObjects:
-	hidden_object 15,  8, RARE_CANDY, HiddenItems
+	hidden_object 17,  8, RARE_CANDY, HiddenItems
 	db -1 ; end
 
 Route4HiddenObjects:
