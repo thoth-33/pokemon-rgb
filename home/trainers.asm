@@ -149,6 +149,10 @@ ENDC
 	res BIT_SCRIPTED_NPC_MOVEMENT, [hl] ; Clear NPC movement flag to avoid softlock if this trainer doesn't move
 	res BIT_FLY_TRAINER, [hl] ; Clear Trainer encounter reset flag
 	ld [wEmotionBubbleSpriteIndex], a
+	ld a, SFX_59
+	call PlaySound
+	ld a, SFX_PRESS_AB
+	call PlaySoundWaitForCurrent
 	xor a ; EXCLAMATION_BUBBLE
 	ld [wWhichEmotionBubble], a
 	predef EmotionBubble
