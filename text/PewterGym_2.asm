@@ -48,7 +48,7 @@ _TM34ExplanationText::
 	
 _PewterGymLevelCapText::
 	text "Oh, and your"
-	line "level cap has"
+	line "LEVEL CAP has"
 	cont "raised to 20."
 	done
 

@@ -86,12 +86,12 @@ _CeladonGymTM21NoRoomText::
 	done
 
 _CeladonGymLevelCapLowText::
-	text "Your level cap"
+	text "Your LEVEL CAP"
 	line "has grown to 40."
 	done
 	
 _CeladonGymLevelCapHighText::
-	text "Your level cap"
+	text "Your LEVEL CAP"
 	line "has grown to 45."
 	done
 

@@ -46,8 +46,8 @@ _VermilionGymLTSurgeTM24NoRoomText::
 	done
 
 _VermilionGymLevelCapText::
-	text "Now your level"
-	line "cap is boosted"
+	text "Now your LEVEL"
+	line "CAP is boosted"
 	cont "to 30!"
 	done
 

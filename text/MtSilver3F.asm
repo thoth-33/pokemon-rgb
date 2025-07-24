@@ -36,8 +36,8 @@ _MtSilver3FGiovanniPostBattleText::
 	
 _MtSilver3FLevelCapText::
 	text "You could probably"
-	line "raise #MON to"
-	cont "level 80 now."
+	line "raise #MON to a"
+	cont "LEVEL CAP of 80."
 	done
 	
 _MtSilver3FRocket1BattleText::

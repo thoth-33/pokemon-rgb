@@ -119,5 +119,6 @@ _SSAnneBowOakPostBattleText::
 _SSAnneBowLevelCapText::
 	text "Have you tried"
 	line "raising a #MON"
-	cont "to level 85 yet?"
+	cont "to a LEVEL CAP"
+	cont "of 85 yet?"
 	done

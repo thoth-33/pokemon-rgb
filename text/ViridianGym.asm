@@ -85,8 +85,8 @@ _ViridianGymGiovanniTM27NoRoomText::
 	done
 
 _ViridianGymLevelCapText::
-	text "You have a level"
-	line "cap of 65 to face"
+	text "You have a LEVEL"
+	line "CAP of 65 to face"
 	cont "the ELITE FOUR."
 	done
 

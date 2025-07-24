@@ -317,7 +317,7 @@ _OaksLabRivalSmellYouLaterHardText::
 	cont "toughen it up!"
 
 	para "With no badges,"
-	line "my level cap is"
+	line "my LEVEL CAP is"
 	cont "only 15."
 	
 	para "I will go get"

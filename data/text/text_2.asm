@@ -1216,7 +1216,7 @@ _HitXTimesText::
 _AtLevelCapTextNoExpAllText::
 	text_ram wNameBuffer
 	text " is at"
-	line "the level cap!"
+	line "the LEVEL CAP!"
 	prompt
 	
 _AtLevelCapWithExpAllText::

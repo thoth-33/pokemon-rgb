@@ -56,10 +56,10 @@ _HallOfFameRematchOakText::
 	
 _HallOfFameLevelCapText::
 	text "You can now raise"
-	line "your #MON to"
-	cont "level 75!"
+	line "your #MON to a"
+	cont "LEVEL CAP of 75!"
 
 _HallOfFameLevelCapRematchText::
 	text "You can now raise"
-	line "your #MON to"
-	cont "level 100!"
+	line "your #MON to a"
+	cont "LEVEL CAP of 100!"

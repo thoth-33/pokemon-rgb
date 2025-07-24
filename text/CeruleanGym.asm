@@ -57,7 +57,7 @@ _CeruleanGymMistyTM11NoRoomText::
 	
 _CeruleanGymLevelCapText::
 	text "And now your"
-	line "level cap is 25!"
+	line "LEVEL CAP is 25!"
 	done
 
 _CeruleanGymMistyReceivedCascadeBadgeText::

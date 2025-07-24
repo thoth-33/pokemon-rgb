@@ -49,7 +49,7 @@ _FuchsiaGymKogaTM06NoRoomText::
 _FuchsiaGymLevelCapText::
 	text "You may now raise"
 	line "your #MON to a"
-	cont "level cap of 50."
+	cont "LEVEL CAP of 50."
 	done
 
 _FuchsiaGymRocker1BattleText::

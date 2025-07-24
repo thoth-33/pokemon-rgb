@@ -71,7 +71,7 @@ _CinnabarGymBlaineTM38NoRoomText::
 _CinnabarGymLevelCapText::
 	text "See if you can"
 	line "reach your new"
-	cont "level cap of 55."
+	cont "LEVEL CAP of 55."
 	done
 
 _CinnabarGymSuperNerd1BattleText::
