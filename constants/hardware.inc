@@ -22,7 +22,7 @@ endc
 ; Define the include guard and the current hardware.inc version
 ; (do this after the RGBDS version check since the `DEF` syntax depends on it)
 DEF HARDWARE_INC EQU 1
-DEF HARDWARE_INC_VERSION equs "5.1.0"
+DEF HARDWARE_INC_VERSION equs "5.2.0"
 
 ; Usage: rev_Check_hardware_inc <min_ver>
 ; Examples:
@@ -66,7 +66,7 @@ DEF B_JOYP_DOWN   EQU 3 ; 0 = Down is pressed   (if reading Control Pad) [ro]
 DEF B_JOYP_UP     EQU 2 ; 0 = Up is pressed     (if reading Control Pad) [ro]
 DEF B_JOYP_LEFT   EQU 1 ; 0 = Left is pressed   (if reading Control Pad) [ro]
 DEF B_JOYP_RIGHT  EQU 0 ; 0 = Right is pressed  (if reading Control Pad) [ro]
-    DEF JOYP_INPUTS EQU %0000_1111
+    DEF JOYP_INPUTS EQU %0000_1111 ; bits equal to 0 indicate pressed (when reading inputs)
     DEF JOYP_START  EQU 1 << B_JOYP_START
     DEF JOYP_SELECT EQU 1 << B_JOYP_SELECT
     DEF JOYP_B      EQU 1 << B_JOYP_B
@@ -422,8 +422,6 @@ DEF B_AUDENA_ENABLE_CH1 EQU 0 ; 1 = channel 1 is running [ro]
 
 ; -- AUD3WAVE ($FF30-$FF3F) ---------------------------------------------------
 ; Audio channel 3 wave pattern RAM [r/w]
-DEF _AUD3WAVERAM EQU $FF30 ; $FF30-$FF3F
-
 DEF rAUD3WAVE_0 EQU $FF30
 DEF rAUD3WAVE_1 EQU $FF31
 DEF rAUD3WAVE_2 EQU $FF32
@@ -440,8 +438,6 @@ DEF rAUD3WAVE_C EQU $FF3C
 DEF rAUD3WAVE_D EQU $FF3D
 DEF rAUD3WAVE_E EQU $FF3E
 DEF rAUD3WAVE_F EQU $FF3F
-
-DEF AUD3WAVE_SIZE EQU 16
 
 ; -- LCDC ($FF40) -------------------------------------------------------------
 ; PPU graphics control
@@ -551,7 +547,7 @@ DEF rWY EQU $FF4A
 ; X coordinate of the Window's top-left pixel, plus 7 (7-166) [r/w]
 DEF rWX EQU $FF4B
 
-DEF WX_OFS EQU 7 ; subtract this to get the actual Window Y coordinate
+DEF WX_OFS EQU 7 ; subtract this to get the actual Window X coordinate
 
 ; -- SYS / KEY0 ($FF4C) -------------------------------------------------------
 ; (CGB boot ROM only) CPU mode select
@@ -606,7 +602,7 @@ DEF rVDMA_SRC_LOW EQU $FF52
 ; (CGB only) VRAM DMA destination address (high 8 bits) [wo]
 DEF rVDMA_DEST_HIGH EQU $FF53
 
-; -- VDMA_DEST_LOW / HDMA3 ($FF54) --------------------------------------------
+; -- VDMA_DEST_LOW / HDMA4 ($FF54) --------------------------------------------
 ; (CGB only) VRAM DMA destination address (low 8 bits) [wo]
 DEF rVDMA_DEST_LOW EQU $FF54
 
@@ -812,7 +808,7 @@ DEF rRTCREG EQU $A000
 
 ; ** MBC5 only ****************************************************************
 
-; -- ROMB0 ($2000-$3FFF) ------------------------------------------------------
+; -- ROMB0 ($2000-$2FFF) ------------------------------------------------------
 ; ROM bank number low byte (bits 0-7) [wo]
 DEF rROMB0 EQU $2000
 
@@ -868,12 +864,14 @@ DEF RAMREG_ENABLE EQU $40
 ; Latch accelerometer start [wo]
 DEF rACCLATCH0 EQU $A000
 
+; Write $55 to ACCLATCH0 to erase the latched data
 DEF ACCLATCH0_START EQU $55
 
 ; -- ACCLATCH1 ($Ax1x) --------------------------------------------------------
 ; Latch accelerometer finish [wo]
 DEF rACCLATCH1 EQU $A010
 
+; Write $AA to ACCLATCH1 to latch the accelerometer and update ACCEL*
 DEF ACCLATCH1_FINISH EQU $AA
 
 ; -- ACCELX0 ($Ax2x) ----------------------------------------------------------
@@ -903,6 +901,7 @@ DEF rEEPROM EQU $A080
 ; IR register [r/w]
 DEF rIRREG EQU $A000
 
+; whether the IR transmitter sees light
 DEF IR_LED_OFF EQU $C0
 DEF IR_LED_ON  EQU $C1
 
@@ -921,10 +920,10 @@ DEF SCREEN_WIDTH_PX  EQU SCREEN_WIDTH  * TILE_WIDTH ; width of screen in pixels
 DEF SCREEN_HEIGHT_PX EQU SCREEN_HEIGHT * TILE_WIDTH ; height of screen in pixels
 DEF SCREEN_AREA      EQU SCREEN_WIDTH * SCREEN_HEIGHT ; size of screen in bytes
 
-DEF TILEMAP_WIDTH_PX  EQU 256 ; width of tilemap in pixels
-DEF TILEMAP_HEIGHT_PX EQU 256 ; height of tilemap in pixels
 DEF TILEMAP_WIDTH     EQU  32 ; width of tilemap in bytes
 DEF TILEMAP_HEIGHT    EQU  32 ; height of tilemap in bytes
+DEF TILEMAP_WIDTH_PX  EQU TILEMAP_WIDTH * TILE_WIDTH ; width of tilemap in pixels
+DEF TILEMAP_HEIGHT_PX EQU TILEMAP_HEIGHT * TILE_HEIGHT ; height of tilemap in pixels
 DEF TILEMAP_AREA      EQU TILEMAP_WIDTH * TILEMAP_HEIGHT ; size of tilemap in bytes
 
 DEF COLOR_SIZE EQU 2 ; size of color in bytes (little-endian BGR555)
@@ -937,6 +936,12 @@ DEF COLOR_SIZE EQU 2 ; size of color in bytes (little-endian BGR555)
         DEF COLOR_BLUE       EQU %0_11111_00 ; for the high byte
 DEF PAL_COLORS EQU 4 ; colors per palette
 DEF PAL_SIZE   EQU COLOR_SIZE * PAL_COLORS ; size of palette in bytes
+
+; (DMG only) grayscale shade indexes for BGP, OBP0, and OBP1
+DEF SHADE_WHITE EQU %00
+DEF SHADE_LIGHT EQU %01
+DEF SHADE_DARK  EQU %10
+DEF SHADE_BLACK EQU %11
 
 ; Tilemaps the BG or Window can read from (controlled by LCDC)
 DEF TILEMAP0 EQU $9800 ; $9800-$9BFF
@@ -972,7 +977,7 @@ DEF OAMA_FLAGS  rb ; 3
     DEF B_OAM_XFLIP EQU 5 ; whether the whole OBJ is flipped horizontally
     DEF B_OAM_PAL1  EQU 4 ; (DMG only) which of the two palettes the OBJ uses
     DEF B_OAM_BANK1 EQU 3 ; (CGB only) which VRAM bank the OBJ takes its tile(s) from
-    DEF OAM_PALETTE EQU %111 ; (CGB only) which palette the OBJ uses
+    DEF OAM_PALETTE EQU %00000_111 ; (CGB only) which palette the OBJ uses
         DEF OAM_PRIO  EQU 1 << B_OAM_PRIO
         DEF OAM_YFLIP EQU 1 << B_OAM_YFLIP
         DEF OAM_XFLIP EQU 1 << B_OAM_XFLIP
@@ -984,6 +989,20 @@ DEF OBJ_SIZE    rb 0 ; size of OBJ in bytes = 4
 
 DEF OAM_COUNT EQU 40 ; how many OBJs there are room for in OAM
 DEF OAM_SIZE  EQU OBJ_SIZE * OAM_COUNT
+
+
+;******************************************************************************
+; Audio channel RAM addresses
+;******************************************************************************
+
+DEF AUD1RAM EQU $FF10 ; $FF10-$FF14
+DEF AUD2RAM EQU $FF15 ; $FF15-$FF19
+DEF AUD3RAM EQU $FF1A ; $FF1A-$FF1E
+DEF AUD4RAM EQU $FF1F ; $FF1F-$FF23
+DEF AUDRAM_SIZE EQU 5 ; size of each audio channel RAM in bytes
+
+DEF _AUD3WAVERAM EQU $FF30 ; $FF30-$FF3F
+DEF AUD3WAVE_SIZE EQU 16 ; size of wave pattern RAM in bytes
 
 
 ;******************************************************************************
