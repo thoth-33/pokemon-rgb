@@ -24,9 +24,7 @@ _CeladonMartRoofLittleGirlReceivedTM13Text::
 _CeladonMartRoofLittleGirlTM13ExplanationText::
 	text_start
 
-	para "@"
-	text_ram wStringBuffer
-	text " contains"
+	para "This % contains"
 	line "ICE BEAM!"
 
 	para "It can freeze the"
@@ -54,9 +52,7 @@ _CeladonMartRoofLittleGirlReceivedTM48Text::
 _CeladonMartRoofLittleGirlTM48ExplanationText::
 	text_start
 
-	para "@"
-	text_ram wStringBuffer
-	text " contains"
+	para "This % contains"
 	line "ROCK SLIDE!"
 
 	para "It can spook the"
