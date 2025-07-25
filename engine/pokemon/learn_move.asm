@@ -102,7 +102,7 @@ AbandonLearning:
 	call LoadScreenTilesFromBuffer1
 .skip
 	ld b, 0
-	ret
+	jp UnloadBoldP
 
 PrintLearnedMove:
 	ld a, [wIsInBattle]
@@ -113,7 +113,7 @@ PrintLearnedMove:
 	ld hl, LearnedMove1Text
 	call PrintText
 	ld b, 1
-	ret
+	jp UnloadBoldP
 
 TryingToLearn:
 	push hl
@@ -255,3 +255,12 @@ ForgotAndText:
 HMCantDeleteText:
 	text_far _HMCantDeleteText
 	text_end
+
+UnloadBoldP:
+	ld a, [wIsInBattle]
+	and a
+	ret z
+	ld de, HpBarAndStatusGraphics + (16 tiles)
+	ld hl, vChars2 tile $72
+	lb bc, BANK(HpBarAndStatusGraphics), 1
+	jp CopyVideoData
