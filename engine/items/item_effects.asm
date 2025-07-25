@@ -2205,6 +2205,7 @@ ItemUsePPRestore:
 ; how many PP Ups have been used on the move.
 ; So, Max Ethers and Max Elixirs will not be detected as having no effect on
 ; a move with full PP if the move has had any PP Ups used on it.
+	and PP_UP_MASK ; PP Up counter bits
 	cp b ; does current PP equal max PP?
 	ret z
 	jr .storeNewAmount

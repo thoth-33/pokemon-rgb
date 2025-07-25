@@ -93,8 +93,11 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .doEvolution
 .checkItemEvo
+	ld a, [wIsInBattle] ; are we in battle?
+	and a
 	ld a, [hli]
-	; Bug: Wild encounters can cause stone evolutions without
+	jp nz, .nextEvoEntry1 ; don't evolve if we're in a battle as wCurItem could be holding the last mon sent out
+	; FIXED: Wild encounters can cause stone evolutions without
 	; having any stones available. This was fixed in Yellow.
 	ld b, a ; evolution item
 	ld a, [wCurItem] ; same as [wCurPartySpecies]
