@@ -9,6 +9,7 @@ CeruleanTradeHouse_TextPointers:
 	dw_const CeruleanTradeHouseBulbasaurText, TEXT_CERULEANTRADEHOUSE_BULBASAUR
 	dw_const CeruleanTradeHouseOddishText,    TEXT_CERULEANTRADEHOUSE_ODDISH
 	dw_const CeruleanTradeHouseSandshrewText, TEXT_CERULEANTRADEHOUSE_SANDSHREW
+	dw_const CeruleanTradeHouseLittleBoyText, TEXT_CERULEANTRADEHOUSE_LITTLE_BOY
 
 CeruleanTradeHouseGrannyText:
 	text_far _CeruleanTradeHouseGrannyText
@@ -119,4 +120,11 @@ CeruleanTradeHouseSandshrewText:
 	text_asm
 	ld a, SANDSHREW
 	call PlayCry
+	jp TextScriptEnd
+	
+CeruleanTradeHouseLittleBoyText:
+	text_asm
+	ld a, TRADE_FOR_PIPIN
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
 	jp TextScriptEnd
