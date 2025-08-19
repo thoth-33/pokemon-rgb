@@ -95,6 +95,13 @@ DEF LCDC_DEFAULT EQU LCDC_ON | LCDC_WIN_9C00 | LCDC_WIN_ON | LCDC_BLOCK21 | LCDC
 
 	ei
 
+	call CheckForPlayerNameInSRAM
+	jr nc, .noSave
+	predef LoadSAV
+	xor a
+	ldh [hTileAnimations], a
+.noSave
+
 	predef LoadSGB
 		
 ;	ld a, 0 ; BANK(SFX_Shooting_Star)
@@ -115,11 +122,6 @@ DEF LCDC_DEFAULT EQU LCDC_ON | LCDC_WIN_9C00 | LCDC_WIN_ON | LCDC_BLOCK21 | LCDC
 	call ClearSprites
 	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
-	
-	call CheckForPlayerNameInSRAM
-	jr nc, .noSave
-	predef LoadSAV
-.noSave
 
 	jp PrepareTitleScreen
 
